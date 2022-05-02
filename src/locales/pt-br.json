@@ -1,0 +1,27 @@
+{
+    "translation":{
+        "appName": "Fight It",
+        "login": {
+            
+            "mail": "E-mail",
+            "password": "Senha",
+            "connect": "Conectar",
+            "forgotPass": "Esqueci a senha",
+            "CreateAccount": "Criar Conta"
+        },
+        "validation":{
+            "confirm":"Confirmar",
+            "cancel": "Cancelar"
+        }
+        ,
+        "createAccount":{
+            "title": "Criar Conta",
+            "descriptionSwitch": "Escolha o tipo de cadastro:",
+            "student":"Aluno",
+            "teacher": "Professor",
+            "name": "Nome",
+            "phone": "Telefone",
+            "confirmPassword": "Confirmar Senha"
+        }
+}
+}
