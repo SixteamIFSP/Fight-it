@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text, TouchableOpacity, View } from 'react-native'
 import { ButtonLinguage } from '../../components/buttonChageLinguage';
-import { DoubleButtonConfirmation } from '../../components/DoubleButtonConfirmation';
+import { DoubleButtonConfirmation } from '../../components/doubleButtonConfirmation';
 import { Input } from '../../components/input'
 import { styles as stylesGlobal } from '../../global/styles';
 import { SwitchForm, SwitchText } from './styles';
