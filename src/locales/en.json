@@ -20,7 +20,20 @@
             "teacher": "Teacher",
             "name": "Name",
             "phone": "Phone",
-            "confirmPassword": "Confirm Passoword"
+            "confirmPassword": "Confirm Passoword",
+
+            "triage":{
+                "title":"Triage",
+                "description": "Answer the screening form to know your fitness:",
+                "form-Heart": "You have heart problems?",
+                "form-other-problems":"Description of other uncited issues:"
+                
+            },
+            "qualification":{
+                "title":"Proof of training",
+                "description": "Send the necessary information to prove the training:",
+                "form-fight": "Martial arts"
+            }
         }
 }
 }

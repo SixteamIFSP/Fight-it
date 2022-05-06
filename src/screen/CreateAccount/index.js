@@ -10,19 +10,44 @@ import { SwitchForm, SwitchText } from './styles';
 export function CreateAccount({ navigation  ,routes}){
     const {t} = useTranslation()
     const [step, setStep] = useState(1);
-    const [name, setName]  = useState('');
-    const [mail, setMail] = useState('');
-    const [phone, setPhone] = useState('');
-    const [pass, setPass] = useState('');
-    const [confirm, setConfirm] = useState('');
+    const [name, setName]  = useState('a');
+    const [mail, setMail] = useState('a');
+    const [phone, setPhone] = useState('a');
+    const [pass, setPass] = useState('a');
+    const [confirm, setConfirm] = useState('a');
     const [typeTeacher, setTypeTeacher] = useState(false);
 
     useEffect(()=>{
         console.log('valkor:', typeTeacher );
     },[typeTeacher])
 
-    function handleConfirm(){
+    function validation(){
+        if (name==='')      
+            return false;
+        if (mail==='')      
+            return false;
+        if (phone==='')      
+            return false;
+        if (pass==='' && pass!=confirm)      
+            return false;
+        
+        return true;
 
+    }
+
+    function handleConfirm(){  
+        if(validation()){
+            const data = { 
+                name:name,
+                mail:mail,
+                phone:phone,
+                pass:pass,
+            }
+   
+            navigation.navigate(`${typeTeacher ? 'CreateTeacher':'CreateStudent'}`, {dataAuth:data})
+        } else{
+            console.log("sem validacao");
+        } 
     }
     function handleBack(){
         navigation.navigate('Login');

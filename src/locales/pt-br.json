@@ -21,7 +21,20 @@
             "teacher": "Professor",
             "name": "Nome",
             "phone": "Telefone",
-            "confirmPassword": "Confirmar Senha"
+            "confirmPassword": "Confirmar Senha",
+
+            "triage":{
+                "title":"Triagem",
+                "description": "Responda o formulário de triagem para saber seu condicionamento físico:",
+                "form-Heart": "Possui problemas Cardiacos?",
+                "form-other-problems":"Descrição de outros problemas não citados:"
+                
+            },
+            "qualification":{
+                "title":"Comprovante de aptidão",
+                "description": "Envie as informações necessarias para comprovar a capacitação:",
+                "form-fight": "Arte Marcial"
+            }
         }
 }
 }
