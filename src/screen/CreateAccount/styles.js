@@ -1,7 +1,7 @@
 import styled from  'styled-components/native';
 
 export const SwitchForm = styled.TouchableOpacity`
-    align-items:center;
+ 
     margin-left:5px;
     margin-right:5px;
     width: 35%;
@@ -10,7 +10,7 @@ export const SwitchForm = styled.TouchableOpacity`
 `;
 
 export const SwitchText = styled.Text`
-
+    text-align:center;
     width:100%;
     padding: 10px;
     border-radius:25px;

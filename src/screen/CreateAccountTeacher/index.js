@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { CheckBox } from '../../components/checkbox'
 import { Input } from '../../components/input'
 import { styles as stylesGlobal } from '../../global/styles'
-import { ButtonLinguage } from "../../components/buttonChageLinguage"
+import { ButtonLinguage } from "../../components/buttonChangeLinguage"
 import { DoubleButtonConfirmation } from "../../components/doubleButtonConfirmation"
 
 

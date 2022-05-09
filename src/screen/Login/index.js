@@ -5,22 +5,25 @@ import { Input } from "../../components/input";
 import { styles } from "./styles";
 import { styles as stylesGlobal } from "../../global/styles";
 import  { useTranslation } from 'react-i18next';
-import { ButtonLinguage } from "../../components/buttonChageLinguage";
+import { ButtonLinguage } from "../../components/buttonChangeLinguage";
+import { useUser } from "../../hooks/user";
 
 export function Login({ navigation }) {
     const [mail, setMail] = useState();
     const [password, setPassword] = useState();
     const {t} = useTranslation();
+    const {singIn} = useUser();
 
     function onHandleLogin(){
-      console.log('Logado')
+      singIn({mail:mail, pass:password});
     }
+
     function onHandleForgotPass(){
 
     }
+
     function onHandleCreateAccount(){
       navigation.navigate('CreateAccount');
-
     }
 
 
@@ -29,13 +32,13 @@ export function Login({ navigation }) {
         <View style={stylesGlobal.container}>
           <ButtonLinguage />
           
-          <SafeAreaView style={styles.container}>
-            <Text>Fight if</Text>
+          <View style={styles.container}>
+            <Text>Fight It</Text>
               <Input
         
                 onChangeText={setMail}
                 value={mail}
-                placeholder={t('login.mail')}  /// TROCAR PARA ARQUIVO DE Nacionalização
+                placeholder={t('login.mail')}  
                 keyboardType="email-address"
               />
               <Input
@@ -43,7 +46,7 @@ export function Login({ navigation }) {
                 secureTextEntry={true}
                 onChangeText={setPassword}
                 value={password}
-                placeholder={t('login.password')}  /// TROCAR PARA ARQUIVO DE Nacionalização
+                placeholder={t('login.password')}  
                 
               />
 
@@ -54,12 +57,12 @@ export function Login({ navigation }) {
                 <Text>{t('login.connect')}</Text>
               </TouchableOpacity>
 
-              <TouchableOpacity
+              {/* <TouchableOpacity
                 style={styles.textTouchebles}
                 onPress={onHandleForgotPass}
               >
                 <Text>{t('login.forgotPass')}</Text>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
 
               <TouchableOpacity
                 style={styles.textTouchebles}
@@ -67,7 +70,7 @@ export function Login({ navigation }) {
               >
                 <Text>{t('login.CreateAccount')}</Text>
               </TouchableOpacity>
-          </SafeAreaView>
+          </View>
         </View>
     
     );
