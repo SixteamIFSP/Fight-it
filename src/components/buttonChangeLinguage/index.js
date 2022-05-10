@@ -1,25 +1,25 @@
 import { useEffect, useState } from "react";
 import { TouchableOpacity } from "react-native";
-import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { useTranslation } from "react-i18next";
 
-export function ButtonLinguage(){
+export function ButtonLinguage() {
     const { i18n } = useTranslation();
-    const [linguage, setLinguage ] =  useState(true);
-    
+    const [linguage, setLinguage] = useState(true);
+
     const changeLanguage = (lng) => {
         i18n.changeLanguage(lng);
     }
 
-    function changeLinguage (){
+    function changeLinguage() {
         setLinguage((value) => !value)
     }
 
-    useEffect(()=>{
-        linguage ? changeLanguage('br'): changeLanguage('en');
+    useEffect(() => {
+        linguage ? changeLanguage('br') : changeLanguage('en');
         console.log(linguage);
-    },[linguage])
+    }, [linguage])
 
     return (
         <TouchableOpacity onPress={changeLinguage}>

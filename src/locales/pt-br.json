@@ -1,40 +1,36 @@
 {
-    "translation":{
+    "translation": {
         "appName": "Fight It",
         "login": {
-            
             "mail": "E-mail",
             "password": "Senha",
             "connect": "Conectar",
             "forgotPass": "Esqueci a senha",
             "CreateAccount": "Criar Conta"
         },
-        "validation":{
-            "confirm":"Confirmar",
+        "validation": {
+            "confirm": "Confirmar",
             "cancel": "Cancelar"
-        }
-        ,
-        "createAccount":{
+        },
+        "createAccount": {
             "title": "Criar Conta",
             "descriptionSwitch": "Escolha o tipo de cadastro:",
-            "student":"Aluno",
+            "student": "Aluno",
             "teacher": "Professor",
             "name": "Nome",
             "phone": "Telefone",
             "confirmPassword": "Confirmar Senha",
-
-            "triage":{
-                "title":"Triagem",
+            "triage": {
+                "title": "Triagem",
                 "description": "Responda o formulário de triagem para saber seu condicionamento físico:",
                 "form-Heart": "Possui problemas Cardiacos?",
-                "form-other-problems":"Descrição de outros problemas não citados:"
-                
+                "form-other-problems": "Descrição de outros problemas não citados:"
             },
-            "qualification":{
-                "title":"Comprovante de aptidão",
+            "qualification": {
+                "title": "Comprovante de aptidão",
                 "description": "Envie as informações necessarias para comprovar a capacitação:",
                 "form-fight": "Arte Marcial"
             }
         }
-}
+    }
 }
