@@ -66,7 +66,6 @@ function UserProvider({children}){
 
 function useUser(){
     const context = useContext(UserContext);
-
     return context;
 }
 

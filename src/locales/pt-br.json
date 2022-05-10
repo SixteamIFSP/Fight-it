@@ -2,7 +2,6 @@
     "translation":{
         "appName": "Fight It",
         "login": {
-            
             "mail": "E-mail",
             "password": "Senha",
             "connect": "Conectar",
@@ -35,6 +34,19 @@
                 "description": "Envie as informações necessarias para comprovar a capacitação:",
                 "form-fight": "Arte Marcial"
             }
+            
+        },
+        "homePage":{
+            "student":{
+                "message":"Olá estudande"
+            },
+            "teacher":{
+                "message":"Olá professor"
+            }
+        },
+        "header":{
+            "teacher":"Professor",
+            "student":"Aluno"
         }
 }
 }

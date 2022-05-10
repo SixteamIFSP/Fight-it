@@ -10,13 +10,15 @@ import { ButtonLogout } from "../../components/buttonLogout";
 // import { styles } from "./styles";
 
 export function HomeScreenTeacher({ navigation }) {
+    const {t} = useTranslation()
+    const { user } = useUser()
   
     return (
      
         <View style={stylesGlobal.container}>
           <ButtonLinguage />
           <ButtonLogout />
-          <Text>Bom dia professor</Text>
+          <Text>{t('homePage.teacher.message')} {user.nome}</Text>
         </View>
     
     );
