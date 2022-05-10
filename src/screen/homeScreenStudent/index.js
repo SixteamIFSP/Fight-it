@@ -16,7 +16,7 @@ export function HomeScreenStudent({ navigation }) {
         <View style={stylesGlobal.container}>
           <ButtonLinguage />
           <ButtonLogout />
-            <Text>Bom dia professor</Text>
+            <Text>Bom dia Aluno</Text>
         </View>
     
     );

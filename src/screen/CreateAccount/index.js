@@ -8,7 +8,7 @@ import { createAccount } from '../../controler/account';
 import { styles as stylesGlobal } from '../../global/styles';
 import { SwitchForm, SwitchText } from './styles';
 
-export function CreateAccount({ navigation  ,routes}){
+export function CreateAccount({ navigation, routes }){
     const {t} = useTranslation()
 
     const [name, setName]  = useState('');
@@ -26,7 +26,6 @@ export function CreateAccount({ navigation  ,routes}){
         if (name==='' | phone==='' | mail==='' | pass==='' | pass!==confirm)      
             return false;
         return true;
-
     }
 
     function handleConfirm(){  
@@ -53,8 +52,6 @@ export function CreateAccount({ navigation  ,routes}){
         navigation.navigate('Login');
         
     }
-
-
 
     return (
         <View style={stylesGlobal.container}>

@@ -8,14 +8,20 @@ import { CreateAccountTeacher } from '../screen/createAccountTeacher';
 import { CreateAccountStudent } from '../screen/createAccountStudent';
 import { useUser } from '../hooks/user';
 import { HomeScreenTeacher } from '../screen/homeScreenTeacher';
+import { HomeScreenStudent } from '../screen/homeScreenStudent';
 
 const AuthStack = createNativeStackNavigator();
 const AppRoutes = createNativeStackNavigator();
 
 function StackLoged(){
+  const {user} = useUser();
+
+  console.log("USER",user);
+
   return (
-          <AuthStack.Navigator  initialRouteName="HomeScreenTeacher" >
+          <AuthStack.Navigator  initialRouteName={user.tipoUsuario = 1 ? 'HomeScreenTeacher' : 'HomeScreenStudent'} >
               <AuthStack.Screen navigationKey='HomeScreenTeacher' name="HomeScreenTeacher" component={HomeScreenTeacher} />
+              <AuthStack.Screen navigationKey='HomeScreenStudent' name="HomeScreenStudent" component={HomeScreenStudent} />
               <AuthStack.Screen navigationKey='CreateAccount' name="CreateAccount" component={CreateAccount} />
               <AppRoutes.Screen navigationKey='CreateStudent' name="CreateStudent" component={CreateAccountStudent} />
               <AppRoutes.Screen navigationKey='CreateTeacher' name="CreateTeacher" component={CreateAccountTeacher} />
@@ -25,9 +31,18 @@ function StackLoged(){
 function StackAuth(){
   
   return (
-          <AppRoutes.Navigator  initialRouteName="Login" >
-              <AppRoutes.Screen navigationKey='Login' name="Login" component={Login} />
-              <AppRoutes.Screen navigationKey='CreateAccount' name="CreateAccount" component={CreateAccount} />
+          <AppRoutes.Navigator 
+             screenOptions={{headerShown: false,}}
+            initialRouteName="Login" >
+              <AppRoutes.Screen 
+              navigationKey='Login' 
+              name="Login"
+              component={Login} />
+              <AppRoutes.Screen 
+           
+              navigationKey='CreateAccount' 
+              name="CreateAccount" 
+              component={CreateAccount} />
               
           </AppRoutes.Navigator> 
       )
