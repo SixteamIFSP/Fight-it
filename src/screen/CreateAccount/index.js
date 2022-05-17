@@ -8,6 +8,7 @@ import { createAccount } from '../../controler/account';
 import { styles as stylesGlobal } from '../../global/styles';
 import { SwitchForm, SwitchText } from './styles';
 
+
 export function CreateAccount({ navigation, routes }) {
     const { t } = useTranslation()
 
@@ -36,6 +37,9 @@ export function CreateAccount({ navigation, routes }) {
                 telefone: phone,
                 senha: pass,
                 receberNot: 1,
+    }
+
+
                 tipoUserID: typeTeacher ? 1 : 2,
             }
             console.log("DATA", data);
@@ -49,6 +53,7 @@ export function CreateAccount({ navigation, routes }) {
     function handleBack() {
         navigation.navigate('Login');
     };
+
     return (
         <View style={stylesGlobal.container}>
             <ButtonLinguage></ButtonLinguage>

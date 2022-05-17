@@ -31,6 +31,19 @@
                 "description": "Envie as informações necessarias para comprovar a capacitação:",
                 "form-fight": "Arte Marcial"
             }
+            
+        },
+        "homePage":{
+            "student":{
+                "message":"Olá estudande"
+            },
+            "teacher":{
+                "message":"Olá professor"
+            }
+        },
+        "header":{
+            "teacher":"Professor",
+            "student":"Aluno"
         }
     }
 }

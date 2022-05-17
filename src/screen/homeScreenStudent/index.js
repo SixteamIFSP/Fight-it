@@ -5,12 +5,16 @@ import { ButtonLogout } from "../../components/buttonLogout";
 // import { styles } from "./styles";
 
 export function HomeScreenStudent({ navigation }) {
+  const {t} = useTranslation();
+  const {user} = useUser
 
-  return (
-    <View style={stylesGlobal.container}>
-      <ButtonLinguage />
-      <ButtonLogout />
-      <Text>Bom dia professor</Text>
-    </View>
-  );
-};
+
+    return (    
+        <View style={stylesGlobal.container}>
+          <ButtonLinguage />
+          <ButtonLogout />
+            <Text>{t('homePage.student.message')} {user.nome}</Text>
+        </View>
+    );
+  }
+

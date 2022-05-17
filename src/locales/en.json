@@ -31,6 +31,18 @@
                 "description": "Send the necessary information to prove the training:",
                 "form-fight": "Martial arts"
             }
+        },
+        "homePage":{
+            "student":{
+                "message":"Hello! student"
+            },
+            "teacher":{
+                "message":"Hello! teacher"
+            }
+        },
+        "header":{
+            "teacher":"Teacher",
+            "student":"Student"
         }
     }
 }

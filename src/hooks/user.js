@@ -2,6 +2,7 @@ import { api } from '../services/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { tokenKey } from '../configuration/constants';
+import Toast from "react-native-toast-message";
 
 export const UserContext = createContext();
 
@@ -13,6 +14,7 @@ function UserProvider({ children }) {
             const response = await api.post('/user/login', { email: mail, senha: pass });
 
             console.log(response);
+
 
             if (!response?.data.status) {
                 console.log("Erro de autenticação");
@@ -27,8 +29,20 @@ function UserProvider({ children }) {
                 userID: response.data.userID,
                 tipoUsuario: response.data.tipoUsuario,
             });
+
+
+        Toast.show({
+            type: "success",
+            text2: "Login Efetuado com sucesso",
+        });
+        
+
         } catch (error) {
             console.log(error.message);
+            Toast.show({
+                type: "error",
+                text2: "Erro interno",
+            })
         }
 
     }
@@ -52,7 +66,6 @@ function UserProvider({ children }) {
 
 function useUser() {
     const context = useContext(UserContext);
-
     return context;
 }
 
