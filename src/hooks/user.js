@@ -6,37 +6,37 @@ import Toast from "react-native-toast-message";
 
 export const UserContext = createContext();
 
-function UserProvider({children}){
+function UserProvider({ children }) {
     const [user, setUser] = useState(null);
 
-    async function singIn({mail, pass}){
+    async function singIn({ mail, pass }) {
         try {
-            const response = await api.post('/user/login', {email:mail, senha:pass});
+            const response = await api.post('/user/login', { email: mail, senha: pass });
 
             console.log(response);
 
-            if (!response?.data.status){
-                return  Toast.show({
-                    type: "error",
-                    text2: "Usuário não Encontrado",
-                });
-            
+
+            if (!response?.data.status) {
+                console.log("Erro de autenticação");
+                return
             }
 
-        console.log(response.data.mensagem);
-        await AsyncStorage.setItem(tokenKey, JSON.stringify(response.data.token))
-        setUser({
-            nome: response.data.nome,
-            email:response.data.email,
-            userID: response.data.userID,
-            tipoUsuario: response.data.tipoUsuario,
-        });
+            console.log(response.data.mensagem);
+            await AsyncStorage.setItem(tokenKey, JSON.stringify(response.data.token))
+            setUser({
+                nome: response.data.nome,
+                email: response.data.email,
+                userID: response.data.userID,
+                tipoUsuario: response.data.tipoUsuario,
+            });
+
 
         Toast.show({
             type: "success",
             text2: "Login Efetuado com sucesso",
         });
         
+
         } catch (error) {
             console.log(error.message);
             Toast.show({
@@ -47,7 +47,7 @@ function UserProvider({children}){
 
     }
 
-    async function logOut(){
+    async function logOut() {
         setUser(null);
         await AsyncStorage.removeItem(tokenKey);
     }
@@ -57,17 +57,17 @@ function UserProvider({children}){
             singIn,
             logOut,
             user,
-            }}>
+        }}>
 
             {children}
         </UserContext.Provider>
     )
 }
 
-function useUser(){
+function useUser() {
     const context = useContext(UserContext);
     return context;
 }
 
-export {useUser, UserProvider}
+export { useUser, UserProvider }
 

@@ -1,57 +1,54 @@
-import React, { useState } from "react"
-import { View, Text, Pressable } from "react-native"
-import { useTranslation } from 'react-i18next'
-import { CheckBox } from '../../components/checkbox'
-import { Input } from '../../components/input'
-import { styles as stylesGlobal } from '../../global/styles'
-import { ButtonLinguage } from "../../components/buttonChangeLinguage"
-import { DoubleButtonConfirmation } from "../../components/doubleButtonConfirmation"
+import React, { useState } from "react";
+import { View, Text, Pressable } from "react-native";
+import { useTranslation } from 'react-i18next';
+import { Input } from '../../components/input';
+import { styles as stylesGlobal } from '../../global/styles';
+import { ButtonLinguage } from "../../components/buttonChangeLinguage";
+import { DoubleButtonConfirmation } from "../../components/doubleButtonConfirmation";
 
 
-export function CreateAccountTeacher({ navigation, route }){
-    const {t} = useTranslation()
+export function CreateAccountTeacher({ navigation, route }) {
+    const { t } = useTranslation();
     const [marcialFight, setMarcialFight] = useState('');
-    const [check, setCheck] = useState(false);
 
-    const {dataAuth} = route.params;
+    const { dataAuth } = route.params;
 
-    function validation(){
-        if(valor === '')
+    function validation() {
+        if (valor === '')
             return false
 
         return true
-    }
+    };
 
-    function handleConfirm(){  
-        if(validation()){
-            const data = { 
-               ...dataAuth,
-                aluno:{
-                    valor:marcialFight,
+    function handleConfirm() {
+        if (validation()) {
+            const data = {
+                ...dataAuth,
+                aluno: {
+                    valor: marcialFight,
                 }
             }
-            console.log("DATA:",data);
+            console.log("DATA:", data);
             navigation.navigate('Login');
-        } else{
+        } else {
             console.log("error validacao");
-        } 
-    }
-    function handleBack(){
+        }
+    };
+    function handleBack() {
         navigation.navigate('CreateAccount');
-        
-    }
+
+    };
 
     return (
         <View style={stylesGlobal.container}>
             <ButtonLinguage></ButtonLinguage>
             <Text>{t(`createAccount.qualification.title`)}</Text>
-            <Text style={{width:"60%"}}>{t(`createAccount.qualification.description`)}</Text>
-            <View style={{flexDirection:"row", width:'100%', justifyContent:"center", alignItems:"center"}}>
+            <Text style={{ width: "60%" }}>{t(`createAccount.qualification.description`)}</Text>
+            <View style={{ flexDirection: "row", width: '100%', justifyContent: "center", alignItems: "center" }}>
                 <Input placeholder={t(`createAccount.qualification.form-fight`)} value={marcialFight} onChangeText={setMarcialFight} ></Input>
             </View>
 
             <DoubleButtonConfirmation handleConfirm={handleConfirm} handleBack={handleBack}></DoubleButtonConfirmation>
         </View>
     )
-
-}
+};

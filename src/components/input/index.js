@@ -1,9 +1,9 @@
 import { InputStyle } from "./styles"
 
-export function Input( {...rest } ){
+export function Input({ ...rest }) {
     return (
-        <InputStyle 
-            {...rest}   
+        <InputStyle
+            {...rest}
         />
     )
 }
