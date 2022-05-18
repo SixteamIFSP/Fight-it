@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Button, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Login } from '../screen/login';
 import { CreateAccount } from '../screen/createAccount';
 import { CreateAccountTeacher } from '../screen/createAccountTeacher';
@@ -10,24 +11,69 @@ import { useUser } from '../hooks/user';
 import { HomeScreenTeacher } from '../screen/homeScreenTeacher';
 import { HomeScreenStudent } from '../screen/homeScreenStudent';
 import { useTranslation } from 'react-i18next';
+import { FontAwesome  } from '@expo/vector-icons';
 
-const AuthStack = createNativeStackNavigator();
+const TabNavegation = createBottomTabNavigator();
 const AppRoutes = createNativeStackNavigator();
+const StackStudant = createNativeStackNavigator();
 
 function StackLoged(){
   const {t} = useTranslation();
   const {user} = useUser();
 
-  return (
-          <AuthStack.Navigator  initialRouteName={user.tipoUsuario = 1 ? 'HomeScreenTeacher' : 'HomeScreenStudent'} >
-              <AuthStack.Screen options={{ title: t('header.teacher') }} navigationKey='HomeScreenTeacher' name="HomeScreenTeacher" component={HomeScreenTeacher} />
-              <AuthStack.Screen options={{ title: t('header.student') }} navigationKey='HomeScreenStudent' name="HomeScreenStudent" component={HomeScreenStudent} />
-              <AuthStack.Screen navigationKey='CreateAccount' name="CreateAccount" component={CreateAccount} />
-              <AppRoutes.Screen navigationKey='CreateStudent' name="CreateStudent" component={CreateAccountStudent} />
-              <AppRoutes.Screen navigationKey='CreateTeacher' name="CreateTeacher" component={CreateAccountTeacher} />
-          </AuthStack.Navigator> 
+  const Teacher = () =>{
+    return (
+    <TabNavegation.Navigator initialRouteName="HomeScreenTeacher"  screenOptions={({ route }) => ({
+      tabBarIcon: ({ focused, color, size }) => {
+        let iconName;
+
+        if (route.name === 'HomeScreenTeacher') {
+          iconName = 'home';
+        } else if (route.name === 'Calendar') {
+          iconName = 'calendar';
+        } else if (route.name === 'Class') {
+          iconName = 'group';
+        } else if (route.name === 'Dashboard') {
+          iconName = 'bar-chart-o';
+        } else if (route.name === 'Config') {
+          iconName = 'cogs';
+        }
+
+        // You can return any component that you like here!
+        return <FontAwesome name={iconName} size={size} color={color} />;
+      },
+      tabBarActiveTintColor: 'black',
+      tabBarInactiveTintColor: 'gray',
+    })}>
+      <TabNavegation.Screen options={{ title: "Home" }} navigationKey='HomeScreenTeacher' name="HomeScreenTeacher" component={HomeScreenTeacher} />
+      <TabNavegation.Screen navigationKey='Calendar' name="Calendar" component={HomeScreenTeacher} />  
+      <TabNavegation.Screen navigationKey='Class' name="Class" component={HomeScreenTeacher} />  
+      <TabNavegation.Screen navigationKey='Dashboard' name="Dashboard" component={HomeScreenTeacher} />  
+      <TabNavegation.Screen navigationKey='Config' name="Config" component={CreateAccountTeacher} />  
+    </TabNavegation.Navigator>
+    )
+  }
+
+  const Studant = () =>{
+    return (
+    <TabNavegation.Navigator initialRouteName="HomeScreenStudent">
+      <TabNavegation.Screen options={{ title: t('header.student') }} navigationKey='HomeScreenStudent' name="HomeScreenStudent" component={HomeScreenStudent} />
+      <TabNavegation.Screen navigationKey='CreateStudent' name="CreateStudent" component={CreateAccountStudent} />
+    </TabNavegation.Navigator>
+    )
+    
+  }
+
+  const User = {
+    1: <Teacher />,
+    2: <Studant />,
+  }
+
+  return ( 
+        User[user.tipoUsuario]
       )
 }
+
 function StackAuth(){
   
   return (
