@@ -1,11 +1,11 @@
-import React, { useState } from "react"
-import { View, Text, Pressable } from "react-native"
-import { useTranslation } from 'react-i18next'
-import { CheckBox } from '../../components/checkbox'
-import { Input } from '../../components/input'
-import { styles as stylesGlobal } from '../../global/styles'
-import { ButtonLinguage } from "../../components/buttonChangeLinguage"
-import { DoubleButtonConfirmation } from "../../components/doubleButtonConfirmation"
+import React, { useState } from "react";
+import { View, Text, Pressable } from "react-native";
+import { useTranslation } from 'react-i18next';
+import { CheckBox } from '../../components/checkbox';
+import { Input } from '../../components/input';
+import { styles as stylesGlobal } from '../../global/styles';
+import { ButtonLinguage } from "../../components/buttonChangeLinguage";
+import { DoubleButtonConfirmation } from "../../components/doubleButtonConfirmation";
 
 
 export function CreateAccountStudent({ navigation, route }) {
@@ -13,28 +13,27 @@ export function CreateAccountStudent({ navigation, route }) {
     const [valor, setValor] = useState('');
     const [check, setCheck] = useState(false);
 
-    // const { dataAuth } = route.params;
+    const { dataAuth } = route.params;
 
     function validation() {
-        if (valor === '')
-            return false
-
+        if (valor === '') false;
         return true
     };
 
     function handleConfirm() {
         if (validation()) {
             const data = {
+                ...dataAuth,
                 aluno: {
                     valor: valor,
                     check: check
                 }
-            }
+            };
             console.log("DATA:", data);
             navigation.navigate('Login');
         } else {
             console.log("error validacao");
-        }
+        };
     };
     function handleBack() {
         navigation.navigate('CreateAccount');
@@ -43,6 +42,7 @@ export function CreateAccountStudent({ navigation, route }) {
 
     return (
         <View style={stylesGlobal.container}>
+            <ButtonLinguage></ButtonLinguage>
             <Text>{t(`createAccount.triage.title`)}</Text>
             <Text style={{ width: "60%", marginBottom: 60 }}>{t(`createAccount.triage.description`)}</Text>
             <Pressable onPress={() => setCheck((value) => !value)} style={{ flexDirection: "row", width: '100%', alignItems: "center" }}>

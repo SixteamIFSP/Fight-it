@@ -25,5 +25,8 @@ export const styles = StyleSheet.create({
     },
     textTouchebles: {
         margin: 12,
+    },
+    FightIt:{
+        marginBottom: 10
     }
 });

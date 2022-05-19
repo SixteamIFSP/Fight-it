@@ -3,6 +3,7 @@ import styled from  'styled-components/native';
 export const SwitchForm = styled.TouchableOpacity`
     margin-left:5px;
     margin-right:5px;
+    margin-top: 10px;
     width: 35%;
 `;
 

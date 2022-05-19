@@ -7,9 +7,6 @@ import { Input } from '../../components/input';
 import { createAccount } from '../../controler/account';
 import { styles as stylesGlobal } from '../../global/styles';
 import { SwitchForm, SwitchText } from './styles';
-import { Toast } from 'react-native-toast-message/lib/src/Toast';
-import { SwitchButton } from '../../components/switchbutton';
-
 
 export function CreateAccount({ navigation, routes }) {
     const { t } = useTranslation()
@@ -39,34 +36,19 @@ export function CreateAccount({ navigation, routes }) {
                 telefone: phone,
                 senha: pass,
                 receberNot: 1,
-            }
-        }
-    }
-    function handleConfirm(){  
-        if(validation()){
-            const data = { 
-                nome:name,
-                email:mail,
-                telefone:phone,
-                senha:pass,
-                receberNot:1,
-            }
+                tipoUserID: typeTeacher ? 1 : 2,
+            };
             console.log("DATA", data);
             //navigation.navigate(`${typeTeacher ? 'CreateTeacher':'CreateStudent'}`, {dataAuth:data})
-            createAccount(data, typeTeacher);
-            
+            createAccount(data);
             navigation.navigate('Login');
-        } else{
-            Toast.show({
-                type: "error",
-                text2: "Usuário não Encontrado",
-            });
-        } 
-    }
-    function handleBack(){
+        } else {
+            console.log("sem validacao");
+        };
+    };
+    function handleBack() {
         navigation.navigate('Login');
     };
-
     return (
         <View style={stylesGlobal.container}>
             <ButtonLinguage></ButtonLinguage>
@@ -77,9 +59,16 @@ export function CreateAccount({ navigation, routes }) {
                 width: '100%',
                 justifyContent: 'center',
             }}>
-                <SwitchButton onPress={()=> setTypeTeacher(false)} text={t('createAccount.student')} type={!typeTeacher}></SwitchButton>
-                <SwitchButton onPress={()=> setTypeTeacher(true)} text={t('createAccount.teacher')} type={typeTeacher}></SwitchButton>
-                
+                <SwitchForm onPress={() => setTypeTeacher(false)}>
+                    <SwitchText change={!typeTeacher}>{t('createAccount.student')}</SwitchText>
+
+                </SwitchForm>
+                <SwitchForm onPress={() => setTypeTeacher(true)}>
+
+                    <SwitchText change={typeTeacher}>{t('createAccount.teacher')}</SwitchText>
+
+                </SwitchForm>
+
             </View>
 
             <Input
@@ -117,9 +106,10 @@ export function CreateAccount({ navigation, routes }) {
                 placeholder={t('createAccount.confirmPassword')}
                 secureTextEntry={true}
             />
-            <View style={{width:'100%',justifyContent:'center'}}>
-                <DoubleButtonConfirmation handleConfirm={handleConfirm} handleBack={handleBack}/>
+            <View style={{ width: '100%', justifyContent: 'center' }}>
+
+                <DoubleButtonConfirmation handleConfirm={handleConfirm} handleBack={handleBack} />
             </View>
         </View>
-    )
-}
+    );
+};
