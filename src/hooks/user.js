@@ -9,6 +9,17 @@ export const UserContext = createContext();
 function UserProvider({ children }) {
     const [user, setUser] = useState(null);
 
+    useEffect(()=>{
+
+        setUser({
+            nome        : 'teste',
+            email       : 'teste',
+            userID      : 1,
+            tipoUsuario : 1,
+        })
+    },[])
+
+
     async function singIn({mail, pass}, typeTeacher){
         let response;
         try {
@@ -40,7 +51,7 @@ function UserProvider({ children }) {
 
         Toast.show({
             type: "success",
-            text2: "Login Efetuado com sucesso",
+            text2: "Login efetuado com sucesso",
         });
         
 

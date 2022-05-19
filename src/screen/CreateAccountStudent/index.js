@@ -13,7 +13,7 @@ export function CreateAccountStudent({ navigation, route }) {
     const [valor, setValor] = useState('');
     const [check, setCheck] = useState(false);
 
-    const { dataAuth } = route.params;
+    // const { dataAuth } = route.params;
 
     function validation() {
         if (valor === '')
@@ -25,7 +25,6 @@ export function CreateAccountStudent({ navigation, route }) {
     function handleConfirm() {
         if (validation()) {
             const data = {
-                ...dataAuth,
                 aluno: {
                     valor: valor,
                     check: check
@@ -44,7 +43,6 @@ export function CreateAccountStudent({ navigation, route }) {
 
     return (
         <View style={stylesGlobal.container}>
-            <ButtonLinguage></ButtonLinguage>
             <Text>{t(`createAccount.triage.title`)}</Text>
             <Text style={{ width: "60%", marginBottom: 60 }}>{t(`createAccount.triage.description`)}</Text>
             <Pressable onPress={() => setCheck((value) => !value)} style={{ flexDirection: "row", width: '100%', alignItems: "center" }}>

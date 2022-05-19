@@ -11,7 +11,7 @@ export function CreateAccountTeacher({ navigation, route }) {
     const { t } = useTranslation();
     const [marcialFight, setMarcialFight] = useState('');
 
-    const { dataAuth } = route.params;
+    // const { dataAuth } = route.params;
 
     function validation() {
         if (valor === '')
@@ -23,7 +23,7 @@ export function CreateAccountTeacher({ navigation, route }) {
     function handleConfirm() {
         if (validation()) {
             const data = {
-                ...dataAuth,
+
                 aluno: {
                     valor: marcialFight,
                 }
@@ -41,7 +41,6 @@ export function CreateAccountTeacher({ navigation, route }) {
 
     return (
         <View style={stylesGlobal.container}>
-            <ButtonLinguage></ButtonLinguage>
             <Text>{t(`createAccount.qualification.title`)}</Text>
             <Text style={{ width: "60%" }}>{t(`createAccount.qualification.description`)}</Text>
             <View style={{ flexDirection: "row", width: '100%', justifyContent: "center", alignItems: "center" }}>

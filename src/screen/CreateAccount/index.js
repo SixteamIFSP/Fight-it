@@ -42,7 +42,6 @@ export function CreateAccount({ navigation, routes }) {
             }
         }
     }
-    
     function handleConfirm(){  
         if(validation()){
             const data = { 
