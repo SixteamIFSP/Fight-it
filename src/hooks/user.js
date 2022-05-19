@@ -9,9 +9,16 @@ export const UserContext = createContext();
 function UserProvider({children}){
     const [user, setUser] = useState(null);
 
-    async function singIn({mail, pass}){
+    async function singIn({mail, pass}, typeTeacher){
+        let response;
         try {
-            const response = await api.post('/user/login', {email:mail, senha:pass});
+
+            if (typeTeacher){
+                 response = await api.post('/user/login/professor', {email:mail, senha:pass});
+            } else {
+                 response = await api.post('/user/login/aluno', {email:mail, senha:pass});
+            }
+              
 
             console.log(response);
 

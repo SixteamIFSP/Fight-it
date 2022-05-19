@@ -56,12 +56,35 @@ function StackLoged(){
 
   const Studant = () =>{
     return (
-    <TabNavegation.Navigator initialRouteName="HomeScreenStudent">
-      <TabNavegation.Screen options={{ title: t('header.student') }} navigationKey='HomeScreenStudent' name="HomeScreenStudent" component={HomeScreenStudent} />
-      <TabNavegation.Screen navigationKey='CreateStudent' name="CreateStudent" component={CreateAccountStudent} />
-    </TabNavegation.Navigator>
-    )
+        <TabNavegation.Navigator initialRouteName="HomeScreenStudent"  screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
     
+            if (route.name === 'HomeScreenStudent') {
+              iconName = 'home';
+            } else if (route.name === 'Calendar') {
+              iconName = 'calendar';
+            } else if (route.name === 'Class') {
+              iconName = 'group';
+            } else if (route.name === 'Dashboard') {
+              iconName = 'bar-chart-o';
+            } else if (route.name === 'Config') {
+              iconName = 'cogs';
+            }
+    
+            // You can return any component that you like here!
+            return <FontAwesome name={iconName} size={size} color={color} />;
+          },
+          tabBarActiveTintColor: 'black',
+          tabBarInactiveTintColor: 'gray',
+        })}>
+          <TabNavegation.Screen options={{ title: "Home" }} navigationKey='HomeScreenStudent' name="HomeScreenStudent" component={HomeScreenStudent} />
+          <TabNavegation.Screen navigationKey='Calendar' name="Calendar" component={HomeScreenStudent} />  
+          <TabNavegation.Screen navigationKey='Class' name="Class" component={HomeScreenStudent} />  
+          <TabNavegation.Screen navigationKey='Dashboard' name="Dashboard" component={HomeScreenStudent} />  
+          <TabNavegation.Screen navigationKey='Config' name="Config" component={CreateAccountStudent} />  
+        </TabNavegation.Navigator>
+        )
   }
 
   const User = {
@@ -70,7 +93,7 @@ function StackLoged(){
   }
 
   return ( 
-        User[user.tipoUsuario]
+        User[user?.tipoUsuario]
       )
 }
 

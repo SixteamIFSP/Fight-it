@@ -11,14 +11,14 @@ import { useUser } from "../../hooks/user";
 
 export function HomeScreenStudent({ navigation }) {
   const {t} = useTranslation();
-  const {user} = useUser
+  const {user} = useUser();
+
+  console.log("USUARIO", user);
 
     return (
-     
         <View style={stylesGlobal.container}>
-          <ButtonLinguage />
           <ButtonLogout />
-            <Text>{t('homePage.student.message')} {user.nome}</Text>
+            <Text>{t('homePage.student.message')} {user?.nome}</Text>
         </View>
     
     );

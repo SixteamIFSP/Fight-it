@@ -18,7 +18,7 @@ export function HomeScreenTeacher({ navigation }) {
         <View style={stylesGlobal.container}>
           
           <ButtonLogout />
-          <Text>{t('homePage.teacher.message')} {user.nome}</Text>
+          <Text>{t('homePage.teacher.message')} {user?.nome}</Text>
         </View>
     
     );

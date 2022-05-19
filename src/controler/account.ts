@@ -9,14 +9,19 @@ function toastMensage(bool, msg){
     }); 
 }
 
-export async function createAccount(data){
+export async function createAccount(data, type){
 
     console.log("Data interno", data);
     
         try {
-            const response = await api.post(`/user/cadastro`, data);
+            let response;
+            if (type){
+                response = await api.post('/user/cadastro/professor', {data});
+           } else {
+                response = await api.post('/user/cadastro/aluno', {data});
+           }
     
-            console.log("\nRESPOSTA DA CRIACAO;", response.data);
+            console.log("\nRESPOSTA DA CRIACAO;", response?.data);
             
             if (response.data.status){
                 toastMensage(true, 'sucessor')

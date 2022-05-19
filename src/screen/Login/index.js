@@ -7,15 +7,17 @@ import { styles as stylesGlobal } from "../../global/styles";
 import  { useTranslation } from 'react-i18next';
 import { ButtonLinguage } from "../../components/buttonChangeLinguage";
 import { useUser } from "../../hooks/user";
+import { SwitchButton } from "../../components/switchbutton";
 
 export function Login({ navigation }) {
     const [mail, setMail] = useState();
     const [password, setPassword] = useState();
+    const [typeTeacher ,setTypeTeacher] = useState();
     const {t} = useTranslation();
     const {singIn} = useUser();
 
     function onHandleLogin(){
-      singIn({mail:mail, pass:password});
+      singIn({mail:mail, pass:password}, typeTeacher);
     }
 
     function onHandleForgotPass(){
@@ -34,6 +36,9 @@ export function Login({ navigation }) {
           
           <View style={styles.container}>
             <Text>Fight It</Text>
+            <SwitchButton onPress={()=> setTypeTeacher(false)} text={t('createAccount.student')} type={!typeTeacher}></SwitchButton>
+            <SwitchButton onPress={()=> setTypeTeacher(true)} text={t('createAccount.teacher')} type={typeTeacher}></SwitchButton>
+
               <Input
         
                 onChangeText={setMail}
