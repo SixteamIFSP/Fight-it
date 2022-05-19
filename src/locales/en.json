@@ -1,5 +1,5 @@
 {
-    "translation":{
+    "translation": {
         "appName": "Fight It",
         "login": {
             "mail": "E-mail",
@@ -8,29 +8,26 @@
             "forgotPass": "Forgot Password?",
             "CreateAccount": "Create Account"
         },
-        "validation":{
-            "confirm":"Confirm",
+        "validation": {
+            "confirm": "Confirm",
             "cancel": "Cancel"
-        }
-        ,
-        "createAccount":{
+        },
+        "createAccount": {
             "title": "Create Account",
             "descriptionSwitch": "Choose the type of registration:",
-            "student":"Student",
+            "student": "Student",
             "teacher": "Teacher",
             "name": "Name",
             "phone": "Phone",
             "confirmPassword": "Confirm Passoword",
-
-            "triage":{
-                "title":"Triage",
+            "triage": {
+                "title": "Triage",
                 "description": "Answer the screening form to know your fitness:",
                 "form-Heart": "You have heart problems?",
-                "form-other-problems":"Description of other uncited issues:"
-                
+                "form-other-problems": "Description of other uncited issues:"
             },
-            "qualification":{
-                "title":"Proof of training",
+            "qualification": {
+                "title": "Proof of training",
                 "description": "Send the necessary information to prove the training:",
                 "form-fight": "Martial arts"
             }
@@ -47,5 +44,5 @@
             "teacher":"Teacher",
             "student":"Student"
         }
-}
+    }
 }

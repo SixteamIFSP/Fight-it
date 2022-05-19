@@ -1,6 +1,4 @@
 import * as React from 'react';
-import { Button, Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Login } from '../screen/login';
@@ -95,11 +93,13 @@ function StackLoged(){
   return ( 
         User[user?.tipoUsuario]
       )
+
 }
 
 function StackAuth(){
   
   return (
+
           <AppRoutes.Navigator 
              screenOptions={{headerShown: false,}}
             initialRouteName="Login" >
@@ -107,34 +107,35 @@ function StackAuth(){
               navigationKey='Login' 
               name="Login"
               component={Login} />
-              <AppRoutes.Screen 
-           
+                
+              <AppRoutes.Screen
               navigationKey='CreateAccount' 
               name="CreateAccount" 
               component={CreateAccount} />
               
           </AppRoutes.Navigator> 
       )
+
 }
 
 
 
 export function Router() {
-  const {user} = useUser();
-  console.log("ROTER USER",user);
+  const { user } = useUser();
+  console.log("ROTER USER", user);
 
-    return (<>
-      {  user==null ? <StackAuth /> : <StackLoged /> }
-       
-     
-    </>
-        
-    )
+  return (<>
+    {user == null ? <StackAuth /> : <StackLoged />}
 
-      
-    
 
-     
-      
-    
+  </>
+
+  )
+
+
+
+
+
+
+
 }

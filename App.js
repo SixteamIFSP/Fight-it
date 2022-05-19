@@ -1,9 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Router } from './src/routes';
 import Toast, { BaseToast, ErrorToast } from 'react-native-toast-message';
-import i18n from './src/locales/i18n';
 import { UserProvider } from './src/hooks/user';
 
 const toastConfig = {
@@ -39,23 +37,21 @@ const toastConfig = {
 
 export default function App() {
   return (
-      <UserProvider>
-        <NavigationContainer >
-          <Router />
-          <Toast
-            config={toastConfig}
-          />
-        </NavigationContainer>
-      </UserProvider>
-
-    
+    <UserProvider>
+      <NavigationContainer >
+        <Router />
+        <Toast
+          config={toastConfig}
+        />
+      </NavigationContainer>
+    </UserProvider>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width:"100%",
+    width: "100%",
     backgroundColor: '#ffffff'
   },
 });
