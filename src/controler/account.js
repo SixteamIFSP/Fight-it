@@ -1,4 +1,3 @@
-import { useTranslation } from "react-i18next";
 import { api } from "../services/api";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
 

@@ -9,15 +9,15 @@ export const UserContext = createContext();
 function UserProvider({ children }) {
     const [user, setUser] = useState(null);
 
-    useEffect(()=>{
+    // useEffect(()=>{
 
-        setUser({
-            nome        : 'teste',
-            email       : 'teste',
-            userID      : 1,
-            tipoUsuario : 1,
-        })
-    },[])
+    //     setUser({
+    //         nome        : 'teste',
+    //         email       : 'teste',
+    //         userID      : 1,
+    //         tipoUsuario : 1,
+    //     })
+    // },[])
 
 
     async function singIn({mail, pass}, typeTeacher){
