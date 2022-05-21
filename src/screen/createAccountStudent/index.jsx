@@ -30,7 +30,7 @@ export function CreateAccountStudent({ navigation, route }) {
                     check: check
                 }
             }
-            console.log("DATA:", data);
+     
             navigation.navigate('Login');
         } else {
             console.log("error validacao");

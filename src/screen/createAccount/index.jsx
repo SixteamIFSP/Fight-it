@@ -21,27 +21,12 @@ export function CreateAccount({ navigation, routes }) {
     const [confirm, setConfirm] = useState('');
     const [typeTeacher, setTypeTeacher] = useState(false);
 
-    useEffect(() => {
-        console.log('valkor:', typeTeacher);
-    }, [typeTeacher])
-
     function validation() {
         if (name === '' | phone === '' | mail === '' | pass === '' | pass !== confirm)
             return false;
         return true;
     };
 
-    function handleConfirm() {
-        if (validation()) {
-            const data = {
-                nome: name,
-                email: mail,
-                telefone: phone,
-                senha: pass,
-                receberNot: 1,
-            }
-        }
-    }
     function handleConfirm(){  
         if(validation()){
             const data = { 
@@ -59,7 +44,7 @@ export function CreateAccount({ navigation, routes }) {
         } else{
             Toast.show({
                 type: "error",
-                text2: "Usuário não Encontrado",
+                text2: "Digite os campos corretamente!",
             });
         } 
     }
@@ -89,19 +74,16 @@ export function CreateAccount({ navigation, routes }) {
 
             />
             <Input
-
                 onChangeText={setMail}
                 value={mail}
                 placeholder={t('login.mail')}
                 keyboardType="email-address"
             />
             <Input
-
+                keyboardType='phone-pad'
                 onChangeText={setPhone}
                 value={phone}
                 placeholder={t('createAccount.phone')}
-                keyboardType="numeric"
-
             />
             <Input
 

@@ -10,8 +10,6 @@ export function HomeScreenStudent({ navigation }) {
   const {t} = useTranslation();
   const {user} = useUser();
 
-  console.log("USUARIO", user);
-
     return (
         <View style={stylesGlobal.container}>
           <ButtonLogout />

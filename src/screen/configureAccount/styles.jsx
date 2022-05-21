@@ -31,6 +31,7 @@ export const TextDescription = styled.Text`
     font-size:18px;
     text-align:left;
     margin-right:10px;
+    margin-left:10px;
 `;
 
 export const TextInfo = styled.Text`
@@ -71,6 +72,7 @@ export const CancelButton = styled.Text`
 export const ButtonConfigure = styled.TouchableOpacity`
     width:100%;
     margin-top:30px;
+    margin-bottom:30px;
     padding:5px;
     border-color:black;
     border-width:1px;

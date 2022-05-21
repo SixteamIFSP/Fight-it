@@ -34,7 +34,7 @@ function UserProvider({ children }) {
             }
               
 
-            console.log(response);
+            console.log(response.data);
 
 
             if (!response?.data.status) {

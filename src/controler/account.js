@@ -10,26 +10,23 @@ function toastMensage(bool, msg){
 }
 
 export async function createAccount(data, type){
-
-    console.log("Data interno", data);
     
         try {
             let response;
             if (type){
-                response = await api.post('/user/cadastro/professor', {data});
+                response = await api.post('/user/cadastro/professor', {...data});
            } else {
-                response = await api.post('/user/cadastro/aluno', {data});
+                response = await api.post('/user/cadastro/aluno', {...data});
            }
-    
-            console.log("\nRESPOSTA DA CRIACAO;", response?.data);
             
             if (response.data.status){
-                toastMensage(true, 'Sucesso')
+                toastMensage(true, response.data.mensagem)
             } else{
                 toastMensage(false, 'ERRO')   
             }
            
         } catch (error) {
+            console.log(error);
             toastMensage(false, 'error') 
         }
 }
@@ -44,8 +41,6 @@ export async function GetUserAccount(setDataUser,id, type){
        } else {
             response = await api.get(`/user/busca/aluno/${id}`,);
        }
-
-       
         
         if (response.data.status){
                 setDataUser(response?.data.result);
@@ -53,8 +48,6 @@ export async function GetUserAccount(setDataUser,id, type){
         } else {
             toastMensage(false, 'Erro ao buscar dados')   
         }
-
-        console.log("\nResposta GET DATA;", response.data.result);
        
     } catch (error) {
         console.log('erro:',error)
@@ -71,8 +64,6 @@ export async function ChangeInfoAccount(data, type){
        } else {
             response = await api.patch('/user/perfil/aluno', {...data});
        }
-
-        console.log("\nRESPOSTA DA CRIACAO;", response?.data);
         
         if (response.data.status){
             toastMensage(true, 'Atualizado com sucesso!')
@@ -94,8 +85,6 @@ export async function ChangePassowrd(data, type){
        } else {
             response = await api.patch('/user/senha/aluno', {...data});
        }
-
-        console.log("\nRESPOSTA DA alteracao;", response?.data);
         
         if (response.data.status){
             toastMensage(true, 'Atualizado com sucesso!')
@@ -106,5 +95,32 @@ export async function ChangePassowrd(data, type){
     } catch (error) {
         console.log(error);
         toastMensage(false, "ERRO INTERNO") ;
+    }
+}
+
+export async function DeleteAccount(data, type, logout){ // data => {id:number, senha:string}
+    console.log(data, type);
+
+    function desconect(){
+        logout();
+    }
+
+    try {
+        let response;
+        if (type){
+            response = await api.delete('/user/excluir/professor', {data:{...data}});
+       } else {
+            response = await api.delete('/user/excluir/aluno', {data:{...data}});
+       }
+        if (response.data.status){
+            toastMensage(true, 'Usuário excluido com sucesso!')
+            desconect();
+        } else{
+            toastMensage(false, 'Erro ao atualizar')   
+        }
+       
+    } catch (error) {
+        console.log({...error});
+        toastMensage(false, "Erro ao enviar os dados") ;
     }
 }

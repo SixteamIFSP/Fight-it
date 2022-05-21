@@ -28,7 +28,7 @@ export function CreateAccountTeacher({ navigation, route }) {
                     valor: marcialFight,
                 }
             }
-            console.log("DATA:", data);
+      
             navigation.navigate('Login');
         } else {
             console.log("error validacao");

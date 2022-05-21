@@ -2,6 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import { styles as globalStyles } from "../../global/styles";
 import { useUser } from "../../hooks/user";
+import { FontAwesome } from '@expo/vector-icons'; 
+import { Input } from "../../components/input";
+import { CheckBox } from "../../components/checkbox";
+import { ChangeInfoAccount, ChangePassowrd, DeleteAccount, GetUserAccount } from "../../controler/account";
+import { Toast } from "react-native-toast-message/lib/src/Toast";
 import { 
     ButtonConfigure,
     CancelButton,
@@ -16,12 +21,8 @@ import {
     TextHeader,
     TextInfo
 } from "./styles";
-import { FontAwesome } from '@expo/vector-icons'; 
-import { Input } from "../../components/input";
-import { CheckBox } from "../../components/checkbox";
-import { ChangeInfoAccount, ChangePassowrd, GetUserAccount } from "../../controler/account";
-import { Toast } from "react-native-toast-message/lib/src/Toast";
 
+// Compomente de SHOW e EDIT de dados do usuário
 const DataUser = () => {
     const { user, modifyUser} = useUser();
     const [dataUser, setDataUser] = useState();
@@ -44,13 +45,12 @@ const DataUser = () => {
 
     },[dataUser])
 
-    function Save(){
+    function save(){
         if (!editable){
             setEditable((value)=> !value)
         } else {
             //logica de envio
             if(nome!=='' & telefone!=='' & email === user.email){
-                console.log('atualizacao');
                 let data = {
                     id:user?.userID,
                     nome:nome,
@@ -97,7 +97,7 @@ const DataUser = () => {
                 <TextDescription>Telefone:</TextDescription>
                 {
                     editable ?
-                        <Input value={telefone} placeholder={"Digite seu numero:"} onChangeText={setTelefone}></Input>
+                        <Input autoComplete={'tel'} keyboardType={'phone-pad'} value={telefone} placeholder={"Digite seu numero:"} onChangeText={setTelefone}></Input>
                         : <TextInfo>{dataUser?.Telefone}</TextInfo>
                 }
             </TextAlingLine>
@@ -119,7 +119,7 @@ const DataUser = () => {
                         <CancelButton>Cancelar</CancelButton>
                     </ContainerCancelButton>
                 }
-                <ContainerSVG onPress={()=>Save()}>
+                <ContainerSVG onPress={()=>save()}>
                     <FontAwesome name={editable ? 'save' : 'pencil'} size={30} color="black" />
                 </ContainerSVG>
 
@@ -128,6 +128,7 @@ const DataUser = () => {
     )
 }
 
+// Compomente de troca de senha
 export const ChangePassword = ({editable, setEditable})=>{
     const { user } = useUser();
 
@@ -135,7 +136,7 @@ export const ChangePassword = ({editable, setEditable})=>{
     const [newSenha, setNewSenha] = useState('');
     const [confirm, setConfirm] = useState('');
 
-    function Save(){
+    function save(){
         if (!editable){
             setEditable((value)=> !value)
         } else {
@@ -180,15 +181,13 @@ export const ChangePassword = ({editable, setEditable})=>{
 
             <RowConfirmation>
                 {
-                    (editable) ?
+                    (editable) &&
 
                     <ContainerCancelButton onPress={()=>cancel()}>
                         <CancelButton>Cancelar</CancelButton>
                     </ContainerCancelButton>
-                    :
-                    <></>
                 }
-                <ContainerSVG onPress={()=>Save()}>
+                <ContainerSVG onPress={()=>save()}>
                     <FontAwesome name={editable ? 'save' : 'pencil'} size={30} color="black" />
                 </ContainerSVG>
 
@@ -202,9 +201,72 @@ export const ChangePassword = ({editable, setEditable})=>{
     )
 }
 
+const ConfirmDelete = ( {deletable, setDeletable} ) => {
+    const { user, logOut} = useUser();
+    const [ password, setPassword ] = useState('');
+
+    function handleDelete(){
+        try {
+            if (password!=='' & password.length > 6 ){
+                let data = {
+                    id: user.userID,
+                    senha: password,
+                }
+    
+                DeleteAccount(data, user.tipoUsuario===1, ()=>logOut())
+            } else {
+                Toast.show({
+                    type: "error",
+                    text2: "Preencha os campos corretamente",
+                }) 
+            }
+            
+        } catch (error) {
+            console.log(error.message);
+        }
+      
+
+        setDeletable(false)
+    }
+
+
+    return (
+
+        deletable ? (
+
+        <ConteinerInfo>
+            <TextHeader>Excluir usuário</TextHeader>
+            <TextDescription>
+                Validação de usuário:
+            </TextDescription>
+            <Input placeholder={"Para excluir conta digite sua senha!"} secureTextEntry={true} value={password} onChangeText={setPassword}></Input>
+
+            <RowConfirmation>
+                    <ContainerCancelButton onPress={()=>setDeletable(false)}>
+                        <CancelButton>Cancelar</CancelButton>
+                    </ContainerCancelButton>
+                    <ContainerSVG onPress={()=>handleDelete()}>
+                        <FontAwesome name={'trash'} size={30} color="#cc0000" />
+                    </ContainerSVG>
+            </RowConfirmation>
+        </ConteinerInfo>
+        ) : (
+
+        <ButtonConfigure onPress={()=>setDeletable(true)}>
+            <TextButton>EXCLUIR CONTA</TextButton>
+        </ButtonConfigure>
+        )
+
+    )
+
+}
+
+
+
 
 export function ConfigureAccount(){
     const [editablePass, setEditablePass] = useState(false);
+    const [deletable, setDeletable] = useState(false);
 
     return (
         <Container >
@@ -215,11 +277,9 @@ export function ConfigureAccount(){
                 <DataUser></DataUser>
             </> }
                 
-                <ChangePassword editable={editablePass} setEditable={setEditablePass}></ChangePassword>
+            <ChangePassword editable={editablePass} setEditable={setEditablePass}></ChangePassword>
 
-            <ButtonConfigure >
-                <TextButton>EXCLUIR CONTA</TextButton>
-            </ButtonConfigure>
+            <ConfirmDelete deletable={deletable} setDeletable={setDeletable}></ConfirmDelete>
             
         </Container>
     )
