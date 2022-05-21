@@ -19,6 +19,9 @@ function UserProvider({ children }) {
         })
     },[])
 
+    async function modifyUser(value){
+        setUser(value)
+    }
 
     async function singIn({mail, pass}, typeTeacher){
         let response;
@@ -41,7 +44,7 @@ function UserProvider({ children }) {
 
             console.log(response.data.mensagem);
             await AsyncStorage.setItem(tokenKey, JSON.stringify(response.data.token))
-            setUser({
+            modifyUser({
                 nome: response.data.nome,
                 email: response.data.email,
                 userID: response.data.userID,
@@ -75,6 +78,7 @@ function UserProvider({ children }) {
             singIn,
             logOut,
             user,
+            modifyUser,
         }}>
 
             {children}

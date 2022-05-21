@@ -33,6 +33,20 @@ export function Login({ navigation }) {
 
     <View style={stylesGlobal.container}>
       <ButtonLinguage />
+              <Input
+        
+                onChangeText={setMail}
+                value={mail}
+                placeholder={t('login.mail')}
+                keyboardType="email-address"
+              />
+              <Input
+        
+                secureTextEntry={true}
+                onChangeText={setPassword}
+                value={password}
+                placeholder={t('login.password')}                
+              />
 
       <View style={styles.container}>
           <Text>Fight It</Text>
