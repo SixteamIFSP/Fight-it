@@ -43,7 +43,7 @@ export function Login({ navigation }) {
         
                 onChangeText={setMail}
                 value={mail}
-                placeholder={t('login.mail')}  
+                placeholder={t('login.mail')}
                 keyboardType="email-address"
               />
               <Input
@@ -51,8 +51,7 @@ export function Login({ navigation }) {
                 secureTextEntry={true}
                 onChangeText={setPassword}
                 value={password}
-                placeholder={t('login.password')}  
-                
+                placeholder={t('login.password')}                
               />
 
               <TouchableOpacity

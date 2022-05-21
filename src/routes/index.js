@@ -10,6 +10,7 @@ import { HomeScreenTeacher } from '../screen/homeScreenTeacher';
 import { HomeScreenStudent } from '../screen/homeScreenStudent';
 import { useTranslation } from 'react-i18next';
 import { FontAwesome  } from '@expo/vector-icons';
+import { ConfigureAccount } from '../screen/configureAccount';
 
 const TabNavegation = createBottomTabNavigator();
 const AppRoutes = createNativeStackNavigator();
@@ -47,7 +48,7 @@ function StackLoged(){
       <TabNavegation.Screen navigationKey='Calendar' name="Calendar" component={HomeScreenTeacher} />  
       <TabNavegation.Screen navigationKey='Class' name="Class" component={HomeScreenTeacher} />  
       <TabNavegation.Screen navigationKey='Dashboard' name="Dashboard" component={HomeScreenTeacher} />  
-      <TabNavegation.Screen navigationKey='Config' name="Config" component={CreateAccountTeacher} />  
+      <TabNavegation.Screen navigationKey='Config' name="Config" component={ConfigureAccount} />  
     </TabNavegation.Navigator>
     )
   }
@@ -80,7 +81,7 @@ function StackLoged(){
           <TabNavegation.Screen navigationKey='Calendar' name="Calendar" component={HomeScreenStudent} />  
           <TabNavegation.Screen navigationKey='Class' name="Class" component={HomeScreenStudent} />  
           <TabNavegation.Screen navigationKey='Dashboard' name="Dashboard" component={HomeScreenStudent} />  
-          <TabNavegation.Screen navigationKey='Config' name="Config" component={CreateAccountStudent} />  
+          <TabNavegation.Screen navigationKey='Config' name="Config" component={ConfigureAccount} />  
         </TabNavegation.Navigator>
         )
   }

@@ -9,16 +9,19 @@ export const UserContext = createContext();
 function UserProvider({ children }) {
     const [user, setUser] = useState(null);
 
-    // useEffect(()=>{
+    useEffect(()=>{
 
-    //     setUser({
-    //         nome        : 'teste',
-    //         email       : 'teste',
-    //         userID      : 1,
-    //         tipoUsuario : 1,
-    //     })
-    // },[])
+        setUser({
+            nome        : 'teste',
+            email       : 'teste',
+            userID      : 1,
+            tipoUsuario : 1,
+        })
+    },[])
 
+    async function modifyUser(value){
+        setUser(value)
+    }
 
     async function singIn({mail, pass}, typeTeacher){
         let response;
@@ -41,7 +44,7 @@ function UserProvider({ children }) {
 
             console.log(response.data.mensagem);
             await AsyncStorage.setItem(tokenKey, JSON.stringify(response.data.token))
-            setUser({
+            modifyUser({
                 nome: response.data.nome,
                 email: response.data.email,
                 userID: response.data.userID,
@@ -75,6 +78,7 @@ function UserProvider({ children }) {
             singIn,
             logOut,
             user,
+            modifyUser,
         }}>
 
             {children}
