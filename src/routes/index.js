@@ -10,7 +10,6 @@ import { HomeScreenTeacher } from '../screen/homeScreenTeacher';
 import { HomeScreenStudent } from '../screen/homeScreenStudent';
 import { useTranslation } from 'react-i18next';
 import { FontAwesome  } from '@expo/vector-icons';
-import { ConfigureAccount } from '../screen/configureAccount';
 
 const TabNavegation = createBottomTabNavigator();
 const AppRoutes = createNativeStackNavigator();
@@ -19,24 +18,13 @@ const StackStudant = createNativeStackNavigator();
 function StackLoged(){
   const {t} = useTranslation();
   const {user} = useUser();
-  const expr = 'Papayas';
-  switch (expr) {
-    case 'Oranges':
-      console.log('Oranges are $0.59 a pound.');
-      break;
-    case 'Mangoes':
-    case 'Papayas':
-      console.log('Mangoes and papayas are $2.79 a pound.');
-      // expected output: "Mangoes and papayas are $2.79 a pound."
-      break;
-    default:
-      console.log(`Sorry, we are out of ${expr}.`);
-  }
+
   const Teacher = () =>{
     return (
     <TabNavegation.Navigator initialRouteName="HomeScreenTeacher"  screenOptions={({ route }) => ({
       tabBarIcon: ({ focused, color, size }) => {
         let iconName;
+
         if (route.name === 'HomeScreenTeacher') {
           iconName = 'home';
         } else if (route.name === 'Calendar') {
@@ -59,7 +47,7 @@ function StackLoged(){
       <TabNavegation.Screen navigationKey='Calendar' name="Calendar" component={HomeScreenTeacher} />  
       <TabNavegation.Screen navigationKey='Class' name="Class" component={HomeScreenTeacher} />  
       <TabNavegation.Screen navigationKey='Dashboard' name="Dashboard" component={HomeScreenTeacher} />  
-      <TabNavegation.Screen navigationKey='Config' name="Config" component={ConfigureAccount} />  
+      <TabNavegation.Screen navigationKey='Config' name="Config" component={CreateAccountTeacher} />  
     </TabNavegation.Navigator>
     )
   }
@@ -92,7 +80,7 @@ function StackLoged(){
           <TabNavegation.Screen navigationKey='Calendar' name="Calendar" component={HomeScreenStudent} />  
           <TabNavegation.Screen navigationKey='Class' name="Class" component={HomeScreenStudent} />  
           <TabNavegation.Screen navigationKey='Dashboard' name="Dashboard" component={HomeScreenStudent} />  
-          <TabNavegation.Screen navigationKey='Config' name="Config" component={ConfigureAccount} />  
+          <TabNavegation.Screen navigationKey='Config' name="Config" component={CreateAccountStudent} />  
         </TabNavegation.Navigator>
         )
   }
