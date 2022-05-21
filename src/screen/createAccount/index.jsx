@@ -27,28 +27,25 @@ export function CreateAccount({ navigation, routes }) {
         return true;
     };
 
-    function handleConfirm(){  
-        if(validation()){
-            const data = { 
-                nome:name,
-                email:mail,
-                telefone:phone,
-                senha:pass,
-                receberNot:1,
-            }
-            console.log("DATA", data);
-            //navigation.navigate(`${typeTeacher ? 'CreateTeacher':'CreateStudent'}`, {dataAuth:data})
+    function handleConfirm() {
+        if (validation()) {
+            const data = {
+                nome: name,
+                email: mail,
+                telefone: phone,
+                senha: pass,
+                receberNot: 1,
+            };
             createAccount(data, typeTeacher);
-            
             navigation.navigate('Login');
-        } else{
+        } else {
             Toast.show({
                 type: "error",
                 text2: "Digite os campos corretamente!",
             });
-        } 
+        }
     }
-    function handleBack(){
+    function handleBack() {
         navigation.navigate('Login');
     };
 
@@ -62,9 +59,9 @@ export function CreateAccount({ navigation, routes }) {
                 width: '100%',
                 justifyContent: 'center',
             }}>
-                <SwitchButton onPress={()=> setTypeTeacher(false)} text={t('createAccount.student')} type={!typeTeacher}></SwitchButton>
-                <SwitchButton onPress={()=> setTypeTeacher(true)} text={t('createAccount.teacher')} type={typeTeacher}></SwitchButton>
-                
+                <SwitchButton onPress={() => setTypeTeacher(false)} text={t('createAccount.student')} type={!typeTeacher}></SwitchButton>
+                <SwitchButton onPress={() => setTypeTeacher(true)} text={t('createAccount.teacher')} type={typeTeacher}></SwitchButton>
+
             </View>
 
             <Input
@@ -99,8 +96,8 @@ export function CreateAccount({ navigation, routes }) {
                 placeholder={t('createAccount.confirmPassword')}
                 secureTextEntry={true}
             />
-            <View style={{width:'100%',justifyContent:'center'}}>
-                <DoubleButtonConfirmation handleConfirm={handleConfirm} handleBack={handleBack}/>
+            <View style={{ width: '100%', justifyContent: 'center' }}>
+                <DoubleButtonConfirmation handleConfirm={handleConfirm} handleBack={handleBack} />
             </View>
         </View>
     )
