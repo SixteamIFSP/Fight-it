@@ -7,7 +7,7 @@ import { useUser } from "../../hooks/user";
 // import { styles } from "./styles";
 
 export function HomeScreenStudent({ navigation }) {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const {user} = useUser();
 
     return (

@@ -1,13 +1,5 @@
 import { api } from "../services/api";
-import { Toast } from "react-native-toast-message/lib/src/Toast";
-import { useUser } from "../hooks/user";
-
-function toastMensage(bool, msg){
-    Toast.show({
-        type: bool ? 'success' : "error",
-        text2: msg,
-    }); 
-}
+import { toastMessage } from "../util/toastMessage";
 
 export async function createAccount(data, type){
     
@@ -20,14 +12,14 @@ export async function createAccount(data, type){
            }
             
             if (response.data.status){
-                toastMensage(true, response.data.mensagem)
+                toastMessage(true, response?.data.mensagem)
             } else{
-                toastMensage(false, 'ERRO')   
+                toastMessage(false, response?.data.mensagem)   
             }
            
         } catch (error) {
             console.log(error);
-            toastMensage(false, 'error') 
+            toastMessage(false, 'Erro de conexão!') 
         }
 }
 
@@ -44,16 +36,15 @@ export async function GetUserAccount(setDataUser,id, type){
         
         if (response.data.status){
                 setDataUser(response?.data.result);
-                // toastMensage(true, response?.data.mensagem)
+                // toastMessage(true, response?.data.mensagem)
         } else {
-            toastMensage(false, 'Erro ao buscar dados')   
+            toastMessage(false, response?.data.mensagem)   
         }
        
     } catch (error) {
         console.log('erro:',error)
-        toastMensage(false, 'error') 
+        toastMessage(false, 'Erro de conexão!') 
     }
-
 }
 
 export async function ChangeInfoAccount(data, type){
@@ -66,14 +57,14 @@ export async function ChangeInfoAccount(data, type){
        }
         
         if (response.data.status){
-            toastMensage(true, 'Atualizado com sucesso!')
+            toastMessage(true, response.data.mensagem)
         } else{
-            toastMensage(false, 'Erro ao atualizar')   
+            toastMessage(false, response.data.mensagem)   
         }
        
     } catch (error) {
         console.log(error);
-        toastMensage(false, "ERRO INTERNO") ;
+        toastMessage(false, "Erro de conexão!") ;
     }
 }
 
@@ -87,14 +78,14 @@ export async function ChangePassowrd(data, type){
        }
         
         if (response.data.status){
-            toastMensage(true, 'Atualizado com sucesso!')
+            toastMessage(true, 'Atualizado com sucesso!')
         } else{
-            toastMensage(false, 'Erro ao atualizar')   
+            toastMessage(false, 'Erro ao atualizar')   
         }
        
     } catch (error) {
         console.log(error);
-        toastMensage(false, "ERRO INTERNO") ;
+        toastMessage(false, "ERRO INTERNO") ;
     }
 }
 
@@ -113,14 +104,14 @@ export async function DeleteAccount(data, type, logout){ // data => {id:number, 
             response = await api.delete('/user/excluir/aluno', {data:{...data}});
        }
         if (response.data.status){
-            toastMensage(true, 'Usuário excluido com sucesso!')
+            toastMessage(true, 'Usuário excluido com sucesso!')
             desconect();
         } else{
-            toastMensage(false, 'Erro ao atualizar')   
+            toastMessage(false, 'Erro ao atualizar')   
         }
        
     } catch (error) {
         console.log({...error});
-        toastMensage(false, "Erro ao enviar os dados") ;
+        toastMessage(false, "Erro ao enviar os dados") ;
     }
 }

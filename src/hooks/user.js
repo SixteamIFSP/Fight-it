@@ -1,8 +1,8 @@
 import { api } from '../services/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createContext, useContext, useEffect, useState } from 'react';
-import { tokenKey } from '../configuration/constants';
-import Toast from "react-native-toast-message";
+import { tokenKey } from '../configuration/constants'; 
+import { toastMessage } from '../util/toastMessage';
 
 export const UserContext = createContext();
 
@@ -14,7 +14,7 @@ function UserProvider({ children }) {
         setUser({
             nome        : 'teste',
             email       : 'teste',
-            userID      : 1,
+            userID      : 5,
             tipoUsuario : 1,
         })
     },[])
@@ -38,9 +38,10 @@ function UserProvider({ children }) {
 
 
             if (!response?.data.status) {
-                console.log("Erro de autenticação");
+                console.log("Erro de autenticação: ", response?.data.mensagem);
+                toastMessage(false, response?.data.mensagem);
                 return
-            }
+            } 
 
             console.log(response.data.mensagem);
             await AsyncStorage.setItem(tokenKey, JSON.stringify(response.data.token))
@@ -50,20 +51,12 @@ function UserProvider({ children }) {
                 userID: response.data.userID,
                 tipoUsuario: response.data.tipoUsuario,
             });
-
-
-        Toast.show({
-            type: "success",
-            text2: "Login efetuado com sucesso",
-        });
+            toastMessage(true, "Login efetuado com sucesso");
         
 
         } catch (error) {
             console.log(error.message);
-            Toast.show({
-                type: "error",
-                text2: "Erro interno",
-            })
+            toastMessage(true, "Erro de conexão!");
         }
 
     }

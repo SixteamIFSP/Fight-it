@@ -35,7 +35,7 @@
         },
         "homePage":{
             "student":{
-                "message":"Olá estudande"
+                "message":"Olá estudante"
             },
             "teacher":{
                 "message":"Olá professor"
