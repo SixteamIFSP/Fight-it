@@ -25,5 +25,17 @@ export const styles = StyleSheet.create({
     },
     textTouchebles: {
         margin: 12,
+    },
+    TitleLogin: {
+        marginTop: 12,
+        marginBottom: 12,
+    },
+    switchButtons: {
+        flexDirection: 'row',
+        width: '75%',
+        flexwrap: 'nowrap',
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: 10,
     }
 });

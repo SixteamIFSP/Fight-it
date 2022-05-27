@@ -28,8 +28,6 @@ export async function createClass(data){ // data => { nome:string, descricao:str
     try {
         response = await api.post(`/turma/criar`, {...data});
 
-        console.log(response?.data);
-
         if (response?.data.status){
             toastMessage(true, response?.data.mensagem) 
 
@@ -64,8 +62,7 @@ export async function getAlunosTurma(setAlunos, data){ // data => number
     }
 }
 
-export async function adicionarAluno(data){ // data => {turmaId:number, email:string}
-    console.log('paramentro', data);
+export async function adicionarAluno(data){
 
     try {
         const response = await api.post(`/turma/adiciona`, {...data});

@@ -23,12 +23,10 @@ export function CreateAccountTeacher({ navigation, route }) {
     function handleConfirm() {
         if (validation()) {
             const data = {
-
                 aluno: {
                     valor: marcialFight,
                 }
             }
-      
             navigation.navigate('Login');
         } else {
             console.log("error validacao");

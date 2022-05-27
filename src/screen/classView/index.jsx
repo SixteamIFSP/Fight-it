@@ -35,7 +35,6 @@ function AdicionarAluno({turmaId , setback}){
             turmaId:turmaId,
         }
 
-        console.log(data);
         adicionarAluno(data);
         setback(false);
         
@@ -56,7 +55,6 @@ function AdicionarAluno({turmaId , setback}){
 }
 
 export function ClassView({navigation, route}){
-    console.log(route.params.data);
     const { Descricao, id} = route.params.data;
     const [dataAlunos, setDataAlunos] = useState([]);
     const [adicionarAluno, setAdicionarAluno] = useState(false);
