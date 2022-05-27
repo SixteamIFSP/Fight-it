@@ -253,7 +253,7 @@ const ConfirmDelete = ( {deletable, setDeletable} ) => {
         ) : (
 
         <ButtonConfigure onPress={()=>setDeletable(true)}>
-            <TextButton>EXCLUIR CONTA</TextButton>
+            <TextButton>DESATIVAR CONTA</TextButton>
         </ButtonConfigure>
         )
 

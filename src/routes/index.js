@@ -45,11 +45,13 @@ function StackLoged(){
       tabBarActiveTintColor: 'black',
       tabBarInactiveTintColor: 'gray',
     })}>
+
       <TabNavegation.Screen options={{ title: "Home" }} navigationKey='HomeScreenTeacher' name="HomeScreenTeacher" component={HomeScreenTeacher} />
-      <TabNavegation.Screen navigationKey='Calendar' name="Calendar" component={HomeScreenTeacher} />  
-      <TabNavegation.Screen options={{headerShown: false}} navigationKey='Class' name="Class" component={ClassStack} />  
-      <TabNavegation.Screen navigationKey='Dashboard' name="Dashboard" component={HomeScreenTeacher} />  
-      <TabNavegation.Screen navigationKey='Config' name="Config" component={ConfigureAccount} />  
+      <TabNavegation.Screen navigationKey='Calendar' name="Calendar" component={HomeScreenTeacher} />
+      <TabNavegation.Screen options={{headerShown: false}} navigationKey='Class' name="Class" component={ClassStack} />
+      <TabNavegation.Screen navigationKey='Dashboard' name="Dashboard" component={HomeScreenTeacher} />
+      <TabNavegation.Screen navigationKey='Config' name="Config" component={ConfigureAccount} />
+
     </TabNavegation.Navigator>
     )
   }

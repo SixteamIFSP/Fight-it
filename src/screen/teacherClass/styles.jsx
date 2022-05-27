@@ -9,21 +9,6 @@ export const Container = styled.View`
 
 
 // Visualização de turma
-export const ContainerButtonAdd = styled.TouchableOpacity`
-    position:absolute;
-    top:2%;
-    right:3%;
-    width:50px;
-    height:50px;
-    z-index:2;
-    align-items:center;
-    justify-content:center;
-    border-width:1px;
-    border-color:black;
-    border-radius:50px;
-    background-color:white;
-`;
-
 export const ContainerList = styled.SafeAreaView`
     flex:1;
     padding-top:10%;
@@ -41,15 +26,15 @@ export const CardView = styled.TouchableOpacity`
     border-color:black;
     border-width:1px;
     border-radius:10px;
-`
+`;
 
 export const CardTitle = styled.Text`
     color:#000;
     font-size:24px;
     font-weight:bold;
     margin-bottom:20px;
-
 `;
+
 export const CardDescription = styled.Text`
     color:#000;
     font-size:18px;

@@ -56,7 +56,7 @@ function UserProvider({ children }) {
 
         } catch (error) {
             console.log(error.message);
-            toastMessage(true, "Erro de conexão!");
+            toastMessage(false, "Erro de conexão!");
         }
 
     }

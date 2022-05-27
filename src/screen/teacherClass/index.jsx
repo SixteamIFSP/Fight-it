@@ -4,28 +4,30 @@ import {
     CardTitle,
     CardView,
     Container,
-    ContainerButtonAdd, 
     ContainerForm, 
     ContainerList, 
     ContainerTitle,
     TextTitle
 } from "./styles";
-import { ActivityIndicator, FlatList, requireNativeComponent } from "react-native";
+import { ActivityIndicator, FlatList } from "react-native";
 import { createClass, getClass } from "../../controler/class";
 import { useUser } from "../../hooks/user";
 import { DoubleButtonConfirmation } from "../../components/doubleButtonConfirmation";
 import { Input } from "../../components/input";
 import { toastMessage } from "../../util/toastMessage";
+import { AddButton } from "../../components/addButton";
 
+
+const dataStatic = {}
 
 function CardTurma({data, handleNewScreen}){
     return (
-        <CardView onPress={()=>handleNewScreen('ClassInfo',  {title: `Turma: ${data?.Nome}`, data:data})}>
+        <CardView onPress={()=>handleNewScreen('ClassView', {title: `Turma: ${data?.Nome}`, data:data})}>
             <CardTitle>{data?.Nome}</CardTitle>
         </CardView>
     )
-
 }
+
 function FooterLoading({loading}){
     if (!loading) return null;
 
@@ -54,13 +56,12 @@ function LoadingClass({ user, setCreateNew, navigation}){
         navigation.navigate(screen, params)
     }
 
+  
 
     return(
 
         <>    
-            <ContainerButtonAdd onPress={()=>setCreateNew((value)=> !value)}>
-                <FontAwesome name="plus" size={24} color="black" />
-            </ContainerButtonAdd>
+            <AddButton handle={()=>setCreateNew((value)=> !value)}/>
 
             <ContainerList>
             {
