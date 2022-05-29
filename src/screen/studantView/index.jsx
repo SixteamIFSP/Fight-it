@@ -1,28 +1,26 @@
 import React from "react";
-import { Text } from "react-native";
 import { Container, ContainerButtons, ContainerDesempenho, ContentButtons, DesempenhoHeader, TextButtons } from "./styles";
 
 export function StudantView({navigation, route}){
     console.log(route?.params);
 
-
     function handleTriagem(){
 
     }
 
-    function handleAvaliacao(){
+    function handleEvaluation(){
 
+        navigation.navigate('EvaluationStudent', {...route?.params, title:'Avaliação: '+route?.params.nome})
     }
 
     return(
         <Container>
-            <Text>Bomdia</Text>
             <ContainerButtons>
                 <ContentButtons onPress={()=>handleTriagem()}>
                 <TextButtons>Visualizar Triagem</TextButtons>
                 </ContentButtons>
 
-                <ContentButtons  onPress={()=>handleAvaliacao()}>
+                <ContentButtons  onPress={()=>handleEvaluation()}>
                 <TextButtons>Avaliar Aluno</TextButtons>
                 </ContentButtons>
             </ContainerButtons>
@@ -30,7 +28,7 @@ export function StudantView({navigation, route}){
             <ContainerDesempenho>
                 <DesempenhoHeader>DESEMPENHO</DesempenhoHeader>
 
-                
+                {/* Tabela de aluno */}
             </ContainerDesempenho>
 
 

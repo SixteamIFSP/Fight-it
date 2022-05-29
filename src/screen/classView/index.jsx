@@ -108,7 +108,7 @@ export function ClassView({navigation, route}){
 
                         <ContentListagem
                             data={dataAlunos}
-                            renderItem={({item})=> <RenderListAluno item={item} navigation={navigation} data={{Nome:Nome, id:id, ProfessorId:ProfessorId} }></RenderListAluno>}
+                            renderItem={({item})=> <RenderListAluno item={item} navigation={navigation} data={{nomeTurma:Nome, id:id, ProfessorId:ProfessorId} }></RenderListAluno>}
                             keyExtractor={item => `${item.Nome}`+'91'}>
 
                         </ContentListagem> 
