@@ -59,8 +59,16 @@ export function CreateAccount({ navigation, routes }) {
                 width: '100%',
                 justifyContent: 'center',
             }}>
-                <SwitchButton onPress={() => setTypeTeacher(false)} text={t('createAccount.student')} type={!typeTeacher}></SwitchButton>
-                <SwitchButton onPress={() => setTypeTeacher(true)} text={t('createAccount.teacher')} type={typeTeacher}></SwitchButton>
+                <SwitchButton
+                    onPress={() => setTypeTeacher(false)}
+                    text={t('createAccount.student')}
+                    type={!typeTeacher}
+                ></SwitchButton>
+                <SwitchButton
+                    onPress={() => setTypeTeacher(true)}
+                    text={t('createAccount.teacher')}
+                    type={typeTeacher}
+                ></SwitchButton>
 
             </View>
 
