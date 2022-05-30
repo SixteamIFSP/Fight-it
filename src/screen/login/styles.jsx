@@ -33,9 +33,8 @@ export const styles = StyleSheet.create({
     switchButtons: {
         flexDirection: 'row',
         width: '75%',
-        flexwrap: 'nowrap',
+        flexWrap: 'nowrap',
         justifyContent: 'center',
-        alignItems: 'center',
-        gap: 10,
+        alignItems: 'center'
     }
 });

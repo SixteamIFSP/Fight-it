@@ -6,7 +6,7 @@ import { DoubleButtonConfirmation } from '../../components/doubleButtonConfirmat
 import { Input } from '../../components/input';
 import { createAccount } from '../../controler/account';
 import { styles as stylesGlobal } from '../../global/styles';
-import { SwitchForm, SwitchText } from './styles';
+import { styles } from './styles';
 import { Toast } from 'react-native-toast-message/lib/src/Toast';
 import { SwitchButton } from '../../components/switchbutton';
 
@@ -52,13 +52,14 @@ export function CreateAccount({ navigation, routes }) {
     return (
         <View style={stylesGlobal.container}>
             <ButtonLinguage></ButtonLinguage>
-            <Text>{t('createAccount.title')}</Text>
-            <Text>{t('createAccount.descriptionSwitch')}</Text>
-            <View style={{
-                flexDirection: 'row',
-                width: '100%',
-                justifyContent: 'center',
-            }}>
+
+            <Text style={styles.TitleLogin}>Fight It</Text>
+
+            <View style={styles.userTypeChoice}>
+                <Text>{t('createAccount.descriptionSwitch')}</Text>
+            </View>
+
+            <View style={styles.switchButtons}>
                 <SwitchButton
                     onPress={() => setTypeTeacher(false)}
                     text={t('createAccount.student')}
@@ -69,14 +70,12 @@ export function CreateAccount({ navigation, routes }) {
                     text={t('createAccount.teacher')}
                     type={typeTeacher}
                 ></SwitchButton>
-
             </View>
 
             <Input
                 onChangeText={setName}
                 value={name}
                 placeholder={t('createAccount.name')}
-
             />
             <Input
                 onChangeText={setMail}
@@ -91,7 +90,6 @@ export function CreateAccount({ navigation, routes }) {
                 placeholder={t('createAccount.phone')}
             />
             <Input
-
                 onChangeText={setPass}
                 value={pass}
                 placeholder={t('login.password')}
@@ -104,8 +102,10 @@ export function CreateAccount({ navigation, routes }) {
                 placeholder={t('createAccount.confirmPassword')}
                 secureTextEntry={true}
             />
-            <View style={{ width: '100%', justifyContent: 'center' }}>
-                <DoubleButtonConfirmation handleConfirm={handleConfirm} handleBack={handleBack} />
+            <View style={styles.confirmationButton}>
+                <DoubleButtonConfirmation
+                    handleConfirm={handleConfirm}
+                    handleBack={handleBack} />
             </View>
         </View>
     )
