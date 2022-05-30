@@ -1,4 +1,4 @@
-import  styled  from 'styled-components/native'
+import styled  from 'styled-components/native'
 
 export const Container = styled.View`
     flex:1;
@@ -44,4 +44,8 @@ export const AddContainer = styled.View`
 export const TextDescription = styled.Text`
     width:100%;
     height:10%;
-`
+`;
+
+export const TextTouchable = styled.TouchableOpacity`
+    padding:5px;
+`;

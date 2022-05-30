@@ -1,18 +1,33 @@
 import React, { useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import { Text, View,  } from "react-native";
 import { AddButton } from "../../components/addButton";
 import { DoubleButtonConfirmation } from "../../components/doubleButtonConfirmation";
 import { Input } from "../../components/input";
 import { adicionarAluno, getAlunosTurma } from "../../controler/class";
 import { toastMessage } from "../../util/toastMessage";
-import { Container, ContainerHeader,  ContainerListRow, ContainerList,  Informacoes, ContentListagem, AddContainer, ContainerFlat, TextDescription, } from "./styles";
+import { Container,
+    ContainerHeader, 
+    ContainerListRow,
+    ContainerList,
+    Informacoes,
+    ContentListagem,
+    AddContainer,
+    ContainerFlat,
+    TextDescription,
+    TextTouchable,
+} from "./styles";
 
 
-const RenderListAluno = ({item})=>{
+const RenderListAluno = ({item, navigation, data})=>{
+
+    function handleTouch(){
+        navigation.navigate('StudantView', {...data, studantId:item.id, nome:item.Nome, title:"Aluno: "+item.Nome})
+    }
+
     return(
-        <View>
+        <TextTouchable onPress={()=>handleTouch()}>
             <Text>{item?.Nome}</Text>
-        </View>
+        </TextTouchable>
     )
 }
 
@@ -55,7 +70,7 @@ function AdicionarAluno({turmaId , setback}){
 }
 
 export function ClassView({navigation, route}){
-    const { Descricao, id} = route.params.data;
+    const { Descricao, ProfessorId,  Nome, id } = route.params.data;
     const [dataAlunos, setDataAlunos] = useState([]);
     const [adicionarAluno, setAdicionarAluno] = useState(false);
 
@@ -91,7 +106,7 @@ export function ClassView({navigation, route}){
 
                         <ContentListagem
                             data={dataAlunos}
-                            renderItem={({item})=> <RenderListAluno item={item}></RenderListAluno>}
+                            renderItem={({item})=> <RenderListAluno item={item} navigation={navigation} data={{nomeTurma:Nome, id:id, ProfessorId:ProfessorId} }></RenderListAluno>}
                             keyExtractor={item => `${item.Nome}`+'91'}>
 
                         </ContentListagem> 
