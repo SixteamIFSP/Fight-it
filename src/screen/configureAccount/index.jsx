@@ -17,7 +17,8 @@ import {
     TextButton,
     TextDescription,
     TextHeader,
-    TextInfo
+    TextInfo,
+    ConteinerInfoDelete,
 } from "./styles";
 
 // Compomente de SHOW e EDIT de dados do usuário
@@ -236,7 +237,7 @@ const ConfirmDelete = ({ deletable, setDeletable }) => {
     return (
         deletable ?
             (
-                <ConteinerInfo style={{ marginTop: 20, marginBottom: 20 }}>
+                <ConteinerInfoDelete style={{ marginTop: 20, marginBottom: 20 }}>
                     <TextHeader>Excluir usuário</TextHeader>
                     <TextDescription>
                         Validação de usuário:
@@ -255,7 +256,7 @@ const ConfirmDelete = ({ deletable, setDeletable }) => {
                             <FontAwesome name={'trash'} size={30} color="#cc0000" />
                         </ContainerSVG>
                     </RowConfirmation>
-                </ConteinerInfo>
+                </ConteinerInfoDelete>
             )
             :
             (
