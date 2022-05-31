@@ -32,9 +32,8 @@ const DataUser = () => {
     const [telefone, setTelefone] = useState('');
     const [notification, setNotification] = useState()
 
-
     useEffect(() => {
-        GetUserAccount((data) => setDataUser(data), user?.userID, user?.tipoUsuario == 1,)
+        GetUserAccount((data) => setDataUser(data), user?.userID, user?.tipoUsuario === 1,)
     }, [])
 
     useEffect(() => {
@@ -97,7 +96,13 @@ const DataUser = () => {
                 <TextDescription>Telefone:</TextDescription>
                 {
                     editable ?
-                        <Input autoComplete={'tel'} keyboardType={'phone-pad'} value={telefone} placeholder={"Digite seu numero:"} onChangeText={setTelefone}></Input>
+                        <Input
+                            autoComplete={'tel'}
+                            keyboardType={'phone-pad'}
+                            value={telefone}
+                            placeholder={"Digite seu numero:"}
+                            onChangeText={setTelefone}
+                        ></Input>
                         : <TextInfo>{dataUser?.Telefone}</TextInfo>
                 }
             </TextAlingLine>
@@ -109,8 +114,6 @@ const DataUser = () => {
                         : <TextInfo>{notification ? 'Ativo' : 'Desativado'}</TextInfo>
                 }
             </TextAlingLine>
-
-
             <RowConfirmation>
                 {
                     (editable) &&
@@ -122,7 +125,6 @@ const DataUser = () => {
                 <ContainerSVG onPress={() => save()}>
                     <FontAwesome name={editable ? 'save' : 'pencil'} size={30} color="black" />
                 </ContainerSVG>
-
             </RowConfirmation>
         </ConteinerInfo>
     )
@@ -169,15 +171,27 @@ export const ChangePassword = ({ editable, setEditable }) => {
     return (
         editable ?
             <ConteinerInfo>
-
                 <TextHeader>Trocar Senha</TextHeader>
-
                 <TextDescription>Senha antiga:</TextDescription>
-                <Input secureTextEntry={true} value={oldPass} onChangeText={setOldPass}></Input>
+                <Input
+                    style={{ marginTop: -20, marginBottom: 10, width: '100%' }}
+                    secureTextEntry={true}
+                    value={oldPass}
+                    onChangeText={setOldPass}></Input>
                 <TextDescription>Nova Senha:</TextDescription>
-                <Input secureTextEntry={true} value={newSenha} onChangeText={setNewSenha}></Input>
+                <Input
+                    style={{ marginTop: -20, marginBottom: 10, width: '100%' }}
+                    secureTextEntry={true}
+                    value={newSenha}
+                    onChangeText={setNewSenha}></Input>
+
                 <TextDescription>Confirmação de senha:</TextDescription>
-                <Input secureTextEntry={true} value={confirm} onChangeText={setConfirm}></Input>
+                <Input
+                    style={{ marginTop: -20, marginBottom: 20, width: '100%' }}
+                    secureTextEntry={true}
+                    value={confirm}
+                    onChangeText={setConfirm}>
+                </Input>
 
                 <RowConfirmation>
                     {
@@ -261,16 +275,11 @@ const ConfirmDelete = ({ deletable, setDeletable }) => {
 
 }
 
-
-
-
 export function ConfigureAccount() {
     const [editablePass, setEditablePass] = useState(false);
     const [deletable, setDeletable] = useState(false);
-
     return (
         <Container >
-
             {!editablePass &&
                 <>
                     <TextHeader>Minha conta</TextHeader>
