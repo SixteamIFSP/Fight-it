@@ -72,7 +72,7 @@ export async function adicionarAluno(data){ // data => {turmaId:number, email:st
 
         console.log(response?.data);
 
-        if (response?.data.status & response?.data.result.length > 0){
+        if (response?.data.status){
             toastMessage(true, response?.data.mensagem) 
 
         } else{
