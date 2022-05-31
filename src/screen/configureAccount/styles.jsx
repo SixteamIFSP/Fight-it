@@ -12,6 +12,8 @@ export const TextHeader = styled.Text`
     font-size:30px;
 `;
 export const ConteinerInfo = styled.View`
+    border-top-width:6px;
+    borderTopColor: #3d3d3d;
     margin-left:auto;
     margin-right:auto;
     width:90%;
