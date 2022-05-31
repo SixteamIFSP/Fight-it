@@ -8,7 +8,8 @@ export const styles = StyleSheet.create({
         width: '75%',
         flexWrap: 'nowrap',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginBottom: 20,
     },
     userTypeChoice: {
         marginBottom: 16,
@@ -21,5 +22,8 @@ export const styles = StyleSheet.create({
     confirmationButton: {
         width: '100%',
         justifyContent: 'center',
-    }
+    }, 
+    inputes: {
+        marginBottom:24,
+    },
 });

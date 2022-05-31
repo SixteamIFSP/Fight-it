@@ -73,30 +73,34 @@ export function CreateAccount({ navigation, routes }) {
             </View>
 
             <Input
+                style={styles.inputes}
                 onChangeText={setName}
                 value={name}
                 placeholder={t('createAccount.name')}
             />
             <Input
+                style={styles.inputes}
                 onChangeText={setMail}
                 value={mail}
                 placeholder={t('login.mail')}
                 keyboardType="email-address"
             />
             <Input
+                style={styles.inputes}
                 keyboardType='phone-pad'
                 onChangeText={setPhone}
                 value={phone}
                 placeholder={t('createAccount.phone')}
             />
             <Input
+                style={styles.inputes}
                 onChangeText={setPass}
                 value={pass}
                 placeholder={t('login.password')}
                 secureTextEntry={true}
-
             />
             <Input
+                style={styles.inputes}
                 onChangeText={setConfirm}
                 value={confirm}
                 placeholder={t('createAccount.confirmPassword')}
