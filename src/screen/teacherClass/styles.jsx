@@ -16,12 +16,15 @@ export const CardView = styled.TouchableOpacity`
     z-index:1;
     width:100%;
     height:auto;
-    padding:10px;
+    padding:5px;
     margin-bottom:20px;
     border-color:black;
     border-width:0.5px;
     border-radius:4px;
     background-color: white;
+    border-top-width:6px;
+    borderColor: #3d3d3d;
+    borderStyle: solid;
 `;
 export const CardTitle = styled.Text`
     color:#000;

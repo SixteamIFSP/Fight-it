@@ -18,6 +18,7 @@ import { toastMessage } from "../../util/toastMessage";
 import { AddButton } from "../../components/addButton";
 
 function CardTurma({ data, handleNewScreen }) {
+    // TODO: COLOCAR AS INFORMAÇÕES DENTRO DE CADA CARD E VALIDAR SE EXISTE OU NÃO INFORMAÇÕES.
     return (
         <CardView
             onPress={
