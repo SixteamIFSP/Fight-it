@@ -21,7 +21,8 @@ export const styles = StyleSheet.create({
         alignItems: "center",
         backgroundColor: "#DDDDDD",
         padding: 10,
-        margin: 12,
+        marginBottom: 12,
+        marginTop: 16,
     },
     textTouchebles: {
         margin: 12,
@@ -35,6 +36,10 @@ export const styles = StyleSheet.create({
         width: '75%',
         flexWrap: 'nowrap',
         justifyContent: 'center',
-        alignItems: 'center'
-    }
+        alignItems: 'center',
+        marginBottom: 24,
+    },
+    inputPassword: {
+        marginTop: 10,
+    },
 });

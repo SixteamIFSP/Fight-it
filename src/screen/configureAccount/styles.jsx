@@ -4,7 +4,6 @@ export const Container = styled.ScrollView`
     flex:1;
     width:100%;
 `;
-
 export const TextHeader = styled.Text`
     width:100%;
     margin:10px;
@@ -12,7 +11,6 @@ export const TextHeader = styled.Text`
     text-align:center;
     font-size:30px;
 `;
-
 export const ConteinerInfo = styled.View`
     margin-left:auto;
     margin-right:auto;
@@ -22,20 +20,17 @@ export const ConteinerInfo = styled.View`
     border-radius: 4px;
     background-color: white;
 `;
-
 export const TextAlingLine = styled.View`
     flex-direction:row;
     align-items:center;
     margin-bottom:10px;
 `;
-
 export const TextDescription = styled.Text`
     font-size:18px;
     text-align:left;
     margin-right:10px;
     margin-left:10px;
 `;
-
 export const TextInfo = styled.Text`
     width:100%;
     text-align:left;
@@ -51,14 +46,12 @@ export const ContainerSVG = styled.TouchableOpacity`
     height:40px;
     justify-content:center;
     align-items:center;
-   
 `;
 export const ContainerCancelButton = styled.TouchableOpacity`
     width:50%;
     margin-left:auto;
     margin-right: auto;
 `;
-
 export const CancelButton = styled.Text`
     text-align:center;
     padding:5px;
@@ -69,7 +62,6 @@ export const CancelButton = styled.Text`
     border-radius:5px;
     background-color:rgb(221, 221, 221);
 `;
-
 export const ButtonConfigure = styled.TouchableOpacity`
     width:75%;
     margin-top:30px;
@@ -83,7 +75,6 @@ export const ButtonConfigure = styled.TouchableOpacity`
     text-align: center;
     background-color: white;
 `;
-
 export const TextButton = styled.Text`
     text-align:center;
     font-size:14px;

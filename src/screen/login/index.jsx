@@ -61,6 +61,7 @@ export function Login({ navigation }) {
           keyboardType="email-address"
         />
         <Input
+        style={styles.inputPassword}
           secureTextEntry={true}
           onChangeText={setPassword}
           value={password}
