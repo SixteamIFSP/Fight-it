@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Text, View } from "react-native";
-import { styles as globalStyles } from "../../global/styles";
 import { useUser } from "../../hooks/user";
 import { FontAwesome } from '@expo/vector-icons';
 import { Input } from "../../components/input";
@@ -128,8 +126,7 @@ const DataUser = () => {
             </RowConfirmation>
         </ConteinerInfo>
     )
-}
-
+};
 // Compomente de troca de senha
 export const ChangePassword = ({ editable, setEditable }) => {
     const { user } = useUser();
@@ -142,7 +139,6 @@ export const ChangePassword = ({ editable, setEditable }) => {
         if (!editable) {
             setEditable((value) => !value)
         } else {
-
             //logica de envio
             if (newSenha !== '' & newSenha.length > 6 & confirm === newSenha & oldPass !== '') {
                 let data = {
@@ -162,32 +158,31 @@ export const ChangePassword = ({ editable, setEditable }) => {
             setEditable((value) => !value)
 
         }
-    }
+    };
     function cancel() {
         setEditable(false);
-    }
-
-
+    };
     return (
         editable ?
-            <ConteinerInfo>
+            <ConteinerInfo style={{marginTop: 20}}>
                 <TextHeader>Trocar Senha</TextHeader>
                 <TextDescription>Senha antiga:</TextDescription>
                 <Input
-                    style={{ marginTop: -20, marginBottom: 10, width: '100%' }}
+                    style={{ marginBottom: 10, width: '100%' }}
                     secureTextEntry={true}
                     value={oldPass}
                     onChangeText={setOldPass}></Input>
                 <TextDescription>Nova Senha:</TextDescription>
                 <Input
-                    style={{ marginTop: -20, marginBottom: 10, width: '100%' }}
+
+                    style={{ marginBottom: 10, width: '100%' }}
                     secureTextEntry={true}
                     value={newSenha}
                     onChangeText={setNewSenha}></Input>
 
                 <TextDescription>Confirmação de senha:</TextDescription>
                 <Input
-                    style={{ marginTop: -20, marginBottom: 20, width: '100%' }}
+                    style={{ marginBottom: 10, width: '100%' }}
                     secureTextEntry={true}
                     value={confirm}
                     onChangeText={setConfirm}>
@@ -213,7 +208,7 @@ export const ChangePassword = ({ editable, setEditable }) => {
                 <TextButton>MUDAR SENHA</TextButton>
             </ButtonConfigure>
     )
-}
+};
 
 const ConfirmDelete = ({ deletable, setDeletable }) => {
     const { user, logOut } = useUser();
@@ -225,55 +220,51 @@ const ConfirmDelete = ({ deletable, setDeletable }) => {
                 let data = {
                     id: user.userID,
                     senha: password,
-                }
-
+                };
                 DeleteAccount(data, user.tipoUsuario === 1, () => logOut())
             } else {
                 Toast.show({
                     type: "error",
                     text2: "Preencha os campos corretamente",
-                })
-            }
-
+                });
+            };
         } catch (error) {
             console.log(error.message);
-        }
-
-
+        };
         setDeletable(false)
-    }
-
-
+    };
     return (
-
-        deletable ? (
-
-            <ConteinerInfo>
-                <TextHeader>Excluir usuário</TextHeader>
-                <TextDescription>
-                    Validação de usuário:
-                </TextDescription>
-                <Input placeholder={"Para excluir conta digite sua senha!"} secureTextEntry={true} value={password} onChangeText={setPassword}></Input>
-
-                <RowConfirmation>
-                    <ContainerCancelButton onPress={() => setDeletable(false)}>
-                        <CancelButton>Cancelar</CancelButton>
-                    </ContainerCancelButton>
-                    <ContainerSVG onPress={() => handleDelete()}>
-                        <FontAwesome name={'trash'} size={30} color="#cc0000" />
-                    </ContainerSVG>
-                </RowConfirmation>
-            </ConteinerInfo>
-        ) : (
-
-            <ButtonConfigure onPress={() => setDeletable(true)}>
-                <TextButton>DESATIVAR CONTA</TextButton>
-            </ButtonConfigure>
-        )
-
+        deletable ?
+            (
+                <ConteinerInfo style={{ marginTop: 20, marginBottom: 20 }}>
+                    <TextHeader>Excluir usuário</TextHeader>
+                    <TextDescription>
+                        Validação de usuário:
+                    </TextDescription>
+                    <Input
+                        style={{ width: '90%' }}
+                        placeholder={"Para excluir conta digite sua senha!"}
+                        secureTextEntry={true} value={password}
+                        onChangeText={setPassword}
+                    ></Input>
+                    <RowConfirmation>
+                        <ContainerCancelButton onPress={() => setDeletable(false)}>
+                            <CancelButton>Cancelar</CancelButton>
+                        </ContainerCancelButton>
+                        <ContainerSVG onPress={() => handleDelete()}>
+                            <FontAwesome name={'trash'} size={30} color="#cc0000" />
+                        </ContainerSVG>
+                    </RowConfirmation>
+                </ConteinerInfo>
+            )
+            :
+            (
+                <ButtonConfigure onPress={() => setDeletable(true)}>
+                    <TextButton>DESATIVAR CONTA</TextButton>
+                </ButtonConfigure>
+            )
     )
-
-}
+};
 
 export function ConfigureAccount() {
     const [editablePass, setEditablePass] = useState(false);
@@ -285,11 +276,8 @@ export function ConfigureAccount() {
                     <TextHeader>Minha conta</TextHeader>
                     <DataUser></DataUser>
                 </>}
-
             <ChangePassword editable={editablePass} setEditable={setEditablePass}></ChangePassword>
-
             <ConfirmDelete deletable={deletable} setDeletable={setDeletable}></ConfirmDelete>
-
         </Container>
     )
 }

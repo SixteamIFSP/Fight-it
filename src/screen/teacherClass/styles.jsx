@@ -4,7 +4,8 @@ export const Container = styled.View`
     flex:1;
     width:100%;
     z-index:0;
-    background-color:white;
+    background-color:#fff;
+    
 `;
 
 
@@ -22,10 +23,10 @@ export const CardView = styled.TouchableOpacity`
     height:150px;
     padding:10px;
     margin-bottom:20px;
-    background-color:white;
     border-color:black;
     border-width:1px;
     border-radius:10px;
+    background-color: white;
 `;
 
 export const CardTitle = styled.Text`

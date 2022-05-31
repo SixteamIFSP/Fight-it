@@ -41,13 +41,11 @@ export const TextInfo = styled.Text`
     text-align:left;
     font-size:18px;
 `;
-
 export const RowConfirmation = styled.View`
     flex-direction:row;
     justify-content:flex-end;
     align-items:center;
 `;
-
 export const ContainerSVG = styled.TouchableOpacity`
     width:40px;
     height:40px;
@@ -55,7 +53,6 @@ export const ContainerSVG = styled.TouchableOpacity`
     align-items:center;
    
 `;
-
 export const ContainerCancelButton = styled.TouchableOpacity`
     width:50%;
     margin-left:auto;
@@ -70,6 +67,7 @@ export const CancelButton = styled.Text`
     border-color:black;
     border-width:1px;
     border-radius:5px;
+    background-color:rgb(221, 221, 221);
 `;
 
 export const ButtonConfigure = styled.TouchableOpacity`
@@ -83,6 +81,7 @@ export const ButtonConfigure = styled.TouchableOpacity`
     margin-right: auto;
     margin-left: auto;
     text-align: center;
+    background-color: white;
 `;
 
 export const TextButton = styled.Text`
