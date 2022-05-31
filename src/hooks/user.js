@@ -9,15 +9,15 @@ export const UserContext = createContext();
 function UserProvider({ children }) {
     const [user, setUser] = useState(null);
 
-    useEffect(()=>{
+    // useEffect(()=>{
 
-        setUser({
-            nome        : 'teste',
-            email       : 'teste',
-            userID      : 5,
-            tipoUsuario : 1,
-        })
-    },[])
+    //     setUser({
+    //         nome        : 'teste',
+    //         email       : 'teste',
+    //         userID      : 5,
+    //         tipoUsuario : 1,
+    //     })
+    // },[])
 
     async function modifyUser(value){
         setUser(value)
@@ -32,18 +32,15 @@ function UserProvider({ children }) {
             } else {
                  response = await api.post('/user/login/aluno', {email:mail, senha:pass});
             }
-              
-
-            console.log(response.data);
 
 
             if (!response?.data.status) {
-                console.log("Erro de autenticação: ", response?.data.mensagem);
+              
                 toastMessage(false, response?.data.mensagem);
                 return
             } 
 
-            console.log(response.data.mensagem);
+        
             await AsyncStorage.setItem(tokenKey, JSON.stringify(response.data.token))
             modifyUser({
                 nome: response.data.nome,
@@ -55,7 +52,7 @@ function UserProvider({ children }) {
         
 
         } catch (error) {
-            console.log(error.message);
+         
             toastMessage(false, "Erro de conexão!");
         }
 

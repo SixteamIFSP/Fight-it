@@ -21,6 +21,7 @@ import {
     TextHeader,
     TextInfo
 } from "./styles";
+import { toastMessage } from "../../util/toastMessage";
 
 // Compomente de SHOW e EDIT de dados do usuário
 const DataUser = () => {
@@ -215,14 +216,13 @@ const ConfirmDelete = ( {deletable, setDeletable} ) => {
     
                 DeleteAccount(data, user.tipoUsuario===1, ()=>logOut())
             } else {
-                Toast.show({
-                    type: "error",
-                    text2: "Preencha os campos corretamente",
-                }) 
+
+                toastMessage(false, "Preencha os campos corretamente") 
             }
             
         } catch (error) {
-            console.log(error.message);
+
+            toastMessage(false, "Erro de conexão") 
         }
       
 

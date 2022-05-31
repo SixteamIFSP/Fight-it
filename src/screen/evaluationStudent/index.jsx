@@ -1,52 +1,67 @@
+import { FontAwesome } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react"
 import { Text, TouchableOpacity, View } from "react-native"
+import SelectDropdown from "react-native-select-dropdown";
 import { AddButton } from "../../components/addButton"
+import { Button } from "../../components/button";
 import { DoubleButtonConfirmation } from "../../components/doubleButtonConfirmation";
 import { Input } from "../../components/input";
-import { createEvaluetion, getEvaluetion } from "../../controler/evaluetion";
+import { createEvaluetion, criarParametroDesempenho, getEvaluetion, getParams, } from "../../controler/evaluetion";
 import { toastMessage } from "../../util/toastMessage";
 import { 
+    AlingButtons,
+    AlingDropDown,
     Container,
     ContainerEvaluation,
     EvaluationList,
+    EvaluationSelect,
+    styles,
     TextHeader
 } from "./styles"
 
 
-const RenderEvaluation = ({item, navigation, data})=>{
-    console.log(item);
+const RenderEvaluation = ({item, data, selectEvaluation, setSelectEvaluation})=>{
+
 
 
     function handleTouch(){
-        //navigation.navigate('StudantView', {...data, studantId:item.id, nome:item.Nome, title:"Aluno: "+item.Nome})
+        setSelectEvaluation(0)
+        setTimeout(() => {
+            if (item?.id!==selectEvaluation)
+                setSelectEvaluation(item?.id)
+        }, 200);
+        
     }
 
     return(
-        <TouchableOpacity onPress={()=>handleTouch()}>
+        <EvaluationSelect select={item?.id===selectEvaluation}  onPress={()=>handleTouch()}>
+            <Text>{'id: '+item?.id}</Text>
             <Text>{'Nome: '+item?.nome}</Text>
             <Text>{'data: '+item?.criação.slice(0,10)}</Text>
-        </TouchableOpacity>
+        </EvaluationSelect>
     )
 }
 
-function CreatePerformace({ idAluno,  setCreatePerformace}){
+function CreatePerformace({ dataParams,  setCreatePerformace}){
     const [nomeDesempenho , setNomeDesempenho] = useState('');
     const [dataCriacao, setDataCriacao] = useState('');
 
     useEffect(()=>{
         const date = new Date();
-        setDataCriacao(`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`);
-
+        setDataCriacao(`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`); 
     },[]);
 
     function handleSubmit(){
         if (nomeDesempenho!=='' & dataCriacao!==null){
             const date = new Date();
             const data = {
-                nome:nomeDesempenho,
-                date:`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`,
-                alunoId:idAluno,
+                nome:       nomeDesempenho,
+                date:       `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`,
+                alunoId:    dataParams?.studantId,
+                turma:      dataParams?.turma,
+                professor:  dataParams?.professorId,
             }
+
             createEvaluetion(data)
             setCreatePerformace(false);
         } else {
@@ -78,21 +93,133 @@ function CreatePerformace({ idAluno,  setCreatePerformace}){
     ) 
 }
 
+function FormCreateParams({selectEvaluation}){
+    const [createParams, setCreateParams] = useState(false);
+    const [typeParams, setTypeParams] = useState([]);
+    const [paramSelected, setParamSelected] = useState('');
+    const [listParams, setListParams] = useState([]);
+    const [valor, setValor] = useState(0)
+
+    useState(()=>{
+        getParams(setTypeParams);
+        getParams(setListParams);
+        
+    })
+
+    function handleSubmit(){
+        let param = listParams.filter(filter => filter?.NomeParametro === paramSelected);
+        
+        if (paramSelected!=='' & param.length===1){
+            param = param[0];
+
+            const data = {
+                desempenho: selectEvaluation,
+                parametro: param?.id,
+                valor: valor,
+            }
+
+            criarParametroDesempenho(data);
+            setSelectEvaluation();
+        }
+    }
+
+    function onChanged(text){
+        let newText = '';
+        let numbers = '0123456789';
+    
+        for (var i=0; i < text.length; i++) {
+            if(numbers.indexOf(text[i]) > -1 ) {
+                
+                newText = newText + text[i];
+                if (newText[0]==='0' && newText.length===2){
+                    newText = newText[1]
+                }
+            }
+            else {
+                // your call back function
+                alert("please enter numbers only");
+            }
+        }
+        if (text < 11)
+            setValor(newText);
+    }
+
+    function handleCreateParam(){
+        if (!createParams){
+            setCreateParams(value=>!value);
+            return;
+        }
+
+
+       
+
+    }
+
+    return(
+        <View>
+            <TextHeader>{"Criação de parâmetro:"}</TextHeader>
+            <AlingDropDown>
+
+                <SelectDropdown 
+                    buttonStyle={styles.dropdown2BtnStyle}
+                    buttonTextStyle={styles.dropdown2BtnTxtStyle}
+                    defaultButtonText={'Selecione parâmetro'}
+                    data={listParams.map((value)=>value?.NomeParametro)}
+                    onSelect={(selectedItem, index) => {
+                        setParamSelected(selectedItem)
+                    }}
+                    buttonTextAfterSelection={(selectedItem, index) => {
+                     
+                        return selectedItem
+                    }}
+                    renderDropdownIcon={isOpened => {
+                        return <FontAwesome name={isOpened ? 'chevron-up' : 'chevron-down'} color={'#FFF'} size={18} />;
+                    }}
+                    rowTextForSelection={(item, index) => {
+                        return item
+                    }}
+                />
+
+                <Input 
+                    keyboardType='numeric'
+                    onChangeText={(text)=>onChanged(text)}
+                    value={valor+""}
+                    maxLength={2}  //setting limit of input
+                />
+            </AlingDropDown>
+                <AlingButtons>
+
+                {!createParams && <Button handle={()=>handleSubmit()} text={"Enviar Avaliação"}/>}
+                    
+                    
+                    {/* <Button handle={()=>handleCreateParam()} text={"Criar Novo parâmetro"}/> */}
+                
+                </AlingButtons>
+            
+        </View>
+    );
+}
+
 export function EvaluationStudent({navigation, route}){
     const [createPerformance, setCreatePerformace] = useState(false);
+    const [selectEvaluation, setSelectEvaluation] = useState(0);
     const [dataEvaluation, setDataEvaluation] = useState([]);
 
     
-    console.log("AVALIAÇÂO: ", route?.params);
-    const { id, studantId } =  route?.params;
+    const { id, studantId, ProfessorId } =  route?.params;
 
     useEffect(()=>{
-        if (!createPerformance)
-        getEvaluetion(studantId, setDataEvaluation);
+        if (!createPerformance) {
+            const data = {professor:ProfessorId, aluno:studantId}
+        
+            getEvaluetion(data, setDataEvaluation);
+        }
+
+
 
     },[createPerformance])
     useEffect(()=>{
-        console.log("dataEvaluation: ", dataEvaluation);
+ 
 
     },[dataEvaluation])
 
@@ -100,25 +227,37 @@ export function EvaluationStudent({navigation, route}){
     return (
         <Container>
 
-            {!createPerformance ? <View>
+            {!createPerformance ? 
+                <View>
+                    <TextHeader>{"AVALIAÇÃO:"}</TextHeader>
+                    <ContainerEvaluation>
+                    <TextHeader>{"Datas de Desempenho: "}</TextHeader>
+                    
+                    <EvaluationList
+                        data={dataEvaluation}
+                        renderItem={({item, index})=> 
 
-                <TextHeader>{"AVALIAÇÃO:"}</TextHeader>
-                <ContainerEvaluation>
-                <TextHeader>{"Datas de Desempenho: "}</TextHeader>
-                
-                <EvaluationList
-                    data={dataEvaluation}
-                    renderItem={({item})=> <RenderEvaluation item={item} navigation={navigation} ></RenderEvaluation>}
-                    keyExtractor={item => `${item?.id}`+'91'}
-                />
+                            <RenderEvaluation 
+                                item={item} 
+                                navigation={navigation}
+                                selectEvaluation={selectEvaluation}
+                                setSelectEvaluation={setSelectEvaluation} 
+                            />
 
-              
-
-                </ContainerEvaluation>
-                <AddButton handle={()=>{setCreatePerformace(value=>!value)}}></AddButton>
-            </View> : 
-                <CreatePerformace idAluno={studantId} setCreatePerformace={setCreatePerformace}></CreatePerformace>
+                        }
+                        keyExtractor={item => `${item?.id}`+'91'}
+                    />
+                    </ContainerEvaluation>
+                    <AddButton handle={()=>{setCreatePerformace(value=>!value)}}></AddButton>
+                    {
+                        selectEvaluation!==0 &&
+                            <FormCreateParams selectEvaluation={selectEvaluation} setSelectEvaluation={setSelectEvaluation}></FormCreateParams>
+                    }
+                </View>              
+                :
+                <CreatePerformace dataParams={{studantId:studantId, professorId:ProfessorId, turma:id}} setCreatePerformace={setCreatePerformace}></CreatePerformace>
             }
+
         </Container>
     )
 }

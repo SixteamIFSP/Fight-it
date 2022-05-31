@@ -5,6 +5,7 @@ import { Input } from '../../components/input';
 import { styles as stylesGlobal } from '../../global/styles';
 import { ButtonLinguage } from "../../components/buttonChangeLinguage";
 import { DoubleButtonConfirmation } from "../../components/doubleButtonConfirmation";
+import { toastMessage } from "../../util/toastMessage";
 
 
 export function CreateAccountTeacher({ navigation, route }) {
@@ -31,7 +32,7 @@ export function CreateAccountTeacher({ navigation, route }) {
       
             navigation.navigate('Login');
         } else {
-            console.log("error validacao");
+            toastMessage(false, "Preencha os campos corretamente") 
         }
     };
     function handleBack() {

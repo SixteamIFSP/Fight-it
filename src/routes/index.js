@@ -126,7 +126,7 @@ function StackAuth(){
 
 export function Router() {
   const { user } = useUser();
-  console.log("ROTER USER", user);
+ 
 
   return (<>
     {user == null ? <StackAuth /> : <StackLoged />}

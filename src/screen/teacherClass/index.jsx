@@ -22,8 +22,8 @@ const dataStatic = {}
 
 function CardTurma({data, handleNewScreen}){
     return (
-        <CardView onPress={()=>handleNewScreen('ClassView', {title: `Turma: ${data?.Nome}`, data:data})}>
-            <CardTitle>{data?.Nome}</CardTitle>
+        <CardView onPress={()=>handleNewScreen('ClassView', {title: `Turma: ${data?.TurmaNome}`, data:{...data, nomeTurma:data?.TurmaNome}})}>
+            <CardTitle>{data?.TurmaNome}</CardTitle>
         </CardView>
     )
 }
