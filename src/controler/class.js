@@ -12,7 +12,6 @@ export async function getClass(setClasses, idUsuario, type){
        }
         
         if (response?.data.status){
-            toastMessage(true, response?.data.mensagem)
             setClasses(response?.data.result)
         } else{
             toastMessage(false, response?.data.mensagem)   
@@ -36,7 +35,6 @@ export async function createClass(data){ // data => { nome:string, descricao:str
         }
         
     } catch (error) {
-       
         toastMessage(false, 'Erro de conexão!') 
     }
 }

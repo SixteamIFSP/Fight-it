@@ -7,6 +7,7 @@ export async function getEvaluetion(data, setValue ){
        
         if (response?.data.status){
             setValue(response?.data.result.desempenhos);
+            
         } else{
             toastMessage(false, response?.data.mensagem);
         }
@@ -18,9 +19,6 @@ export async function getEvaluetion(data, setValue ){
 }
 
 export async function createEvaluetion(data){ //data => nome:string, date:(string:yyyy-MM-dd), idAluno:number
-
-
-    
         try {
             const response = await api.post('/desempenho/criar/desempenho', {...data});
            
