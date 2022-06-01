@@ -7,7 +7,7 @@ export async function getEvaluetion(data, setValue ){
        
         if (response?.data.status){
             setValue(response?.data.result.desempenhos);
-            
+
         } else{
             toastMessage(false, response?.data.mensagem);
         }
@@ -15,6 +15,7 @@ export async function getEvaluetion(data, setValue ){
     } catch (error) {
   
         toastMessage(false, 'Erro de conexão!');
+
     }
 }
 
@@ -35,30 +36,11 @@ export async function createEvaluetion(data){ //data => nome:string, date:(strin
         }
 }
 
-export async function createParamsEvaluetion(data){ //data => "desempenho": string, "parametro": "kick" (nome do item q esta no banco), "valor": "9", "tipoparametroid":"1"
-
-    
-        try {
-            const response = await api.post('/desempenho/inserir/parametro', {...data});
-           
-            
-            if (response.data.status){
-                toastMessage(true, response?.data.mensagem)
-            } else{
-                toastMessage(false, response?.data.mensagem)   
-            }
-           
-        } catch (error) {
-         
-            toastMessage(false, 'Erro de conexão!') 
-        }
-}
 export async function getTypesParams(setData){ 
     
         try {
             const response = await api.get('/desempenho/tipo_parametro');
            
-            
             if (response?.data.status){
                 setData(response?.data.resultado)
             } else{
@@ -87,7 +69,7 @@ export async function getParams(setData){
         
 }
 
-export async function criarParametroDesempenho(data){ ///data=>{ "desempenho": 8, "parametro": "kick", "valor": "10", "tipoparametroid":"1" }
+export async function criarParametroDesempenho(data){ ///data=> { "desempenho": 8, "parametro": "1", "valor": "10" }
 
 
     try {
@@ -104,3 +86,22 @@ export async function criarParametroDesempenho(data){ ///data=>{ "desempenho": 8
         toastMessage(false, 'Erro de conexão!') 
     }
 } 
+
+export async function criarNovoParametro(data){ //data => {parametro:string,  tipoparametroid:number }
+
+    
+    try {
+        const response = await api.post('/desempenho/inserir/parametro', {...data});
+       
+        
+        if (response.data.status){
+            toastMessage(true, response?.data.mensagem)
+        } else{
+            toastMessage(false, response?.data.mensagem)   
+        }
+       
+    } catch (error) {
+     
+        toastMessage(false, 'Erro de conexão!') 
+    }
+}

@@ -58,6 +58,7 @@ export const styles = StyleSheet.create(
     flex-direction: row;
     width:100%;
     justify-content:center;
+    margin-top:5%;
 `;
 
 export const AlingDropDown = styled.View`

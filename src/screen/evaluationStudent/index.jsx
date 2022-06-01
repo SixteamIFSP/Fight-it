@@ -6,7 +6,7 @@ import { AddButton } from "../../components/addButton"
 import { Button } from "../../components/button";
 import { DoubleButtonConfirmation } from "../../components/doubleButtonConfirmation";
 import { Input } from "../../components/input";
-import { createEvaluetion, criarParametroDesempenho, getEvaluetion, getParams, } from "../../controler/evaluetion";
+import { createEvaluetion, criarNovoParametro, criarParametroDesempenho, getEvaluetion, getParams, getTypesParams, } from "../../controler/evaluetion";
 import { toastMessage } from "../../util/toastMessage";
 import { 
     AlingButtons,
@@ -93,18 +93,19 @@ function CreatePerformace({ dataParams,  setCreatePerformace}){
     ) 
 }
 
-function FormCreateParams({selectEvaluation}){
+function FormCreateParams({selectEvaluation, setSelectEvaluation}){
     const [createParams, setCreateParams] = useState(false);
     const [typeParams, setTypeParams] = useState([]);
+    const [textNewParam, setTextNewParam] = useState('');
     const [paramSelected, setParamSelected] = useState('');
     const [listParams, setListParams] = useState([]);
     const [valor, setValor] = useState(0)
 
-    useState(()=>{
-        getParams(setTypeParams);
+    useEffect(()=>{
+        getTypesParams(setTypeParams);
         getParams(setListParams);
         
-    })
+    },[createParams])
 
     function handleSubmit(){
         let param = listParams.filter(filter => filter?.NomeParametro === paramSelected);
@@ -150,7 +151,16 @@ function FormCreateParams({selectEvaluation}){
             return;
         }
 
+        let param  = typeParams.filter(filter => filter.Tipo == paramSelected)
+            param = param[0];
 
+        const data = {
+            parametro:textNewParam,
+            tipoparametroid:param.id,
+        }
+
+        criarNovoParametro(data)
+        setCreateParams(value=>!value);
        
 
     }
@@ -160,39 +170,73 @@ function FormCreateParams({selectEvaluation}){
             <TextHeader>{"Criação de parâmetro:"}</TextHeader>
             <AlingDropDown>
 
-                <SelectDropdown 
-                    buttonStyle={styles.dropdown2BtnStyle}
-                    buttonTextStyle={styles.dropdown2BtnTxtStyle}
-                    defaultButtonText={'Selecione parâmetro'}
-                    data={listParams.map((value)=>value?.NomeParametro)}
-                    onSelect={(selectedItem, index) => {
-                        setParamSelected(selectedItem)
-                    }}
-                    buttonTextAfterSelection={(selectedItem, index) => {
-                     
-                        return selectedItem
-                    }}
-                    renderDropdownIcon={isOpened => {
-                        return <FontAwesome name={isOpened ? 'chevron-up' : 'chevron-down'} color={'#FFF'} size={18} />;
-                    }}
-                    rowTextForSelection={(item, index) => {
-                        return item
-                    }}
-                />
+                {!createParams ? (
+                    <>
+                        <SelectDropdown 
+                            buttonStyle={styles.dropdown2BtnStyle}
+                            buttonTextStyle={styles.dropdown2BtnTxtStyle}
+                            defaultButtonText={'Selecione parâmetro'}
+                            data={listParams.map((value)=>value?.NomeParametro)}
+                            onSelect={(selectedItem, index) => {
+                                setParamSelected(selectedItem)
+                            }}
+                            buttonTextAfterSelection={(selectedItem, index) => {
+                            
+                                return selectedItem
+                            }}
+                            renderDropdownIcon={isOpened => {
+                                return <FontAwesome name={isOpened ? 'chevron-up' : 'chevron-down'} color={'#FFF'} size={18} />;
+                            }}
+                            rowTextForSelection={(item, index) => {
+                                return item
+                            }}
+                        />
 
-                <Input 
-                    keyboardType='numeric'
-                    onChangeText={(text)=>onChanged(text)}
-                    value={valor+""}
-                    maxLength={2}  //setting limit of input
-                />
+                        <Input 
+                            keyboardType='numeric'
+                            onChangeText={(text)=>onChanged(text)}
+                            value={valor+""}
+                            maxLength={2}  //setting limit of input
+                        />
+                    </>
+                ):(
+                    <>
+                        <Input  
+                            onChangeText={(text)=>setTextNewParam(text)}
+                            value={textNewParam} 
+                            placeholder={`Digite o nome do novo paramâtro`} 
+                        />
+                        <SelectDropdown 
+                            buttonStyle={styles.dropdown2BtnStyle}
+                            buttonTextStyle={styles.dropdown2BtnTxtStyle}
+                            defaultButtonText={'Selecione tipo de Parametro'}
+                            data={typeParams.map((value)=>value?.Tipo)}
+                            onSelect={(selectedItem, index) => {
+                                setParamSelected(selectedItem)
+                            }}
+                            buttonTextAfterSelection={(selectedItem, index) => {
+                            
+                                return selectedItem
+                            }}
+                            renderDropdownIcon={isOpened => {
+                                return <FontAwesome name={isOpened ? 'chevron-up' : 'chevron-down'} color={'#FFF'} size={18} />;
+                            }}
+                            rowTextForSelection={(item, index) => {
+                                return item
+                            }}
+                        />
+                    </>
+                )
+                
+                }
+
             </AlingDropDown>
                 <AlingButtons>
 
                 {!createParams && <Button handle={()=>handleSubmit()} text={"Enviar Avaliação"}/>}
                     
                     
-                    {/* <Button handle={()=>handleCreateParam()} text={"Criar Novo parâmetro"}/> */}
+                    <Button handle={()=>handleCreateParam()} text={"Criar Novo parâmetro"}/>
                 
                 </AlingButtons>
             
