@@ -67,26 +67,25 @@ function StackLoged(){
     
             if (route.name === 'HomeScreenStudent') {
               iconName = 'home';
-            } else if (route.name === 'Calendar') {
-              iconName = 'calendar';
-            } else if (route.name === 'Class') {
-              iconName = 'group';
-            } else if (route.name === 'Dashboard') {
-              iconName = 'bar-chart-o';
+            // } else if (route.name === 'Calendar') {
+            //   iconName = 'calendar';
+            // } else if (route.name === 'Class') {
+            //   iconName = 'group';
+            // } else if (route.name === 'Dashboard') {
+            //   iconName = 'bar-chart-o';
             } else if (route.name === 'Config') {
               iconName = 'cogs';
             }
-    
-            // You can return any component that you like here!
+  
             return <FontAwesome name={iconName} size={size} color={color} />;
           },
           tabBarActiveTintColor: 'black',
           tabBarInactiveTintColor: 'gray',
         })}>
           <TabNavegation.Screen options={{ title: "Home" }} navigationKey='HomeScreenStudent' name="HomeScreenStudent" component={HomeScreenStudent} />
-          <TabNavegation.Screen navigationKey='Calendar' name="Calendar" component={HomeScreenStudent} />  
-          <TabNavegation.Screen navigationKey='Class' name="Class" component={HomeScreenStudent} />  
-          <TabNavegation.Screen navigationKey='Dashboard' name="Dashboard" component={HomeScreenStudent} />  
+          {/* <TabNavegation.Screen navigationKey='Calendar' name="Calendar" component={HomeScreenStudent} />   */}
+          {/* <TabNavegation.Screen navigationKey='Class' name="Class" component={HomeScreenStudent} />   */}
+          {/* <TabNavegation.Screen navigationKey='Dashboard' name="Dashboard" component={HomeScreenStudent} />   */}
           <TabNavegation.Screen navigationKey='Config' name="Config" component={ConfigureAccount} />  
         </TabNavegation.Navigator>
         )
