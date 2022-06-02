@@ -9,7 +9,7 @@ import { useUser } from '../hooks/user';
 import { HomeScreenTeacher } from '../screen/homeScreenTeacher';
 import { HomeScreenStudent } from '../screen/homeScreenStudent';
 import { useTranslation } from 'react-i18next';
-import { FontAwesome  } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 import { ConfigureAccount } from '../screen/configureAccount';
 import { ClassStack } from './classStack';
 
@@ -17,11 +17,11 @@ const TabNavegation = createBottomTabNavigator();
 const AppRoutes = createNativeStackNavigator();
 const StackStudant = createNativeStackNavigator();
 
-function StackLoged(){
-  const {t} = useTranslation();
-  const {user} = useUser();
+function StackLoged() {
+  const { t } = useTranslation();
+  const { user } = useUser();
 
-  const Teacher = () =>{
+  const Teacher = () => {
     return (
     <TabNavegation.Navigator initialRouteName="HomeScreenTeacher"  screenOptions={({ route }) => ({
       tabBarIcon: ({ focused, color, size }) => {
@@ -59,7 +59,7 @@ function StackLoged(){
     )
   }
 
-  const Studant = () =>{
+  const Studant = () => {
     return (
         <TabNavegation.Navigator initialRouteName="HomeScreenStudent"  screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
@@ -96,31 +96,31 @@ function StackLoged(){
     2: <Studant />,
   }
 
-  return ( 
-        User[user?.tipoUsuario]
-      )
+  return (
+    User[user?.tipoUsuario]
+  )
 
 }
 
-function StackAuth(){
-  
+function StackAuth() {
+
   return (
 
-          <AppRoutes.Navigator 
-             screenOptions={{headerShown: false,}}
-            initialRouteName="Login" >
-              <AppRoutes.Screen 
-              navigationKey='Login' 
-              name="Login"
-              component={Login} />
-                
-              <AppRoutes.Screen
-              navigationKey='CreateAccount' 
-              name="CreateAccount" 
-              component={CreateAccount} />
-              
-          </AppRoutes.Navigator> 
-      )
+    <AppRoutes.Navigator
+      screenOptions={{ headerShown: false, }}
+      initialRouteName="Login" >
+      <AppRoutes.Screen
+        navigationKey='Login'
+        name="Login"
+        component={Login} />
+
+      <AppRoutes.Screen
+        navigationKey='CreateAccount'
+        name="CreateAccount"
+        component={CreateAccount} />
+
+    </AppRoutes.Navigator>
+  )
 
 }
 
@@ -129,13 +129,9 @@ function StackAuth(){
 export function Router() {
   const { user } = useUser();
  
-
   return (<>
     {user == null ? <StackAuth /> : <StackLoged />}
-
-
   </>
-
   )
 
 

@@ -7,12 +7,12 @@ export function DoubleButtonConfirmation({handleConfirm, handleBack}){
 
     return(
         <Container>
-            <ButtonConfirm onPress={()=> handleConfirm()}>
-                    <TextButton confirm>{t('validation.confirm')}</TextButton>
-                    {/* TROCAR PARA ARQUIVO DE Nacionalização   */}
-            </ButtonConfirm>
             <ButtonConfirm onPress={()=> handleBack()}>
                     <TextButton >{t('validation.cancel')}</TextButton>
+                    {/* TROCAR PARA ARQUIVO DE Nacionalização   */}
+            </ButtonConfirm>
+            <ButtonConfirm onPress={()=> handleConfirm()}>
+                    <TextButton confirm>{t('validation.confirm')}</TextButton>
                     {/* TROCAR PARA ARQUIVO DE Nacionalização   */}
             </ButtonConfirm>
         </Container>

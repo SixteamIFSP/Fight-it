@@ -12,8 +12,6 @@ export function CreateAccountTeacher({ navigation, route }) {
     const { t } = useTranslation();
     const [marcialFight, setMarcialFight] = useState('');
 
-    // const { dataAuth } = route.params;
-
     function validation() {
         if (valor === '')
             return false
@@ -24,12 +22,10 @@ export function CreateAccountTeacher({ navigation, route }) {
     function handleConfirm() {
         if (validation()) {
             const data = {
-
-                aluno: {
+                professor: {
                     valor: marcialFight,
                 }
             }
-      
             navigation.navigate('Login');
         } else {
             toastMessage(false, "Preencha os campos corretamente") 
@@ -45,10 +41,17 @@ export function CreateAccountTeacher({ navigation, route }) {
             <Text>{t(`createAccount.qualification.title`)}</Text>
             <Text style={{ width: "60%" }}>{t(`createAccount.qualification.description`)}</Text>
             <View style={{ flexDirection: "row", width: '100%', justifyContent: "center", alignItems: "center" }}>
-                <Input placeholder={t(`createAccount.qualification.form-fight`)} value={marcialFight} onChangeText={setMarcialFight} ></Input>
+                <Input
+                    placeholder={t(`createAccount.qualification.form-fight`)}
+                    value={marcialFight}
+                    onChangeText={setMarcialFight}
+                ></Input>
             </View>
 
-            <DoubleButtonConfirmation handleConfirm={handleConfirm} handleBack={handleBack}></DoubleButtonConfirmation>
+            <DoubleButtonConfirmation
+                handleConfirm={handleConfirm}
+                handleBack={handleBack}
+            ></DoubleButtonConfirmation>
         </View>
     )
 };

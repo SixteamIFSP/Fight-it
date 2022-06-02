@@ -62,7 +62,6 @@ export async function getAlunosTurma(setAlunos, data){ // data => number
 
 export async function adicionarAluno(data){ // data => {turmaId:number, email:string}
 
-
     try {
         const response = await api.post(`/turma/adiciona`, {...data});
 

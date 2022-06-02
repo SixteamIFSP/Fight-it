@@ -91,7 +91,6 @@ export async function ChangePassowrd(data, type){
 
 export async function DeleteAccount(data, type, logout){ // data => {id:number, senha:string}
 
-
     function desconect(){
         logout();
     }

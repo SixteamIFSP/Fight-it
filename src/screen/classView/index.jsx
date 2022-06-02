@@ -71,7 +71,6 @@ function AdicionarAluno({turmaId , setback}){
 }
 
 export function ClassView({navigation, route}){
-
     const { Descricao, ProfessorId,  Nome, id } = route.params.data;
     const [dataAlunos, setDataAlunos] = useState([]);
     const [adicionarAluno, setAdicionarAluno] = useState(false);
