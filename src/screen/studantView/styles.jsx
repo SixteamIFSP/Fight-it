@@ -27,15 +27,29 @@ export const TextButtons = styled.Text`
 
 export const ContainerDesempenho = styled.ScrollView`
     width:100%;
+    padding:5%;
 `;
 
 export const DesempenhoHeader = styled.Text`
+    margin-bottom:5%;
     padding:5%;
     font-size:20px;
+    
     border-bottom-color:black;
     border-width:1px;
     border-top-width:0;
     border-left-width:0;
     border-right-width:0;
+
+`;
+
+export const ContainerCardParam = styled.TouchableOpacity`
+    width:150px;
+    height:30px;
+   
+    align-items:center;
+    justify-content:center;
+
+    border-width:1px;
 
 `;

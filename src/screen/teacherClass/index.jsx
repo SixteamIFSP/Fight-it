@@ -16,6 +16,7 @@ import { DoubleButtonConfirmation } from "../../components/doubleButtonConfirmat
 import { Input } from "../../components/input";
 import { toastMessage } from "../../util/toastMessage";
 import { AddButton } from "../../components/addButton";
+import { Loading } from "../../components/loading";
 
 function CardTurma({ data, handleNewScreen }) {
     // TODO: COLOCAR AS INFORMAÇÕES DENTRO DE CADA CARD E VALIDAR SE EXISTE OU NÃO INFORMAÇÕES.
@@ -23,14 +24,6 @@ function CardTurma({ data, handleNewScreen }) {
         <CardView onPress={()=>handleNewScreen('ClassView', {title: `Turma: ${data?.TurmaNome}`, data:{...data, nomeTurma:data?.TurmaNome}})}>
             <CardTitle>{data?.TurmaNome}</CardTitle>
         </CardView>
-    )
-};
-
-function FooterLoading({ loading }) {
-    if (!loading) return null;
-
-    return (
-        <ActivityIndicator size={30} color="black"></ActivityIndicator>
     )
 };
 
@@ -42,10 +35,11 @@ function LoadingClass({ user, setCreateNew, navigation }) {
         handleLoadMore();
     }, []);
 
-    function handleLoadMore() {
+    async function handleLoadMore() {
         if (loading) return;
         setLoading(true);
-        getClass(setData, user.userID, user.tipoUsuario === 1);
+        
+        await getClass(setData, user.userID, user.tipoUsuario === 1);
         setLoading(false);
     };
 
@@ -57,10 +51,6 @@ function LoadingClass({ user, setCreateNew, navigation }) {
         <>
             <AddButton handle={() => setCreateNew((value) => !value)} />
             <ContainerList>
-                {
-                    data.length === 0 &&
-                    <FooterLoading loading={loading}></FooterLoading>
-                }
                 <FlatList
                     data={data}
                     renderItem={({ item }) => <CardTurma data={item} handleNewScreen={handleNewScreen}></CardTurma>}
@@ -68,7 +58,7 @@ function LoadingClass({ user, setCreateNew, navigation }) {
                     onEndThreshold={0.1}
                     keyExtractor={item => item.id}
                     ListFooterComponent={
-                        <FooterLoading loading={loading}></FooterLoading>
+                        <Loading loading={loading} size={30}></Loading>
                     }
                 />
             </ContainerList>

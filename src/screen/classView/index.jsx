@@ -118,7 +118,7 @@ export function ClassView({navigation, route}){
                         </AddContainer>
                         
                     </ContainerList>
-                    <ContainerList>
+                    {/* <ContainerList>
                     <Text>Listagem De aulas:</Text>
                         <ContainerFlat>
 
@@ -135,7 +135,7 @@ export function ClassView({navigation, route}){
                             <AddButton handle={()=>null}/>
                         </AddContainer>
                         
-                    </ContainerList>
+                    </ContainerList> */}
 
                     
                 </ContainerListRow>
