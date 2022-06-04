@@ -21,8 +21,10 @@ export const TextButtons = styled.Text`
     width:100%;
     text-align:center;
     padding:10px;
-    border-width:1px;
+    border-width:0.5px;
     border-color:black;
+    background-color: rgb(221, 221, 221);
+
 `;
 
 export const ContainerDesempenho = styled.ScrollView`
@@ -32,10 +34,5 @@ export const ContainerDesempenho = styled.ScrollView`
 export const DesempenhoHeader = styled.Text`
     padding:5%;
     font-size:20px;
-    border-bottom-color:black;
-    border-width:1px;
-    border-top-width:0;
-    border-left-width:0;
-    border-right-width:0;
 
 `;

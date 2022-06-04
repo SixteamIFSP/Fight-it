@@ -23,7 +23,7 @@ function CardTurma({ data, handleNewScreen }) {
         <CardView
             onPress={
                 () => handleNewScreen('ClassView', {
-                    title: `Turma: ${data?.Nome}`,
+                    title: `Turma: ${data?.TurmaNome}`,
                     data: data
                 })
             }
@@ -93,10 +93,8 @@ function CreateClass({ user, setCreateNew }) {
                 nome: name,
                 descricao: description,
                 professorId: user.userID,
-            }
-
+            };
             createClass(data);
-
         } else {
             toastMessage(false, 'Preencha os campos!')
         };
@@ -126,8 +124,6 @@ function CreateClass({ user, setCreateNew }) {
             </ContainerForm>
             <DoubleButtonConfirmation handleConfirm={confirm} handleBack={cancel}></DoubleButtonConfirmation>
         </CardCreateClasss>
-
-
     )
 };
 
@@ -137,7 +133,6 @@ export function TeacherClass({ navigation }) {
 
     return (
         <Container>
-
             {!createNew ?
                 (
                     <LoadingClass user={user} setCreateNew={setCreateNew} navigation={navigation}></LoadingClass>

@@ -6,7 +6,7 @@ export function AddButton({handle}){
     return(
 
         <ContainerButtonAdd onPress={()=>handle()}>
-            <FontAwesome name="plus" size={24} color="black" />
+            <FontAwesome name="plus" size={20} color="black" />
         </ContainerButtonAdd>
     )
 }
