@@ -33,7 +33,7 @@ export function CreateAccountStudent({ navigation, route }) {
      
             navigation.navigate('Login');
         } else {
-            console.log("error validacao");
+        
         }
     };
     function handleBack() {

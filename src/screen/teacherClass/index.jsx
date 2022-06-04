@@ -20,15 +20,8 @@ import { AddButton } from "../../components/addButton";
 function CardTurma({ data, handleNewScreen }) {
     // TODO: COLOCAR AS INFORMAÇÕES DENTRO DE CADA CARD E VALIDAR SE EXISTE OU NÃO INFORMAÇÕES.
     return (
-        <CardView
-            onPress={
-                () => handleNewScreen('ClassView', {
-                    title: `Turma: ${data?.TurmaNome}`,
-                    data: data
-                })
-            }
-        >
-            <CardTitle>{data?.Nome}</CardTitle>
+        <CardView onPress={()=>handleNewScreen('ClassView', {title: `Turma: ${data?.TurmaNome}`, data:{...data, nomeTurma:data?.TurmaNome}})}>
+            <CardTitle>{data?.TurmaNome}</CardTitle>
         </CardView>
     )
 };

@@ -4,13 +4,11 @@ import {
     ContainerButtons,
     ContainerDesempenho,
     ContentButtons,
-    DesempenhoHeader,
     TextButtons
 } from "./styles";
 import Divider from 'react-native-divider';
 
 export function StudantView({ navigation, route }) {
-    console.log(route?.params);
 
     function handleTriagem() {
 

@@ -20,9 +20,11 @@ export function Login({ navigation }) {
   const [mail, setMail] = useState();
   const [password, setPassword] = useState();
   const [typeTeacher, setTypeTeacher] = useState();
-  const { t } = useTranslation();
   const { singIn } = useUser();
 
+  const { t } = useTranslation(); /// IMPORT DA TRADUÇÂO 
+
+  
   function onHandleLogin() {
     singIn({ mail: mail, pass: password }, typeTeacher);
   }
@@ -34,7 +36,6 @@ export function Login({ navigation }) {
   function onHandleCreateAccount() {
     navigation.navigate('CreateAccount');
   }
-
 
   return (
     <View style={stylesGlobal.container}>
