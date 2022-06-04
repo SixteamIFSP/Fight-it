@@ -5,6 +5,7 @@ import { DoubleButtonConfirmation } from "../../components/doubleButtonConfirmat
 import { Input } from "../../components/input";
 import { adicionarAluno, getAlunosTurma } from "../../controler/class";
 import { toastMessage } from "../../util/toastMessage";
+import { useTranslation } from 'react-i18next'
 import { Container,
     ContainerHeader, 
     ContainerListRow,
@@ -19,14 +20,14 @@ import { Container,
 
 
 const RenderListAluno = ({item, navigation, data})=>{
-
+const { t } = useTranslation();
     function handleTouch(){
         navigation.navigate('StudantView', {...data, studantId:item.id, nome:item.Nome, title:"Aluno: "+item.Nome})
     }
 
     return(
         <TextTouchable onPress={()=>handleTouch()}>
-            <Text>{item?.Nome}</Text>
+            <Text>{t(item?.Nome)}</Text>
         </TextTouchable>
     )
 }
@@ -61,7 +62,7 @@ function AdicionarAluno({turmaId , setback}){
         <View>
             <TextDescription>Adicionar Aluno</TextDescription>
 
-            <Input value={mail} placeholder={'Digite o e-mail do aluno'} onChangeText={setMail}/>
+            <Input value={mail} placeholder={t('Digite o e-mail do aluno')} onChangeText={setMail}/>
             <DoubleButtonConfirmation handleBack={handleBack} handleConfirm={handleSubmit}></DoubleButtonConfirmation>
 
 

@@ -7,9 +7,8 @@ import { styles as stylesGlobal } from '../../global/styles'
 import { ButtonLinguage } from "../../components/buttonChangeLinguage"
 import { DoubleButtonConfirmation } from "../../components/doubleButtonConfirmation"
 
-
 export function CreateAccountStudent({ navigation, route }) {
-    const { t } = useTranslation()
+    const { t } = useTranslation();
     const [valor, setValor] = useState('');
     const [check, setCheck] = useState(false);
 
@@ -30,10 +29,10 @@ export function CreateAccountStudent({ navigation, route }) {
                     check: check
                 }
             }
-     
+
             navigation.navigate('Login');
         } else {
-        
+
         }
     };
     function handleBack() {
