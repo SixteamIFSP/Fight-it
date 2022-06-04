@@ -12,11 +12,13 @@ import {
 import { ActivityIndicator, FlatList } from "react-native";
 import { createClass, getClass } from "../../controler/class";
 import { useUser } from "../../hooks/user";
+import { useTranslation } from 'react-i18next';
 import { DoubleButtonConfirmation } from "../../components/doubleButtonConfirmation";
 import { Input } from "../../components/input";
 import { toastMessage } from "../../util/toastMessage";
 import { AddButton } from "../../components/addButton";
 
+const { t } = useTranslation();
 function CardTurma({ data, handleNewScreen }) {
     // TODO: COLOCAR AS INFORMAÇÕES DENTRO DE CADA CARD E VALIDAR SE EXISTE OU NÃO INFORMAÇÕES.
     return (
@@ -27,6 +29,7 @@ function CardTurma({ data, handleNewScreen }) {
 };
 
 function FooterLoading({ loading }) {
+    
     if (!loading) return null;
 
     return (
@@ -91,7 +94,7 @@ function CreateClass({ user, setCreateNew }) {
             createClass(data);
 
         } else {
-            toastMessage(false, 'Preencha os campos!')
+            {t(toastMessage(false, 'Preencha os campos!'))}
         };
 
         cancel();
@@ -103,17 +106,17 @@ function CreateClass({ user, setCreateNew }) {
     return (
         <CardCreateClasss>
             <ContainerTitle>
-                <TextTitle> Criar nova turma</TextTitle>
+                <TextTitle> {t('Criar nova turma')}</TextTitle>
             </ContainerTitle>
             <ContainerForm>
                 <Input
                     value={name}
-                    placeholder={'Nome da turma'}
+                    placeholder={t('Nome da turma')}
                     onChangeText={setName}
                 />
                 <Input
                     value={description}
-                    placeholder={'Descrição da turma'}
+                    placeholder={t('Descrição da turma')}
                     onChangeText={setDescription}
                 />
             </ContainerForm>

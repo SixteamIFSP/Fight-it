@@ -5,7 +5,7 @@ import { DoubleButtonConfirmation } from "../../components/doubleButtonConfirmat
 import { Input } from "../../components/input";
 import { adicionarAluno, getAlunosTurma } from "../../controler/class";
 import { toastMessage } from "../../util/toastMessage";
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next';
 import { Container,
     ContainerHeader, 
     ContainerListRow,
@@ -41,7 +41,7 @@ function AdicionarAluno({turmaId , setback}){
     function handleSubmit(){
 
         if (mail===''){
-            toastMessage(false, 'Digite um email');
+            {t(toastMessage(false, 'Digite um email'))};
             setback(false);
             return
         }
@@ -60,7 +60,7 @@ function AdicionarAluno({turmaId , setback}){
 
     return(
         <View>
-            <TextDescription>Adicionar Aluno</TextDescription>
+            <TextDescription>{t('Adicionar Aluno')}</TextDescription>
 
             <Input value={mail} placeholder={t('Digite o e-mail do aluno')} onChangeText={setMail}/>
             <DoubleButtonConfirmation handleBack={handleBack} handleConfirm={handleSubmit}></DoubleButtonConfirmation>
@@ -103,7 +103,7 @@ export function ClassView({navigation, route}){
                 :
                 <ContainerListRow>
                     <ContainerList>
-                        <Text>Listagem De alunos:</Text>
+                        <Text>{t('Listagem De alunos:')}</Text>
                         <ContainerFlat>
 
                         <ContentListagem
@@ -120,7 +120,7 @@ export function ClassView({navigation, route}){
                         
                     </ContainerList>
                     <ContainerList>
-                    <Text>Listagem De aulas:</Text>
+                    <Text>{t('Listagem De aulas:')}</Text>
                         <ContainerFlat>
 
                         <ContentListagem

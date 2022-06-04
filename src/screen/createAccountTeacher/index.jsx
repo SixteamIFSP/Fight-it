@@ -28,7 +28,7 @@ export function CreateAccountTeacher({ navigation, route }) {
             }
             navigation.navigate('Login');
         } else {
-            toastMessage(false, "Preencha os campos corretamente") 
+            {t(toastMessage(false, "Preencha os campos corretamente"))}
         }
     };
     function handleBack() {

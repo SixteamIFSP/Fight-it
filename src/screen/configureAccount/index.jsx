@@ -5,6 +5,7 @@ import { Input } from "../../components/input";
 import { CheckBox } from "../../components/checkbox";
 import { ChangeInfoAccount, ChangePassowrd, DeleteAccount, GetUserAccount } from "../../controler/account";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
+import { useTranslation } from 'react-i18next';
 import {
     ButtonConfigure,
     CancelButton,
@@ -24,6 +25,7 @@ import { toastMessage } from "../../util/toastMessage";
 
 // Compomente de SHOW e EDIT de dados do usuário
 const DataUser = () => {
+    const { t } = useTranslation();
     const { user, modifyUser } = useUser();
     const [dataUser, setDataUser] = useState();
     const [editable, setEditable] = useState(false);
@@ -77,7 +79,7 @@ const DataUser = () => {
     return (
         <ConteinerInfo>
             <TextAlingLine>
-                <TextDescription>Nome:</TextDescription>
+                <TextDescription>{t('Nome:')}</TextDescription>
                 {
                     editable ?
                         <Input value={nome} onChangeText={setNome}></Input>
@@ -85,7 +87,7 @@ const DataUser = () => {
                 }
             </TextAlingLine>
             <TextAlingLine>
-                <TextDescription>E-mail:</TextDescription>
+                <TextDescription>{t('E-mail:')}</TextDescription>
                 {
                     editable ?
                         <Input editable={false} value={email}></Input>
@@ -93,21 +95,21 @@ const DataUser = () => {
                 }
             </TextAlingLine>
             <TextAlingLine>
-                <TextDescription>Telefone:</TextDescription>
+                <TextDescription>{t('Telefone:')}</TextDescription>
                 {
                     editable ?
                         <Input
                             autoComplete={'tel'}
                             keyboardType={'phone-pad'}
                             value={telefone}
-                            placeholder={"Digite seu numero:"}
+                            placeholder={t("Digite seu numero:")}
                             onChangeText={setTelefone}
                         ></Input>
                         : <TextInfo>{dataUser?.Telefone}</TextInfo>
                 }
             </TextAlingLine>
             <TextAlingLine>
-                <TextDescription>Receber Notificação:</TextDescription>
+                <TextDescription>{t('Receber Notificação:')}</TextDescription>
                 {
                     editable ?
                         <CheckBox isChecked={notification} onPress={() => setNotification((value) => !value)}></CheckBox>
@@ -119,7 +121,7 @@ const DataUser = () => {
                     (editable) &&
 
                     <ContainerCancelButton onPress={() => cancel()}>
-                        <CancelButton>Cancelar</CancelButton>
+                        <CancelButton>{t('Cancelar')}</CancelButton>
                     </ContainerCancelButton>
                 }
                 <ContainerSVG onPress={() => save()}>
@@ -152,10 +154,10 @@ export const ChangePassword = ({ editable, setEditable }) => {
 
             } else {
 
-                Toast.show({
+                {t(Toast.show({
                     type: "error",
                     text2: "Preencha os campos corretamente",
-                })
+                }))}
             }
             setEditable((value) => !value)
 
@@ -167,14 +169,14 @@ export const ChangePassword = ({ editable, setEditable }) => {
     return (
         editable ?
             <ConteinerInfo style={{marginTop: 20}}>
-                <TextHeader>Trocar Senha</TextHeader>
-                <TextDescription>Senha antiga:</TextDescription>
+                <TextHeader>{t('Trocar Senha')}</TextHeader>
+                <TextDescription>{t('Senha antiga:')}</TextDescription>
                 <Input
                     style={{ marginBottom: 10, width: '100%' }}
                     secureTextEntry={true}
                     value={oldPass}
                     onChangeText={setOldPass}></Input>
-                <TextDescription>Nova Senha:</TextDescription>
+                <TextDescription>{t('Nova Senha:')}</TextDescription>
                 <Input
 
                     style={{ marginBottom: 10, width: '100%' }}
@@ -182,7 +184,7 @@ export const ChangePassword = ({ editable, setEditable }) => {
                     value={newSenha}
                     onChangeText={setNewSenha}></Input>
 
-                <TextDescription>Confirmação de senha:</TextDescription>
+                <TextDescription>{t('Confirmação de senha:')}</TextDescription>
                 <Input
                     style={{ marginBottom: 10, width: '100%' }}
                     secureTextEntry={true}
@@ -195,7 +197,7 @@ export const ChangePassword = ({ editable, setEditable }) => {
                         (editable) &&
 
                         <ContainerCancelButton onPress={() => cancel()}>
-                            <CancelButton>Cancelar</CancelButton>
+                            <CancelButton>{t('Cancelar')}</CancelButton>
                         </ContainerCancelButton>
                     }
                     <ContainerSVG onPress={() => save()}>
@@ -207,7 +209,7 @@ export const ChangePassword = ({ editable, setEditable }) => {
             </ConteinerInfo>
             :
             <ButtonConfigure onPress={() => setEditable(true)}>
-                <TextButton>MUDAR SENHA</TextButton>
+                <TextButton>{t('MUDAR SENHA')}</TextButton>
             </ButtonConfigure>
     )
 };
@@ -226,12 +228,12 @@ const ConfirmDelete = ({ deletable, setDeletable }) => {
                 DeleteAccount(data, user.tipoUsuario === 1, () => logOut())
             } else {
 
-                toastMessage(false, "Preencha os campos corretamente") 
+                {t(toastMessage(false, "Preencha os campos corretamente"))}
             }
             
         } catch (error) {
 
-            toastMessage(false, "Erro de conexão") 
+            {t(toastMessage(false, "Erro de conexão"))}
         }
       
 
@@ -241,19 +243,19 @@ const ConfirmDelete = ({ deletable, setDeletable }) => {
         deletable ?
             (
                 <ConteinerInfoDelete style={{ marginTop: 20, marginBottom: 20 }}>
-                    <TextHeader>Excluir usuário</TextHeader>
+                    <TextHeader>{t('Excluir usuário')}</TextHeader>
                     <TextDescription>
-                        Validação de usuário:
+                    {t('Validação de usuário:')}
                     </TextDescription>
                     <Input
                         style={{ width: '90%' }}
-                        placeholder={"Para excluir conta digite sua senha!"}
+                        placeholder={t("Para excluir conta digite sua senha!")}
                         secureTextEntry={true} value={password}
                         onChangeText={setPassword}
                     ></Input>
                     <RowConfirmation>
                         <ContainerCancelButton onPress={() => setDeletable(false)}>
-                            <CancelButton>Cancelar</CancelButton>
+                            <CancelButton>{t('Cancelar')}</CancelButton>
                         </ContainerCancelButton>
                         <ContainerSVG onPress={() => handleDelete()}>
                             <FontAwesome name={'trash'} size={30} color="#cc0000" />
@@ -264,7 +266,7 @@ const ConfirmDelete = ({ deletable, setDeletable }) => {
             :
             (
                 <ButtonConfigure onPress={() => setDeletable(true)}>
-                    <TextButton>DESATIVAR CONTA</TextButton>
+                    <TextButton>{t('DESATIVAR CONTA')}</TextButton>
                 </ButtonConfigure>
             )
     )
@@ -277,7 +279,7 @@ export function ConfigureAccount() {
         <Container >
             {!editablePass &&
                 <>
-                    <TextHeader>Minha conta</TextHeader>
+                    <TextHeader>{t('Minha conta')}</TextHeader>
                     <DataUser></DataUser>
                 </>}
             <ChangePassword editable={editablePass} setEditable={setEditablePass}></ChangePassword>

@@ -1,9 +1,10 @@
 import React from "react";
 import { Container, ContainerButtons, ContainerDesempenho, ContentButtons, DesempenhoHeader, TextButtons } from "./styles";
+import { useTranslation } from 'react-i18next';
 
 export function StudantView({navigation, route}){
-
-
+    
+    const { t } = useTranslation();
     function handleTriagem(){
 
     }
@@ -17,16 +18,16 @@ export function StudantView({navigation, route}){
         <Container>
             <ContainerButtons>
                 <ContentButtons onPress={()=>handleTriagem()}>
-                <TextButtons>Visualizar Triagem</TextButtons>
+                <TextButtons>{t('Visualizar Triagem')}</TextButtons>
                 </ContentButtons>
 
                 <ContentButtons  onPress={()=>handleEvaluation()}>
-                <TextButtons>Avaliar Aluno</TextButtons>
+                <TextButtons>{t('Avaliar Aluno')}</TextButtons>
                 </ContentButtons>
             </ContainerButtons>
             
             <ContainerDesempenho>
-                <DesempenhoHeader>DESEMPENHO</DesempenhoHeader>
+                <DesempenhoHeader>{t('DESEMPENHO')}</DesempenhoHeader>
 
                 {/* Tabela de aluno */}
             </ContainerDesempenho>
