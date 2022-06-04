@@ -2,7 +2,7 @@ import React from "react";
 import { Container, ContainerButtons, ContainerDesempenho, ContentButtons, DesempenhoHeader, TextButtons } from "./styles";
 
 export function StudantView({navigation, route}){
-    console.log(route?.params);
+
 
     function handleTriagem(){
 

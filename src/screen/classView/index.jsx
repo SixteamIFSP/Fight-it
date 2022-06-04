@@ -50,6 +50,7 @@ function AdicionarAluno({turmaId , setback}){
             turmaId:turmaId,
         }
 
+   
         adicionarAluno(data);
         setback(false);
         

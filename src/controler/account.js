@@ -18,7 +18,7 @@ export async function createAccount(data, type){
             }
            
         } catch (error) {
-            console.log(error);
+     
             toastMessage(false, 'Erro de conexão!') 
         }
 }
@@ -42,7 +42,7 @@ export async function GetUserAccount(setDataUser,id, type){
         }
        
     } catch (error) {
-        console.log('erro:',error)
+     
         toastMessage(false, 'Erro de conexão!') 
     }
 }
@@ -63,7 +63,7 @@ export async function ChangeInfoAccount(data, type){
         }
        
     } catch (error) {
-        console.log(error);
+    
         toastMessage(false, "Erro de conexão!") ;
     }
 }
@@ -84,12 +84,12 @@ export async function ChangePassowrd(data, type){
         }
        
     } catch (error) {
-        console.log(error);
+    
         toastMessage(false, "ERRO INTERNO") ;
     }
 }
 
-export async function DeleteAccount(data, type, logout){
+export async function DeleteAccount(data, type, logout){ // data => {id:number, senha:string}
 
     function desconect(){
         logout();
@@ -110,7 +110,7 @@ export async function DeleteAccount(data, type, logout){
         }
        
     } catch (error) {
-        console.log({...error});
+     
         toastMessage(false, "Erro ao enviar os dados") ;
     }
 }

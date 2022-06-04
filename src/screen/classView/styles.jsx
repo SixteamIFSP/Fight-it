@@ -17,6 +17,7 @@ export const Informacoes  = styled.Text`
 export const ContainerListRow = styled.View`
     width:100%;
     height:300px;
+    justify-content:space-evenly;
     flex-direction:row;
     
     
@@ -25,6 +26,7 @@ export const ContainerListRow = styled.View`
 export const ContainerList = styled.View`
     width:40%;
     height:100%;
+    padding:5%;
     border: 1px;
     border-color:black;
 `;

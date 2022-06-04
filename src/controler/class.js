@@ -12,14 +12,13 @@ export async function getClass(setClasses, idUsuario, type){
        }
         
         if (response?.data.status){
-            toastMessage(true, response?.data.mensagem)
             setClasses(response?.data.result)
         } else{
             toastMessage(false, response?.data.mensagem)   
         }
        
     } catch (error) {
-        console.log(error);
+    
         toastMessage(false, 'Erro de conexão!') 
     }
 }
@@ -36,7 +35,6 @@ export async function createClass(data){ // data => { nome:string, descricao:str
         }
         
     } catch (error) {
-        console.log(error);
         toastMessage(false, 'Erro de conexão!') 
     }
 }
@@ -57,17 +55,17 @@ export async function getAlunosTurma(setAlunos, data){ // data => number
         }
         
     } catch (error) {
-        console.log(error);
+  
         toastMessage(false, 'Erro de conexão!') 
     }
 }
 
-export async function adicionarAluno(data){
+export async function adicionarAluno(data){ // data => {turmaId:number, email:string}
 
     try {
         const response = await api.post(`/turma/adiciona`, {...data});
 
-        console.log(response?.data);
+      
 
         if (response?.data.status){
             toastMessage(true, response?.data.mensagem) 
@@ -77,7 +75,7 @@ export async function adicionarAluno(data){
         }
         
     } catch (error) {
-        console.log(error);
+      
         toastMessage(false, 'Erro de conexão!') 
     }
 }
