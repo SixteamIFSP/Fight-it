@@ -24,7 +24,7 @@ function StackLoged() {
   const Teacher = () => {
     return (
     <TabNavegation.Navigator initialRouteName="HomeScreenTeacher"  screenOptions={({ route }) => ({
-      tabBarIcon: ({ focused, color, size }) => {
+      tabBarIcon: ({ focused, color }) => {
         let iconName;
 
         if (route.name === 'HomeScreenTeacher') {
@@ -43,17 +43,18 @@ function StackLoged() {
         // }
 
         // You can return any component that you like here!
-        return <FontAwesome name={iconName} size={size} color={color} />;
+        return <FontAwesome name={iconName} size={28} color={color} />;
       },
       tabBarActiveTintColor: 'black',
       tabBarInactiveTintColor: 'gray',
+      tabBarShowLabel:false,
     })}>
 
-      <TabNavegation.Screen options={{ title: "Home" }} navigationKey='HomeScreenTeacher' name="HomeScreenTeacher" component={HomeScreenTeacher} />
+      <TabNavegation.Screen options={{ title: "Home", headerShown: false }} navigationKey='HomeScreenTeacher' name="HomeScreenTeacher" component={HomeScreenTeacher} />
       {/* <TabNavegation.Screen navigationKey='Calendar' name="Calendar" component={HomeScreenTeacher} /> */}
-      <TabNavegation.Screen options={{headerShown: false}} navigationKey='Class' name="Class" component={ClassStack} />
+      <TabNavegation.Screen options={{ headerShown: false }} navigationKey='Class' name="Class" component={ClassStack} />
       {/* <TabNavegation.Screen navigationKey='Dashboard' name="Dashboard" component={HomeScreenTeacher} /> */}
-      <TabNavegation.Screen navigationKey='Config' name="Config" component={ConfigureAccount} />
+      <TabNavegation.Screen options={{ title: t(`nav.config`) }}  navigationKey='Config' name="Config" component={ConfigureAccount} />
 
     </TabNavegation.Navigator>
     )
@@ -129,7 +130,8 @@ function StackAuth() {
 export function Router() {
   const { user } = useUser();
  
-  return (<>
+  return (
+  <>
     {user == null ? <StackAuth /> : <StackLoged />}
   </>
   )

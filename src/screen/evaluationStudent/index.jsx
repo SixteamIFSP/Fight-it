@@ -16,7 +16,9 @@ import {
     TextHeader
 } from "./styles";
 import Divider from 'react-native-divider';
-
+import SelectDropdown from "react-native-select-dropdown";
+import { Button } from "../../components/button";
+import { FontAwesome } from "@expo/vector-icons";
 
 const RenderEvaluation = ({item, data, selectEvaluation, setSelectEvaluation})=>{
     function handleTouch(){
@@ -90,7 +92,7 @@ function FormCreateParams({ selectEvaluation, setSelectEvaluation }) {
     const [typeParams, setTypeParams] = useState([]);
     const [textNewParam, setTextNewParam] = useState('');
     const [paramSelected, setParamSelected] = useState('');
-    const [listParams, setListParams] = useState([]);
+    const [listParams, setListParams] = useState([{NomeParametro:""}]);
     const [valor, setValor] = useState(0)
 
     useEffect(() => {
@@ -112,7 +114,7 @@ function FormCreateParams({ selectEvaluation, setSelectEvaluation }) {
             }
 
             criarParametroDesempenho(data);
-            setSelectEvaluation();
+            setSelectEvaluation(0);
         }
     }
 
@@ -130,7 +132,7 @@ function FormCreateParams({ selectEvaluation, setSelectEvaluation }) {
             }
             else {
                 // your call back function
-                alert("please enter numbers only");
+               // alert("please enter numbers only");
             }
         }
         if (text < 11)
@@ -153,8 +155,6 @@ function FormCreateParams({ selectEvaluation, setSelectEvaluation }) {
 
         criarNovoParametro(data)
         setCreateParams(value => !value);
-
-
     }
 
     return (
@@ -173,7 +173,6 @@ function FormCreateParams({ selectEvaluation, setSelectEvaluation }) {
                                 setParamSelected(selectedItem)
                             }}
                             buttonTextAfterSelection={(selectedItem, index) => {
-
                                 return selectedItem
                             }}
                             renderDropdownIcon={isOpened => {
@@ -230,6 +229,10 @@ function FormCreateParams({ selectEvaluation, setSelectEvaluation }) {
 
                 <Button handle={() => handleCreateParam()} text={"Criar Novo parâmetro"} />
 
+                {createParams && 
+                    <Button handle={() => setCreateParams(false)} text={"Cancelar"} />
+                }
+
             </AlingButtons>
 
         </View>
@@ -240,7 +243,6 @@ export function EvaluationStudent({ navigation, route }) {
     const [createPerformance, setCreatePerformace] = useState(false);
     const [selectEvaluation, setSelectEvaluation] = useState(0);
     const [dataEvaluation, setDataEvaluation] = useState([]);
-
 
     const { id, studantId, ProfessorId } = route?.params;
 

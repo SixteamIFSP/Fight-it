@@ -33,7 +33,7 @@ export const styles = StyleSheet.create(
     height:60%;
     border-width:1px;
     border-color:black;
-    margin-bottom: 
+    margin-bottom: 20px;
  `;
  
  export const EvaluationList = styled.FlatList`

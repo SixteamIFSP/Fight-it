@@ -2,7 +2,7 @@ import { api } from "../services/api";
 import { toastMessage } from "../util/toastMessage";
 
 
-export async function upload(image, user){
+export async function upload(image, user, modifyUser){
 
     try {
         const form = new FormData();
@@ -11,22 +11,16 @@ export async function upload(image, user){
             name: 'image.jpg',
             type: 'image/jpeg'
         })
-
-        console.log("form:" ,form);
       
-
         const response = await api.post(`/imagem/document`,  form, { headers: {'Content-Type': 'multipart/form-data'}});
 
-        console.log(response);
-
         if (response?.data.status){
-            setImagePerson({...response?.data, ...user})
+            await setImagePerson({...response?.data, ...user});
+            modifyUser({...user, pfp:response?.data.Key});
         } else{
             toastMessage(false, response?.data.mensagem);
         }
 
-
-       
     } catch (error) {
         console.log("erro ", error.message);
         toastMessage(false, 'Erro de conexão!');
@@ -34,27 +28,38 @@ export async function upload(image, user){
 }
 
 export async function setImagePerson (responseImage){   
-    let response; 
+        console.log("RESULTADO DA BUSCA: ",responseImage);
 
+    let response; 
     data = {
         0:{
             aluno: responseImage.userID,
-            imagekey: responseImage.imagePath,
+            imagekey: responseImage.Key,
         },
         1:{
             professor: responseImage.userID,
-            imagekey: responseImage.imagePath,
+            imagekey: responseImage.Key,
         },
     }
 
+    console.log(data[1]);
+
 
     try {
-        if (responseImage===1){
-            response = await api.post(`/imagem/documento/pfp/professor`, data[1]);
+        if (responseImage.tipoUsuario===1){
+            response = await api.post(`/imagem/document/pfp/professor`, {professor:responseImage.userID, imagekey: responseImage.Key});
         } else {
-            response = await api.post(`/imagem/documento/pfp/professor`, data[0]);
+            response = await api.post(`/imagem/document/pfp/aluno`, {aluno: responseImage.userID, imagekey: responseImage.Key,});
         }
 
+        console.log("DATA:",response?.data)
+
+        if (response?.data.status){
+
+            toastMessage(true,  response?.data.mensagem);
+        } else{
+            toastMessage(false, response?.data.mensagem);
+        }
         
 
     } catch (error) {

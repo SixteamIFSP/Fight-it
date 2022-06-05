@@ -30,6 +30,7 @@ import {
 import { Image } from "react-native";
 import { upload } from "../../controler/image";
 import { variables } from "../../configuration/constants";
+import { Loading } from "../../components/loading";
 
 // Compomente de SHOW e EDIT de dados do usuário
 const DataUser = () => {
@@ -279,13 +280,13 @@ const ConfirmDelete = ({ deletable, setDeletable }) => {
 export function ConfigureAccount() {
     const  { user, modifyUser}  = useUser();
     const [editablePass, setEditablePass] = useState(false);
+    const [loadingImage, setLoadingImage] = useState(false);
     const [deletable, setDeletable] = useState(false);
-    const [imageSelect, setImageSelect] = useState(null);
+    const [imageSelect, setImageSelect] = useState(user?.pfp);
 
     useEffect(()=>{
-        setImageSelect(variables.IMAGES_URL?.pfp)
-    },[]);
-
+        setImageSelect(user?.pfp)
+    },[user]);
 
     useEffect(() => {
         (async () => {
@@ -313,10 +314,9 @@ export function ConfigureAccount() {
       
               console.log(result);
               
-              upload(result, user)
-      
-              
-              //setImageSelect(result.uri)
+              setLoadingImage(true);
+              await upload(result, user, modifyUser)
+              setLoadingImage(false);
             
         } catch (error) {
 
@@ -335,22 +335,26 @@ export function ConfigureAccount() {
 
                     <ContainerImage>
                         <AreaImage>
-
                             {
-                                imageSelect !== null? 
-                                    <Image
-                                        source={
-                                            {uri:imageSelect}
-                                        }
-                                        style={{
-                                            width:"100%",
-                                            height:"100%"
-                                        }}
-                                    />   
+                                !loadingImage ?  
+                                    (imageSelect !== null? 
+                                        <Image
+                                            source={
+                                                {uri:variables.IMAGES_URL+imageSelect}
+                                            }
+                                            style={{
+                                                width:"100%",
+                                                height:"100%"
+                                            }}
+                                        />   
+                                    :
+                                    <ButtonImage onPress = {()=> pickImage()}>
+                                        <MaterialIcons name="add-a-photo" size={40} color="#dddddd" />
+                                    </ButtonImage>         )
                                 :
-                                <ButtonImage onPress = {()=> pickImage()}>
-                                    <MaterialIcons name="add-a-photo" size={40} color="#dddddd" />
-                                </ButtonImage>
+                                <AreaImage>
+                                    <Loading   loading={loadingImage} size={40}/>
+                                </AreaImage>
                             }
                         
                         </AreaImage>

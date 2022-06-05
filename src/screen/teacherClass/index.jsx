@@ -52,10 +52,11 @@ function LoadingClass({ user, setCreateNew, navigation }) {
             <AddButton handle={() => setCreateNew((value) => !value)} />
             <ContainerList>
                 <FlatList
+                    style={{width:'100%'}}
                     data={data}
                     renderItem={({ item }) => <CardTurma data={item} handleNewScreen={handleNewScreen}></CardTurma>}
-                    onEndReached={handleLoadMore}
-                    onEndThreshold={0.1}
+                    //onEndReached={handleLoadMore}
+                    onEndThreshold={0.01}
                     keyExtractor={item => item.id}
                     ListFooterComponent={
                         <Loading loading={loading} size={30}></Loading>

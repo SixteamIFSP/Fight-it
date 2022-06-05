@@ -43,6 +43,9 @@
         "header":{
             "teacher":"Teacher",
             "student":"Student"
+        },
+        "nav":{
+            "config": "Configuration"
         }
     }
 }

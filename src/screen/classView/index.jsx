@@ -46,7 +46,7 @@ function AdicionarAluno({ turmaId, setback }) {
     }
     function handleSubmit() {
 
-        if (mail === '') {
+        if (mail === '' || mail.indexOf("@")===-1) {
             toastMessage(false, 'Digite um email');
             setback(false);
             return
@@ -57,7 +57,6 @@ function AdicionarAluno({ turmaId, setback }) {
             turmaId: turmaId,
         }
 
-   
         adicionarAluno(data);
         setback(false);
 
@@ -105,7 +104,7 @@ export function ClassView({ navigation, route }) {
             {
                 adicionarAluno ? <AdicionarAluno setback={setAdicionarAluno} turmaId={id}></AdicionarAluno>
                 :
-                <ContainerListRow>
+                <ContainerListColumn>
                     <ContainerList>
                         <Text>Listagem De alunos:</Text>
                         <ContainerFlat>
@@ -143,7 +142,7 @@ export function ClassView({ navigation, route }) {
                     </ContainerList> */}
 
                     
-                </ContainerListRow>
+                </ContainerListColumn>
             }
 
 

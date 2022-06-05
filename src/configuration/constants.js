@@ -4,7 +4,7 @@ const aws = false
 const production = {
   API_URL: aws ? '' : 'https://fight-it.herokuapp.com/',
   API_AUTHORIZATION: '',
-  IMAGES_URL: aws ? '' : 'https://fight-it.herokuapp.com/imagem/document/',
+  IMAGES_URL: aws ? '' : 'https://fight-it.herokuapp.com',
 };
 
 const development = {

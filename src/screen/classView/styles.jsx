@@ -19,6 +19,7 @@ export const ContainerList = styled.View`
     height: 100%;
     border: 0.5px;
     border-color: black;
+    
     background-color: #fff;
     margin-bottom: 20px;
 `;
@@ -27,7 +28,7 @@ export const ContentListagem = styled.FlatList`
 `;
 export const ContainerFlat = styled.View`
     max-height:100%;
-    padding: 10px
+    padding: 10px;
 `;
 
 export const AddContainer = styled.View`

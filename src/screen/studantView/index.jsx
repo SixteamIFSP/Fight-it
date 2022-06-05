@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Dimensions, FlatList, Text, View } from "react-native";
 import { Loading } from "../../components/loading";
 import { getDesempenhoPorParametro, getParamsAluno } from "../../controler/student";
+import { LineChart } from "react-native-chart-kit";
+import  Divider from "react-native-divider"
 import { 
     Container,
     ContainerButtons,
@@ -11,7 +13,6 @@ import {
     DesempenhoHeader,
     TextButtons
 } from "./styles";
-import { LineChart } from "react-native-chart-kit";
 
 function CardParamStutant({item, handleGraphyc}){
 
@@ -42,14 +43,14 @@ export function StudantView({navigation, route}){
     
     async function handleLoadingParams(){
         if (loading) return;
-        setLoading(true)
+        setLoading(true);
         const data = {
             aluno: route?.params.studantId,
             turma: route?.params.id,
         }
 
-        await getParamsAluno(data, setParamsAluno)
-        setLoading(false)
+        await getParamsAluno(data, setParamsAluno);
+        setLoading(false);
     }
 
     async function handleLoadingGraphyc(idParam){
@@ -83,8 +84,9 @@ export function StudantView({navigation, route}){
                     color="#000"
                     orientation="center"
                 >
-                    DESEMPENHO
+                    <Text>DESEMPENHO</Text>
                 </Divider>
+              
 
                 <FlatList
                     horizontal={true}
@@ -106,51 +108,47 @@ export function StudantView({navigation, route}){
                 <Loading loading={loading} size={30}></Loading>
 
                 {loadingGraphyc &&
-
-                <LineChart
-                    data={{
-                    labels: dataParams?.map((value)=>value?.data.slice(0,10)),
-                    datasets: [
-                        {
-                        data: dataParams?.map((value)=>value.valor)
+                    <LineChart
+                        data={{
+                        labels: dataParams?.map((value)=>value?.data.slice(0,10)),
+                        datasets: [
+                            {
+                            data: dataParams?.map((value)=>value.valor)
+                            }
+                        ]
+                        }}
+                        width={Dimensions.get("window").width}  
+                        height={220}
+                        yAxisLabel=""                           
+                        yAxisSuffix=""                          
+                        yAxisInterval={1}                    
+                        chartConfig={{
+                        backgroundColor: "#000000",
+                        backgroundGradientFrom: "#505050",
+                        backgroundGradientTo: "#595959",
+                        decimalPlaces: 0,                    
+                        color: (opacity = 1) => `rgba(205, 205, 205, ${opacity})`,
+                        labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+            
+                        style: {
+                            borderRadius: 16
+                        },
+                        propsForDots: {
+                            r: "6",
+                            strokeWidth: "2",
+                            stroke: "#ffffff"
                         }
-                    ]
-                    }}
-                    width={Dimensions.get("window").width} // from react-native
-                    height={220}
-                    yAxisLabel=""   //string que aparece antes do dataset
-                    yAxisSuffix=""  //string que aparece depois do dataset
-                    yAxisInterval={1} // optional, defaults to 1
-                    chartConfig={{
-                    backgroundColor: "#000000",
-                    backgroundGradientFrom: "#505050",
-                    backgroundGradientTo: "#595959",
-                    decimalPlaces: 0, // optional, defaults to 2dp
-                    color: (opacity = 1) => `rgba(205, 205, 205, ${opacity})`,
-                    labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-          
-                    style: {
+                        }}
+                        bezier
+                        style={{
+                        marginVertical: 8,
                         borderRadius: 16
-                    },
-                    propsForDots: {
-                        r: "6",
-                        strokeWidth: "2",
-                        stroke: "#ffffff"
-                    }
-                    }}
-                    bezier
-                    style={{
-                    marginVertical: 8,
-                    borderRadius: 16
-                    }}
-                />
+                        }}
+                    />
                 
                 }
                
-                {/* Tabela de aluno */}
             </ContainerDesempenho>
-
-
         </Container>
     )
 }
