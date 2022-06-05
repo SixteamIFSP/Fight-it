@@ -65,7 +65,7 @@ export async function adicionarAluno(data){ // data => {turmaId:number, email:st
     try {
         const response = await api.post(`/turma/adiciona`, {...data});
 
-      
+      console.log(response.data);
 
         if (response?.data.status){
             toastMessage(true, response?.data.mensagem) 
@@ -75,7 +75,7 @@ export async function adicionarAluno(data){ // data => {turmaId:number, email:st
         }
         
     } catch (error) {
-      
+        console.log(error.message);
         toastMessage(false, 'Erro de conexão!') 
     }
 }

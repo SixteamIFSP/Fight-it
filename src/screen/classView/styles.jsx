@@ -5,6 +5,12 @@ export const Container = styled.View`
     width:100%;
     height: 100%;
 `;
+
+export const AddContainerView = styled(Container)`
+     justify-content: center;
+     align-items:center;
+`;
+
 export const ContainerListColumn = styled.View`
     width:90%;
     height:50%;
@@ -19,7 +25,6 @@ export const ContainerList = styled.View`
     height: 100%;
     border: 0.5px;
     border-color: black;
-    
     background-color: #fff;
     margin-bottom: 20px;
 `;
@@ -39,6 +44,7 @@ export const AddContainer = styled.View`
 
 export const TextDescription = styled.Text`
     width:100%;
+    text-align:center;
     height:10%;
 `;
 
