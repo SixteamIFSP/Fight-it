@@ -8,8 +8,8 @@ import { useUser } from "../../hooks/user";
 
 export function HomeScreenTeacher({ navigation }) {
 
-    const {t} = useTranslation()
-    const { user } = useUser()
+    const {t} = useTranslation();
+    const { user } = useUser();
   
     return (  
         <View style={stylesGlobal.container}>

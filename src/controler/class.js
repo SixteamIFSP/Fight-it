@@ -44,18 +44,18 @@ export async function getAlunosTurma(setAlunos, data){ // data => number
     try {
         const response = await api.get(`/turma/alunos/${data}`);
 
-        if (response?.data.status & response?.data.result.length > 0){
+        if (response?.data.status){
             setAlunos(response?.data.result)
 
         } else{
-            if (response?.data.result.length == 0)
+            if (response?.data.result == null)
                 toastMessage(false, 'Turma sem alunos') 
             else 
                 toastMessage(false, 'Erro ao buscar dos dados') 
         }
         
     } catch (error) {
-  
+        console.log(error.message)
         toastMessage(false, 'Erro de conexão!') 
     }
 }

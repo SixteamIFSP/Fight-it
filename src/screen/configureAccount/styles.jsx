@@ -13,7 +13,7 @@ export const TextHeader = styled.Text`
 `;
 export const ConteinerInfo = styled.View`
     border-top-width:6px;
-    borderTopColor: #3d3d3d;
+    border-top-color: #3d3d3d;
     margin-left:auto;
     margin-right:auto;
     width:90%;
@@ -86,7 +86,7 @@ export const TextButton = styled.Text`
 `;
 export const ConteinerInfoDelete = styled.View`
 width:90%;
-padding: 20px
+padding: 20px;
 height:auto;
 margin-bottom:20px;
 margin-right: auto;
@@ -96,6 +96,31 @@ border-width:0.5px;
 border-radius:4px;
 background-color: white;
 border-top-width:6px;
-borderTopColor: #ce0000;
-borderStyle: solid;
+border-top-color: #ce0000;
+border-style: solid;
+`;
+
+export const ContainerImage = styled.View`
+    width:100%;
+    height:15%;
+    align-items:center;
+    justify-content: center;
+`
+
+export const AreaImage = styled.View`
+    width: 70px;
+    height: 70px;
+    
+    overflow:hidden;
+    border-radius:50px;
+`;
+export const ButtonImage = styled.TouchableOpacity`
+    width:100%;
+    height:100%;
+
+    background-color:#3d3d3d;
+    align-items:center;
+    justify-content: center;
+   
+
 `;

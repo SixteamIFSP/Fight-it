@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Login } from '../screen/login';
 import { CreateAccount } from '../screen/createAccount';
 import { CreateAccountTeacher } from '../screen/createAccountTeacher';
-import { CreateAccountStudent } from '../screen/createAccountStudent';
+import { CreateAccountStudent } from '../screen/addCertificado';
 import { useUser } from '../hooks/user';
 import { HomeScreenTeacher } from '../screen/homeScreenTeacher';
 import { HomeScreenStudent } from '../screen/homeScreenStudent';

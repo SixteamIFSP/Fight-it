@@ -18,7 +18,6 @@ export function ButtonLinguage() {
 
     useEffect(() => {
         linguage ? changeLanguage('br') : changeLanguage('en');
-        console.log(linguage);
     }, [linguage])
 
     return (

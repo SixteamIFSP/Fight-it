@@ -10,14 +10,9 @@ function UserProvider({ children }) {
     const [user, setUser] = useState(null);
 
     useEffect(()=>{
-
-        setUser({
-            nome        : 'teste',
-            email       : 'teste',
-            userID      : 5,
-            tipoUsuario : 1,
-        })
-    },[])
+        console.log("USER ", user);
+        
+    },[user])
 
     async function modifyUser(value){
         setUser(value)
@@ -47,6 +42,8 @@ function UserProvider({ children }) {
                 email: response.data.email,
                 userID: response.data.userID,
                 tipoUsuario: response.data.tipoUsuario,
+                pfp: response.data.pfp,
+
             });
             toastMessage(true, "Login efetuado com sucesso");
         

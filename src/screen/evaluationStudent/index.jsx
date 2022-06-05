@@ -21,9 +21,6 @@ import {
 
 
 const RenderEvaluation = ({item, data, selectEvaluation, setSelectEvaluation})=>{
-
-
-
     function handleTouch(){
         setSelectEvaluation(0)
         setTimeout(() => {

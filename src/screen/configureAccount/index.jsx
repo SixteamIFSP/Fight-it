@@ -3,8 +3,12 @@ import { useUser } from "../../hooks/user";
 import { FontAwesome } from '@expo/vector-icons';
 import { Input } from "../../components/input";
 import { CheckBox } from "../../components/checkbox";
+import { MaterialIcons } from '@expo/vector-icons'; 
 import { ChangeInfoAccount, ChangePassowrd, DeleteAccount, GetUserAccount } from "../../controler/account";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
+import { toastMessage } from "../../util/toastMessage";
+import * as ImagePicker from 'expo-image-picker';
+
 import {
     ButtonConfigure,
     CancelButton,
@@ -19,8 +23,13 @@ import {
     TextHeader,
     TextInfo,
     ConteinerInfoDelete,
+    ButtonImage,
+    ContainerImage,
+    AreaImage,
 } from "./styles";
-import { toastMessage } from "../../util/toastMessage";
+import { Image } from "react-native";
+import { upload } from "../../controler/image";
+import { variables } from "../../configuration/constants";
 
 // Compomente de SHOW e EDIT de dados do usuário
 const DataUser = () => {
@@ -61,10 +70,7 @@ const DataUser = () => {
                 modifyUser({ ...user, nome: nome, })
 
             } else {
-                Toast.show({
-                    type: "error",
-                    text2: "Erro ao Atualizar dados",
-                });
+                toastMessage(false, 'Erro ao Atualizar dados');
             }
 
             setEditable((value) => !value)
@@ -130,7 +136,7 @@ const DataUser = () => {
     )
 };
 // Compomente de troca de senha
-export const ChangePassword = ({ editable, setEditable }) => {
+export const ChangePassword = ({ editable, setEditable}) => {
     const { user } = useUser();
 
     const [oldPass, setOldPass] = useState('');
@@ -271,13 +277,84 @@ const ConfirmDelete = ({ deletable, setDeletable }) => {
 };
 
 export function ConfigureAccount() {
+    const  { user, modifyUser}  = useUser();
     const [editablePass, setEditablePass] = useState(false);
     const [deletable, setDeletable] = useState(false);
+    const [imageSelect, setImageSelect] = useState(null);
+
+    useEffect(()=>{
+        setImageSelect(variables.IMAGES_URL?.pfp)
+    },[]);
+
+
+    useEffect(() => {
+        (async () => {
+         
+            const cameraRollStatus =
+              await ImagePicker.requestMediaLibraryPermissionsAsync();
+          
+            if (
+              cameraRollStatus.status !== "granted" 
+            ) {
+              alert("Usuario sem permição para utilizar mídias");
+            }
+          
+        })();
+      }, []);
+
+      const pickImage = async () => {
+
+        try {
+            let result = await ImagePicker.launchImageLibraryAsync({
+                mediaTypes: "Images",
+                aspect: [4, 3],
+                quality: 1,
+              })
+      
+              console.log(result);
+              
+              upload(result, user)
+      
+              
+              //setImageSelect(result.uri)
+            
+        } catch (error) {
+
+            console.log(error.message);
+        }
+        
+
+
+    }
+
     return (
         <Container >
             {!editablePass &&
                 <>
                     <TextHeader>Minha conta</TextHeader>
+
+                    <ContainerImage>
+                        <AreaImage>
+
+                            {
+                                imageSelect !== null? 
+                                    <Image
+                                        source={
+                                            {uri:imageSelect}
+                                        }
+                                        style={{
+                                            width:"100%",
+                                            height:"100%"
+                                        }}
+                                    />   
+                                :
+                                <ButtonImage onPress = {()=> pickImage()}>
+                                    <MaterialIcons name="add-a-photo" size={40} color="#dddddd" />
+                                </ButtonImage>
+                            }
+                        
+                        </AreaImage>
+                    </ContainerImage>
                     <DataUser></DataUser>
                 </>}
             <ChangePassword editable={editablePass} setEditable={setEditablePass}></ChangePassword>

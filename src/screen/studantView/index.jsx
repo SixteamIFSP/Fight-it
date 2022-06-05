@@ -122,8 +122,7 @@ export function StudantView({navigation, route}){
                     decimalPlaces: 0, // optional, defaults to 2dp
                     color: (opacity = 1) => `rgba(205, 205, 205, ${opacity})`,
                     labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-        
-                    
+          
                     style: {
                         borderRadius: 16
                     },
