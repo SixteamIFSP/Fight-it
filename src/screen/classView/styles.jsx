@@ -21,8 +21,6 @@ export const ContainerList = styled.View`
     border-color: black;
     background-color: #fff;
     margin-bottom: 20px;
-    overflow: hidden;
-    overflow-x: scroll;
 `;
 export const ContentListagem = styled.FlatList`
     width:100%; 
