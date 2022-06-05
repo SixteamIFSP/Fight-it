@@ -37,7 +37,7 @@ export function StudantView({navigation, route}){
     // }
     function handleEvaluation(){
 
-        navigation.navigate('EvaluationStudent', {...route?.params, title:'Avaliação: '+route?.params.nome})
+        navigation.navigate('EvaluationStudent', { ...route?.params, title: 'Avaliação: ' + route?.params.nome })
     }
     
     async function handleLoadingParams(){
@@ -72,13 +72,19 @@ export function StudantView({navigation, route}){
                 <TextButtons>Visualizar Triagem</TextButtons>
                 </ContentButtons> */}
 
-                <ContentButtons  onPress={()=>handleEvaluation()}>
-                <TextButtons>Avaliar Aluno</TextButtons>
+                <ContentButtons onPress={() => handleEvaluation()}>
+                    <TextButtons>Avaliar Aluno</TextButtons>
                 </ContentButtons>
             </ContainerButtons>
-            
+
             <ContainerDesempenho>
-                <DesempenhoHeader>DESEMPENHO</DesempenhoHeader>
+                <Divider
+                    borderColor="#000"
+                    color="#000"
+                    orientation="center"
+                >
+                    DESEMPENHO
+                </Divider>
 
                 <FlatList
                     horizontal={true}

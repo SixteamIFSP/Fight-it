@@ -28,7 +28,7 @@ export const CardView = styled.TouchableOpacity`
 `;
 export const CardTitle = styled.Text`
     color:#000;
-    font-size:24px;
+    font-size:16px;
     font-weight:bold;
     margin-bottom:20px;
 `;

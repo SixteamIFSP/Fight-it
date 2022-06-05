@@ -9,7 +9,7 @@ export const TextHeader = styled.Text`
     margin:10px;
     margin-left:0px;
     text-align:center;
-    font-size:30px;
+    font-size:22px;
 `;
 export const ConteinerInfo = styled.View`
     border-top-width:6px;
