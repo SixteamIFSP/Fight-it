@@ -89,10 +89,8 @@ function CreateClass({ user, setCreateNew }) {
                 nome: name,
                 descricao: description,
                 professorId: user.userID,
-            }
-
+            };
             createClass(data);
-
         } else {
             {t(toastMessage(false, 'Preencha os campos!'))}
         };
@@ -122,8 +120,6 @@ function CreateClass({ user, setCreateNew }) {
             </ContainerForm>
             <DoubleButtonConfirmation handleConfirm={confirm} handleBack={cancel}></DoubleButtonConfirmation>
         </CardCreateClasss>
-
-
     )
 };
 
@@ -133,7 +129,6 @@ export function TeacherClass({ navigation }) {
 
     return (
         <Container>
-
             {!createNew ?
                 (
                     <LoadingClass user={user} setCreateNew={setCreateNew} navigation={navigation}></LoadingClass>

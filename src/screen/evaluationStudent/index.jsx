@@ -1,10 +1,7 @@
-import { FontAwesome } from "@expo/vector-icons";
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native"
-import SelectDropdown from "react-native-select-dropdown";
 import { AddButton } from "../../components/addButton"
 import { useTranslation } from 'react-i18next'
-import { Button } from "../../components/button";
 import { DoubleButtonConfirmation } from "../../components/doubleButtonConfirmation";
 import { Input } from "../../components/input";
 import { createEvaluetion, criarNovoParametro, criarParametroDesempenho, getEvaluetion, getParams, getTypesParams, } from "../../controler/evaluetion";
@@ -19,13 +16,14 @@ import {
     styles,
     TextHeader
 } from "./styles";
+import Divider from 'react-native-divider';
 import { t } from "i18next";
 const RenderEvaluation = ({ item, data, selectEvaluation, setSelectEvaluation }) => {
     const { t } = useTranslation();
     function handleTouch() {
         setSelectEvaluation(0)
         setTimeout(() => {
-            if (item?.id!== selectEvaluation)
+            if (item?.id !== selectEvaluation)
                 setSelectEvaluation(item?.id)
         }, 200);
 
@@ -73,7 +71,7 @@ function CreatePerformace({ dataParams, setCreatePerformace }) {
 
     return (
         <View>
-            <TextHeader>{t("Criação de desempenho: ")}</TextHeader>
+            <TextHeader>{t("Criação de desempenho:")}</TextHeader>
 
             <Input
                 onChangeText={setNomeDesempenho}
@@ -91,7 +89,6 @@ function CreatePerformace({ dataParams, setCreatePerformace }) {
         </View>
     )
 }
-
 function FormCreateParams({ selectEvaluation, setSelectEvaluation }) {
     const [createParams, setCreateParams] = useState(false);
     const [typeParams, setTypeParams] = useState([]);
@@ -272,7 +269,12 @@ export function EvaluationStudent({ navigation, route }) {
 
             {!createPerformance ?
                 <View>
-                    <TextHeader>{t("AVALIAÇÃO:")}</TextHeader>
+                    <Divider
+                        borderColor="#000"
+                        color="#000"
+                        orientation="center">
+                        {t("AVALIAÇÃO")}
+                    </Divider>
                     <ContainerEvaluation>
                         <TextHeader>{t("Datas de Desempenho: ")}</TextHeader>
 
