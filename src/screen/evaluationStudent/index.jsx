@@ -3,7 +3,13 @@ import { Text, TouchableOpacity, View } from "react-native";
 import { AddButton } from "../../components/addButton";
 import { DoubleButtonConfirmation } from "../../components/doubleButtonConfirmation";
 import { Input } from "../../components/input";
-import { createEvaluetion, criarNovoParametro, criarParametroDesempenho, getEvaluetion, getParams, getTypesParams, } from "../../controler/evaluetion";
+import {
+    createEvaluetion,
+    criarNovoParametro,
+    criarParametroDesempenho,
+    getEvaluetion, getParams,
+    getTypesParams,
+} from "../../controler/evaluetion";
 import { toastMessage } from "../../util/toastMessage";
 import {
     AlingButtons,
@@ -13,7 +19,8 @@ import {
     EvaluationList,
     EvaluationSelect,
     styles,
-    TextHeader
+    TextHeader,
+    ContainerNewPerformance,
 } from "./styles";
 import Divider from 'react-native-divider';
 import SelectDropdown from "react-native-select-dropdown";
@@ -33,9 +40,16 @@ const RenderEvaluation = ({ item, data, selectEvaluation, setSelectEvaluation })
         }, 200);
     };
     return (
-        <EvaluationSelect select={item?.id === selectEvaluation} onPress={() => handleTouch()}>
-            <Text>{t("evaluationStudent.Fields.Name", { name: item?.nome })}</Text>
-            <Text>{t("evaluationStudent.Fields.Date", { date: item?.criação.slice(0, 10) })}</Text>
+        <EvaluationSelect
+            select={item?.id === selectEvaluation}
+            onPress={() => handleTouch()}
+        >
+            <Text style={{ color: '#fff' }}>
+                {t("evaluationStudent.Fields.Name", { name: item?.nome })}
+            </Text>
+            <Text style={{ color: '#fff', marginTop: 5}} disabled={true}>
+                {t("evaluationStudent.Fields.Date", { date: item?.criação.slice(0, 10) })}
+            </Text>
         </EvaluationSelect>
     );
 };
@@ -71,16 +85,24 @@ function CreatePerformace({ dataParams, setCreatePerformace }) {
 
     return (
         <View>
-            <TextHeader>{t("createEvaluation.Header")}</TextHeader>
-            <Input
-                onChangeText={setNomeDesempenho}
-                value={nomeDesempenho}
-                placeholder={t("createEvaluation.Label.Name")}
-            />
-            <Input
-                value={dataCriacao}
-                editable={false}
-            />
+            <Divider
+                borderColor="#000"
+                color="#000"
+                orientation="center">
+                {t("createEvaluation.Header")}
+            </Divider>
+            <ContainerNewPerformance>
+                <Input
+                    onChangeText={setNomeDesempenho}
+                    value={nomeDesempenho}
+                    placeholder={t("createEvaluation.Label.Name")}
+                />
+                <Input
+                    value={dataCriacao}
+                    editable={false}
+                />
+            </ContainerNewPerformance>
+
             <DoubleButtonConfirmation handleBack={handleBack} handleConfirm={handleSubmit} ></DoubleButtonConfirmation>
         </View>
     );
@@ -267,8 +289,7 @@ export function EvaluationStudent({ navigation, route }) {
                             <TextHeader>{t("evaluationStudent.Description")}</TextHeader>
                             <EvaluationList
                                 data={dataEvaluation}
-                                renderItem={({ item, index }) =>
-
+                                renderItem={({ item }) =>
                                     <RenderEvaluation
                                         item={item}
                                         navigation={navigation}
@@ -279,7 +300,11 @@ export function EvaluationStudent({ navigation, route }) {
                                 keyExtractor={item => `${item?.id}` + '91'}
                             />
                         </ContainerEvaluation>
-                        <AddButton handle={() => { setCreatePerformace(value => !value) }}></AddButton>
+                        <AddButton
+                            handle={
+                                () => { setCreatePerformace(value => !value) }
+                            }
+                        ></AddButton>
                         {
                             selectEvaluation !== 0 &&
                             <FormCreateParams selectEvaluation={selectEvaluation} setSelectEvaluation={setSelectEvaluation}></FormCreateParams>

@@ -7,9 +7,10 @@ export const Container = styled.View`
 `;
 
 export const ContainerButtons = styled.View`
-    width:100%;
+    width:75%;
     justify-content:center;
     align-self: center;
+    margin-top: 10px;
 `;
 
 export const ContentButtons = styled.TouchableOpacity`
@@ -36,7 +37,6 @@ export const DesempenhoHeader = styled.Text`
     margin-bottom:5%;
     padding:5%;
     font-size:20px;
-    
     border-bottom-color:black;
     border-width:1px;
     border-top-width:0;
@@ -46,12 +46,9 @@ export const DesempenhoHeader = styled.Text`
 `;
 
 export const ContainerCardParam = styled.TouchableOpacity`
-    width:150px;
-    height:30px;
-   
-    align-items:center;
-    justify-content:center;
-
-    border-width:1px;
-
+    margin-top: 10px;
+    margin-bottom: 20px;
+    min-width: 120px;   
+    background-color: #fff;
+    padding: 12px;
 `;
