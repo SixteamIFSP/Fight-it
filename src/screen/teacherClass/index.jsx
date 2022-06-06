@@ -17,11 +17,13 @@ import { Input } from "../../components/input";
 import { toastMessage } from "../../util/toastMessage";
 import { AddButton } from "../../components/addButton";
 import { Loading } from "../../components/loading";
+import { useTranslation } from 'react-i18next';
 
 function CardTurma({ data, handleNewScreen }) {
+    const { t } = useTranslation()
     // TODO: COLOCAR AS INFORMAÇÕES DENTRO DE CADA CARD E VALIDAR SE EXISTE OU NÃO INFORMAÇÕES.
     return (
-        <CardView onPress={()=>handleNewScreen('ClassView', {title: `Turma: ${data?.TurmaNome}`, data:{...data, nomeTurma:data?.TurmaNome}})}>
+        <CardView onPress={()=>handleNewScreen('ClassView', {title: t("navigationHeader.ClassDescription", {name:data?.TurmaNome}), data:{...data, nomeTurma:data?.TurmaNome}})}>
             <CardTitle>{data?.TurmaNome}</CardTitle>
         </CardView>
     )
@@ -70,6 +72,7 @@ function LoadingClass({ user, setCreateNew, navigation }) {
 function CreateClass({ user, setCreateNew }) {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
+    const { t } = useTranslation();
 
     function confirm() {
         if (name !== '', description != '') {
@@ -80,7 +83,7 @@ function CreateClass({ user, setCreateNew }) {
             };
             createClass(data);
         } else {
-            toastMessage(false, 'Preencha os campos!')
+            toastMessage(false, t("toast.error.blank"))
         };
 
         cancel();
@@ -92,17 +95,17 @@ function CreateClass({ user, setCreateNew }) {
     return (
         <CardCreateClasss>
             <ContainerTitle>
-                <TextTitle> Criar nova turma</TextTitle>
+                <TextTitle>{t('createClass.Header')}</TextTitle>
             </ContainerTitle>
             <ContainerForm>
                 <Input
                     value={name}
-                    placeholder={'Nome da turma'}
+                    placeholder={t('createClass.Placeholder.Nome')}
                     onChangeText={setName}
                 />
                 <Input
                     value={description}
-                    placeholder={'Descrição da turma'}
+                    placeholder={t('createClass.Placeholder.Description')}
                     onChangeText={setDescription}
                 />
             </ContainerForm>

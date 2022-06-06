@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Text, View, } from "react-native";
 import { AddButton } from "../../components/addButton";
 import { DoubleButtonConfirmation } from "../../components/doubleButtonConfirmation";
@@ -43,6 +44,7 @@ const RenderListAluno = ({ item, navigation, data }) => {
 }
 
 function AdicionarAluno({ turmaId, setback }) {
+    const { t } = useTranslation()
     const [loading, setLoading] = useState(false);
     const [mail, setMail] = useState('');
 
@@ -52,7 +54,7 @@ function AdicionarAluno({ turmaId, setback }) {
     async function handleSubmit() {
 
         if (mail === '' || mail.indexOf("@")===-1) {
-            toastMessage(false, 'Digite um email valido');
+            toastMessage(false, t("toast.error.invalid.email"));
             setback(false);
             return
         }
@@ -73,10 +75,10 @@ function AdicionarAluno({ turmaId, setback }) {
 
     return (
         <AddContainerView>
-            <TextDescription>ADICIONAR ALUNO</TextDescription>
+            <TextDescription>{t('addStudentClass.Header')}</TextDescription>
             <Input
                 value={mail}
-                placeholder={'Digite o e-mail do aluno'}
+                placeholder={t("addStudentClass.Placeholder.mail")}
                 keyboardType="email-address"
                 onChangeText={setMail}
             />
@@ -100,6 +102,7 @@ function AdicionarAluno({ turmaId, setback }) {
 }
 
 export function ClassView({ navigation, route }) {
+    const { t } = useTranslation();
     const { Descricao, ProfessorId, Nome, id } = route.params.data;
     const [dataAlunos, setDataAlunos] = useState([]);
     const [adicionarAluno, setAdicionarAluno] = useState(false);
@@ -125,7 +128,7 @@ export function ClassView({ navigation, route }) {
                 :
                 <ContainerListColumn>
                     <ContainerList>
-                        <Text>Listagem De alunos:</Text>
+                        <Text>{t('classView.Student.Header')}</Text>
                         <ContainerFlat>
 
                         <ContentListagem

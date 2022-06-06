@@ -1,16 +1,32 @@
 {
     "translation": {
         "appName": "Fight It",
+        "validation": {
+            "confirm": "Confirm",
+            "cancel": "Cancel"
+        }, 
+        "form":{
+            "mail": "E-mail",
+            "password": "Password",
+            "name": "Name",
+            "phone": "Phone",
+            "notification":"Receive Notification",
+            "confirmPassword": "Confirm Passoword"
+        },
+        "toast":{
+            "error":{
+                "blank":"Error: Fill in all fields!",
+                "invalid": {
+                    "email":"Enter a valid email"
+                }
+            }
+        },
         "login": {
             "mail": "E-mail",
             "password": "Password",
             "connect": "Connect",
             "forgotPass": "Forgot Password?",
             "CreateAccount": "Create Account"
-        },
-        "validation": {
-            "confirm": "Confirm",
-            "cancel": "Cancel"
         },
         "createAccount": {
             "title": "Create Account",
@@ -46,6 +62,48 @@
         },
         "nav":{
             "config": "Configuration"
+        },
+        "configScreen":{
+            "Header":"My Account",
+            "MessageAlert":"User without permition to use media",
+            "Active":"Active",
+            "Deactivated":"Deactivated",
+            "ChangePass": "CHANGE PASSWORD",
+            "DesactiveAccount": "DEACTIVATE ACCOUNT"
+        },
+        "changePass":{
+            "Header": "Change Password",
+            "OldPass":"Old Password",
+            "NewPass":"New Password",
+            "ConfirmPass":"Password Confirmation"
+        },
+        "exclude":{
+            "Header":"Delete Account",
+            "LabelUser":"User validation",
+            "placeholder":"To delete your account enter your password!"  
+        },
+        "navigationHeader":{
+            "Class":"Class",
+            "ClassDescription":"Class: {{name}}",
+            "StudentDescription":"Student: {{name}}"
+        },
+        "createClass":{
+            "Header":"Create new class",
+            "Placeholder":{
+                "Nome":"Class name",
+                "Description":"Class description"
+            }
+        },
+        "classView":{
+            "Student":{
+                "Header":"Student listing"  
+            }
+        },
+        "addStudentClass":{
+            "Header":"Add Student",
+            "Placeholder":{
+                "mail":"Enter student's email"
+            }
         }
     }
 }
