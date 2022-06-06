@@ -85,7 +85,8 @@
         "navigationHeader":{
             "Class":"Turma",
             "ClassDescription":"Turma: {{name}}",
-            "StudentDescription":"Aluno: {{name}}"
+            "StudentDescription":"Aluno: {{name}}",
+            "Evaluation": "Avaliação: {{name}}"
         },
         "createClass":{
             "Header":"Criar nova turma",
@@ -104,6 +105,41 @@
             "Placeholder":{
                 "mail":"Digite o e-mail do aluno"
             }
+        },
+        "studentView":{
+            "Header":"Desempenho",
+            "ButtonAvaliation":"Avaliar Aluno"
+        },
+        "evaluationStudent":{
+            "Header":"AVALIAÇÃO",
+            "Description":"Datas de Desempenho:",
+            "Fields":{
+                "Name":"Nome: {{name}}",
+                "Date":"Data: {{date}}"
+            }
+        },
+        "createEvaluation":{
+            "Header": "Criação de desempenho",
+            "Label":{
+                "Name":"Nome do desempenho",
+                "Date":"Nome do desempenho"
+
+            }
+        }, 
+        "parameterCriation":{
+            "Header": "Criação de parâmetro",
+            "Label":{
+                "Select": "Selecione parâmetro",
+                "insertName":"Enter the name of the new paramâtro",
+                "SelectType":"Select Parameter type"
+            },
+            "Buttons":{
+                "Submit":"Enviar parâmetro",
+                "Create":"Criar novo parâmetro"
+               
+            }
         }
+
+
     }
 }

@@ -22,9 +22,7 @@ import {
 
 
 const RenderListAluno = ({ item, navigation, data }) => {
-
-
-
+    const { t } = useTranslation()
     function handleTouch() {
         navigation.navigate(
             'StudantView',
@@ -32,7 +30,7 @@ const RenderListAluno = ({ item, navigation, data }) => {
                 ...data,
                 studantId: item.id,
                 nome: item.Nome,
-                title: "Aluno: " + item.Nome
+                title: t("navigationHeader.StudentDescription", {name:item.Nome})
             })
     };
 
@@ -44,7 +42,7 @@ const RenderListAluno = ({ item, navigation, data }) => {
 }
 
 function AdicionarAluno({ turmaId, setback }) {
-    const { t } = useTranslation()
+    const { t } = useTranslation();
     const [loading, setLoading] = useState(false);
     const [mail, setMail] = useState('');
 

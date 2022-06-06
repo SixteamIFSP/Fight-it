@@ -19,8 +19,12 @@ import Divider from 'react-native-divider';
 import SelectDropdown from "react-native-select-dropdown";
 import { Button } from "../../components/button";
 import { FontAwesome } from "@expo/vector-icons";
+import { useTranslation } from "react-i18next";
+import { t } from "i18next";
 
 const RenderEvaluation = ({item, data, selectEvaluation, setSelectEvaluation})=>{
+    const { t } = useTranslation();
+
     function handleTouch(){
         setSelectEvaluation(0)
         setTimeout(() => {
@@ -30,9 +34,8 @@ const RenderEvaluation = ({item, data, selectEvaluation, setSelectEvaluation})=>
     }
     return (
         <EvaluationSelect select={item?.id === selectEvaluation} onPress={() => handleTouch()}>
-            <Text>{'id: ' + item?.id}</Text>
-            <Text>{'Nome: ' + item?.nome}</Text>
-            <Text>{'data: ' + item?.criação.slice(0, 10)}</Text>
+            <Text>{t("evaluationStudent.Fields.Name", {name:item?.nome})}</Text>
+            <Text>{t("evaluationStudent.Fields.Date", {date:item?.criação.slice(0, 10)})}</Text>
         </EvaluationSelect>
     )
 }
@@ -69,12 +72,12 @@ function CreatePerformace({ dataParams, setCreatePerformace }) {
 
     return (
         <View>
-            <TextHeader>{"Criação de desempenho: "}</TextHeader>
+            <TextHeader>{t("createEvaluation.Header")}</TextHeader>
 
             <Input
                 onChangeText={setNomeDesempenho}
                 value={nomeDesempenho}
-                placeholder={"Nome do desempenho"}
+                placeholder={t("createEvaluation.Label.Name")}
             />
             <Input
                 value={dataCriacao}
@@ -94,6 +97,7 @@ function FormCreateParams({ selectEvaluation, setSelectEvaluation }) {
     const [paramSelected, setParamSelected] = useState('');
     const [listParams, setListParams] = useState([{NomeParametro:""}]);
     const [valor, setValor] = useState(0)
+    const { t } = useTranslation();
 
     useEffect(() => {
         getTypesParams(setTypeParams);
@@ -159,7 +163,7 @@ function FormCreateParams({ selectEvaluation, setSelectEvaluation }) {
 
     return (
         <View>
-            <TextHeader>{"Criação de parâmetro:"}</TextHeader>
+            <TextHeader>{t("parameterCriation.Header")}</TextHeader>
             <AlingDropDown>
 
                 {!createParams ? (
@@ -167,7 +171,7 @@ function FormCreateParams({ selectEvaluation, setSelectEvaluation }) {
                         <SelectDropdown
                             buttonStyle={styles.dropdown2BtnStyle}
                             buttonTextStyle={styles.dropdown2BtnTxtStyle}
-                            defaultButtonText={'Selecione parâmetro'}
+                            defaultButtonText={t("parameterCriation.Label.Select")}
                             data={listParams.map((value) => value?.NomeParametro)}
                             onSelect={(selectedItem, index) => {
                                 setParamSelected(selectedItem)
@@ -195,12 +199,12 @@ function FormCreateParams({ selectEvaluation, setSelectEvaluation }) {
                         <Input
                             onChangeText={(text) => setTextNewParam(text)}
                             value={textNewParam}
-                            placeholder={`Digite o nome do novo paramâtro`}
+                            placeholder={t("parameterCriation.Label.insertName")}
                         />
                         <SelectDropdown
                             buttonStyle={styles.dropdown2BtnStyle}
                             buttonTextStyle={styles.dropdown2BtnTxtStyle}
-                            defaultButtonText={'Selecione tipo de Parametro'}
+                            defaultButtonText={t("parameterCriation.Label.SelectType")}
                             data={typeParams.map((value) => value?.Tipo)}
                             onSelect={(selectedItem, index) => {
                                 setParamSelected(selectedItem)
@@ -224,13 +228,13 @@ function FormCreateParams({ selectEvaluation, setSelectEvaluation }) {
             </AlingDropDown>
             <AlingButtons>
 
-                {!createParams && <Button handle={() => handleSubmit()} text={"Enviar Avaliação"} />}
+                {!createParams && <Button handle={() => handleSubmit()} text={t("parameterCriation.Buttons.Submit")} />}
 
 
-                <Button handle={() => handleCreateParam()} text={"Criar Novo parâmetro"} />
+                <Button handle={() => handleCreateParam()} text={t("parameterCriation.Buttons.Create")} />
 
                 {createParams && 
-                    <Button handle={() => setCreateParams(false)} text={"Cancelar"} />
+                    <Button handle={() => setCreateParams(false)} text={t("validation.Cancel")} />
                 }
 
             </AlingButtons>
@@ -243,8 +247,8 @@ export function EvaluationStudent({ navigation, route }) {
     const [createPerformance, setCreatePerformace] = useState(false);
     const [selectEvaluation, setSelectEvaluation] = useState(0);
     const [dataEvaluation, setDataEvaluation] = useState([]);
-
     const { id, studantId, ProfessorId } = route?.params;
+    const { t } = useTranslation();
 
     useEffect(() => {
         if (!createPerformance) {
@@ -271,10 +275,10 @@ export function EvaluationStudent({ navigation, route }) {
                         borderColor="#000"
                         color="#000"
                         orientation="center">
-                        AVALIAÇÃO
+                        {t('evaluationStudent.Header')}
                     </Divider>
                     <ContainerEvaluation>
-                        <TextHeader>{"Datas de Desempenho: "}</TextHeader>
+                        <TextHeader>{t("evaluationStudent.Description")}</TextHeader>
 
                         <EvaluationList
                             data={dataEvaluation}
@@ -300,7 +304,6 @@ export function EvaluationStudent({ navigation, route }) {
                 :
                 <CreatePerformace dataParams={{ studantId: studantId, professorId: ProfessorId, turma: id }} setCreatePerformace={setCreatePerformace}></CreatePerformace>
             }
-
         </Container>
     )
 }

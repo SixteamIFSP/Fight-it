@@ -13,6 +13,7 @@ import {
     DesempenhoHeader,
     TextButtons
 } from "./styles";
+import { useTranslation } from "react-i18next";
 
 function CardParamStutant({item, handleGraphyc}){
 
@@ -24,6 +25,7 @@ function CardParamStutant({item, handleGraphyc}){
 }
 
 export function StudantView({navigation, route}){
+    const { t } = useTranslation();
     const [ loading, setLoading ] = useState(false);
     const [ paramsAluno, setParamsAluno ] = useState([]);
     const [ loadingGraphyc, setLoadingGraphyc ] = useState(false);
@@ -38,7 +40,7 @@ export function StudantView({navigation, route}){
     // }
     function handleEvaluation(){
 
-        navigation.navigate('EvaluationStudent', { ...route?.params, title: 'Avaliação: ' + route?.params.nome })
+        navigation.navigate('EvaluationStudent', { ...route?.params, title: t("navigationHeader.Evaluation", {name:route?.params.nome})})
     }
     
     async function handleLoadingParams(){
@@ -74,7 +76,7 @@ export function StudantView({navigation, route}){
                 </ContentButtons> */}
 
                 <ContentButtons onPress={() => handleEvaluation()}>
-                    <TextButtons>Avaliar Aluno</TextButtons>
+                    <TextButtons>{t("studentView.ButtonAvaliation")}</TextButtons>
                 </ContentButtons>
             </ContainerButtons>
 
@@ -84,7 +86,7 @@ export function StudantView({navigation, route}){
                     color="#000"
                     orientation="center"
                 >
-                    <Text>DESEMPENHO</Text>
+                    <Text>{t("studentView.Header")}</Text>
                 </Divider>
               
 
