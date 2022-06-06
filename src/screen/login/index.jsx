@@ -15,18 +15,22 @@ import {
   SafeAreaView,
   TouchableOpacity
 } from "react-native";
+import { Loading } from "../../components/loading";
 
 export function Login({ navigation }) {
-  const [mail, setMail] = useState();
-  const [password, setPassword] = useState();
-  const [typeTeacher, setTypeTeacher] = useState();
+  const [loading, setLoading] = useState(false);
+  const [mail, setMail] = useState('');
+  const [password, setPassword] = useState('');
+  const [typeTeacher, setTypeTeacher] = useState(true);
   const { singIn } = useUser();
 
   const { t } = useTranslation(); /// IMPORT DA TRADUÇÂO 
 
   
-  function onHandleLogin() {
-    singIn({ mail: mail, pass: password }, typeTeacher);
+  async function onHandleLogin() {
+    setLoading(true);
+    await singIn({ mail: mail, pass: password }, typeTeacher);
+    setLoading(false);
   }
 
   function onHandleForgotPass() {
@@ -44,14 +48,14 @@ export function Login({ navigation }) {
         <Text style={styles.TitleLogin}>Fight It</Text>
         <View style={styles.switchButtons}>
           <SwitchButton
-            onPress={() => setTypeTeacher(false)}
-            text={t('createAccount.student')}
-            type={!typeTeacher}
-          ></SwitchButton>
-          <SwitchButton
             onPress={() => setTypeTeacher(true)}
             text={t('createAccount.teacher')}
             type={typeTeacher}
+          ></SwitchButton>
+          <SwitchButton
+            onPress={() => setTypeTeacher(false)}
+            text={t('createAccount.student')}
+            type={!typeTeacher}
           ></SwitchButton>
         </View>
 
@@ -72,7 +76,13 @@ export function Login({ navigation }) {
           style={styles.button}
           onPress={onHandleLogin}
         >
-          <Text> {t('login.connect')}</Text>
+          { 
+            !loading ? 
+              <Text> {t('login.connect')}</Text>
+              :
+              <Loading loading={loading} size={18}/>
+          }
+          
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.textTouchebles}

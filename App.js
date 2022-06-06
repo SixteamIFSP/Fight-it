@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 import { Router } from './src/routes';
 import Toast, { BaseToast, ErrorToast } from 'react-native-toast-message';
 import { UserProvider } from './src/hooks/user';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const toastConfig = {
   success: (props) => (
@@ -39,10 +40,12 @@ export default function App() {
   return (
     <UserProvider>
       <NavigationContainer >
-        <Router />
-        <Toast
-          config={toastConfig}
-        />
+        <SafeAreaView style={styles.container}>
+          <Router />
+          <Toast
+            config={toastConfig}
+          />
+        </SafeAreaView>
       </NavigationContainer>
     </UserProvider>
   );

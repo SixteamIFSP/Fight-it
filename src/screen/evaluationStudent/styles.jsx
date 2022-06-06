@@ -14,7 +14,7 @@ export const styles = StyleSheet.create(
          color: '#FFF',
          textAlign: 'center',
          fontWeight: 'bold',
-      },
+      }
    }
 );
 
@@ -32,7 +32,7 @@ export const ContainerEvaluation = styled.View`
     height:60%;
     border-width:1px;
     border-color:black;
-    margin-top: 16px;
+    margin-bottom: 20px;
  `;
 
 export const EvaluationList = styled.FlatList`
@@ -46,8 +46,8 @@ export const EvaluationSelect = styled.TouchableOpacity`
     margin-top:1px;
     ${(props) =>
       props?.select && `
-                border-color:black;
-                border-width:1px;`
+         border-color:black;
+         border-width:1px;`
    }
  `;
 

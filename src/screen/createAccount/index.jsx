@@ -1,18 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Text, TouchableOpacity, View } from 'react-native'
+import { Text, View } from 'react-native'
 import { ButtonLinguage } from '../../components/buttonChangeLinguage';
 import { DoubleButtonConfirmation } from '../../components/doubleButtonConfirmation';
 import { Input } from '../../components/input';
 import { createAccount } from '../../controler/account';
 import { styles as stylesGlobal } from '../../global/styles';
 import { styles } from './styles';
-import { Toast } from 'react-native-toast-message/lib/src/Toast';
 import { SwitchButton } from '../../components/switchbutton';
-
+import { Loading } from '../../components/loading';
+import { toastMessage } from '../../util/toastMessage'; 
 
 export function CreateAccount({ navigation, routes }) {
     const { t } = useTranslation()
+    const [loading, setLoading] =useState(false);
 
     const [name, setName] = useState('');
     const [mail, setMail] = useState('');
@@ -27,7 +28,9 @@ export function CreateAccount({ navigation, routes }) {
         return true;
     };
 
-    function handleConfirm() {
+    async function handleConfirm() {
+        if (loading) return
+
         if (validation()) {
             const data = {
                 nome: name,
@@ -36,13 +39,13 @@ export function CreateAccount({ navigation, routes }) {
                 senha: pass,
                 receberNot: 1,
             };
-            createAccount(data, typeTeacher);
+            setLoading(true);
+            await createAccount(data, typeTeacher);
+            setLoading(false);
             navigation.navigate('Login');
+            
         } else {
-            Toast.show({
-                type: "error",
-                text2: "Digite os campos corretamente!",
-            });
+            toastMessage(false, "Digite os campos corretamente!")
         }
     }
     function handleBack() {
@@ -107,10 +110,18 @@ export function CreateAccount({ navigation, routes }) {
                 secureTextEntry={true}
             />
             <View style={styles.confirmationButton}>
-                <DoubleButtonConfirmation
-                    handleConfirm={handleConfirm}
-                    handleBack={handleBack} />
+
+                {
+                !loading ? 
+                    <DoubleButtonConfirmation
+                        handleConfirm={handleConfirm}
+                        handleBack={handleBack} />
+                :
+                    <Loading loading={loading} size={18}/>
+                }
+                    
             </View>
+
         </View>
     )
 }

@@ -6,17 +6,20 @@ import { toastMessage } from '../util/toastMessage';
 
 export const UserContext = createContext();
 
+data = {
+    nome: 'rian',
+    email: 'riansm100@gmail.com',
+    userID: '5',
+    tipoUsuario: 1,
+    pfp: "f9d20e32d01fe870da44cc00067b6dbf",
+}
+
 function UserProvider({ children }) {
     const [user, setUser] = useState(null);
 
     useEffect(()=>{
 
-        setUser({
-            nome        : 'teste',
-            email       : 'teste',
-            userID      : 5,
-            tipoUsuario : 1,
-        })
+        setUser(data); 
     },[])
 
     async function modifyUser(value){
@@ -47,6 +50,8 @@ function UserProvider({ children }) {
                 email: response.data.email,
                 userID: response.data.userID,
                 tipoUsuario: response.data.tipoUsuario,
+                pfp: response.data.pfp,
+
             });
             toastMessage(true, "Login efetuado com sucesso");
         

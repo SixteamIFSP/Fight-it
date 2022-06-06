@@ -1,16 +1,32 @@
 {
     "translation": {
         "appName": "Fight It",
+        "validation": {
+            "confirm": "Confirmar",
+            "cancel": "Cancelar"
+        }, 
+        "form":{
+            "mail": "E-mail",
+            "password": "Senha",
+            "name": "Nome",
+            "phone": "Telefone",
+            "notification":"Receber Notificação",
+            "confirmPassword": "Confirmar Senha"
+        },
+        "toast":{
+            "error":{
+                "blank":"Erro: Preencha todos os campos!",
+                "invalid": {
+                    "email":"Digite um e-mail valido"
+                }
+            }
+        },
         "login": {
             "mail": "E-mail",
             "password": "Senha",
             "connect": "Conectar",
             "forgotPass": "Esqueci a senha",
             "CreateAccount": "Criar Conta"
-        },
-        "validation": {
-            "confirm": "Confirmar",
-            "cancel": "Cancelar"
         },
         "createAccount": {
             "title": "Criar Conta",
@@ -30,8 +46,7 @@
                 "title": "Comprovante de aptidão",
                 "description": "Envie as informações necessarias para comprovar a capacitação:",
                 "form-fight": "Arte Marcial"
-            }
-            
+            }     
         },
         "homePage":{
             "student":{
@@ -44,6 +59,87 @@
         "header":{
             "teacher":"Professor",
             "student":"Aluno"
+        },
+        "nav":{
+            "config": "Configuração"
+        },
+        "configScreen":{
+            "Header":"Minha Conta",
+            "MessageAlert":"Usuário sem permição para utilizar mídias",
+            "Active":"Ativo",
+            "Deactivated":"Desativado",
+            "ChangePass": "MUDAR SENHA",
+            "DesactiveAccount": "DESATIVAR CONTA"       
+        },
+        "changePass":{
+            "Header": "Trocar Senha",
+            "OldPass":"Senha Antiga",
+            "NewPass":"Nova Senha",
+            "ConfirmPass":"Confirmação de Senha"
+        },
+        "exclude":{
+            "Header":"Excluir Conta",
+            "LabelUser":"Validação de usuário",
+            "placeholder":"Para excluir conta digite sua senha!"
+        },
+        "navigationHeader":{
+            "Class":"Turma",
+            "ClassDescription":"Turma: {{name}}",
+            "StudentDescription":"Aluno: {{name}}",
+            "Evaluation": "Avaliação: {{name}}"
+        },
+        "createClass":{
+            "Header":"Criar nova turma",
+            "Placeholder":{
+                "Nome":"Nome da turma",
+                "Description":"Descrição da turma"
+            }
+        },
+        "classView":{
+            "Student":{
+                "Header":"Listagem de alunos"  
+            }
+        },
+        "addStudentClass":{
+            "Header":"Adicionar Aluno",
+            "Placeholder":{
+                "mail":"Digite o e-mail do aluno"
+            }
+        },
+        "studentView":{
+            "Header":"Desempenho",
+            "ButtonAvaliation":"Avaliar Aluno"
+        },
+        "evaluationStudent":{
+            "Header":"AVALIAÇÃO",
+            "Description":"Datas de Desempenho:",
+            "Fields":{
+                "Name":"Nome: {{name}}",
+                "Date":"Data: {{date}}"
+            }
+        },
+        "createEvaluation":{
+            "Header": "Criação de desempenho",
+            "Label":{
+                "Name":"Nome do desempenho",
+                "Date":"Nome do desempenho"
+
+            }
+        }, 
+        "parameterCriation":{
+            "Header": "Criação de parâmetro",
+            "Label":{
+                "Select": "Selecione parâmetro",
+                "insertName":"Enter the name of the new paramâtro",
+                "SelectType":"Select Parameter type"
+            },
+            "Buttons":{
+                "Submit":"Enviar parâmetro",
+                "Create":"Criar novo parâmetro"
+               
+            }
         }
+
+
     }
 }

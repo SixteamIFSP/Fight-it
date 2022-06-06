@@ -5,6 +5,12 @@ export const Container = styled.View`
     width:100%;
     height: 100%;
 `;
+
+export const AddContainerView = styled(Container)`
+     justify-content: center;
+     align-items:center;
+`;
+
 export const ContainerListColumn = styled.View`
     width:90%;
     height:50%;
@@ -27,7 +33,7 @@ export const ContentListagem = styled.FlatList`
 `;
 export const ContainerFlat = styled.View`
     max-height:100%;
-    padding: 10px
+    padding: 10px;
 `;
 
 export const AddContainer = styled.View`
@@ -38,6 +44,7 @@ export const AddContainer = styled.View`
 
 export const TextDescription = styled.Text`
     width:100%;
+    text-align:center;
     height:10%;
 `;
 

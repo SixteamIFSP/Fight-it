@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native"
-import { AddButton } from "../../components/addButton"
+import { Text, TouchableOpacity, View } from "react-native";
+import { AddButton } from "../../components/addButton";
 import { DoubleButtonConfirmation } from "../../components/doubleButtonConfirmation";
 import { Input } from "../../components/input";
 import { createEvaluetion, criarNovoParametro, criarParametroDesempenho, getEvaluetion, getParams, getTypesParams, } from "../../controler/evaluetion";
@@ -16,9 +16,15 @@ import {
     TextHeader
 } from "./styles";
 import Divider from 'react-native-divider';
-
+import SelectDropdown from "react-native-select-dropdown";
+import { Button } from "../../components/button";
+import { FontAwesome } from "@expo/vector-icons";
+import { useTranslation } from "react-i18next";
+import { t } from "i18next";
 
 const RenderEvaluation = ({ item, data, selectEvaluation, setSelectEvaluation }) => {
+    const { t } = useTranslation();
+
     function handleTouch() {
         setSelectEvaluation(0)
         setTimeout(() => {
@@ -27,13 +33,9 @@ const RenderEvaluation = ({ item, data, selectEvaluation, setSelectEvaluation })
         }, 200);
     };
     return (
-        <EvaluationSelect
-            select={item?.id === selectEvaluation}
-            onPress={() => handleTouch()}
-        >
-            <Text>{'id: ' + item?.id}</Text>
-            <Text>{'Nome: ' + item?.nome}</Text>
-            <Text>{'data: ' + item?.criação.slice(0, 10)}</Text>
+        <EvaluationSelect select={item?.id === selectEvaluation} onPress={() => handleTouch()}>
+            <Text>{t("evaluationStudent.Fields.Name", { name: item?.nome })}</Text>
+            <Text>{t("evaluationStudent.Fields.Date", { date: item?.criação.slice(0, 10) })}</Text>
         </EvaluationSelect>
     );
 };
@@ -69,16 +71,15 @@ function CreatePerformace({ dataParams, setCreatePerformace }) {
 
     return (
         <View>
-            <TextHeader>{"Criação de desempenho: "}</TextHeader>
+            <TextHeader>{t("createEvaluation.Header")}</TextHeader>
             <Input
                 onChangeText={setNomeDesempenho}
                 value={nomeDesempenho}
-                placeholder={"Nome do desempenho"}
+                placeholder={t("createEvaluation.Label.Name")}
             />
             <Input
                 value={dataCriacao}
                 editable={false}
-
             />
             <DoubleButtonConfirmation handleBack={handleBack} handleConfirm={handleSubmit} ></DoubleButtonConfirmation>
         </View>
@@ -89,14 +90,15 @@ function FormCreateParams({ selectEvaluation, setSelectEvaluation }) {
     const [typeParams, setTypeParams] = useState([]);
     const [textNewParam, setTextNewParam] = useState('');
     const [paramSelected, setParamSelected] = useState('');
-    const [listParams, setListParams] = useState([]);
+    const [listParams, setListParams] = useState([{ NomeParametro: "" }]);
     const [valor, setValor] = useState(0)
+    const { t } = useTranslation();
 
     useEffect(() => {
         getTypesParams(setTypeParams);
         getParams(setListParams);
 
-    }, [createParams])
+    }, [createParams]);
 
     function handleSubmit() {
         let param = listParams.filter(
@@ -110,8 +112,8 @@ function FormCreateParams({ selectEvaluation, setSelectEvaluation }) {
                 valor: valor,
             };
             criarParametroDesempenho(data);
-            setSelectEvaluation();
-        };
+            setSelectEvaluation(0);
+        }
     };
 
     function onChanged(text) {
@@ -124,11 +126,11 @@ function FormCreateParams({ selectEvaluation, setSelectEvaluation }) {
                 newText = newText + text[i];
                 if (newText[0] === '0' && newText.length === 2) {
                     newText = newText[1]
-                }
+                };
             }
             else {
                 // your call back function
-                alert("please enter numbers only");
+                // alert("please enter numbers only");
             };
         };
         if (text < 11)
@@ -153,78 +155,83 @@ function FormCreateParams({ selectEvaluation, setSelectEvaluation }) {
 
     return (
         <View>
-            <TextHeader>{"Criação de parâmetro:"}</TextHeader>
+            <TextHeader>{t("parameterCriation.Header")}</TextHeader>
             <AlingDropDown>
+
                 {
-                    !createParams ? (
-                        <>
-                            <SelectDropdown
-                                buttonStyle={styles.dropdown2BtnStyle}
-                                buttonTextStyle={styles.dropdown2BtnTxtStyle}
-                                defaultButtonText={'Selecione parâmetro'}
-                                data={listParams.map((value) => value?.NomeParametro)}
-                                onSelect={(selectedItem, index) => {
-                                    setParamSelected(selectedItem)
-                                }}
-                                buttonTextAfterSelection={(selectedItem, index) => {
+                    !createParams ?
+                        (
+                            <>
+                                <SelectDropdown
+                                    buttonStyle={styles.dropdown2BtnStyle}
+                                    buttonTextStyle={styles.dropdown2BtnTxtStyle}
+                                    defaultButtonText={t("parameterCriation.Label.Select")}
+                                    data={listParams.map((value) => value?.NomeParametro)}
+                                    onSelect={(selectedItem, index) => {
+                                        setParamSelected(selectedItem)
+                                    }}
+                                    buttonTextAfterSelection={(selectedItem, index) => {
+                                        return selectedItem
+                                    }}
+                                    renderDropdownIcon={isOpened => {
+                                        return <FontAwesome name={isOpened ? 'chevron-up' : 'chevron-down'} color={'#FFF'} size={18} />;
+                                    }}
+                                    rowTextForSelection={(item, index) => {
+                                        return item
+                                    }}
+                                />
 
-                                    return selectedItem
-                                }}
-                                renderDropdownIcon={isOpened => {
-                                    return <FontAwesome name={isOpened ? 'chevron-up' : 'chevron-down'} color={'#FFF'} size={18} />;
-                                }}
-                                rowTextForSelection={(item, index) => {
-                                    return item
-                                }}
-                            />
-                            <Input
-                                keyboardType='numeric'
-                                onChangeText={(text) => onChanged(text)}
-                                value={valor + ""}
-                                maxLength={2}  //setting limit of input
-                            />
-                        </>
-                    ) : (
-                        <>
-                            <Input
-                                onChangeText={(text) => setTextNewParam(text)}
-                                value={textNewParam}
-                                placeholder={`Digite o nome do novo paramâtro`}
-                            />
-                            <SelectDropdown
-                                buttonStyle={styles.dropdown2BtnStyle}
-                                buttonTextStyle={styles.dropdown2BtnTxtStyle}
-                                defaultButtonText={'Selecione tipo de Parametro'}
-                                data={typeParams.map((value) => value?.Tipo)}
-                                onSelect={(selectedItem, index) => {
-                                    setParamSelected(selectedItem)
-                                }}
-                                buttonTextAfterSelection={(selectedItem, index) => {
+                                <Input
+                                    keyboardType='numeric'
+                                    onChangeText={(text) => onChanged(text)}
+                                    value={valor + ""}
+                                    maxLength={2}  //setting limit of input
+                                />
+                            </>
+                        )
+                        :
+                        (
+                            <>
+                                <Input
+                                    onChangeText={(text) => setTextNewParam(text)}
+                                    value={textNewParam}
+                                    placeholder={t("parameterCriation.Label.insertName")}
+                                />
+                                <SelectDropdown
+                                    buttonStyle={styles.dropdown2BtnStyle}
+                                    buttonTextStyle={styles.dropdown2BtnTxtStyle}
+                                    defaultButtonText={t("parameterCriation.Label.SelectType")}
+                                    data={typeParams.map((value) => value?.Tipo)}
+                                    onSelect={(selectedItem, index) => {
+                                        setParamSelected(selectedItem)
+                                    }}
+                                    buttonTextAfterSelection={(selectedItem, index) => {
 
-                                    return selectedItem
-                                }}
-                                renderDropdownIcon={isOpened => {
-                                    return <FontAwesome name={isOpened ? 'chevron-up' : 'chevron-down'} color={'#FFF'} size={18} />;
-                                }}
-                                rowTextForSelection={(item, index) => {
-                                    return item
-                                }}
-                            />
-                        </>
-                    )
+                                        return selectedItem
+                                    }}
+                                    renderDropdownIcon={isOpened => {
+                                        return <FontAwesome name={isOpened ? 'chevron-up' : 'chevron-down'} color={'#FFF'} size={18} />;
+                                    }}
+                                    rowTextForSelection={(item, index) => {
+                                        return item
+                                    }}
+                                />
+                            </>
+                        )
                 }
             </AlingDropDown>
             <AlingButtons>
                 {
-                    !createParams &&
-                    <Button
+                    !createParams
+                    && <Button
                         handle={() => handleSubmit()}
-                        text={"Enviar Avaliação"}
-                    />
+                        text={t("parameterCriation.Buttons.Submit")} />
                 }
-                <Button handle={() => handleCreateParam()} text={"Criar Novo parâmetro"} />
+                <Button handle={() => handleCreateParam()} text={t("parameterCriation.Buttons.Create")} />
+                {createParams &&
+                    <Button handle={() => setCreateParams(false)} text={t("validation.Cancel")} />
+                }
             </AlingButtons>
-
         </View>
     );
 };
@@ -233,19 +240,16 @@ export function EvaluationStudent({ navigation, route }) {
     const [createPerformance, setCreatePerformace] = useState(false);
     const [selectEvaluation, setSelectEvaluation] = useState(0);
     const [dataEvaluation, setDataEvaluation] = useState([]);
-
     const { id, studantId, ProfessorId } = route?.params;
+    const { t } = useTranslation();
 
     useEffect(() => {
         if (!createPerformance) {
             const data = { professor: ProfessorId, aluno: studantId }
-
             getEvaluetion(data, setDataEvaluation);
         };
     }, [createPerformance])
     useEffect(() => {
-
-
     }, [dataEvaluation]);
 
     return (
@@ -257,13 +261,14 @@ export function EvaluationStudent({ navigation, route }) {
                             borderColor="#000"
                             color="#000"
                             orientation="center">
-                            AVALIAÇÃO
+                            {t('evaluationStudent.Header')}
                         </Divider>
                         <ContainerEvaluation>
-                            <TextHeader>{"Datas de Desempenho: "}</TextHeader>
+                            <TextHeader>{t("evaluationStudent.Description")}</TextHeader>
                             <EvaluationList
                                 data={dataEvaluation}
-                                renderItem={({ item }) =>
+                                renderItem={({ item, index }) =>
+
                                     <RenderEvaluation
                                         item={item}
                                         navigation={navigation}

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Text, View, } from "react-native";
 import { AddButton } from "../../components/addButton";
 import { DoubleButtonConfirmation } from "../../components/doubleButtonConfirmation";
 import { Input } from "../../components/input";
+import { Loading } from "../../components/loading";
 import { adicionarAluno, getAlunosTurma } from "../../controler/class";
 import { toastMessage } from "../../util/toastMessage";
 import {
@@ -15,11 +17,12 @@ import {
     TextDescription,
     TextTouchable,
     ClassText,
+    AddContainerView,
 } from "./styles";
 
 
 const RenderListAluno = ({ item, navigation, data }) => {
-
+    const { t } = useTranslation()
     function handleTouch() {
         navigation.navigate(
             'StudantView',
@@ -27,7 +30,7 @@ const RenderListAluno = ({ item, navigation, data }) => {
                 ...data,
                 studantId: item.id,
                 nome: item.Nome,
-                title: "Aluno: " + item.Nome
+                title: t("navigationHeader.StudentDescription", {name:item.Nome})
             })
     };
 
@@ -39,49 +42,65 @@ const RenderListAluno = ({ item, navigation, data }) => {
 }
 
 function AdicionarAluno({ turmaId, setback }) {
+    const { t } = useTranslation();
+    const [loading, setLoading] = useState(false);
     const [mail, setMail] = useState('');
 
     function handleBack() {
         setback(false)
     }
-    function handleSubmit() {
+    async function handleSubmit() {
 
-        if (mail === '') {
-            toastMessage(false, 'Digite um email');
+        if (mail === '' || mail.indexOf("@")===-1) {
+            toastMessage(false, t("toast.error.invalid.email"));
             setback(false);
             return
         }
+        setLoading(true)
 
         const data = {
             email: mail,
             turmaId: turmaId,
         }
 
-   
-        adicionarAluno(data);
+        await adicionarAluno(data);
+
+        setLoading(false)
         setback(false);
 
     }
 
 
     return (
-        <View>
-            <TextDescription>Adicionar Aluno</TextDescription>
+        <AddContainerView>
+            <TextDescription>{t('addStudentClass.Header')}</TextDescription>
             <Input
                 value={mail}
-                placeholder={'Digite o e-mail do aluno'}
+                placeholder={t("addStudentClass.Placeholder.mail")}
+                keyboardType="email-address"
                 onChangeText={setMail}
             />
-            <DoubleButtonConfirmation
-                handleBack={handleBack}
-                handleConfirm={handleSubmit
-                }></DoubleButtonConfirmation>
-        </View>
+            {
+                !loading ?
+                    <DoubleButtonConfirmation
+                        handleBack={handleBack}
+                        handleConfirm={handleSubmit
+                        }
+
+                    />
+                
+                 :
+                 <Loading  loading={loading} size={18}/>
+            }
+
+               
+        </AddContainerView>
     )
 
 }
 
 export function ClassView({ navigation, route }) {
+    const { t } = useTranslation();
     const { Descricao, ProfessorId, Nome, id } = route.params.data;
     const [dataAlunos, setDataAlunos] = useState([]);
     const [adicionarAluno, setAdicionarAluno] = useState(false);
@@ -104,50 +123,46 @@ export function ClassView({ navigation, route }) {
         <Container>
             {
                 adicionarAluno ? <AdicionarAluno setback={setAdicionarAluno} turmaId={id}></AdicionarAluno>
-                    :
-                    <ContainerListColumn>
-                        <ContainerList>
-                            <AddContainer>
-                                <AddButton handle={() => HandleChangeAddAluno()} />
-                            </AddContainer>
-                            <ClassText>Alunos nessa classe:</ClassText>
-                            <ContainerFlat>
-                                <ContentListagem
-                                    data={dataAlunos}
-                                    renderItem={
-                                        ({ item }) => <RenderListAluno
-                                            item={item}
-                                            navigation={navigation}
-                                            data={
-                                                { nomeTurma: Nome, id: id, ProfessorId: ProfessorId }
-                                            }
-                                        ></RenderListAluno>
-                                    }
-                                    keyExtractor={item => `${item.Nome}` + '91'}>
-                                </ContentListagem>
-                            </ContainerFlat>
+                :
+                <ContainerListColumn>
+                    <ContainerList>
+                        <Text>{t('classView.Student.Header')}</Text>
+                        <ContainerFlat>
 
-                        </ContainerList>
-                        <ContainerList>
-                            <AddContainer>
-                                <AddButton handle={() => null} />
-                            </AddContainer>
-                            <ClassText>Aulas:</ClassText>
-                            <ContainerFlat>
-                                <ContentListagem
-                                    data={dataAlunos}
-                                    renderItem={
-                                        ({ item }) => <RenderListAluno item={item}></RenderListAluno>
-                                    }
-                                    keyExtractor={item => item.Nome + '91'}>
-                                </ContentListagem>
-                            </ContainerFlat>
+                        <ContentListagem
+                            data={dataAlunos}
+                            renderItem={({item})=> <RenderListAluno item={item} navigation={navigation} data={{nomeTurma:Nome, id:id, ProfessorId:ProfessorId} }></RenderListAluno>}
+                            keyExtractor={item => `${item.Nome}`+'91'}>
 
+                        </ContentListagem> 
+                        </ContainerFlat>
+                        
+                        <AddContainer>
+                            <AddButton handle={()=>HandleChangeAddAluno()}/>
+                        </AddContainer>
+                        
+                    </ContainerList>
+                    {/* <ContainerList>
+                    <Text>Listagem De aulas:</Text>
+                        <ContainerFlat>
 
-                        </ContainerList>
+                        <ContentListagem
+                            data={dataAlunos}
+                            renderItem={({item})=> <RenderListAluno item={item}></RenderListAluno>}
+                            keyExtractor={item => item.Nome+'91'}>
 
+                        </ContentListagem> 
+                        </ContainerFlat>
+                        
+                        <AddContainer>
 
-                    </ContainerListColumn>
+                            <AddButton handle={()=>null}/>
+                        </AddContainer>
+                        
+                    </ContainerList> */}
+
+                    
+                </ContainerListColumn>
             }
 
 

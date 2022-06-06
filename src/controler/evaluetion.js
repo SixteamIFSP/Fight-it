@@ -15,7 +15,6 @@ export async function getEvaluetion(data, setValue ){
     } catch (error) {
   
         toastMessage(false, 'Erro de conexão!');
-
     }
 }
 
@@ -25,14 +24,14 @@ export async function createEvaluetion(data){ //data => nome:string, date:(strin
            
             
             if (response.data.status){
-                toastMessage(true, response?.data.mensagem)
+                toastMessage(true, response?.data.mensagem);
             } else{
-                toastMessage(false, response?.data.mensagem)   
+                toastMessage(false, response?.data.mensagem);
             }
            
         } catch (error) {
         
-            toastMessage(false, 'Erro de conexão!') 
+            toastMessage(false, 'Erro de conexão!');
         }
 }
 
@@ -82,7 +81,7 @@ export async function criarParametroDesempenho(data){ ///data=> { "desempenho": 
         }
        
     } catch (error) {
-        console.log(error.message)
+        
         toastMessage(false, 'Erro de conexão!') 
     }
 } 
