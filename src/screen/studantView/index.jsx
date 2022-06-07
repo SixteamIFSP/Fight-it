@@ -3,8 +3,8 @@ import { Dimensions, FlatList, Text, View } from "react-native";
 import { Loading } from "../../components/loading";
 import { getDesempenhoPorParametro, getParamsAluno } from "../../controler/student";
 import { LineChart } from "react-native-chart-kit";
-import  Divider from "react-native-divider"
-import { 
+import Divider from "react-native-divider"
+import {
     Container,
     ContainerButtons,
     ContainerCardParam,
@@ -15,35 +15,33 @@ import {
 } from "./styles";
 import { useTranslation } from "react-i18next";
 
-function CardParamStutant({item, handleGraphyc}){
+function CardParamStudant({ item, handleGraphyc }) {
 
     return (
-        <ContainerCardParam onPress={()=>handleGraphyc(item.id)}>
+        <ContainerCardParam onPress={() => handleGraphyc(item.id)}>
             <Text>{item.nome}</Text>
         </ContainerCardParam>
-        )
-}
-
-export function StudantView({navigation, route}){
+    )
+};
+export function StudantView({ navigation, route }) {
     const { t } = useTranslation();
-    const [ loading, setLoading ] = useState(false);
-    const [ paramsAluno, setParamsAluno ] = useState([]);
-    const [ loadingGraphyc, setLoadingGraphyc ] = useState(false);
-    const [ dataParams, setDataParams ] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [paramsAluno, setParamsAluno] = useState([]);
+    const [loadingGraphyc, setLoadingGraphyc] = useState(false);
+    const [dataParams, setDataParams] = useState([]);
 
-    useEffect(()=>{
+    useEffect(() => {
         handleLoadingParams()
-    },[])
+    }, [])
 
     // function handleTriagem(){
 
     // }
-    function handleEvaluation(){
-
-        navigation.navigate('EvaluationStudent', { ...route?.params, title: t("navigationHeader.Evaluation", {name:route?.params.nome})})
+    function handleEvaluation() {
+        navigation.navigate('EvaluationStudent', { ...route?.params, title: t("navigationHeader.Evaluation", { name: route?.params.nome }) })
     }
-    
-    async function handleLoadingParams(){
+
+    async function handleLoadingParams() {
         if (loading) return;
         setLoading(true);
         const data = {
@@ -55,7 +53,7 @@ export function StudantView({navigation, route}){
         setLoading(false);
     }
 
-    async function handleLoadingGraphyc(idParam){
+    async function handleLoadingGraphyc(idParam) {
 
         setLoadingGraphyc(false)
         const data = {
@@ -67,14 +65,10 @@ export function StudantView({navigation, route}){
         setLoadingGraphyc(true)
 
     }
-    
-    return(
+
+    return (
         <Container>
             <ContainerButtons>
-                {/* <ContentButtons onPress={()=>handleTriagem()}>
-                <TextButtons>Visualizar Triagem</TextButtons>
-                </ContentButtons> */}
-
                 <ContentButtons onPress={() => handleEvaluation()}>
                     <TextButtons>{t("studentView.ButtonAvaliation")}</TextButtons>
                 </ContentButtons>
@@ -86,70 +80,72 @@ export function StudantView({navigation, route}){
                     color="#000"
                     orientation="center"
                 >
-                    <Text>{t("studentView.Header")}</Text>
+                    {t("studentView.Header")}
                 </Divider>
-              
 
                 <FlatList
                     horizontal={true}
                     data={paramsAluno}
-                    renderItem={({item})=><CardParamStutant item={item} handleGraphyc={handleLoadingGraphyc}></CardParamStutant>}
+                    renderItem={
+                        ({ item }) => <CardParamStudant
+                            item={item}
+                            handleGraphyc={handleLoadingGraphyc}
+                        ></CardParamStudant>
+                    }
                     keyExtractor={(item) => item.id}
                     ItemSeparatorComponent={() => {
                         return (
                             <View
                                 style={{
-                                height: "100%",
-                                width: 20,
+                                    height: "100%",
+                                    width: 20,
                                 }}
                             />
                         );
                     }}
-                
                 />
                 <Loading loading={loading} size={30}></Loading>
-
                 {loadingGraphyc &&
                     <LineChart
                         data={{
-                        labels: dataParams?.map((value)=>value?.data.slice(0,10)),
-                        datasets: [
-                            {
-                            data: dataParams?.map((value)=>value.valor)
-                            }
-                        ]
+                            labels: dataParams?.map((value) => value?.data.slice(0, 10)),
+                            datasets: [
+                                {
+                                    data: dataParams?.map((value) => value.valor)
+                                }
+                            ]
                         }}
-                        width={Dimensions.get("window").width}  
+                        width={Dimensions.get("window").width}
                         height={220}
-                        yAxisLabel=""                           
-                        yAxisSuffix=""                          
-                        yAxisInterval={1}                    
+                        yAxisLabel=""
+                        yAxisSuffix=""
+                        yAxisInterval={1}
                         chartConfig={{
-                        backgroundColor: "#000000",
-                        backgroundGradientFrom: "#505050",
-                        backgroundGradientTo: "#595959",
-                        decimalPlaces: 0,                    
-                        color: (opacity = 1) => `rgba(205, 205, 205, ${opacity})`,
-                        labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-            
-                        style: {
-                            borderRadius: 16
-                        },
-                        propsForDots: {
-                            r: "6",
-                            strokeWidth: "2",
-                            stroke: "#ffffff"
-                        }
+                            backgroundColor: "#000000",
+                            backgroundGradientFrom: "#505050",
+                            backgroundGradientTo: "#595959",
+                            decimalPlaces: 0,
+                            color: (opacity = 1) => `rgba(205, 205, 205, ${opacity})`,
+                            labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+
+                            style: {
+                                borderRadius: 16
+                            },
+                            propsForDots: {
+                                r: "6",
+                                strokeWidth: "2",
+                                stroke: "#ffffff"
+                            }
                         }}
                         bezier
                         style={{
-                        marginVertical: 8,
-                        borderRadius: 16
+                            marginVertical: 8,
+                            borderRadius: 16
                         }}
                     />
-                
+
                 }
-               
+
             </ContainerDesempenho>
         </Container>
     )

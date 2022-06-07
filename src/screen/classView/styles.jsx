@@ -7,8 +7,8 @@ export const Container = styled.View`
 `;
 
 export const AddContainerView = styled(Container)`
-     justify-content: center;
      align-items:center;
+     padding: 15px;
 `;
 
 export const ContainerListColumn = styled.View`
@@ -27,6 +27,8 @@ export const ContainerList = styled.View`
     border-color: black;
     background-color: #fff;
     margin-bottom: 20px;
+    padding-top: 16px;
+    padding-left: 10px;
 `;
 export const ContentListagem = styled.FlatList`
     width:100%; 
@@ -45,7 +47,8 @@ export const AddContainer = styled.View`
 export const TextDescription = styled.Text`
     width:100%;
     text-align:center;
-    height:10%;
+    font-weight: 700;
+    font-size: 16px;
 `;
 
 export const TextTouchable = styled.TouchableOpacity`
