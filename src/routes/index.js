@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Login } from '../screen/login';
 import { CreateAccount } from '../screen/createAccount';
 import { CreateAccountTeacher } from '../screen/createAccountTeacher';
-import { CreateAccountStudent } from '../screen/createAccountStudent';
+import { CreateAccountStudent } from '../screen/addCertificado';
 import { useUser } from '../hooks/user';
 import { HomeScreenTeacher } from '../screen/homeScreenTeacher';
 import { HomeScreenStudent } from '../screen/homeScreenStudent';
@@ -23,70 +23,73 @@ function StackLoged() {
 
   const Teacher = () => {
     return (
-      <TabNavegation.Navigator initialRouteName="HomeScreenTeacher" screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
-          let iconName;
+    <TabNavegation.Navigator initialRouteName="HomeScreenTeacher"  screenOptions={({ route }) => ({
+      tabBarIcon: ({ focused, color }) => {
+        let iconName;
 
-          if (route.name === 'HomeScreenTeacher') {
-            iconName = 'home';
-          } else if (route.name === 'Calendar') {
-            iconName = 'calendar';
-          } else if (route.name === 'Class') {
-            iconName = 'group';
-          } else if (route.name === 'Dashboard') {
-            iconName = 'bar-chart-o';
-          } else if (route.name === 'Config') {
-            iconName = 'cogs';
-          }
+        if (route.name === 'HomeScreenTeacher') {
+          iconName = 'home';
+        } else if (route.name === 'Class') {
+          iconName = 'group';
+        } 
+         else if (route.name === 'Config') {
+          iconName = 'cogs';
+        }
+        // else if (route.name === 'Dashboard') {
+        //   iconName = 'bar-chart-o';
+        // }
+        //  else if (route.name === 'Calendar') {
+        //   iconName = 'calendar';
+        // }
 
-          // You can return any component that you like here!
-          return <FontAwesome name={iconName} size={size} color={color} />;
-        },
-        tabBarActiveTintColor: 'black',
-        tabBarInactiveTintColor: 'gray',
-      })}>
+        // You can return any component that you like here!
+        return <FontAwesome name={iconName} size={28} color={color} />;
+      },
+      tabBarActiveTintColor: 'black',
+      tabBarInactiveTintColor: 'gray',
+      tabBarShowLabel:false,
+    })}>
 
-        <TabNavegation.Screen options={{ title: "Home" }} navigationKey='HomeScreenTeacher' name="HomeScreenTeacher" component={HomeScreenTeacher} />
-        <TabNavegation.Screen navigationKey='Calendar' name="Calendar" component={HomeScreenTeacher} />
-        <TabNavegation.Screen options={{ headerShown: false }} navigationKey='Class' name="Class" component={ClassStack} />
-        <TabNavegation.Screen navigationKey='Dashboard' name="Dashboard" component={HomeScreenTeacher} />
-        <TabNavegation.Screen navigationKey='Config' name="Config" component={ConfigureAccount} />
+      <TabNavegation.Screen options={{ title: "Home", headerShown: false }} navigationKey='HomeScreenTeacher' name="HomeScreenTeacher" component={HomeScreenTeacher} />
+      {/* <TabNavegation.Screen navigationKey='Calendar' name="Calendar" component={HomeScreenTeacher} /> */}
+      <TabNavegation.Screen options={{ headerShown: false }} navigationKey='Class' name="Class" component={ClassStack} />
+      {/* <TabNavegation.Screen navigationKey='Dashboard' name="Dashboard" component={HomeScreenTeacher} /> */}
+      <TabNavegation.Screen options={{ title: t(`nav.config`) }}  navigationKey='Config' name="Config" component={ConfigureAccount} />
 
-      </TabNavegation.Navigator>
+    </TabNavegation.Navigator>
     )
   }
 
   const Studant = () => {
     return (
-      <TabNavegation.Navigator initialRouteName="HomeScreenStudent" screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
-          let iconName;
-
-          if (route.name === 'HomeScreenStudent') {
-            iconName = 'home';
-          } else if (route.name === 'Calendar') {
-            iconName = 'calendar';
-          } else if (route.name === 'Class') {
-            iconName = 'group';
-          } else if (route.name === 'Dashboard') {
-            iconName = 'bar-chart-o';
-          } else if (route.name === 'Config') {
-            iconName = 'cogs';
-          }
-
-          // You can return any component that you like here!
-          return <FontAwesome name={iconName} size={size} color={color} />;
-        },
-        tabBarActiveTintColor: 'black',
-        tabBarInactiveTintColor: 'gray',
-      })}>
-        <TabNavegation.Screen options={{ title: "Home" }} navigationKey='HomeScreenStudent' name="HomeScreenStudent" component={HomeScreenStudent} />
-        <TabNavegation.Screen navigationKey='Calendar' name="Calendar" component={HomeScreenStudent} />
-        <TabNavegation.Screen navigationKey='Class' name="Class" component={HomeScreenStudent} />
-        <TabNavegation.Screen navigationKey='Dashboard' name="Dashboard" component={HomeScreenStudent} />
-        <TabNavegation.Screen navigationKey='Config' name="Config" component={ConfigureAccount} />
-      </TabNavegation.Navigator>
-    )
+        <TabNavegation.Navigator initialRouteName="HomeScreenStudent"  screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
+    
+            if (route.name === 'HomeScreenStudent') {
+              iconName = 'home';
+            // } else if (route.name === 'Calendar') {
+            //   iconName = 'calendar';
+            // } else if (route.name === 'Class') {
+            //   iconName = 'group';
+            // } else if (route.name === 'Dashboard') {
+            //   iconName = 'bar-chart-o';
+            } else if (route.name === 'Config') {
+              iconName = 'cogs';
+            }
+  
+            return <FontAwesome name={iconName} size={size} color={color} />;
+          },
+          tabBarActiveTintColor: 'black',
+          tabBarInactiveTintColor: 'gray',
+        })}>
+          <TabNavegation.Screen options={{ title: "Home" }} navigationKey='HomeScreenStudent' name="HomeScreenStudent" component={HomeScreenStudent} />
+          {/* <TabNavegation.Screen navigationKey='Calendar' name="Calendar" component={HomeScreenStudent} />   */}
+          {/* <TabNavegation.Screen navigationKey='Class' name="Class" component={HomeScreenStudent} />   */}
+          {/* <TabNavegation.Screen navigationKey='Dashboard' name="Dashboard" component={HomeScreenStudent} />   */}
+          <TabNavegation.Screen navigationKey='Config' name="Config" component={ConfigureAccount} />  
+        </TabNavegation.Navigator>
+        )
   }
 
   const User = {
@@ -126,7 +129,9 @@ function StackAuth() {
 
 export function Router() {
   const { user } = useUser();
-  return (<>
+ 
+  return (
+  <>
     {user == null ? <StackAuth /> : <StackLoged />}
   </>
   )

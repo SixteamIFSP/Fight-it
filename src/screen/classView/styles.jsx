@@ -5,6 +5,12 @@ export const Container = styled.View`
     width:100%;
     height: 100%;
 `;
+
+export const AddContainerView = styled(Container)`
+     align-items:center;
+     padding: 15px;
+`;
+
 export const ContainerListColumn = styled.View`
     width:90%;
     height:50%;
@@ -21,15 +27,15 @@ export const ContainerList = styled.View`
     border-color: black;
     background-color: #fff;
     margin-bottom: 20px;
-    overflow: hidden;
-    overflow-x: scroll;
+    padding-top: 16px;
+    padding-left: 10px;
 `;
 export const ContentListagem = styled.FlatList`
     width:100%; 
 `;
 export const ContainerFlat = styled.View`
     max-height:100%;
-    padding: 10px
+    padding: 10px;
 `;
 
 export const AddContainer = styled.View`
@@ -40,7 +46,9 @@ export const AddContainer = styled.View`
 
 export const TextDescription = styled.Text`
     width:100%;
-    height:10%;
+    text-align:center;
+    font-weight: 700;
+    font-size: 16px;
 `;
 
 export const TextTouchable = styled.TouchableOpacity`

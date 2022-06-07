@@ -16,28 +16,16 @@ import { DoubleButtonConfirmation } from "../../components/doubleButtonConfirmat
 import { Input } from "../../components/input";
 import { toastMessage } from "../../util/toastMessage";
 import { AddButton } from "../../components/addButton";
+import { Loading } from "../../components/loading";
+import { useTranslation } from 'react-i18next';
 
 function CardTurma({ data, handleNewScreen }) {
+    const { t } = useTranslation()
     // TODO: COLOCAR AS INFORMAÇÕES DENTRO DE CADA CARD E VALIDAR SE EXISTE OU NÃO INFORMAÇÕES.
     return (
-        <CardView
-            onPress={
-                () => handleNewScreen('ClassView', {
-                    title: `Turma: ${data?.TurmaNome}`,
-                    data: data
-                })
-            }
-        >
-            <CardTitle>{data?.Nome}</CardTitle>
+        <CardView onPress={()=>handleNewScreen('ClassView', {title: t("navigationHeader.ClassDescription", {name:data?.TurmaNome}), data:{...data, nomeTurma:data?.TurmaNome}})}>
+            <CardTitle>{data?.TurmaNome}</CardTitle>
         </CardView>
-    )
-};
-
-function FooterLoading({ loading }) {
-    if (!loading) return null;
-
-    return (
-        <ActivityIndicator size={30} color="black"></ActivityIndicator>
     )
 };
 
@@ -49,10 +37,11 @@ function LoadingClass({ user, setCreateNew, navigation }) {
         handleLoadMore();
     }, []);
 
-    function handleLoadMore() {
+    async function handleLoadMore() {
         if (loading) return;
         setLoading(true);
-        getClass(setData, user.userID, user.tipoUsuario === 1);
+        
+        await getClass(setData, user.userID, user.tipoUsuario === 1);
         setLoading(false);
     };
 
@@ -64,18 +53,15 @@ function LoadingClass({ user, setCreateNew, navigation }) {
         <>
             <AddButton handle={() => setCreateNew((value) => !value)} />
             <ContainerList>
-                {
-                    data.length === 0 &&
-                    <FooterLoading loading={loading}></FooterLoading>
-                }
                 <FlatList
+                    style={{width:'100%'}}
                     data={data}
                     renderItem={({ item }) => <CardTurma data={item} handleNewScreen={handleNewScreen}></CardTurma>}
-                    onEndReached={handleLoadMore}
-                    onEndThreshold={0.1}
+                    //onEndReached={handleLoadMore}
+                    onEndThreshold={0.01}
                     keyExtractor={item => item.id}
                     ListFooterComponent={
-                        <FooterLoading loading={loading}></FooterLoading>
+                        <Loading loading={loading} size={30}></Loading>
                     }
                 />
             </ContainerList>
@@ -86,6 +72,7 @@ function LoadingClass({ user, setCreateNew, navigation }) {
 function CreateClass({ user, setCreateNew }) {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
+    const { t } = useTranslation();
 
     function confirm() {
         if (name !== '', description != '') {
@@ -96,7 +83,7 @@ function CreateClass({ user, setCreateNew }) {
             };
             createClass(data);
         } else {
-            toastMessage(false, 'Preencha os campos!')
+            toastMessage(false, t("toast.error.blank"))
         };
 
         cancel();
@@ -108,17 +95,17 @@ function CreateClass({ user, setCreateNew }) {
     return (
         <CardCreateClasss>
             <ContainerTitle>
-                <TextTitle> Criar nova turma</TextTitle>
+                <TextTitle>{t('createClass.Header')}</TextTitle>
             </ContainerTitle>
             <ContainerForm>
                 <Input
                     value={name}
-                    placeholder={'Nome da turma'}
+                    placeholder={t('createClass.Placeholder.Nome')}
                     onChangeText={setName}
                 />
                 <Input
                     value={description}
-                    placeholder={'Descrição da turma'}
+                    placeholder={t('createClass.Placeholder.Description')}
                     onChangeText={setDescription}
                 />
             </ContainerForm>
