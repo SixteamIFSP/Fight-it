@@ -251,7 +251,7 @@ function FormCreateParams({ selectEvaluation, setSelectEvaluation }) {
                 }
                 <Button handle={() => handleCreateParam()} text={t("parameterCriation.Buttons.Create")} />
                 {createParams &&
-                    <Button handle={() => setCreateParams(false)} text={t("validation.Cancel")} />
+                    <Button handle={() => setCreateParams(false)} text={t("validation.cancel")} />
                 }
             </AlingButtons>
         </View>
