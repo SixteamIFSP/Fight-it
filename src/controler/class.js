@@ -6,9 +6,9 @@ export async function getClass(setClasses, idUsuario, type){
     try {
         let response;
         if (type){
-            response = await api.get(`/turma/busca/${idUsuario}`);
+            response = await api.get(`/turmas/busca/${idUsuario}`);
        } else {
-            response = await api.get(`/turma/busca/${idUsuario}`);
+            response = await api.get(`/turmas/busca/${idUsuario}`);
        }
         
         if (response?.data.status){
@@ -25,7 +25,7 @@ export async function getClass(setClasses, idUsuario, type){
 
 export async function createClass(data){ // data => { nome:string, descricao:string, professorId:number}
     try {
-        response = await api.post(`/turma/criar`, {...data});
+        response = await api.post(`/turmas/criar`, {...data});
 
         if (response?.data.status){
             toastMessage(true, response?.data.mensagem) 
@@ -42,7 +42,7 @@ export async function createClass(data){ // data => { nome:string, descricao:str
 export async function getAlunosTurma(setAlunos, data){ // data => number
 
     try {
-        const response = await api.get(`/turma/alunos/${data}`);
+        const response = await api.get(`/turmas/alunos/${data}`);
 
         if (response?.data.status){
             setAlunos(response?.data.result)
@@ -63,7 +63,7 @@ export async function getAlunosTurma(setAlunos, data){ // data => number
 export async function adicionarAluno(data){ // data => {turmaId:number, email:string}
 
     try {
-        const response = await api.post(`/turma/adiciona`, {...data});
+        const response = await api.post(`/turmas/adiciona`, {...data});
 
         if (response?.data.status){
             toastMessage(true, response?.data.mensagem) 
