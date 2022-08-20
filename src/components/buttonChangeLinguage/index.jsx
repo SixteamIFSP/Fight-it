@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { TouchableOpacity } from "react-native";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import i18n from '../../locales/i18n';
 
 import { useTranslation } from "react-i18next";
 export function ButtonLinguage() {
-    const { i18n } = useTranslation();
     const [linguage, setLinguage] = useState(true);
-
     const changeLanguage = (language) => {
         i18n.changeLanguage(language);
     }
@@ -24,6 +23,4 @@ export function ButtonLinguage() {
             <MaterialCommunityIcons name="translate" size={24} color="black" />
         </TouchableOpacity>
     )
-
-
 }
