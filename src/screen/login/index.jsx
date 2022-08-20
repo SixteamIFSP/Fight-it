@@ -1,5 +1,4 @@
 import { useState, } from "react";
-import i18n from '../../locales/i18n';
 import { Input } from "../../components/input";
 import { styles } from "./styles";
 import { styles as stylesGlobal } from "../../global/styles";
@@ -8,11 +7,8 @@ import { ButtonLinguage } from "../../components/buttonChangeLinguage";
 import { useUser } from "../../hooks/user";
 import { SwitchButton } from "../../components/switchbutton";
 import {
-  Button,
   Text,
   View,
-  TextInput,
-  SafeAreaView,
   TouchableOpacity
 } from "react-native";
 import { Loading } from "../../components/loading";
@@ -24,17 +20,12 @@ export function Login({ navigation }) {
   const [typeTeacher, setTypeTeacher] = useState(true);
   const { singIn } = useUser();
 
-  const { t } = useTranslation(); /// IMPORT DA TRADUÇÂO 
+  const { t: translation } = useTranslation(); /// IMPORT DA TRADUÇÂO 
 
-  
   async function onHandleLogin() {
     setLoading(true);
-    await singIn({ mail: mail, pass: password }, typeTeacher);
+    await singIn({ mail, password }, typeTeacher);
     setLoading(false);
-  }
-
-  function onHandleForgotPass() {
-
   }
 
   function onHandleCreateAccount() {
@@ -49,49 +40,46 @@ export function Login({ navigation }) {
         <View style={styles.switchButtons}>
           <SwitchButton
             onPress={() => setTypeTeacher(true)}
-            text={t('createAccount.teacher')}
+            text={translation('createAccount.teacher')}
             type={typeTeacher}
           ></SwitchButton>
           <SwitchButton
             onPress={() => setTypeTeacher(false)}
-            text={t('createAccount.student')}
+            text={translation('createAccount.student')}
             type={!typeTeacher}
           ></SwitchButton>
         </View>
-
         <Input
           onChangeText={setMail}
           value={mail}
-          placeholder={t('login.mail')}
+          placeholder={translation('login.mail')}
           keyboardType="email-address"
         />
         <Input
-        style={styles.inputPassword}
+          style={styles.inputPassword}
           secureTextEntry={true}
           onChangeText={setPassword}
           value={password}
-          placeholder={t('login.password')}
+          placeholder={translation('login.password')}
         />
         <TouchableOpacity
           style={styles.button}
           onPress={onHandleLogin}
         >
-          { 
-            !loading ? 
-              <Text> {t('login.connect')}</Text>
+          {
+            !loading ?
+              <Text> {translation('login.connect')}</Text>
               :
-              <Loading loading={loading} size={18}/>
+              <Loading loading={loading} size={18} />
           }
-          
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.textTouchebles}
           onPress={onHandleCreateAccount}
         >
-          <Text>{t('login.CreateAccount')}</Text>
+          <Text>{translation('login.CreateAccount')}</Text>
         </TouchableOpacity>
       </View>
     </View>
-
   );
 }
