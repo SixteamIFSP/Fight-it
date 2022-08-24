@@ -103,10 +103,6 @@ export function ClassView({ navigation, route }) {
         setAdicionarAluno((value) => !value)
     };
 
-    function HandleChangeAddAula() {
-        setAdicionarAluno(value => !value)
-    };
-
     useEffect(() => {
         if (!adicionarAluno) {
             getAlunosTurma(setDataAlunos, id);

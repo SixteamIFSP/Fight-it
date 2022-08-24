@@ -6,9 +6,11 @@ export async function getClass(setClasses, idUsuario, type){
     try {
         let response;
         if (type){
-            response = await api.get(`/turmas/busca/${idUsuario}`);
+            response = await api.get(`/turma/busca/${idUsuario}`);
+            console.log(response);
        } else {
-            response = await api.get(`/turmas/busca/${idUsuario}`);
+            response = await api.get(`/turma/busca/${idUsuario}`);
+            console.log(response);
        }
         
         if (response?.data.status){
@@ -25,7 +27,7 @@ export async function getClass(setClasses, idUsuario, type){
 
 export async function createClass(data){ // data => { nome:string, descricao:string, professorId:number}
     try {
-        response = await api.post(`/turmas/criar`, {...data});
+        response = await api.post(`/turma/criar`, {...data});
 
         if (response?.data.status){
             toastMessage(true, response?.data.mensagem) 
@@ -42,16 +44,16 @@ export async function createClass(data){ // data => { nome:string, descricao:str
 export async function getAlunosTurma(setAlunos, data){ // data => number
 
     try {
-        const response = await api.get(`/turmas/alunos/${data}`);
+        const response = await api.get(`/turma/alunos/${data}`);
 
         if (response?.data.status){
-            setAlunos(response?.data.result)
+            setAlunos(response?.data.result);
 
         } else{
             if (response?.data.result == null)
-                toastMessage(false, 'Turma sem alunos') 
+                toastMessage(false, 'Turma sem alunos');
             else 
-                toastMessage(false, 'Erro ao buscar dos dados') 
+                toastMessage(false, 'Erro ao buscar dos dados');
         }
         
     } catch (error) {
@@ -63,7 +65,7 @@ export async function getAlunosTurma(setAlunos, data){ // data => number
 export async function adicionarAluno(data){ // data => {turmaId:number, email:string}
 
     try {
-        const response = await api.post(`/turmas/adiciona`, {...data});
+        const response = await api.post(`/turma/adiciona`, {...data});
 
         if (response?.data.status){
             toastMessage(true, response?.data.mensagem) 
@@ -72,6 +74,20 @@ export async function adicionarAluno(data){ // data => {turmaId:number, email:st
             toastMessage(false, response?.data.mensagem) 
         }
         
+    } catch (error) {
+        toastMessage(false, 'Erro de conexão!') 
+    }
+}
+
+export async function deleteTurma(turmaId){
+    try {
+        const response = await api.delete(`/turma/excluir/turma/${turmaId}`);
+
+        if (response?.data.status){
+            toastMessage(true, response?.data.mensagem) 
+        } else{
+            toastMessage(false, response?.data.mensagem) 
+        }  
     } catch (error) {
         toastMessage(false, 'Erro de conexão!') 
     }

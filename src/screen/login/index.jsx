@@ -24,8 +24,7 @@ export function Login({ navigation }) {
   const [typeTeacher, setTypeTeacher] = useState(true);
   const { singIn } = useUser();
 
-  const { t } = useTranslation(); /// IMPORT DA TRADUÇÂO 
-
+  const { t } = useTranslation(); 
   
   async function onHandleLogin() {
     setLoading(true);

@@ -35,11 +35,11 @@ function StackLoged() {
          else if (route.name === 'Config') {
           iconName = 'cogs';
         }
+         else if (route.name === 'Calendar') {
+          iconName = 'calendar';
+        }
         // else if (route.name === 'Dashboard') {
         //   iconName = 'bar-chart-o';
-        // }
-        //  else if (route.name === 'Calendar') {
-        //   iconName = 'calendar';
         // }
 
         // You can return any component that you like here!
@@ -51,7 +51,7 @@ function StackLoged() {
     })}>
 
       <TabNavegation.Screen options={{ title: "Home", headerShown: false }} navigationKey='HomeScreenTeacher' name="HomeScreenTeacher" component={HomeScreenTeacher} />
-      {/* <TabNavegation.Screen navigationKey='Calendar' name="Calendar" component={HomeScreenTeacher} /> */}
+      <TabNavegation.Screen navigationKey='Calendar' name="Calendar" component={HomeScreenTeacher} />
       <TabNavegation.Screen options={{ headerShown: false }} navigationKey='Class' name="Class" component={ClassStack} />
       {/* <TabNavegation.Screen navigationKey='Dashboard' name="Dashboard" component={HomeScreenTeacher} /> */}
       <TabNavegation.Screen options={{ title: t(`nav.config`) }}  navigationKey='Config' name="Config" component={ConfigureAccount} />
@@ -100,13 +100,10 @@ function StackLoged() {
   return (
     User[user?.tipoUsuario]
   )
-
 }
 
 function StackAuth() {
-
   return (
-
     <AppRoutes.Navigator
       screenOptions={{ headerShown: false, }}
       initialRouteName="Login" >
@@ -122,10 +119,7 @@ function StackAuth() {
 
     </AppRoutes.Navigator>
   )
-
 }
-
-
 
 export function Router() {
   const { user } = useUser();
@@ -135,11 +129,4 @@ export function Router() {
     {user == null ? <StackAuth /> : <StackLoged />}
   </>
   )
-
-
-
-
-
-
-
 }

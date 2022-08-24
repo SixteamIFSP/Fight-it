@@ -14,6 +14,7 @@ import {
     TextButtons
 } from "./styles";
 import { useTranslation } from "react-i18next";
+import { useFocusEffect } from "@react-navigation/native";
 
 function CardParamStudant({ item, handleGraphyc }) {
 
@@ -33,10 +34,7 @@ export function StudantView({ navigation, route }) {
     useEffect(() => {
         handleLoadingParams()
     }, [])
-
-    // function handleTriagem(){
-
-    // }
+    
     function handleEvaluation() {
         navigation.navigate('EvaluationStudent', { ...route?.params, title: t("navigationHeader.Evaluation", { name: route?.params.nome }) })
     }
@@ -44,6 +42,7 @@ export function StudantView({ navigation, route }) {
     async function handleLoadingParams() {
         if (loading) return;
         setLoading(true);
+
         const data = {
             aluno: route?.params.studantId,
             turma: route?.params.id,

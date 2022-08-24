@@ -26,12 +26,13 @@ export async function createAccount(data, type){
 
 export async function GetUserAccount(setDataUser,id, type){
     let response;
-
     try {
         if(type){
             response = await api.get(`/user/busca/professor/${id}`,);
+            console.log(response);
        } else {
             response = await api.get(`/user/busca/aluno/${id}`,);
+            console.log(response);
        }
         
         if (response.data.status){
