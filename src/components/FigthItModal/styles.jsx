@@ -1,9 +1,12 @@
 import { StyleSheet } from "react-native";
+import { TextAlingLine } from "../../screen/configureAccount/styles";
 
 export const styles = StyleSheet.create({
     modal: {
         flex: 1,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     outerView: {
         flex: 1,
@@ -15,7 +18,7 @@ export const styles = StyleSheet.create({
         marginBottom: 30,
         backgroundColor: 'white',
         borderRadius: 30,
-        padding: 20,
+        padding: 30,
         width: 250,
         shadowColor: '#000000',
         shadowOpacity: 0.25,
@@ -27,11 +30,13 @@ export const styles = StyleSheet.create({
         alignContent: "space-between"
     },
     modalText: {
+        marginRight: 'auto',
+        marginLeft: 'auto',
         marginTop: 10,
         marginBottom: 10,
     },
     textLine: {
-        marginBottom: 50,
+        marginBottom: 12,
         fontWeight: '700',
         alignSelf: 'flex-start'
     },

@@ -14,12 +14,10 @@ export function FightItModal({ textButton, modalText, modalActive }) {
             >
                 <View style={styles.outerView}>
                     <View style={styles.modalView}>
-                        <Text style={styles.modalText}>
                             <Text style={styles.textLine}>{modalText ? modalText.toUpperCase() : ''}</Text>
                             <Pressable onPress={() => setModalActive(false)}>
                                 <Text style={styles.textClose}>{textButton ? textButton.toUpperCase() : 'FECHAR'}</Text>
                             </Pressable>
-                        </Text>
                     </View>
                 </View>
             </Modal>
