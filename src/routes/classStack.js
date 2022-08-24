@@ -30,7 +30,19 @@ export function ClassStack(){
                 navigationKey='ClassView'
                 name="ClassView"
                 component={ClassView}></StackClass.Screen>
-            <StackClass.Screen options={({route}) => ({title: route.params.title})} navigationKey='StudantView' name="StudantView" component={StudantView}></StackClass.Screen>
+            <StackClass.Screen
+            options={({route}) => ({
+                title: route.params.title,
+                headerRight: () => (
+                    <ContainerSVG onPress={() => deleteTurma(route.params.id)}>
+                        <FontAwesome name={'trash'} size={30} color="#cc0000" />
+                    </ContainerSVG>
+                ),
+                })}
+
+            navigationKey='StudantView'
+            name="StudantView"
+            component={StudantView}></StackClass.Screen>
             <StackClass.Screen options={({route}) => ({title: route.params.title})} navigationKey='EvaluationStudent' name="EvaluationStudent" component={EvaluationStudent}></StackClass.Screen>
         </StackClass.Navigator>
     )
