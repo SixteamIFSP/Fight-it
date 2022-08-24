@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Text, View, } from "react-native";
+import { Text, View } from "react-native";
 import { AddButton } from "../../components/addButton";
 import { DoubleButtonConfirmation } from "../../components/doubleButtonConfirmation";
 import { Input } from "../../components/input";
@@ -17,6 +17,7 @@ import {
     TextDescription,
     TextTouchable,
     AddContainerView,
+    styles,
 } from "./styles";
 import Divider from 'react-native-divider';
 
@@ -73,7 +74,7 @@ function AdicionarAluno({ turmaId, setback }) {
             >{t('addStudentClass.Header')}
             </Divider>
             <Input
-                style={{ marginTop: 20}}
+                style={{ marginTop: 20 }}
                 value={mail}
                 placeholder={t("addStudentClass.Placeholder.mail")}
                 keyboardType="email-address"
@@ -91,7 +92,7 @@ function AdicionarAluno({ turmaId, setback }) {
             }
         </AddContainerView>
     )
-}
+};
 
 export function ClassView({ navigation, route }) {
     const { t } = useTranslation();
