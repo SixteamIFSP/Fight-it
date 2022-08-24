@@ -3,27 +3,36 @@ import React, { useState } from "react";
 import { styles } from "./styles";
 
 export function FightItModal({ textButton, modalText, modalActive }) {
-    //ativa e desativa a modal
     const [setModalActive] = useState(false);
-        return (
-            <View style={styles.modal}>
-                <Modal
-                    animationType="slide"
-                    transparent={true}
-                    visible={modalActive}
-                    onRequestClose={() => { setModalActive(false) }}
-                >
-                    <View style={styles.outerView}>
-                        <View style={styles.modalView}>
-                            <Text style={styles.modalText}>
-                                <Text style={styles.modalText}>{modalText ? modalText : ''}</Text>
-                                <Pressable onPress={() => setModalActive(false)}>
-                                    <Text style={{ color: 'red' }}>{textButton ? textButton : 'Clique aqui para fechar'}</Text>
-                                </Pressable>
-                            </Text>
-                        </View>
+    return (
+        <View style={styles.modal}>
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={modalActive}
+                onRequestClose={() => { setModalActive(false) }}
+            >
+                <View style={styles.outerView}>
+                    <View style={styles.modalView}>
+                        <Text style={styles.modalText}>
+                            <Text style={styles.textLine}>{modalText ? modalText.toUpperCase() : ''}</Text>
+                            <Pressable onPress={() => setModalActive(false)}>
+                                <Text style={styles.textClose}>{textButton ? textButton.toUpperCase() : 'FECHAR'}</Text>
+                            </Pressable>
+                        </Text>
                     </View>
-                </Modal>
-            </View>
-        )
+                </View>
+            </Modal>
+        </View>
+    )
 }
+
+/* uso
+  let [setModalVisible] = useState(false);
+      <FightItModal
+        textButton="FECHAR"
+        modalText
+        modalActive={visibleModal}
+      ></FightItModal>
+      <Text onPress={() => { visibleModal = true }}>assasa</Text>
+      */

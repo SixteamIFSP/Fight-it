@@ -3,8 +3,6 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
     modal: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
         backgroundColor: 'white'
     },
     outerView: {
@@ -19,18 +17,26 @@ export const styles = StyleSheet.create({
         borderRadius: 30,
         padding: 20,
         width: 250,
-        alignItems: 'center',
         shadowColor: '#000000',
-        shadowOffset: {
-            width: 0,
-            height: 2
-        },
         shadowOpacity: 0.25,
         shadowRadius: 4,
-        elevation: 5
+        flexDirection: "column",
+        justifyContent:"center",
+        alignItems: "center",
+        flexWrap: "wrap",
+        alignContent: "space-between"
     },
     modalText: {
-        marginBottom: 15,
-        textAlign: 'center'
+        marginTop: 10,
+        marginBottom: 10,
+    },
+    textLine: {
+        marginBottom: 50,
+        fontWeight: '700',
+        alignSelf: 'flex-start'
+    },
+    textClose: {
+        color: 'red',
+        marginTop:20
     }
 });

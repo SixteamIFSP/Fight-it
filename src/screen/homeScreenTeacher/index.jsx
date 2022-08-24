@@ -3,15 +3,19 @@ import { styles as stylesGlobal } from "../../global/styles";
 import { ButtonLogout } from "../../components/buttonLogout";
 import { useTranslation } from "react-i18next";
 import { useUser } from "../../hooks/user";
-import React, { useState } from "react";
+import { FightItModal } from "../../components/FigthItModal";
 
 export function HomeScreenTeacher({ navigation }) {
-
   const { t } = useTranslation();
   const { user } = useUser();
-
   return (
     <View style={stylesGlobal.container}>
+      <FightItModal
+        textButton="FECHAR"
+        modalText="textinho"
+        modalActive={true}
+      ></FightItModal>
+
       <ButtonLogout />
       <Text>{t('homePage.teacher.message')} {user?.nome}</Text>
     </View>
