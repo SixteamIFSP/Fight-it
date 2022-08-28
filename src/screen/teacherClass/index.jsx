@@ -28,7 +28,7 @@ function CardTurma({ data, handleNewScreen }) {
                 })
             }
         >
-            <CardTitle>{data?.Nome}</CardTitle>
+            <CardTitle>{data?.TurmaNome}</CardTitle>
         </CardView>
     )
 };

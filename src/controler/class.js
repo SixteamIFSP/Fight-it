@@ -81,3 +81,43 @@ export async function adicionarAluno(data){
         toastMessage(false, 'Erro de conexão!') 
     }
 }
+
+export async function adicionarAula(data){
+
+    try {
+        const response = await api.post(`/turma/adiciona`, {...data});
+
+        console.log(response?.data);
+
+        if (response?.data.status){
+            toastMessage(true, response?.data.mensagem) 
+
+        } else{
+            toastMessage(false, response?.data.mensagem) 
+        }
+        
+    } catch (error) {
+        console.log(error);
+        toastMessage(false, 'Erro de conexão!') 
+    }
+}
+
+export async function removeAula(aulaID){
+
+    try {
+        const response = await api.delete(`/turma/adiciona`, {aulaID});
+
+        console.log(response?.data);
+
+        if (response?.data.status){
+            toastMessage(true, response?.data.mensagem) 
+
+        } else{
+            toastMessage(false, response?.data.mensagem) 
+        }
+        
+    } catch (error) {
+        console.log(error);
+        toastMessage(false, 'Erro de conexão!') 
+    }
+}
