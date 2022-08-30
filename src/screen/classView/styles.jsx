@@ -17,6 +17,7 @@ export const AdicionarAulaButton = styled.TouchableOpacity`
 export const RenderAulaContainer = styled.View`
 flex-direction: row;
 justify-content: space-between;
+margin-top: 5px;
 padding-left: 10px;
 padding-right: 10px;
 height: auto;

@@ -66,11 +66,12 @@ function AdicionarAula({ turmaId, setback }) {
             toastMessage(false, 'Digite um tópico de aula');
             return
         }
+        
         const data = {
-            topicoAula,
-            date: date.toLocaleDateString(),
-            time: time.toLocaleTimeString(),
-            equipamentos
+            aula: topicoAula,
+            data: JSON.stringify({data: date.toLocaleDateString(),hora: time.toLocaleTimeString()}),
+            descricao: JSON.stringify({equipamentos}),
+            turma: turmaId,
         }
         adicionarAula(data)
         setback();
@@ -293,7 +294,7 @@ export function ClassView({ navigation, route }) {
             </ContainerListColumn>
             }
             {
-                page === pageAddLesson && <AdicionarAula setback={() => handleOpenPage(pageDefault)}/>
+                page === pageAddLesson && <AdicionarAula turmaId={id} setback={() => handleOpenPage(pageDefault)}/>
             }
             {/*grafico */}
         </Container>
