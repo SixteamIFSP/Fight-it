@@ -103,7 +103,7 @@ export async function adicionarAula(data){
 export async function removeAula(aula){
 
     try {
-        const response = await api.delete(`/aula/deletarAula`, {aula});
+        const response = await api.patch(`/aula/deletarAula`, {aula});
 
         console.log(response?.data);
 
