@@ -26,8 +26,8 @@ export async function getClass(setClasses, idUsuario, type){
 
 export async function createClass(data){ // data => { nome:string, descricao:string, professorId:number}
     try {
-        response = await api.post(`/turma/criar`, {...data});
-
+      const response = await api.post(`/turma/criar`, {...data});
+      
         if (response?.data.status){
             toastMessage(true, response?.data.mensagem) 
 
@@ -45,19 +45,18 @@ export async function getAlunosTurma(setAlunos, data){ // data => number
 
     try {
         const response = await api.get(`/turma/alunos/${data}`);
-
-        if (response?.data.status & response?.data.result.length > 0){
+        
+        if (response?.data.status && response?.data.result.length > 0){
             setAlunos(response?.data.result)
 
         } else{
-            if (response?.data.result.length == 0)
-                toastMessage(false, 'Turma sem alunos') 
+            if (response?.data.mensagem)
+                toastMessage(false, response?.data.mensagem) 
             else 
                 toastMessage(false, 'Erro ao buscar dos dados') 
         }
         
     } catch (error) {
-        console.log(error);
         toastMessage(false, 'Erro de conexão!') 
     }
 }
@@ -66,6 +65,45 @@ export async function adicionarAluno(data){
 
     try {
         const response = await api.post(`/turma/adiciona`, {...data});
+
+        console.log(response?.data);
+
+        if (response?.data.status){
+            toastMessage(true, response?.data.mensagem) 
+
+        } else{
+            toastMessage(false, response?.data.mensagem) 
+        }
+        
+    } catch (error) {
+        console.log(error);
+        toastMessage(false, 'Erro de conexão!') 
+    }
+}
+
+export async function adicionarAula(data){
+
+    try {
+        const response = await api.post(`/aula/criarAula`, {...data});
+
+
+        if (response?.data.status){
+            toastMessage(true, response?.data.message) 
+
+        } else{
+            toastMessage(false, response?.data.message) 
+        }
+        
+    } catch (error) {
+        console.log(error);
+        toastMessage(false, 'Erro de conexão!') 
+    }
+}
+
+export async function removeAula(aula){
+
+    try {
+        const response = await api.patch(`/aula/deletarAula`, {aula});
 
         console.log(response?.data);
 

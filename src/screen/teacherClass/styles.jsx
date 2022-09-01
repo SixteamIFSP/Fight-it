@@ -48,9 +48,9 @@ export const TextTitle = styled.Text`
     font-size:25px;
 `;
 export const ContainerForm = styled.View`
-    align-items: center
+    align-items: center;
     width:100%;
-    margin-bottom:30px;
+    margin-bottom: 30px;
 `;
 export const CardCreateClasss = styled.View`
     margin-left:auto;
