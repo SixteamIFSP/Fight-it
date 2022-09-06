@@ -127,7 +127,20 @@ export async function removeAula(aula){
         }
         
     } catch (error) {
-        console.log(error);
+        toastMessage(false, 'Erro de conexão!') 
+    }
+}
+
+export async function deleteTurma(turmaId){
+    try {
+        const response = await api.delete(`/turma/excluir/turma/${turmaId}`);
+
+        if (response?.data.status){
+            toastMessage(true, response?.data.mensagem) 
+        } else{
+            toastMessage(false, response?.data.mensagem) 
+        }  
+    } catch (error) {
         toastMessage(false, 'Erro de conexão!') 
     }
 }

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Text, View, TouchableOpacity, ScrollView } from "react-native";
 import { AddButton } from "../../components/addButton";
 import { DoubleButtonConfirmation } from "../../components/doubleButtonConfirmation";
@@ -29,6 +30,8 @@ import {
     Equipamento,
     TextWhite,
     CancelarAula
+    AddContainerView,
+    styles,
 } from "./styles";
 import Divider from 'react-native-divider';
 
