@@ -3,8 +3,13 @@ import { useUser } from "../../hooks/user";
 import { FontAwesome } from '@expo/vector-icons';
 import { Input } from "../../components/input";
 import { CheckBox } from "../../components/checkbox";
+import { MaterialIcons } from '@expo/vector-icons'; 
 import { ChangeInfoAccount, ChangePassowrd, DeleteAccount, GetUserAccount } from "../../controler/account";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
+import { toastMessage } from "../../util/toastMessage";
+import * as ImagePicker from 'expo-image-picker';
+import { useTranslation } from 'react-i18next';
+
 import {
     ButtonConfigure,
     CancelButton,
@@ -19,7 +24,15 @@ import {
     TextHeader,
     TextInfo,
     ConteinerInfoDelete,
+    ButtonImage,
+    ContainerImage,
+    AreaImage,
 } from "./styles";
+import { Image } from "react-native";
+import { upload } from "../../controler/image";
+import { variables } from "../../configuration/constants";
+import { Loading } from "../../components/loading";
+import { t } from "i18next";
 
 // Compomente de SHOW e EDIT de dados do usuário
 const DataUser = () => {
@@ -60,10 +73,7 @@ const DataUser = () => {
                 modifyUser({ ...user, nome: nome, })
 
             } else {
-                Toast.show({
-                    type: "error",
-                    text2: "Erro ao Atualizar dados",
-                });
+                toastMessage(false, 'Erro ao Atualizar dados');
             }
 
             setEditable((value) => !value)
@@ -76,7 +86,7 @@ const DataUser = () => {
     return (
         <ConteinerInfo>
             <TextAlingLine>
-                <TextDescription>Nome:</TextDescription>
+                <TextDescription>{t('form.name')}:</TextDescription>
                 {
                     editable ?
                         <Input value={nome} onChangeText={setNome}></Input>
@@ -84,7 +94,7 @@ const DataUser = () => {
                 }
             </TextAlingLine>
             <TextAlingLine>
-                <TextDescription>E-mail:</TextDescription>
+                <TextDescription>{t('form.mail')}:</TextDescription>
                 {
                     editable ?
                         <Input editable={false} value={email}></Input>
@@ -92,7 +102,7 @@ const DataUser = () => {
                 }
             </TextAlingLine>
             <TextAlingLine>
-                <TextDescription>Telefone:</TextDescription>
+                <TextDescription>{t('form.phone')}:</TextDescription>
                 {
                     editable ?
                         <Input
@@ -106,7 +116,7 @@ const DataUser = () => {
                 }
             </TextAlingLine>
             <TextAlingLine>
-                <TextDescription>Receber Notificação:</TextDescription>
+                <TextDescription>{t('form.notification')}:</TextDescription>
                 {
                     editable ?
                         <CheckBox isChecked={notification} onPress={() => setNotification((value) => !value)}></CheckBox>
@@ -118,7 +128,7 @@ const DataUser = () => {
                     (editable) &&
 
                     <ContainerCancelButton onPress={() => cancel()}>
-                        <CancelButton>Cancelar</CancelButton>
+                        <CancelButton>{t('validation.cancel')}</CancelButton>
                     </ContainerCancelButton>
                 }
                 <ContainerSVG onPress={() => save()}>
@@ -129,7 +139,7 @@ const DataUser = () => {
     )
 };
 // Compomente de troca de senha
-export const ChangePassword = ({ editable, setEditable }) => {
+export const ChangePassword = ({ editable, setEditable}) => {
     const { user } = useUser();
 
     const [oldPass, setOldPass] = useState('');
@@ -150,11 +160,13 @@ export const ChangePassword = ({ editable, setEditable }) => {
                 ChangePassowrd(data, user.TipoUsuario === 1)
 
             } else {
+                
+                toastMessage(false,  "Preencha os campos corretamente"); // sem t
 
-                Toast.show({
-                    type: "error",
-                    text2: "Preencha os campos corretamente",
-                })
+                //toastMessage(false,  t("msg.completeFields")); // com t 
+
+
+               
             }
             setEditable((value) => !value)
 
@@ -166,14 +178,14 @@ export const ChangePassword = ({ editable, setEditable }) => {
     return (
         editable ?
             <ConteinerInfo style={{marginTop: 20}}>
-                <TextHeader>Trocar Senha</TextHeader>
-                <TextDescription>Senha antiga:</TextDescription>
+                <TextHeader>{t("changePass.Header")}</TextHeader>
+                <TextDescription>{t("changePass.OldPass")}</TextDescription>
                 <Input
                     style={{ marginBottom: 10, width: '100%' }}
                     secureTextEntry={true}
                     value={oldPass}
                     onChangeText={setOldPass}></Input>
-                <TextDescription>Nova Senha:</TextDescription>
+                <TextDescription>{t("changePass.NewPass")}</TextDescription>
                 <Input
 
                     style={{ marginBottom: 10, width: '100%' }}
@@ -181,7 +193,7 @@ export const ChangePassword = ({ editable, setEditable }) => {
                     value={newSenha}
                     onChangeText={setNewSenha}></Input>
 
-                <TextDescription>Confirmação de senha:</TextDescription>
+                <TextDescription>{t("changePass.ConfirmPass")}</TextDescription>
                 <Input
                     style={{ marginBottom: 10, width: '100%' }}
                     secureTextEntry={true}
@@ -194,7 +206,7 @@ export const ChangePassword = ({ editable, setEditable }) => {
                         (editable) &&
 
                         <ContainerCancelButton onPress={() => cancel()}>
-                            <CancelButton>Cancelar</CancelButton>
+                            <CancelButton>{t('validation.cancel')}</CancelButton>
                         </ContainerCancelButton>
                     }
                     <ContainerSVG onPress={() => save()}>
@@ -206,7 +218,7 @@ export const ChangePassword = ({ editable, setEditable }) => {
             </ConteinerInfo>
             :
             <ButtonConfigure onPress={() => setEditable(true)}>
-                <TextButton>MUDAR SENHA</TextButton>
+                <TextButton>{t("configScreen.ChangePass")}</TextButton>
             </ButtonConfigure>
     )
 };
@@ -224,33 +236,35 @@ const ConfirmDelete = ({ deletable, setDeletable }) => {
                 };
                 DeleteAccount(data, user.tipoUsuario === 1, () => logOut())
             } else {
-                Toast.show({
-                    type: "error",
-                    text2: "Preencha os campos corretamente",
-                });
-            };
+
+                toastMessage(false, "Preencha os campos corretamente") 
+            }
+            
         } catch (error) {
-            console.log(error.message);
-        };
+
+            toastMessage(false, "Erro de conexão") 
+        }
+      
+
         setDeletable(false)
     };
     return (
         deletable ?
             (
                 <ConteinerInfoDelete style={{ marginTop: 20, marginBottom: 20 }}>
-                    <TextHeader>Excluir usuário</TextHeader>
+                    <TextHeader>{t("exclude.Header")}</TextHeader>
                     <TextDescription>
-                        Validação de usuário:
+                        {t("exclude.LabelUser")}
                     </TextDescription>
                     <Input
                         style={{ width: '90%' }}
-                        placeholder={"Para excluir conta digite sua senha!"}
+                        placeholder={t("exclude.placeholder")}
                         secureTextEntry={true} value={password}
                         onChangeText={setPassword}
                     ></Input>
                     <RowConfirmation>
                         <ContainerCancelButton onPress={() => setDeletable(false)}>
-                            <CancelButton>Cancelar</CancelButton>
+                            <CancelButton>{t('validation.cancel')}</CancelButton>
                         </ContainerCancelButton>
                         <ContainerSVG onPress={() => handleDelete()}>
                             <FontAwesome name={'trash'} size={30} color="#cc0000" />
@@ -261,20 +275,95 @@ const ConfirmDelete = ({ deletable, setDeletable }) => {
             :
             (
                 <ButtonConfigure onPress={() => setDeletable(true)}>
-                    <TextButton>DESATIVAR CONTA</TextButton>
+                    <TextButton>{t('configScreen.DesactiveAccount')}</TextButton>
                 </ButtonConfigure>
             )
     )
 };
 
 export function ConfigureAccount() {
+    const { t } = useTranslation();
+    const  { user, modifyUser}  = useUser();
     const [editablePass, setEditablePass] = useState(false);
+    const [loadingImage, setLoadingImage] = useState(false);
     const [deletable, setDeletable] = useState(false);
+    const [imageSelect, setImageSelect] = useState(user?.pfp);
+
+    useEffect(()=>{
+        setImageSelect(user?.pfp)
+    },[user]);
+
+    useEffect(() => {
+        (async () => {
+         
+            const cameraRollStatus =
+              await ImagePicker.requestMediaLibraryPermissionsAsync();
+          
+            if (
+              cameraRollStatus.status !== "granted" 
+            ) {
+              alert("Usuario sem permição para utilizar mídias");
+            }
+          
+        })();
+      }, []);
+
+      const pickImage = async () => {
+
+        try {
+            let result = await ImagePicker.launchImageLibraryAsync({
+                mediaTypes: "Images",
+                aspect: [4, 3],
+                quality: 1,
+              })
+      
+              console.log(result);
+              
+              setLoadingImage(true);
+              await upload(result, user, modifyUser)
+              setLoadingImage(false);
+            
+        } catch (error) {
+
+            console.log(error.message);
+        }
+        
+
+
+    }
+
     return (
         <Container >
             {!editablePass &&
                 <>
-                    <TextHeader>Minha conta</TextHeader>
+                    <TextHeader>{t("configScreen.Header")}</TextHeader>
+
+                    <ContainerImage>
+                        <AreaImage>
+                            {
+                                !loadingImage ?  
+                                    (imageSelect !== null? 
+                                        <Image
+                                            source={
+                                                {uri:variables.IMAGES_URL+imageSelect}
+                                            }
+                                            style={{
+                                                width:"100%",
+                                                height:"100%"
+                                            }}
+                                        />   
+                                    :
+                                    <ButtonImage onPress = {()=> pickImage()}>
+                                        <MaterialIcons name="add-a-photo" size={40} color="#dddddd" />
+                                    </ButtonImage>         )
+                                :
+                                <AreaImage>
+                                    <Loading   loading={loadingImage} size={40}/>
+                                </AreaImage>
+                            }
+                        
+                        </AreaImage>
+                    </ContainerImage>
                     <DataUser></DataUser>
                 </>}
             <ChangePassword editable={editablePass} setEditable={setEditablePass}></ChangePassword>

@@ -7,8 +7,7 @@ import { styles as stylesGlobal } from '../../global/styles'
 import { ButtonLinguage } from "../../components/buttonChangeLinguage"
 import { DoubleButtonConfirmation } from "../../components/doubleButtonConfirmation"
 
-
-export function CreateAccountStudent({ navigation, route }) {
+export function addCertificado({ navigation, route }) {
     const { t } = useTranslation()
     const [valor, setValor] = useState('');
     const [check, setCheck] = useState(false);
@@ -33,7 +32,7 @@ export function CreateAccountStudent({ navigation, route }) {
      
             navigation.navigate('Login');
         } else {
-            console.log("error validacao");
+        
         }
     };
     function handleBack() {

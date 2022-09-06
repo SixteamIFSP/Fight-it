@@ -16,19 +16,19 @@ export const CardView = styled.TouchableOpacity`
     z-index:1;
     width:100%;
     height:auto;
-    padding:5px;
+    padding:10px;
     margin-bottom:20px;
     border-color:black;
     border-width:0.5px;
     border-radius:4px;
     background-color: white;
     border-top-width:6px;
-    borderColor: #3d3d3d;
-    borderStyle: solid;
+    border-color: #3d3d3d;
+    border-style: solid;
 `;
 export const CardTitle = styled.Text`
     color:#000;
-    font-size:24px;
+    font-size:16px;
     font-weight:bold;
     margin-bottom:20px;
 `;
@@ -57,10 +57,10 @@ export const CardCreateClasss = styled.View`
     margin-right:auto;
     margin-top:20px;
     border-top-width:6px;
-    borderColor: #3d3d3d;
+    border-color: #3d3d3d;
     border-width:0.5px;
     border-radius: 4px;
-    borderStyle: solid;
+    border-style: solid;
     width:90%;
     padding:16px;
     background-color: white;

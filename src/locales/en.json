@@ -1,16 +1,33 @@
 {
     "translation": {
         "appName": "Fight It",
+        "validation": {
+            "confirm": "Confirm",
+            "cancel": "Cancel"
+        }, 
+        "form":{
+            "mail": "E-mail",
+            "password": "Password",
+            "name": "Name",
+            "phone": "Phone",
+            "notification":"Receive Notification",
+            "confirmPassword": "Confirm Passoword",
+            "date":"Date"
+        },
+        "toast":{
+            "error":{
+                "blank":"Error: Fill in all fields!",
+                "invalid": {
+                    "email":"Enter a valid email"
+                }
+            }
+        },
         "login": {
             "mail": "E-mail",
             "password": "Password",
             "connect": "Connect",
             "forgotPass": "Forgot Password?",
             "CreateAccount": "Create Account"
-        },
-        "validation": {
-            "confirm": "Confirm",
-            "cancel": "Cancel"
         },
         "createAccount": {
             "title": "Create Account",
@@ -43,6 +60,85 @@
         "header":{
             "teacher":"Teacher",
             "student":"Student"
+        },
+        "nav":{
+            "config": "Configuration"
+        },
+        "configScreen":{
+            "Header":"My Account",
+            "MessageAlert":"User without permition to use media",
+            "Active":"Active",
+            "Deactivated":"Deactivated",
+            "ChangePass": "CHANGE PASSWORD",
+            "DesactiveAccount": "DEACTIVATE ACCOUNT"
+        },
+        "changePass":{
+            "Header": "Change Password",
+            "OldPass":"Old Password",
+            "NewPass":"New Password",
+            "ConfirmPass":"Password Confirmation"
+        },
+        "exclude":{
+            "Header":"Delete Account",
+            "LabelUser":"User validation",
+            "placeholder":"To delete your account enter your password!"  
+        },
+        "navigationHeader":{
+            "Class":"Class",
+            "ClassDescription":"Class: {{name}}",
+            "StudentDescription":"Student: {{name}}",
+            "Evaluation": "Evaluation {{name}}"
+        },
+        "createClass":{
+            "Header":"Create new class",
+            "Placeholder":{
+                "Nome":"Class name",
+                "Description":"Class description"
+            }
+        },
+        "classView":{
+            "Student":{
+                "Header":"Student listing"  
+            }
+        },
+        "addStudentClass":{
+            "Header":"Add Student",
+            "Placeholder":{
+                "mail":"Enter student's email"
+            }
+        },
+        "studentView":{
+            "Header":"Evaluation",
+            "ButtonAvaliation":"Evaluate Student"
+        },
+        "evaluationStudent":{
+            "Header":"CREATE EVALUETION",
+            "Description":"Performance Dates",
+            "Fields":{
+                "Name":"Name: {{name}}",
+                "Date":"Date: {{date}}"
+            }
+        },
+        "createEvaluation":{
+            "Header": "Performance creation",
+            "Label":{
+                "Name":"Performance name",
+                "Date":"Performance date"
+
+            }
+        },
+        "parameterCriation":{
+            "Header": "Parameter creation",
+            "Label":{
+                "Select": "Select parameter",
+                "insertName":"Enter the name of the new parameter",
+                "SelectType":"Select parameter type"
+            },
+            "Buttons":{
+                "Submit":"Submit evaluation",
+                "Create":"Create new parameter"
+               
+            }
         }
     }
 }

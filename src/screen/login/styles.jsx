@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 
-
 export const styles = StyleSheet.create({
     container: {
         width: '100%',
@@ -20,6 +19,7 @@ export const styles = StyleSheet.create({
     button: {
         alignItems: "center",
         backgroundColor: "#DDDDDD",
+        width:'40%',
         padding: 10,
         marginBottom: 12,
         marginTop: 16,
@@ -28,6 +28,7 @@ export const styles = StyleSheet.create({
         margin: 12,
     },
     TitleLogin: {
+        fontSize:42,
         marginTop: 12,
         marginBottom: 12,
     },
