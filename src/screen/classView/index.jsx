@@ -29,7 +29,7 @@ import {
     RenderAulaContainer,
     Equipamento,
     TextWhite,
-    CancelarAula
+    CancelarAula,
     AddContainerView,
     styles,
 } from "./styles";
