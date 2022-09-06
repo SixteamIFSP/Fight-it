@@ -8,7 +8,6 @@ import { adicionarAluno, adicionarAula, getAlunosTurma, removeAula } from "../..
 import { Loading } from "../../components/loading";
 import { toastMessage } from "../../util/toastMessage";
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { useTranslation } from "react-i18next";
 
 
 import {
@@ -20,8 +19,6 @@ import {
     ContainerFlat,
     TextDescription,
     TextTouchable,
-    AddContainerView,
-    styles,
     ClassText,
     AdicionarAulaContainer,
     AdicionarAulaButton,
