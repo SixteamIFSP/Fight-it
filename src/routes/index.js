@@ -12,6 +12,7 @@ import { useTranslation } from 'react-i18next';
 import { FontAwesome } from '@expo/vector-icons';
 import { ConfigureAccount } from '../screen/configureAccount';
 import { ClassStack } from './classStack';
+import { CreateTriagem } from '../screen/createTriagem';
 
 const TabNavegation = createBottomTabNavigator();
 const AppRoutes = createNativeStackNavigator();
@@ -116,6 +117,10 @@ function StackAuth() {
         navigationKey='CreateAccount'
         name="CreateAccount"
         component={CreateAccount} />
+        <AppRoutes.Screen
+        navigationKey='CreateTriagem'
+        name="CreateTriagem"
+        component={CreateTriagem} />
 
     </AppRoutes.Navigator>
   )
