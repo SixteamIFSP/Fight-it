@@ -108,7 +108,8 @@
         },
         "studentView":{
             "Header":"Desempenho",
-            "ButtonAvaliation":"Avaliar Aluno"
+            "ButtonAvaliation":"Avaliar Aluno",
+            "ButtonViewTriagem":"Visualizar Triagem"
         },
         "evaluationStudent":{
             "Header":"AVALIAÇÃO",

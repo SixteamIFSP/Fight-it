@@ -1,10 +1,10 @@
 import { api } from "../services/api";
 import { toastMessage } from "../util/toastMessage";
 
-export async function createTriagem(data, id){
+export async function createTriagem(data, alunoId){
     
         try {
-              const  response = await api.post('/triagem/criarTriagem', {...data});
+              const  response = await api.post('/triagem/criarTriagem', {...data, alunoId});
   
             if (response.data.status){
                 toastMessage(true, response?.data.mensagem)
@@ -20,3 +20,19 @@ export async function createTriagem(data, id){
 }
 
 
+
+export async function getTriagem(id){
+    
+    try {
+          const  response = await api.get('/triagem/acessarTriagem/' + id, {...data});
+        if (response.data.status){
+            toastMessage(true, response?.data.mensagem)
+            return response?.data?.result
+        } else{
+            toastMessage(false, response?.data.mensagem)   
+        }
+       
+    } catch (error) {
+        toastMessage(false, 'Erro de conexão!') 
+    }
+}

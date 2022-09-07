@@ -39,6 +39,10 @@ export function StudantView({ navigation, route }) {
         navigation.navigate('EvaluationStudent', { ...route?.params, title: t("navigationHeader.Evaluation", { name: route?.params.nome }) })
     }
 
+    function handleViewTriagem() {
+        navigation.navigate('TriagemView', { ...route?.params, title: 'Triagem do '+route?.params.nome })
+    }
+
     async function handleLoadingParams() {
         if (loading) return;
         setLoading(true);
@@ -70,6 +74,9 @@ export function StudantView({ navigation, route }) {
             <ContainerButtons>
                 <ContentButtons onPress={() => handleEvaluation()}>
                     <TextButtons>{t("studentView.ButtonAvaliation")}</TextButtons>
+                </ContentButtons>
+                <ContentButtons onPress={() => handleViewTriagem()}>
+                    <TextButtons>{t("studentView.ButtonViewTriagem")}</TextButtons>
                 </ContentButtons>
             </ContainerButtons>
 

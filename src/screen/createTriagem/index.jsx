@@ -45,7 +45,7 @@ export function CreateTriagem({navigation, route}) {
         setLoading(true);
          //TODO: CREATE ACCOUNT DEVE RETORNAR ID PARA QUE SEJA POSSÍVEL CRIAR A TRIAGEM DO ALUNO  SENDO CADASTRADO
          const id = await createAccount(route.params.data, false);
-         const idChumbadoEnquantoServicoCreateAccountNaoRetornaID = 1
+         const idChumbadoEnquantoServicoCreateAccountNaoRetornaID = 5
          await  createTriagem(data, idChumbadoEnquantoServicoCreateAccountNaoRetornaID)
          setLoading(false);
          navigation.navigate('Login');
