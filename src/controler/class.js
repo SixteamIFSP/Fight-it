@@ -27,8 +27,8 @@ export async function getClass(setClasses, idUsuario, type){
 
 export async function createClass(data){ // data => { nome:string, descricao:string, professorId:number}
     try {
-        response = await api.post(`/turma/criar`, {...data});
-
+      const response = await api.post(`/turma/criar`, {...data});
+      
         if (response?.data.status){
             toastMessage(true, response?.data.mensagem) 
 
@@ -92,3 +92,42 @@ export async function deleteTurma(turmaId){
         toastMessage(false, 'Erro de conexão!') 
     }
 }
+
+export async function adicionarAula(data){
+
+    try {
+        const response = await api.post(`/aula/criarAula`, {...data});
+
+
+        if (response?.data.status){
+            toastMessage(true, response?.data.message) 
+
+        } else{
+            toastMessage(false, response?.data.message) 
+        }
+        
+    } catch (error) {
+        console.log(error);
+        toastMessage(false, 'Erro de conexão!') 
+    }
+}
+
+export async function removeAula(aula){
+
+    try {
+        const response = await api.patch(`/aula/deletarAula`, {aula});
+
+        console.log(response?.data);
+
+        if (response?.data.status){
+            toastMessage(true, response?.data.mensagem) 
+
+        } else{
+            toastMessage(false, response?.data.mensagem) 
+        }
+        
+    } catch (error) {
+        toastMessage(false, 'Erro de conexão!') 
+    }
+}
+

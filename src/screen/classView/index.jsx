@@ -1,12 +1,15 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Text, View } from "react-native";
+import { Text, View, TouchableOpacity, ScrollView } from "react-native";
 import { AddButton } from "../../components/addButton";
 import { DoubleButtonConfirmation } from "../../components/doubleButtonConfirmation";
 import { Input } from "../../components/input";
+import { adicionarAluno, adicionarAula, getAlunosTurma, removeAula } from "../../controler/class";
 import { Loading } from "../../components/loading";
-import { adicionarAluno, getAlunosTurma } from "../../controler/class";
 import { toastMessage } from "../../util/toastMessage";
+import DateTimePicker from '@react-native-community/datetimepicker';
+
+
 import {
     Container,
     ContainerListColumn,
@@ -16,6 +19,14 @@ import {
     ContainerFlat,
     TextDescription,
     TextTouchable,
+    ClassText,
+    AdicionarAulaContainer,
+    AdicionarAulaButton,
+    DeleteButton,
+    RenderAulaContainer,
+    Equipamento,
+    TextWhite,
+    CancelarAula,
     AddContainerView,
     styles,
 } from "./styles";
@@ -42,7 +53,7 @@ function RenderListAluno ({ item, navigation, data }) {
             <Text>{item?.Nome}</Text>
         </TextTouchable>
     );
-}
+};
 
 function AdicionarAluno({ turmaId, setback }) {
     const { t } = useTranslation();
@@ -50,7 +61,7 @@ function AdicionarAluno({ turmaId, setback }) {
     const [mail, setMail] = useState('');
 
     function handleBack() {
-        setback(false)
+        setback()
     }
     async function handleSubmit() {
         if (mail === '' || mail.indexOf("@") === -1) {
@@ -97,90 +108,85 @@ function AdicionarAluno({ turmaId, setback }) {
     )
 };
 
+
+
+function RenderAula({aula, onDeleteAula}) {
+    console.log(aula)
+    return (
+        <RenderAulaContainer>
+             <Text>{aula.Nome}</Text>
+             <CancelarAula
+             onPress={() => onDeleteAula(aula.id)}>
+                <TextWhite>Cancelar aula</TextWhite>
+            </CancelarAula>
+        </RenderAulaContainer>
+    )
+}
+
 export function ClassView({ navigation, route }) {
     const { t } = useTranslation();
     const { id, Nome, ProfessorId, Descricao } = route.params.data;
     const [dataAlunos, setDataAlunos] = useState([]);
     const [adicionarAluno, setAdicionarAluno] = useState(false);
 
-    const { setCallback } = useModal();
-    const isFocused = useIsFocused();
-
-    function callBackDeleteTurma(){
-        deleteTurma(id);
-        navigation.goBack()
-    }
-    
-    useEffect(()=>{
-        console.log("Chamou o Effect TURMA!!", isFocused);
-        function effect (){
-            setCallback("Deseja apagar a turma?", ()=> callBackDeleteTurma() );
-        };
-        isFocused && effect();
-    }, [isFocused])
-    
-   
-    
     function HandleChangeAddAluno() {
         setAdicionarAluno((value) => !value)
     };
 
     useEffect(() => {
-        if (!adicionarAluno) {
+        console.log(new Date().getHours())
+        if (page === pageDefault) {
             getAlunosTurma(setDataAlunos, id);
-        };
-    }, [adicionarAluno]);
+        }
+    }, []);
 
     return (
         <Container>
             {
-                adicionarAluno ?
-                    <AdicionarAluno
-                        setback={setAdicionarAluno}
-                        turmaId={id}
-                    ></AdicionarAluno>
-                    :
-                    <ContainerListColumn>
-                        <ContainerList>
-                            <Text>{t('classView.Student.Header')}</Text>
-                            <ContainerFlat>
-                                <ContentListagem
-                                    data={dataAlunos}
-                                    renderItem={
-                                        ({ item }) => <RenderListAluno
-                                            item={item}
-                                            navigation={navigation}
-                                            data={
-                                                { nomeTurma: Nome, id: id, ProfessorId: ProfessorId }
-                                            }></RenderListAluno>}
-                                    keyExtractor={item => `${item.Nome}` + '91'}>
-                                </ContentListagem>
-                            </ContainerFlat>
-
-                            <AddContainer>
-                                <AddButton handle={() => HandleChangeAddAluno()} />
-                            </AddContainer>
-
-                        </ContainerList>
-                        {/* <ContainerList>
-                    <Text>Listagem De aulas:</Text>
-                        <ContainerFlat>
-
+                page === pageAddAluno && <AdicionarAluno setback={() => handleOpenPage(pageDefault)} turmaId={id}></AdicionarAluno>
+            }
+            {
+                page === pageDefault &&  <ContainerListColumn>
+                <ContainerList>
+                    <Text>{t('classView.Student.Header')}</Text>
+                    <ContainerFlat>
                         <ContentListagem
                             data={dataAlunos}
-                            renderItem={({item})=> <RenderListAluno item={item}></RenderListAluno>}
-                            keyExtractor={item => item.Nome+'91'}>
+                            renderItem={
+                                ({ item }) => <RenderListAluno
+                                    item={item}
+                                    navigation={navigation}
+                                    data={
+                                        { nomeTurma: Nome, id: id, ProfessorId: ProfessorId }
+                                    }></RenderListAluno>}
+                            keyExtractor={item => `${item.Nome}` + '91'}>
+                        </ContentListagem>
+                    </ContainerFlat>
 
-                        </ContentListagem> 
-                        </ContainerFlat>
-                        
-                        <AddContainer>
+                    <AddContainer>
+                        <AddButton handle={() => handleOpenPage(pageAddAluno)} />
+                    </AddContainer>
 
-                            <AddButton handle={()=>null}/>
-                        </AddContainer>
-                        
-                    </ContainerList> */}
-                    </ContainerListColumn>
+                </ContainerList>
+                <ContainerList>
+                    <AddContainer>
+                        <AddButton handle={() => handleOpenPage(pageAddLesson)} />
+                    </AddContainer>
+                    <ClassText>Aulas:</ClassText>
+                    <ContainerFlat>
+                        <ContentListagem
+                            data={dataAlunos}
+                            renderItem={
+                                ({ item }) => <RenderAula aula={item} onDeleteAula={onDeleteAula}/>
+                            }
+                            keyExtractor={item => item.Nome + '91'}>
+                        </ContentListagem>
+                    </ContainerFlat>
+                </ContainerList>
+            </ContainerListColumn>
+       }
+            {
+                page === pageAddLesson && <AdicionarAula turmaId={id} setback={() => handleOpenPage(pageDefault)}/>
             }
             {/*grafico */}
         </Container>
