@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
 import { AddButton } from "../../components/addButton";
@@ -20,9 +20,12 @@ import {
     styles,
 } from "./styles";
 import Divider from 'react-native-divider';
+import { useModal } from "../../hooks/modalConfirmation";
+import { useIsFocused } from "@react-navigation/native";
+import { deleteTurma } from '../../controler/class';
 
-const RenderListAluno = ({ item, navigation, data }) => {
-    const { t } = useTranslation()
+function RenderListAluno ({ item, navigation, data }) {
+    const { t } = useTranslation();
     function handleTouch() {
         navigation.navigate(
             'StudantView',
@@ -39,7 +42,7 @@ const RenderListAluno = ({ item, navigation, data }) => {
             <Text>{item?.Nome}</Text>
         </TextTouchable>
     );
-};
+}
 
 function AdicionarAluno({ turmaId, setback }) {
     const { t } = useTranslation();
@@ -96,10 +99,28 @@ function AdicionarAluno({ turmaId, setback }) {
 
 export function ClassView({ navigation, route }) {
     const { t } = useTranslation();
-    const { Descricao, ProfessorId, Nome, id } = route.params.data;
+    const { id, Nome, ProfessorId, Descricao } = route.params.data;
     const [dataAlunos, setDataAlunos] = useState([]);
     const [adicionarAluno, setAdicionarAluno] = useState(false);
 
+    const { setCallback } = useModal();
+    const isFocused = useIsFocused();
+
+    function callBackDeleteTurma(){
+        deleteTurma(id);
+        navigation.goBack()
+    }
+    
+    useEffect(()=>{
+        console.log("Chamou o Effect TURMA!!", isFocused);
+        function effect (){
+            setCallback("Deseja apagar a turma?", ()=> callBackDeleteTurma() );
+        };
+        isFocused && effect();
+    }, [isFocused])
+    
+   
+    
     function HandleChangeAddAluno() {
         setAdicionarAluno((value) => !value)
     };

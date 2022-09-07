@@ -1,36 +1,30 @@
-import { Text, View, Modal, Pressable } from "react-native";
 import React, { useState } from "react";
+import { Text, View, Modal, Pressable } from "react-native";
 import { styles } from "./styles";
 
-export function FightItModal({ textButton, modalText, modalActive }) {
-    const [setModalActive] = useState(false);
+export const ConfirmModal = ({value, changeModal, textModal, confirmAction})=>{
+    console.log(value, changeModal, textModal, confirmAction);
     return (
         <View style={styles.modal}>
             <Modal
                 animationType="slide"
                 transparent={true}
-                visible={modalActive}
-                onRequestClose={() => { setModalActive(false) }}
+                visible={value}
             >
                 <View style={styles.outerView}>
+                   
                     <View style={styles.modalView}>
-                            <Text style={styles.textLine}>{modalText ? modalText.toUpperCase() : ''}</Text>
-                            <Pressable onPress={() => setModalActive(false)}>
-                                <Text style={styles.textClose}>{textButton ? textButton.toUpperCase() : 'FECHAR'}</Text>
-                            </Pressable>
+                        <Text style={styles.textLine}>{textModal ? textModal.toUpperCase() : ''}</Text>
+                        <Pressable onPress={() => confirmAction()}>
+                            <Text style={styles.textClose}>{'CONFIRMAR'}</Text>
+                        </Pressable>
+                        <Pressable onPress={() =>changeModal()}>
+                            <Text style={styles.textClose}>{'FECHAR'}</Text>
+                        </Pressable>
                     </View>
+
                 </View>
             </Modal>
-        </View>
+        </View> 
     )
 }
-
-/* uso
-  let [setModalVisible] = useState(false);
-      <FightItModal
-        textButton="FECHAR"
-        modalText
-        modalActive={visibleModal}
-      ></FightItModal>
-      <Text onPress={() => { visibleModal = true }}>assasa</Text>
-      */

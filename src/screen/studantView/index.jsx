@@ -14,7 +14,8 @@ import {
     TextButtons
 } from "./styles";
 import { useTranslation } from "react-i18next";
-import { useFocusEffect } from "@react-navigation/native";
+import { useIsFocused } from "@react-navigation/native";
+import { useModal } from "../../hooks/modalConfirmation";
 
 function CardParamStudant({ item, handleGraphyc }) {
 
@@ -26,14 +27,21 @@ function CardParamStudant({ item, handleGraphyc }) {
 };
 export function StudantView({ navigation, route }) {
     const { t } = useTranslation();
+    const { setCallback } = useModal();
     const [loading, setLoading] = useState(false);
     const [paramsAluno, setParamsAluno] = useState([]);
     const [loadingGraphyc, setLoadingGraphyc] = useState(false);
     const [dataParams, setDataParams] = useState([]);
+    const isFocused = useIsFocused();
 
-    useEffect(() => {
-        handleLoadingParams()
-    }, [])
+    useEffect(()=>{
+        console.log("Chamou o Effect CLASS!!", isFocused);
+        function effect (){
+            handleLoadingParams()
+            setCallback("Deseja apagar aluno?", ()=> console.log(id));
+        };
+        isFocused && effect();
+    }, [isFocused])
     
     function handleEvaluation() {
         navigation.navigate('EvaluationStudent', { ...route?.params, title: t("navigationHeader.Evaluation", { name: route?.params.nome }) })

@@ -10,12 +10,6 @@ export function HomeScreenTeacher({ navigation }) {
   const { user } = useUser();
   return (
     <View style={stylesGlobal.container}>
-      <FightItModal
-        textButton="FECHAR"
-        modalText="textinho"
-        modalActive={true}
-      ></FightItModal>
-
       <ButtonLogout />
       <Text>{t('homePage.teacher.message')} {user?.nome}</Text>
     </View>
