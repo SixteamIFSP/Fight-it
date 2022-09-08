@@ -35,6 +35,119 @@ import { useModal } from "../../hooks/modalConfirmation";
 import { useIsFocused } from "@react-navigation/native";
 import { deleteTurma } from '../../controler/class';
 
+function AdicionarAula({ turmaId, setback }) {
+    const [topicoAula, setTopicoAula] = useState('')
+    const [date, setDate] = useState(new Date())
+    const [time, setTime] = useState(new Date())
+    const [equipamentos, setEquipamentos] = useState([])
+    const [selectectDateIsOpen, setSelectedDateIsOpen] = useState(false)
+    const [selectTimeIsOpen, setSelectTimeIsOpen] = useState(false)
+    const [equipamento, setEquipamento ] = useState('')
+
+    function handleBack() {
+        setback()
+    }
+    function handleSubmit() {
+        if (!topicoAula) {
+            toastMessage(false, 'Digite um tópico de aula');
+            return
+        }
+        const data = {
+            topicoAula,
+            date: date.toLocaleDateString(),
+            time: time.toLocaleTimeString(),
+            equipamentos
+        }
+        adicionarAula(data)
+        setback();
+    }
+
+    useEffect(() =>{
+    }, []) 
+
+    return (
+        <AdicionarAulaContainer>
+            <TextDescription>Adicionar aula</TextDescription>
+            <Input
+                value={topicoAula}
+                placeholder={'Tópico da aula'}
+                onChangeText={setTopicoAula}
+            />
+            <TouchableOpacity onPress={() => {setSelectedDateIsOpen(true)}}>
+                <Text>Data da aula</Text>
+                <Text>{date.toLocaleDateString()}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => {setSelectTimeIsOpen(true)}}>
+                <Text>Horário da aula</Text>
+                <Text>{time.toLocaleTimeString()}</Text>
+            </TouchableOpacity>
+             {selectectDateIsOpen && <DateTimePicker
+              themeVariant="dark"
+              testID="dateTimePicker"
+              value={date}
+              mode="date"
+              format="DD-MM-YYYY"
+              minimumDate={new Date() - 1}
+              is24Hour={true}
+              display="default"
+              onChange={(event, date) => {
+               if(date) { 
+                 setDate(date)
+               } 
+               setSelectedDateIsOpen(false)
+              }}
+              positiveButtonLabel="OK!" 
+           />}
+             {
+                selectTimeIsOpen && < DateTimePicker
+                testID="dateTimePicker"
+                value={new Date()}
+                mode="time"
+                is24Hour={true}
+                display="default"
+                onChange={(event, date) => {
+                    if(date) { 
+                      setTime(date)
+                    } 
+                    setSelectTimeIsOpen(false)
+                }}
+             />
+             }
+
+            <Input 
+                   value={equipamento}
+                   placeholder={'Nome do equipamento'}
+                   onChangeText={setEquipamento}
+                 />
+                <AdicionarAulaButton 
+                 disabled={!equipamento}
+                 onPress={() => {               
+                    setEquipamentos(e => [...e, equipamento])
+                    setEquipamento('')
+                }}>
+                    <TextWhite >Adicionar equipamento</TextWhite>
+                </AdicionarAulaButton>
+                <Text>Equipamentos da aula:</Text>
+            <ScrollView style={{marginTop: 10}}>
+                {equipamentos.map((equipamento, index) => <Equipamento key={index}>
+                    <Text>{equipamento}</Text>
+                    <DeleteButton onPress={() => {
+                        const eqpm = equipamentos
+                        eqpm.splice(index,1)
+                        setEquipamentos([...eqpm])
+                     }}>
+                        <Text style={{color: 'black'}}>X</Text>
+                     </DeleteButton>
+                    </Equipamento>)}
+            </ScrollView>
+            <DoubleButtonConfirmation
+                handleBack={handleBack}
+                handleConfirm={handleSubmit
+                }></DoubleButtonConfirmation>
+        </AdicionarAulaContainer>
+    )
+}
+
 function RenderListAluno ({ item, navigation, data }) {
     const { t } = useTranslation();
     function handleTouch() {
@@ -108,8 +221,6 @@ function AdicionarAluno({ turmaId, setback }) {
     )
 };
 
-
-
 function RenderAula({aula, onDeleteAula}) {
     console.log(aula)
     return (
@@ -128,66 +239,89 @@ export function ClassView({ navigation, route }) {
     const { id, Nome, ProfessorId, Descricao } = route.params.data;
     const [dataAlunos, setDataAlunos] = useState([]);
     const [adicionarAluno, setAdicionarAluno] = useState(false);
+    const [page, setPage ] = useState(1);
+    const { setCallback } = useModal();
+    const isFocused = useIsFocused();
 
+    function callBackDeleteTurma(){
+        deleteTurma(id);
+        navigation.goBack()
+    }
+    
+    function handleOpenPage(pageNumber) {
+        setPage(pageNumber)
+    }
+    
     function HandleChangeAddAluno() {
         setAdicionarAluno((value) => !value)
     };
+    
+    function onDeleteAula(aulaID) {
+        removeAula(aulaID).then(() => {
+            const index = dataAulas.findIndex(e => e.id = aulaID)
+            const data = dataAulas
+            data.splice(index, 1)
+            setDataAulas([...data])
+        })
+    }
 
     useEffect(() => {
-        console.log(new Date().getHours())
-        if (page === pageDefault) {
-            getAlunosTurma(setDataAlunos, id);
-        }
+        if (!isFocused) return;   
+        function effect (){
+            setCallback("Deseja apagar a turma?", ()=> callBackDeleteTurma() );
+        };
+
+        effect();
+        getAlunosTurma(setDataAlunos, id);
     }, []);
+    
+    const pageView = {
+        1: 
+        <ContainerListColumn>
+            <ContainerList>
+                <ClassText>{t('classView.Student.Header')}</ClassText>
+                <ContainerFlat>
+                    <ContentListagem
+                        data={dataAlunos}
+                        renderItem={
+                            ({ item }) => <RenderListAluno
+                                item={item}
+                                navigation={navigation}
+                                data={
+                                    { nomeTurma: Nome, id: id, ProfessorId: ProfessorId }
+                                }></RenderListAluno>}
+                        keyExtractor={item => `${item.Nome}` + '91'}>
+                    </ContentListagem>
+                </ContainerFlat>
+
+                <AddContainer>
+                    <AddButton handle={() => handleOpenPage(pageAddAluno)} />
+                </AddContainer>
+
+            </ContainerList>
+            <ContainerList>
+                <AddContainer>
+                    <AddButton handle={() => handleOpenPage(pageAddLesson)} />
+                </AddContainer>
+                <ClassText>Aulas:</ClassText>
+                <ContainerFlat>
+                    <ContentListagem
+                        data={dataAlunos}
+                        renderItem={
+                            ({ item }) => <RenderAula aula={item} onDeleteAula={onDeleteAula}/>
+                        }
+                        keyExtractor={item => item.Nome + '91'}>
+                    </ContentListagem>
+                </ContainerFlat>
+            </ContainerList>
+        </ContainerListColumn>,
+        2: <AdicionarAluno setback={() => handleOpenPage(pageDefault)} turmaId={id}></AdicionarAluno>,
+        3: <AdicionarAula turmaId={id} setback={() => handleOpenPage(pageDefault)}/>
+    }
 
     return (
         <Container>
-            {
-                page === pageAddAluno && <AdicionarAluno setback={() => handleOpenPage(pageDefault)} turmaId={id}></AdicionarAluno>
-            }
-            {
-                page === pageDefault &&  <ContainerListColumn>
-                <ContainerList>
-                    <Text>{t('classView.Student.Header')}</Text>
-                    <ContainerFlat>
-                        <ContentListagem
-                            data={dataAlunos}
-                            renderItem={
-                                ({ item }) => <RenderListAluno
-                                    item={item}
-                                    navigation={navigation}
-                                    data={
-                                        { nomeTurma: Nome, id: id, ProfessorId: ProfessorId }
-                                    }></RenderListAluno>}
-                            keyExtractor={item => `${item.Nome}` + '91'}>
-                        </ContentListagem>
-                    </ContainerFlat>
-
-                    <AddContainer>
-                        <AddButton handle={() => handleOpenPage(pageAddAluno)} />
-                    </AddContainer>
-
-                </ContainerList>
-                <ContainerList>
-                    <AddContainer>
-                        <AddButton handle={() => handleOpenPage(pageAddLesson)} />
-                    </AddContainer>
-                    <ClassText>Aulas:</ClassText>
-                    <ContainerFlat>
-                        <ContentListagem
-                            data={dataAlunos}
-                            renderItem={
-                                ({ item }) => <RenderAula aula={item} onDeleteAula={onDeleteAula}/>
-                            }
-                            keyExtractor={item => item.Nome + '91'}>
-                        </ContentListagem>
-                    </ContainerFlat>
-                </ContainerList>
-            </ContainerListColumn>
-       }
-            {
-                page === pageAddLesson && <AdicionarAula turmaId={id} setback={() => handleOpenPage(pageDefault)}/>
-            }
+           { pageView[page] }
             {/*grafico */}
         </Container>
     );

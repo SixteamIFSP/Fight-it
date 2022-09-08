@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Text, View, Modal, Pressable } from "react-native";
 import { styles } from "./styles";
 
-export function FightItModal({ textButton, modalText, modalActive }) {
-    const [setModalActive] = useState(false);
+export const ConfirmModal = ({value, changeModal, textModal, confirmAction})=>{
+    console.log(value, changeModal, textModal, confirmAction);
     return (
         <View style={styles.modal}>
             <Modal
