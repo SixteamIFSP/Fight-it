@@ -32,10 +32,6 @@ export function Login({ navigation }) {
     setLoading(false);
   }
 
-  function onHandleForgotPass() {
-
-  }
-
   function onHandleCreateAccount() {
     navigation.navigate('CreateAccount');
   }
