@@ -2,6 +2,7 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
     modal: {
+        position:'absolute',
         flex: 1,
         backgroundColor: 'white',
         justifyContent: 'center',

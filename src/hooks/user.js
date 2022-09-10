@@ -44,7 +44,6 @@ function UserProvider({ children }) {
             });
             toastMessage(true, "Login efetuado com sucesso");
         } catch (error) {  
-            console.log(error);       
             toastMessage(false, "Erro de conexão!");
         }
     }

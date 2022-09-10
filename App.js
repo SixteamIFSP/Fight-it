@@ -4,6 +4,7 @@ import { Router } from './src/routes';
 import Toast, { BaseToast, ErrorToast } from 'react-native-toast-message';
 import { UserProvider } from './src/hooks/user';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { ModalProvider } from './src/hooks/modalConfirmation';
 
 const toastConfig = {
   success: (props) => (
@@ -39,14 +40,17 @@ const toastConfig = {
 export default function App() {
   return (
     <UserProvider>
-      <NavigationContainer >
-        <SafeAreaView style={styles.container}>
-          <Router />
-          <Toast
-            config={toastConfig}
-          />
-        </SafeAreaView>
-      </NavigationContainer>
+     
+        <ModalProvider>
+        <NavigationContainer >
+          <SafeAreaView style={styles.container}>
+            <Router />
+            <Toast
+              config={toastConfig}
+            />
+          </SafeAreaView>
+        </NavigationContainer>
+      </ModalProvider>
     </UserProvider>
   );
 };

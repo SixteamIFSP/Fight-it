@@ -50,7 +50,7 @@ export const TextTitle = styled.Text`
 export const ContainerForm = styled.View`
     align-items: center;
     width:100%;
-    margin-bottom:30px;
+    margin-bottom: 30px;
 `;
 export const CardCreateClasss = styled.View`
     margin-left:auto;

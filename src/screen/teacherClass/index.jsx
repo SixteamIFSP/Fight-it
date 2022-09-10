@@ -18,6 +18,7 @@ import { toastMessage } from "../../util/toastMessage";
 import { AddButton } from "../../components/addButton";
 import { Loading } from "../../components/loading";
 import { useTranslation } from 'react-i18next';
+import { useIsFocused } from "@react-navigation/native";
 
 function CardTurma({ data, handleNewScreen }) {
     const { t } = useTranslation()
@@ -32,10 +33,16 @@ function CardTurma({ data, handleNewScreen }) {
 function LoadingClass({ user, setCreateNew, navigation }) {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
+    const isFocused = useIsFocused();
 
-    useEffect(() => {
-        handleLoadMore();
-    }, []);
+    useEffect(()=>{
+        function effect (){
+            setData([])
+            console.log("TURMAs", isFocused )
+            handleLoadMore();
+        };
+        isFocused && effect();
+    }, [isFocused])
 
     async function handleLoadMore() {
         if (loading) return;

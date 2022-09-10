@@ -6,11 +6,12 @@ import { TeacherClass } from "../screen/teacherClass";
 import { useTranslation } from 'react-i18next';
 import { ContainerSVG } from "../screen/configureAccount/styles";
 import { FontAwesome } from "@expo/vector-icons";
-import { deleteTurma } from "../controler/class";
+import { useModal } from "../hooks/modalConfirmation";
 
 const StackClass = createNativeStackNavigator();
 
 export function ClassStack(){
+    const { changeModal } = useModal()
     const { t } = useTranslation()
     return(
         <StackClass.Navigator >
@@ -21,7 +22,7 @@ export function ClassStack(){
                     ({route}) => ({
                         title: route.params.title,
                         headerRight: () => (
-                            <ContainerSVG onPress={() => deleteTurma(route.params.id)}>
+                            <ContainerSVG onPress={() => changeModal()}>
                                 <FontAwesome name={'trash'} size={30} color="#cc0000" />
                             </ContainerSVG>
                         ),
@@ -34,7 +35,7 @@ export function ClassStack(){
             options={({route}) => ({
                 title: route.params.title,
                 headerRight: () => (
-                    <ContainerSVG onPress={() => deleteTurma(route.params.id)}>
+                    <ContainerSVG onPress={() => changeModal()}>
                         <FontAwesome name={'trash'} size={30} color="#cc0000" />
                     </ContainerSVG>
                 ),
