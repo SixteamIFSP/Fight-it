@@ -9,18 +9,18 @@ import { styles as stylesGlobal } from '../../global/styles';
 import { styles } from './styles';
 import { SwitchButton } from '../../components/switchbutton';
 import { Loading } from '../../components/loading';
-import { toastMessage } from '../../util/toastMessage'; 
+import { toastMessage } from '../../util/toastMessage';
 
 export function CreateAccount({ navigation, routes }) {
     const { t } = useTranslation()
-    const [loading, setLoading] =useState(false);
+    const [loading, setLoading] = useState(false);
 
     const [name, setName] = useState('');
     const [mail, setMail] = useState('');
     const [phone, setPhone] = useState('');
     const [pass, setPass] = useState('');
     const [confirm, setConfirm] = useState('');
-    const [typeTeacher, setTypeTeacher] = useState(false);
+    const [typeTeacher, setTypeTeacher] = useState(true);
 
     function validation() {
         if (name === '' | phone === '' | mail === '' | pass === '' | pass !== confirm)
@@ -43,7 +43,7 @@ export function CreateAccount({ navigation, routes }) {
             await createAccount(data, typeTeacher);
             setLoading(false);
             navigation.navigate('Login');
-            
+
         } else {
             toastMessage(false, "Digite os campos corretamente!")
         }
@@ -64,14 +64,14 @@ export function CreateAccount({ navigation, routes }) {
 
             <View style={styles.switchButtons}>
                 <SwitchButton
-                    onPress={() => setTypeTeacher(false)}
-                    text={t('createAccount.student')}
-                    type={!typeTeacher}
-                ></SwitchButton>
-                <SwitchButton
                     onPress={() => setTypeTeacher(true)}
                     text={t('createAccount.teacher')}
                     type={typeTeacher}
+                ></SwitchButton>
+                <SwitchButton
+                    onPress={() => setTypeTeacher(false)}
+                    text={t('createAccount.student')}
+                    type={!typeTeacher}
                 ></SwitchButton>
             </View>
 
@@ -112,14 +112,14 @@ export function CreateAccount({ navigation, routes }) {
             <View style={styles.confirmationButton}>
 
                 {
-                !loading ? 
-                    <DoubleButtonConfirmation
-                        handleConfirm={handleConfirm}
-                        handleBack={handleBack} />
-                :
-                    <Loading loading={loading} size={18}/>
+                    !loading ?
+                        <DoubleButtonConfirmation
+                            handleConfirm={handleConfirm}
+                            handleBack={handleBack} />
+                        :
+                        <Loading loading={loading} size={18} />
                 }
-                    
+
             </View>
 
         </View>
