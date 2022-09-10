@@ -7,10 +7,8 @@ export async function getClass(setClasses, idUsuario, type){
         let response;
         if (type){
             response = await api.get(`/turma/busca/${idUsuario}`);
-            console.log(response);
        } else {
             response = await api.get(`/turma/busca/${idUsuario}`);
-            console.log(response);
        }
         
         if (response?.data.status){
@@ -42,10 +40,8 @@ export async function createClass(data){ // data => { nome:string, descricao:str
 }
 
 export async function getAlunosTurma(setAlunos, data){ // data => number
-
     try {
         const response = await api.get(`/turma/alunos/${data}`);
-
         if (response?.data.status){
             setAlunos(response?.data.result);
 

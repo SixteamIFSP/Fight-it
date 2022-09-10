@@ -32,9 +32,10 @@ import {
 } from "./styles";
 import Divider from 'react-native-divider';
 
-const RenderListAluno = ({ item, navigation, data }) => {
+const RenderListAluno = ({ item, navigation, data, student }) => {
     const { t } = useTranslation()
     function handleTouch() {
+        if(student) return 
         navigation.navigate(
             'StudantView',
             {
@@ -223,22 +224,23 @@ function AdicionarAluno({ turmaId, setback }) {
 
 
 
-function RenderAula({aula, onDeleteAula}) {
+function RenderAula({aula, onDeleteAula, student}) {
     console.log(aula)
     return (
         <RenderAulaContainer>
              <Text>{aula.Nome}</Text>
-             <CancelarAula
+             {!student && <CancelarAula
              onPress={() => onDeleteAula(aula.id)}>
                 <TextWhite>Cancelar aula</TextWhite>
-            </CancelarAula>
+            </CancelarAula>}
         </RenderAulaContainer>
     )
 }
 
 export function ClassView({ navigation, route }) {
     const { t } = useTranslation();
-    const { Descricao, ProfessorId, Nome, id } = route.params.data;
+    const data = route?.params?.data;
+    const student = route?.params?.student
     const [dataAlunos, setDataAlunos] = useState([]);
     const [dataAulas, setDataAulas] = useState([]);
     const [page, setPage ] = useState(1) 
@@ -260,16 +262,22 @@ export function ClassView({ navigation, route }) {
     }
 
     useEffect(() => {
-        console.log(new Date().getHours())
+        console.log(route?.params)
         if (page === pageDefault) {
-            getAlunosTurma(setDataAlunos, id);
+            if(route?.params?.student) {
+                //TODO: DEVE EXISTIR UM MÉTODO PARA BUSCAR TURMA PELO ID DO ALUNO
+                getAlunosTurma(setDataAlunos, 10);
+            } else { 
+                console.log(data?.id)
+                getAlunosTurma(setDataAlunos, data?.id);
+            }
         }
     }, []);
 
     return (
         <Container>
             {
-                page === pageAddAluno && <AdicionarAluno setback={() => handleOpenPage(pageDefault)} turmaId={id}></AdicionarAluno>
+                page === pageAddAluno && <AdicionarAluno setback={() => handleOpenPage(pageDefault)} turmaId={data?.id}></AdicionarAluno>
             }
             {
                 page === pageDefault &&  <ContainerListColumn>
@@ -280,30 +288,31 @@ export function ClassView({ navigation, route }) {
                             data={dataAlunos}
                             renderItem={
                                 ({ item }) => <RenderListAluno
+                                    student={student}
                                     item={item}
                                     navigation={navigation}
                                     data={
-                                        { nomeTurma: Nome, id: id, ProfessorId: ProfessorId }
+                                        { nomeTurma: data?.Nome, id: data?.id, ProfessorId: data?.ProfessorId }
                                     }></RenderListAluno>}
                             keyExtractor={item => `${item.Nome}` + '91'}>
                         </ContentListagem>
                     </ContainerFlat>
 
                     <AddContainer>
-                        <AddButton handle={() => handleOpenPage(pageAddAluno)} />
+                      {!student && <AddButton handle={() => handleOpenPage(pageAddAluno)} /> }
                     </AddContainer>
 
                 </ContainerList>
                 <ContainerList>
                     <AddContainer>
-                        <AddButton handle={() => handleOpenPage(pageAddLesson)} />
+                       {!student  && <AddButton handle={() => handleOpenPage(pageAddLesson)} />}
                     </AddContainer>
                     <ClassText>Aulas:</ClassText>
                     <ContainerFlat>
                         <ContentListagem
                             data={dataAlunos}
                             renderItem={
-                                ({ item }) => <RenderAula aula={item} onDeleteAula={onDeleteAula}/>
+                                ({ item }) => <RenderAula aula={item} onDeleteAula={onDeleteAula} student={student}/>
                             }
                             keyExtractor={item => item.Nome + '91'}>
                         </ContentListagem>
@@ -312,7 +321,7 @@ export function ClassView({ navigation, route }) {
             </ContainerListColumn>
        }
             {
-                page === pageAddLesson && <AdicionarAula turmaId={id} setback={() => handleOpenPage(pageDefault)}/>
+                page === pageAddLesson && <AdicionarAula turmaId={data?.id} setback={() => handleOpenPage(pageDefault)}/>
             }
             {/*grafico */}
         </Container>

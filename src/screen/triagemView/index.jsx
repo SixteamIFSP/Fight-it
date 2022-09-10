@@ -8,43 +8,46 @@ import {Container, TextAnswer,TextQuestion,TextTitle} from './style'
 
 export function TriagemView({route}) {
     const [triagem, setTriagem] = useState({
-        dataNascimento: '20/10/2001',
-        altura: '31',
-        peso: '33',
-        problemaOrtopedico: 'NenhumaNenhumaNenhumaNenhumaNenhumaNenhumaNenhumaNenhumaNenhumaNenhumaNenhumaNenhumaNenhumaNenhumaNenhumaNenhumaNenhumaNenhumaNenhumaNenhumaNenhumaNenhumaNenhumaNenhumaNenhumaNenhumaNenhumaNenhumaNenhumaNenhumaNenhumaNenhumaNenhumaNenhumaNenhumaNenhumaNenhumaNenhumaNenhumaNenhuma',
-        doencasCronicas: 'Nenhuma',
-        lesoes: 'Nenhuma',
-        alunoId: ''
+        id: '',
+        Data_Nascimento: '',
+        Altura: '',
+        Peso: '',
+        Problema_Ortopedico: '',
+        Doencas_Cronicas: '',
+        Lesoes: '',
        })  
 
     useEffect(() => {
-       getTriagem(1).then(e => {
-        console.log(e) 
+        //route.params?.studentId. Enquanto não temos triagem criada com o ID do aluno, colocamos id
+       getTriagem(5).then(response => {
+       if(response)  {
+         setTriagem({...response[0], Data_Nascimento:`${response[0].Data_Nascimento.slice(2,10).replace(/[-]/g, '/')}`})
+       }
        })
     }, [])
 
     return (
         <Container>
-             <TextTitle>Última triagem do FULANO</TextTitle>
+             <TextTitle>Última triagem</TextTitle>
 
             <ScrollView style={{flex: 1, padding: 10}}>
             <TextQuestion>Altura: </TextQuestion>
-             <TextAnswer>{triagem.altura}</TextAnswer>
+             <TextAnswer>{triagem.Altura}</TextAnswer>
              
              <TextQuestion>Peso: </TextQuestion>
-             <TextAnswer>{triagem.peso}</TextAnswer>
+             <TextAnswer>{triagem.Altura}</TextAnswer>
              
              <TextQuestion>Data de nascimento: </TextQuestion>
-             <TextAnswer>{triagem.dataNascimento}</TextAnswer>
+             <TextAnswer>{triagem.Data_Nascimento}</TextAnswer>
              
              <TextQuestion>Alguma lesão?: </TextQuestion>
-             <TextAnswer>{triagem.lesoes}</TextAnswer>
+             <TextAnswer>{triagem.Lesoes}</TextAnswer>
 
              <TextQuestion>Algum problema ortopédico?: </TextQuestion>
-             <TextAnswer>{triagem.problemaOrtopedico}</TextAnswer>
+             <TextAnswer>{triagem.Problema_Ortopedico}</TextAnswer>
              
              <TextQuestion>Alguma doença crónica?: </TextQuestion>
-             <TextAnswer> {triagem.doencasCronicas}</TextAnswer>
+             <TextAnswer> {triagem.Doencas_Cronicas}</TextAnswer>
             </ScrollView>
         </Container>
     )

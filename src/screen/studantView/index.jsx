@@ -52,7 +52,7 @@ export function StudantView({ navigation, route }) {
             turma: route?.params.id,
         }
 
-        await getParamsAluno(data, setParamsAluno);
+        // await getParamsAluno(data, setParamsAluno); - request comentado por estar quebrando o backend
         setLoading(false);
     }
 
@@ -63,8 +63,7 @@ export function StudantView({ navigation, route }) {
             aluno: route?.params.studantId,
             parametro: idParam,
         }
-        await getDesempenhoPorParametro(data, setDataParams)
-
+        await getDesempenhoPorParametro(data, setDataParams) 
         setLoadingGraphyc(true)
 
     }

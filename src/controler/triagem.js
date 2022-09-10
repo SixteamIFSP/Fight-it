@@ -5,7 +5,6 @@ export async function createTriagem(data, alunoId){
     
         try {
               const  response = await api.post('/triagem/criarTriagem', {...data, alunoId});
-  
             if (response.data.status){
                 toastMessage(true, response?.data.mensagem)
                 return response?.data?.id
@@ -24,12 +23,12 @@ export async function createTriagem(data, alunoId){
 export async function getTriagem(id){
     
     try {
-          const  response = await api.get('/triagem/acessarTriagem/' + id, {...data});
+          const  response = await api.get('/triagem/acessarTriagem/' + id);
         if (response.data.status){
-            toastMessage(true, response?.data.mensagem)
+            toastMessage(true, response?.data.message)
             return response?.data?.result
         } else{
-            toastMessage(false, response?.data.mensagem)   
+            toastMessage(false, response?.data.message)   
         }
        
     } catch (error) {

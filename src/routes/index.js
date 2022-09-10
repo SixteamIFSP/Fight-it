@@ -13,6 +13,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { ConfigureAccount } from '../screen/configureAccount';
 import { ClassStack } from './classStack';
 import { CreateTriagem } from '../screen/createTriagem';
+import { ClassView } from '../screen/classView';
 
 const TabNavegation = createBottomTabNavigator();
 const AppRoutes = createNativeStackNavigator();
@@ -71,8 +72,8 @@ function StackLoged() {
               iconName = 'home';
             // } else if (route.name === 'Calendar') {
             //   iconName = 'calendar';
-            // } else if (route.name === 'Class') {
-            //   iconName = 'group';
+            } else if (route.name === 'Class') {
+              iconName = 'group';
             // } else if (route.name === 'Dashboard') {
             //   iconName = 'bar-chart-o';
             } else if (route.name === 'Config') {
@@ -86,7 +87,7 @@ function StackLoged() {
         })}>
           <TabNavegation.Screen options={{ title: "Home" }} navigationKey='HomeScreenStudent' name="HomeScreenStudent" component={HomeScreenStudent} />
           {/* <TabNavegation.Screen navigationKey='Calendar' name="Calendar" component={HomeScreenStudent} />   */}
-          {/* <TabNavegation.Screen navigationKey='Class' name="Class" component={HomeScreenStudent} />   */}
+          <TabNavegation.Screen navigationKey='Class' name="Class" component={ClassView} initialParams={{student: true}}  />  
           {/* <TabNavegation.Screen navigationKey='Dashboard' name="Dashboard" component={HomeScreenStudent} />   */}
           <TabNavegation.Screen navigationKey='Config' name="Config" component={ConfigureAccount} />  
         </TabNavegation.Navigator>
