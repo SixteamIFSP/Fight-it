@@ -1,14 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useIsFocused } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
-import { View } from "react-native";
-import { Agenda,Calendar,  CalendarList,  LocaleConfig} from "react-native-calendars";
+import { useUser } from "../../hooks/user"
+import { CalendarList,  LocaleConfig} from "react-native-calendars";
 import { ClassText, Container, ContainerFlat, ContainerList, ContentListagem } from "./styles";
+import { getCalendar } from "../../controler/calendar";
 
 export function CalendarTeacher({ navigation, route }){
-    const { t,  } = useTranslation();
-    const [dateMark, setDateMark] = useState([])
-    const [dateAgenda, setDateAgenda] = useState([]);
+    const { t } = useTranslation();
+    const { user } = useUser();
+    const [dates, setDates] = useState([]);
+    const isFocused = useIsFocused();
+    const [ isLoading, setLoading ] = useState(false);
 
+    useEffect(()=>{
+        function effect (){
+            console.log("Calendar", isFocused );
+            handleLoading();
+        };
+        isFocused && effect();
+    }, [isFocused])
+
+    async function handleLoading(){
+        if(isLoading) return
+
+        setLoading(true);
+        await getCalendar(user.userID, user.tipoUsuario===1, setDates);
+        setLoading(false);
+
+    }
 
     LocaleConfig.locales['pt-BR'] = {
         monthNames: [
@@ -86,17 +106,17 @@ export function CalendarTeacher({ navigation, route }){
                     selectedDotColor: '#ffffff',
                     arrowColor: 'orange',
                     disabledArrowColor: '#d9e1e8',
-                    monthTextColor: 'blue',
-                    indicatorColor: 'blue',
+                    monthTextColor: 'black',
+                    indicatorColor: 'black',
                     textDayFontFamily: 'monospace',
                     textMonthFontFamily: 'monospace',
                     textDayHeaderFontFamily: 'monospace',
                     textDayFontWeight: '300',
                     textMonthFontWeight: 'bold',
                     textDayHeaderFontWeight: '300',
-                    textDayFontSize: 16,
-                    textMonthFontSize: 16,
-                    textDayHeaderFontSize: 16
+                    textDayFontSize: 18,
+                    textMonthFontSize: 18,
+                    textDayHeaderFontSize: 12
                 }}
 
                 onDayPress={(day) => {
@@ -120,7 +140,7 @@ export function CalendarTeacher({ navigation, route }){
 
 
             <ContainerList>
-                <ClassText>{t('classView.Student.Header')}</ClassText>
+                <ClassText>{"Aulas"}</ClassText>
                 <ContainerFlat>
                     {/* {<ContentListagem
                         data={dataAlunos}

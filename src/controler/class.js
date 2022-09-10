@@ -7,10 +7,8 @@ export async function getClass(setClasses, idUsuario, type){
         let response;
         if (type){
             response = await api.get(`/turma/busca/${idUsuario}`);
-            console.log(response);
        } else {
             response = await api.get(`/turma/busca/${idUsuario}`);
-            console.log(response);
        }
         
         if (response?.data.status){
@@ -21,7 +19,7 @@ export async function getClass(setClasses, idUsuario, type){
        
     } catch (error) {
     
-        toastMessage(false, 'Erro de conexão!') 
+        toastMessage(false, 'Erro de conexão!')
     }
 }
 
@@ -116,9 +114,6 @@ export async function removeAula(aula){
 
     try {
         const response = await api.patch(`/aula/deletarAula`, {aula});
-
-        console.log(response?.data);
-
         if (response?.data.status){
             toastMessage(true, response?.data.mensagem) 
 

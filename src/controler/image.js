@@ -22,14 +22,11 @@ export async function upload(image, user, modifyUser){
         }
 
     } catch (error) {
-        console.log("erro ", error.message);
         toastMessage(false, 'Erro de conexão!');
     }
 }
 
 export async function setImagePerson (responseImage){   
-        console.log("RESULTADO DA BUSCA: ",responseImage);
-
     let response; 
     data = {
         0:{
@@ -51,8 +48,6 @@ export async function setImagePerson (responseImage){
         } else {
             response = await api.post(`/imagem/document/pfp/aluno`, {aluno: responseImage.userID, imagekey: responseImage.Key,});
         }
-
-        console.log("DATA:",response?.data)
 
         if (response?.data.status){
 

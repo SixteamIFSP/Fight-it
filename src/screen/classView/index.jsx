@@ -222,7 +222,6 @@ function AdicionarAluno({ turmaId, setback }) {
 };
 
 function RenderAula({aula, onDeleteAula}) {
-    console.log(aula)
     return (
         <RenderAulaContainer>
              <Text>{aula.Nome}</Text>

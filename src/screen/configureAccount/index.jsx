@@ -324,7 +324,6 @@ export function ConfigureAccount() {
               setLoadingImage(false);
             
         } catch (error) {
-
             console.log(error.message);
         }
         
