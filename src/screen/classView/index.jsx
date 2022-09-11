@@ -9,7 +9,6 @@ import { Loading } from "../../components/loading";
 import { toastMessage } from "../../util/toastMessage";
 import DateTimePicker from '@react-native-community/datetimepicker';
 
-
 import {
     Container,
     ContainerListColumn,
@@ -237,6 +236,8 @@ export function ClassView({ navigation, route }) {
     const { t } = useTranslation();
     const { id, Nome, ProfessorId, Descricao } = route.params.data;
     const [dataAlunos, setDataAlunos] = useState([]);
+    const [dateAula, setDateAula] = useState([]);
+
     const [adicionarAluno, setAdicionarAluno] = useState(false);
     const [page, setPage ] = useState(1);
     const { setCallback } = useModal();
@@ -294,13 +295,13 @@ export function ClassView({ navigation, route }) {
                 </ContainerFlat>
 
                 <AddContainer>
-                    <AddButton handle={() => handleOpenPage(pageAddAluno)} />
+                    <AddButton handle={() => handleOpenPage(2)} />
                 </AddContainer>
 
             </ContainerList>
             <ContainerList>
                 <AddContainer>
-                    <AddButton handle={() => handleOpenPage(pageAddLesson)} />
+                    <AddButton handle={() => handleOpenPage(3)} />
                 </AddContainer>
                 <ClassText>Aulas:</ClassText>
                 <ContainerFlat>
@@ -314,8 +315,8 @@ export function ClassView({ navigation, route }) {
                 </ContainerFlat>
             </ContainerList>
         </ContainerListColumn>,
-        2: <AdicionarAluno setback={() => handleOpenPage(pageDefault)} turmaId={id}></AdicionarAluno>,
-        3: <AdicionarAula turmaId={id} setback={() => handleOpenPage(pageDefault)}/>
+        2: <AdicionarAluno setback={() => handleOpenPage(1)} turmaId={id}></AdicionarAluno>,
+        3: <AdicionarAula turmaId={id} setback={() => handleOpenPage(1)}/>
     }
 
     return (

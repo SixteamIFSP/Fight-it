@@ -9,7 +9,7 @@ import {
     TextTitle,
     CardCreateClasss,
 } from "./styles";
-import { ActivityIndicator, FlatList } from "react-native";
+import { ActivityIndicator, FlatList, Text } from "react-native";
 import { createClass, getClass } from "../../controler/class";
 import { useUser } from "../../hooks/user";
 import { DoubleButtonConfirmation } from "../../components/doubleButtonConfirmation";
@@ -45,11 +45,8 @@ function LoadingClass({ user, setCreateNew, navigation }) {
     }, [isFocused])
 
     async function handleLoadMore() {
-        if (loading) return;
-        setLoading(true);
-        
+        if (loading) return;     
         await getClass(setData, user.userID, user.tipoUsuario === 1);
-        setLoading(false);
     };
 
     function handleNewScreen(screen, params) {
@@ -60,17 +57,23 @@ function LoadingClass({ user, setCreateNew, navigation }) {
         <>
             <AddButton handle={() => setCreateNew((value) => !value)} />
             <ContainerList>
-                <FlatList
-                    style={{width:'100%'}}
-                    data={data}
-                    renderItem={({ item }) => <CardTurma data={item} handleNewScreen={handleNewScreen}></CardTurma>}
-                    //onEndReached={handleLoadMore}
-                    onEndThreshold={0.01}
-                    keyExtractor={item => item.id}
-                    ListFooterComponent={
-                        <Loading loading={loading} size={30}></Loading>
-                    }
-                />
+                {data.length >= 1 ? 
+                    <FlatList
+                        style={{width:'100%'}}
+                        data={data}
+                        renderItem={({ item }) => <CardTurma data={item} handleNewScreen={handleNewScreen}></CardTurma>}
+                        //onEndReached={handleLoadMore}
+                        onEndThreshold={0.01}
+                        keyExtractor={item => item.id}
+                        ListFooterComponent={
+                            <Loading loading={loading} size={30}></Loading>
+                        }
+                    />
+                    :<Text >Este professor nao possui turmas</Text>
+
+
+                
+                }
             </ContainerList>
         </>
     )
@@ -90,7 +93,7 @@ function CreateClass({ user, setCreateNew }) {
             };
             createClass(data);
         } else {
-            toastMessage(false, t("toast.error.blank"))
+            toastMessage(false, t("toast.error.blank"));
         };
 
         cancel();
