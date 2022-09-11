@@ -27,13 +27,9 @@ export function Login({ navigation }) {
   const { t } = useTranslation(); 
   
   async function onHandleLogin() {
-    setLoading(true);
+    //TODO:achar uma solução que não dê erro: setLoading(true);
     await singIn({ mail: mail, pass: password }, typeTeacher);
-    setLoading(false);
-  }
-
-  function onHandleForgotPass() {
-
+    //TODO:setLoading(false);
   }
 
   function onHandleCreateAccount() {

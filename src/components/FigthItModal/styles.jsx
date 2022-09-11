@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-import { TextAlingLine } from "../../screen/configureAccount/styles";
 
 export const styles = StyleSheet.create({
     modal: {

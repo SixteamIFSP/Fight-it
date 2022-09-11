@@ -47,12 +47,19 @@ export async function createClass(data){ // data => { nome:string, descricao:str
 export async function getAllDataClass(setAlunos, setClass, data){
     axios.all(
         [
-            api.get(`/turma/alunos/${data}`), 
-            api.get(`/aula/busca_professor/${data}`),
+            api.get(`/turma/alunos/${data.teacher}`), 
+            api.get(`/aula/busca_professor/${data.class}`),
     ]
-    ).then(
+    ).then(axios.spread((responseAlunos, responseAula) => {
 
-    ).catch((error)=>{
+        if (responseAlunos?.data.status){
+            setAlunos(responseAlunos.data.result)
+        }
+        if (responseAula?.data.status){
+            setClass(responseAula.data.result)
+        }
+    }))
+    .catch((error)=>{
         console.log(error);
     })
 }

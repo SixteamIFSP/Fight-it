@@ -22,9 +22,9 @@ import { useIsFocused } from "@react-navigation/native";
 
 function CardTurma({ data, handleNewScreen }) {
     const { t } = useTranslation()
-    // TODO: COLOCAR AS INFORMAÇÕES DENTRO DE CADA CARD E VALIDAR SE EXISTE OU NÃO INFORMAÇÕES.
     return (
-        <CardView onPress={()=>handleNewScreen('ClassView', {title: t("navigationHeader.ClassDescription", {name:data?.TurmaNome}), data:{...data, nomeTurma:data?.TurmaNome}})}>
+        <CardView
+            onPress={() => handleNewScreen('ClassView', { title: t("navigationHeader.ClassDescription", { name: data?.TurmaNome }), data: { ...data, nomeTurma: data?.TurmaNome } })}>
             <CardTitle>{data?.TurmaNome}</CardTitle>
         </CardView>
     )
@@ -35,21 +35,23 @@ function LoadingClass({ user, setCreateNew, navigation }) {
     const [loading, setLoading] = useState(false);
     const isFocused = useIsFocused();
 
-    useEffect(()=>{
-        function effect (){
+    useEffect(() => {
+        function effect() {
             setData([])
-            console.log("TURMAs", isFocused )
             handleLoadMore();
         };
         isFocused && effect();
     }, [isFocused])
 
     async function handleLoadMore() {
-        if (loading) return;     
+        if (loading) return;
+        setLoading(true);
+
         await getClass(setData, user.userID, user.tipoUsuario === 1);
     };
 
     function handleNewScreen(screen, params) {
+        console.log(params, 'params')
         navigation.navigate(screen, params)
     };
 
