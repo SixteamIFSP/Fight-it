@@ -9,7 +9,7 @@ import {
     TextTitle,
     CardCreateClasss,
 } from "./styles";
-import { ActivityIndicator, FlatList } from "react-native";
+import { FlatList, Text } from "react-native";
 import { createClass, getClass } from "../../controler/class";
 import { useUser } from "../../hooks/user";
 import { DoubleButtonConfirmation } from "../../components/doubleButtonConfirmation";
@@ -22,9 +22,9 @@ import { useIsFocused } from "@react-navigation/native";
 
 function CardTurma({ data, handleNewScreen }) {
     const { t } = useTranslation()
-    // TODO: COLOCAR AS INFORMAÇÕES DENTRO DE CADA CARD E VALIDAR SE EXISTE OU NÃO INFORMAÇÕES.
     return (
-        <CardView onPress={()=>handleNewScreen('ClassView', {title: t("navigationHeader.ClassDescription", {name:data?.TurmaNome}), data:{...data, nomeTurma:data?.TurmaNome}})}>
+        <CardView
+            onPress={() => handleNewScreen('ClassView', { title: t("navigationHeader.ClassDescription", { name: data?.TurmaNome }), data: { ...data, nomeTurma: data?.TurmaNome } })}>
             <CardTitle>{data?.TurmaNome}</CardTitle>
         </CardView>
     )
@@ -35,10 +35,9 @@ function LoadingClass({ user, setCreateNew, navigation }) {
     const [loading, setLoading] = useState(false);
     const isFocused = useIsFocused();
 
-    useEffect(()=>{
-        function effect (){
+    useEffect(() => {
+        function effect() {
             setData([])
-            console.log("TURMAs", isFocused )
             handleLoadMore();
         };
         isFocused && effect();
@@ -47,12 +46,13 @@ function LoadingClass({ user, setCreateNew, navigation }) {
     async function handleLoadMore() {
         if (loading) return;
         setLoading(true);
-        
+
         await getClass(setData, user.userID, user.tipoUsuario === 1);
         setLoading(false);
     };
 
     function handleNewScreen(screen, params) {
+        console.log(params, 'params')
         navigation.navigate(screen, params)
     };
 
@@ -61,15 +61,13 @@ function LoadingClass({ user, setCreateNew, navigation }) {
             <AddButton handle={() => setCreateNew((value) => !value)} />
             <ContainerList>
                 <FlatList
-                    style={{width:'100%'}}
+                    style={{ width: '100%' }}
                     data={data}
                     renderItem={({ item }) => <CardTurma data={item} handleNewScreen={handleNewScreen}></CardTurma>}
                     //onEndReached={handleLoadMore}
                     onEndThreshold={0.01}
                     keyExtractor={item => item.id}
-                    ListFooterComponent={
-                        <Loading loading={loading} size={30}></Loading>
-                    }
+                    ListFooterComponent={<Loading loading={loading} size={30}></Loading>}
                 />
             </ContainerList>
         </>
