@@ -4,7 +4,7 @@ import { Text, View, TouchableOpacity, ScrollView } from "react-native";
 import { AddButton } from "../../components/addButton";
 import { DoubleButtonConfirmation } from "../../components/doubleButtonConfirmation";
 import { Input } from "../../components/input";
-import { adicionarAluno, adicionarAula, getAlunosTurma, removeAula } from "../../controler/class";
+import { adicionarAluno, adicionarAula, getAllDataClass, getAlunosTurma, removeAula } from "../../controler/class";
 import { Loading } from "../../components/loading";
 import { toastMessage } from "../../util/toastMessage";
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -28,6 +28,7 @@ import {
     CancelarAula,
     AddContainerView,
     styles,
+    Divisor,
 } from "./styles";
 import Divider from 'react-native-divider';
 import { useModal } from "../../hooks/modalConfirmation";
@@ -36,6 +37,7 @@ import { deleteTurma } from '../../controler/class';
 
 function AdicionarAula({ turmaId, setback }) {
     const [topicoAula, setTopicoAula] = useState('')
+    const [descricao, setDescricao] = useState('')
     const [date, setDate] = useState(new Date())
     const [time, setTime] = useState(new Date())
     const [equipamentos, setEquipamentos] = useState([])
@@ -112,8 +114,16 @@ function AdicionarAula({ turmaId, setback }) {
                 }}
              />
              }
+             <Input
+                value={descricao}
+                placeholder={'Descrição da aula'}
+                onChangeText={setDescricao}
+            />
+                <Divisor></Divisor>
 
-            <Input 
+                <TextDescription>Equipamentos</TextDescription>
+
+                <Input 
                    value={equipamento}
                    placeholder={'Nome do equipamento'}
                    onChangeText={setEquipamento}
@@ -223,7 +233,7 @@ function AdicionarAluno({ turmaId, setback }) {
 function RenderAula({aula, onDeleteAula}) {
     return (
         <RenderAulaContainer>
-             <Text>{aula.Nome}</Text>
+             <Text>{aula.nome}</Text>
              <CancelarAula
              onPress={() => onDeleteAula(aula.id)}>
                 <TextWhite>Cancelar aula</TextWhite>
@@ -258,10 +268,10 @@ export function ClassView({ navigation, route }) {
     
     function onDeleteAula(aulaID) {
         removeAula(aulaID).then(() => {
-            const index = dataAulas.findIndex(e => e.id = aulaID)
-            const data = dataAulas
+            const index = dateAula.findIndex(e => e.id = aulaID)
+            const data = dateAula
             data.splice(index, 1)
-            setDataAulas([...data])
+            setDateAula([...data])
         })
     }
 
@@ -269,10 +279,14 @@ export function ClassView({ navigation, route }) {
         if (!isFocused) return;   
         function effect (){
             setCallback("Deseja apagar a turma?", ()=> callBackDeleteTurma() );
+            //getAlunosTurma(setDataAlunos, id);
+            getAllDataClass(setDataAlunos, setDateAula, id )
         };
 
         effect();
-        getAlunosTurma(setDataAlunos, id);
+
+
+        //
     }, []);
     
     const pageView = {
@@ -281,6 +295,9 @@ export function ClassView({ navigation, route }) {
             <ContainerList>
                 <ClassText>{t('classView.Student.Header')}</ClassText>
                 <ContainerFlat>
+                {
+                    dataAlunos.length >= 1  ? 
+
                     <ContentListagem
                         data={dataAlunos}
                         renderItem={
@@ -292,6 +309,9 @@ export function ClassView({ navigation, route }) {
                                 }></RenderListAluno>}
                         keyExtractor={item => `${item.Nome}` + '91'}>
                     </ContentListagem>
+                    :
+                    <Text>{"nao ha alunos nessa turma"}</Text>
+                }
                 </ContainerFlat>
 
                 <AddContainer>
@@ -305,13 +325,18 @@ export function ClassView({ navigation, route }) {
                 </AddContainer>
                 <ClassText>Aulas:</ClassText>
                 <ContainerFlat>
+                {
+                    dateAula.length >= 1  ? 
                     <ContentListagem
-                        data={dataAlunos}
+                        data={dateAula}
                         renderItem={
                             ({ item }) => <RenderAula aula={item} onDeleteAula={onDeleteAula}/>
                         }
                         keyExtractor={item => item.Nome + '91'}>
                     </ContentListagem>
+                    :
+                    <Text>{"nao ha aulas nessa turma"}</Text>
+                }
                 </ContainerFlat>
             </ContainerList>
         </ContainerListColumn>,

@@ -7,17 +7,15 @@ export async function getCalendar(id, type, setDates){
         let response;
         if (type){
             response = await api.get(`/aula/busca_professor/${id}`);
-       } else {
-            response = await api.get(`/aula/busca_aluno/${id}`);
-       }
-        console.log(response?.data);
-        if (response.data.status){
-            toastMessage(true, response?.data.mensagem)
-        } else{
-            toastMessage(false, response?.data.mensagem)   
+        } else {
+                response = await api.get(`/aula/busca_aluno/${id}`);
         }
        
+        if (response?.data.status)
+            setDates(response.data.result)
+       
     } catch (error) {
+        console.log(error);
         toastMessage(false, 'Erro de conexão!') 
     }
 }
