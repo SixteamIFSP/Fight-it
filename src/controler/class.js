@@ -53,8 +53,8 @@ export async function getAllDataClass(setAlunos, setClass, data){
     ).then(axios.spread((responseAlunos, responseAula) => {
         console.log('aaaaa', data,responseAlunos.data, responseAula.data);
      
-        setAlunos(responseAlunos.data.result || [])
-        setClass(responseAula.data.result || [])
+        setAlunos(responseAlunos?.data.result || [])
+        setClass(responseAula?.data.result || [])
         
     }))
     .catch((error)=>{
@@ -136,7 +136,7 @@ export async function adicionarAula(data){
 export async function removeAula(aula){
 
     try {
-        const response = await api.patch(`/aula/deletarAula`, {aula});
+        const response = await api.delete(`/aula/deletarAula`, {aula});
         if (response?.data.status){
             toastMessage(true, response?.data.mensagem) 
 
@@ -148,4 +148,21 @@ export async function removeAula(aula){
         toastMessage(false, 'Erro de conexão!') 
     }
 }
+
+export async function deleteAluno({turma, aluno}){
+    console.log(`/turma/excluir/aluno`, {turma, aluno});
+
+    try {
+        const response = await api.post(`/turma/excluir/aluno`, {turma, aluno});
+        if (response?.data.status){
+            toastMessage(true, response?.data.mensagem)
+        } else{
+            toastMessage(false, response?.data.mensagem) 
+        }
+        
+    } catch (error) {
+        toastMessage(false, 'Erro de conexão!') 
+    }
+}
+
 

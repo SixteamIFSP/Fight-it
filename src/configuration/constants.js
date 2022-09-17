@@ -1,4 +1,4 @@
-const inProduction = true;
+const inProduction = false;
 
 const production = {
   API_URL:  'https://fight-it.herokuapp.com/',

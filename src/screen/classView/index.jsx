@@ -177,7 +177,7 @@ function RenderListAluno ({ item, navigation, data }) {
     );
 };
 
-function AdicionarAluno({ turmaId, setback }) {
+function AdicionarAluno({ turmaId, setback}) {
     const { t } = useTranslation();
     const [loading, setLoading] = useState(false);
     const [mail, setMail] = useState('');
@@ -189,6 +189,7 @@ function AdicionarAluno({ turmaId, setback }) {
         if (mail === '' || mail.indexOf("@") === -1) {
             toastMessage(false, t("toast.error.invalid.email"));
             setback(false);
+
             return
         };
         setLoading(true)
@@ -248,23 +249,28 @@ export function ClassView({ navigation, route }) {
     const [dataAlunos, setDataAlunos] = useState([]);
     const [dateAula, setDateAula] = useState([]);
 
-    const [adicionarAluno, setAdicionarAluno] = useState(false);
     const [page, setPage ] = useState(1);
     const { setCallback } = useModal();
     const isFocused = useIsFocused();
 
     function callBackDeleteTurma(){
         deleteTurma(id);
-        navigation.goBack()
+        navigation.goBack();
     }
     
     function handleOpenPage(pageNumber) {
         setPage(pageNumber)
     }
+
+    function getData(){
+        getAllDataClass(setDataAlunos, setDateAula, id);
+    }
     
-    function HandleChangeAddAluno() {
-        setAdicionarAluno((value) => !value)
-    };
+    function callback(){
+        getData()
+        handleOpenPage(1);
+    }
+ 
     
     function onDeleteAula(aulaID) {
         removeAula(aulaID).then(() => {
@@ -280,12 +286,10 @@ export function ClassView({ navigation, route }) {
         function effect (){
             setCallback("Deseja apagar a turma?", ()=> callBackDeleteTurma() );
             //getAlunosTurma(setDataAlunos, id);
-            getAllDataClass(setDataAlunos, setDateAula, id )
+            getData();
         };
 
         effect();
-
-
         //
     }, []);
     
@@ -340,8 +344,8 @@ export function ClassView({ navigation, route }) {
                 </ContainerFlat>
             </ContainerList>
         </ContainerListColumn>,
-        2: <AdicionarAluno setback={() => handleOpenPage(1)} turmaId={id}></AdicionarAluno>,
-        3: <AdicionarAula turmaId={id} setback={() => handleOpenPage(1)}/>
+        2: <AdicionarAluno setback={callback} turmaId={id}></AdicionarAluno>,
+        3: <AdicionarAula turmaId={id} setback={callback}/>
     }
 
     return (
