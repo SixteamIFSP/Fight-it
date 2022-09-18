@@ -99,6 +99,11 @@ function StackLoged() {
     2: <Studant />,
   }
 
+  const stack = {
+    true: <StackAuth />,
+    false: <StackLoged />,
+  }
+
   return (
     User[user?.tipoUsuario]
   )
@@ -125,10 +130,13 @@ function StackAuth() {
 
 export function Router() {
   const { user } = useUser();
+
+  const stack = {
+    'true': <StackAuth />,
+    'false': <StackLoged />,
+  }
  
   return (
-  <>
-    {user == null ? <StackAuth /> : <StackLoged />}
-  </>
+    stack[`${user == null}`]
   )
 }

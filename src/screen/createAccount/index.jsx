@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text, View } from 'react-native'
 import { ButtonLinguage } from '../../components/buttonChangeLinguage';
@@ -14,17 +14,34 @@ import { toastMessage } from '../../util/toastMessage';
 export function CreateAccount({ navigation, routes }) {
     const { t } = useTranslation()
     const [loading, setLoading] = useState(false);
-
     const [name, setName] = useState('');
     const [mail, setMail] = useState('');
     const [phone, setPhone] = useState('');
     const [pass, setPass] = useState('');
     const [confirm, setConfirm] = useState('');
     const [typeTeacher, setTypeTeacher] = useState(true);
+    const errors = useRef([]);
 
     function validation() {
-        if (name === '' | phone === '' | mail === '' | pass === '' | pass !== confirm)
+        errors.current = [];
+        if (
+            name === '' |
+            phone === '' |
+            mail === '' |
+            pass === '' |
+            confirm === '' |
+            pass !== confirm
+        ){
+
+            (name === '') && errors.current.push('Nome não preenchido');
+            (mail === '') && errors.current.push('E-mail não preenchido');
+            (phone === '') && errors.current.push('Telefone não preenchido');
+            (pass === '') && errors.current.push('Senha não preenchida');
+            (confirm === '') && errors.current.push('Confirmação não preenchida');
+            (pass !== confirm) && errors.current.push('Senha diferente da confirmação');
+
             return false;
+        }
         return true;
     };
 
@@ -45,7 +62,12 @@ export function CreateAccount({ navigation, routes }) {
             navigation.navigate('Login');
 
         } else {
-            toastMessage(false, "Digite os campos corretamente!")
+            let errorsText  = "Digite os campos corretamente: "
+            errors.current.map((value) => {
+                errorsText = errorsText+`\n ${value}`
+            })
+
+            toastMessage(false, errorsText)
         }
     }
     function handleBack() {

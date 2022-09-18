@@ -7,7 +7,7 @@ const production = {
 };
 
 const development = {
-  API_URL: 'http://192.168.1.105:4000/',
+  API_URL: 'http://192.168.1.105:3000/',
   API_AUTHORIZATION: '',
   IMAGES_URL: 'https://fight-it.herokuapp.com/imagem/document/',
 };

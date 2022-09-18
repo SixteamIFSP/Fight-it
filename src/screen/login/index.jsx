@@ -16,6 +16,7 @@ import {
   TouchableOpacity
 } from "react-native";
 import { Loading } from "../../components/loading";
+import { toastMessage } from "../../util/toastMessage";
 
 export function Login({ navigation }) {
   const [loading, setLoading] = useState(false);
@@ -27,9 +28,14 @@ export function Login({ navigation }) {
   const { t } = useTranslation(); 
   
   async function onHandleLogin() {
-    //TODO:achar uma solução que não dê erro: setLoading(true);
+    //TODO:achar uma solução que não dê erro: 
+    if (mail === '' || password === '') {
+      toastMessage(false, "Preencha os campos!");
+      return
+  }
+    setLoading(true);
     await singIn({ mail: mail, pass: password }, typeTeacher);
-    //TODO:setLoading(false);
+    setLoading(false);
   }
 
   function onHandleCreateAccount() {
