@@ -10,8 +10,11 @@ import { styles } from './styles';
 import { SwitchButton } from '../../components/switchbutton';
 import { Loading } from '../../components/loading';
 import { toastMessage } from '../../util/toastMessage';
+import { checkMasks } from '../../util/checkMasks';
+
 
 export function CreateAccount({ navigation, routes }) {
+    const { validationEmail } = checkMasks()
     const { t } = useTranslation()
     const [loading, setLoading] = useState(false);
     const [name, setName] = useState('');
@@ -26,12 +29,9 @@ export function CreateAccount({ navigation, routes }) {
     const [typeTeacher, setTypeTeacher] = useState(true);
 
     const handleValidEmail = value => {
-        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
-        if (reg.test(value) === false) {
-            setEmailValidError('Digite um email válido');
-        } else if (reg.test(value) === true) {
-            setEmailValidError('');
-        }
+
+        setEmailValidError(validationEmail(value));
+
     };
 
     function validation() {
