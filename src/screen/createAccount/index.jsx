@@ -28,7 +28,7 @@ export function CreateAccount({ navigation, routes }) {
     const handleValidEmail = value => {
         let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
         if (reg.test(value) === false) {
-            setEmailValidError('enter valid email address');
+            setEmailValidError('Digite um email válido');
         } else if (reg.test(value) === true) {
             setEmailValidError('');
         }
