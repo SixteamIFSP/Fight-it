@@ -14,13 +14,25 @@ import { toastMessage } from '../../util/toastMessage';
 export function CreateAccount({ navigation, routes }) {
     const { t } = useTranslation()
     const [loading, setLoading] = useState(false);
-
     const [name, setName] = useState('');
+
     const [mail, setMail] = useState('');
+    const [emailValidError, setEmailValidError] = useState('');
+
     const [phone, setPhone] = useState('');
     const [pass, setPass] = useState('');
     const [confirm, setConfirm] = useState('');
+
     const [typeTeacher, setTypeTeacher] = useState(true);
+
+    const handleValidEmail = value => {
+        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+        if (reg.test(value) === false) {
+            setEmailValidError('enter valid email address');
+        } else if (reg.test(value) === true) {
+            setEmailValidError('');
+        }
+    };
 
     function validation() {
         if (name === '' | phone === '' | mail === '' | pass === '' | pass !== confirm)
@@ -75,40 +87,54 @@ export function CreateAccount({ navigation, routes }) {
                 ></SwitchButton>
             </View>
 
-            <Input
-                style={styles.inputes}
-                onChangeText={setName}
-                value={name}
-                placeholder={t('createAccount.name')}
-            />
-            <Input
-                style={styles.inputes}
-                onChangeText={setMail}
-                value={mail}
-                placeholder={t('login.mail')}
-                keyboardType="email-address"
-            />
-            <Input
-                style={styles.inputes}
-                keyboardType='phone-pad'
-                onChangeText={setPhone}
-                value={phone}
-                placeholder={t('createAccount.phone')}
-            />
-            <Input
-                style={styles.inputes}
-                onChangeText={setPass}
-                value={pass}
-                placeholder={t('login.password')}
-                secureTextEntry={true}
-            />
-            <Input
-                style={styles.inputes}
-                onChangeText={setConfirm}
-                value={confirm}
-                placeholder={t('createAccount.confirmPassword')}
-                secureTextEntry={true}
-            />
+            <View style={styles.inputesContainer}>
+                <View style={styles.inputes}>
+                    <Input
+                        errorMessage onChangeText={setName}
+                        value={name}
+                        placeholder={t('createAccount.name')}
+                    /></View>
+                <View style={styles.inputes}>
+                    <Input
+                        onChangeText={(value) => { setMail(value); handleValidEmail(value) }}
+                        value={mail}
+                        placeholder={t('login.mail')}
+                        keyboardType="email-address"
+                        autoComplete="email"
+                    />
+                    {
+                        emailValidError ?
+                            <Text styles={{ backgroundColor: 'red' }}>
+                                {emailValidError}
+                            </Text>
+                            : null
+                    }
+                </View>
+                <View style={styles.inputes}>
+                    <Input
+                        keyboardType='phone-pad'
+                        onChangeText={setPhone}
+                        value={phone}
+                        placeholder={t('createAccount.phone')}
+                    />
+                </View>
+                <View style={styles.inputes}>
+                    <Input
+                        onChangeText={setPass}
+                        value={pass}
+                        placeholder={t('login.password')}
+                        secureTextEntry={true}
+                    /></View>
+                <View style={styles.inputes}>
+                    <Input
+                        onChangeText={setConfirm}
+                        value={confirm}
+                        placeholder={t('createAccount.confirmPassword')}
+                        secureTextEntry={true}
+                    />
+                </View>
+            </View>
+
             <View style={styles.confirmationButton}>
 
                 {

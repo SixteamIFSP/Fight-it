@@ -1,7 +1,6 @@
 
 import { StyleSheet } from "react-native";
 
-
 export const styles = StyleSheet.create({
     switchButtons: {
         flexDirection: 'row',
@@ -22,8 +21,13 @@ export const styles = StyleSheet.create({
     confirmationButton: {
         width: '100%',
         justifyContent: 'center',
-    }, 
-    inputes: {
-        marginBottom:24,
     },
+    inputesContainer: {
+        display: 'flex', width: '100%'
+    },
+    inputes: {
+        marginBottom: 24,
+        alignItems: 'center'
+    },
+    errorMessage: { color: 'red', backgroundColor:'red' }
 });

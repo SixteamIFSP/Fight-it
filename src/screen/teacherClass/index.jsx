@@ -72,9 +72,6 @@ function LoadingClass({ user, setCreateNew, navigation }) {
                         }
                     />
                     :<Text >Este professor nao possui turmas</Text>
-
-
-                
                 }
             </ContainerList>
         </>
