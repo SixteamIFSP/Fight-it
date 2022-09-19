@@ -65,48 +65,54 @@ export const ClassText = styled.Text`
 `;
 
 export const TextWhite  = styled.Text`
-  color: white;
-  font-weight: bold;
+    color: white;
+    font-weight: bold;
 `
 export const Equipamento = styled.View`
-flex-direction: row;
-justify-content: space-between;
-align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 `
 
 export const CancelarAula = styled.TouchableOpacity`
- padding: 4px;
- padding-left: 10px;
- padding-right: 10px;
- background-color: #3d3d3d;
- border-radius: 10;
+    padding: 4px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #3d3d3d;
+    border-radius: 10;
  `
 
  export const AdicionarAulaContainer = styled.View`
-  padding: 20px; 
-  flex: 1;
+    padding: 20px; 
+    flex: 1;
+ `
+ export const Divisor =  styled.View`
+    width:90%;
+    margin:20% 5% 20% 5%;
+    border-color:black;
+    border-top-width:1px
  `
  
  export const AdicionarAulaButton = styled.TouchableOpacity`
     padding: 10px;
-    width: 232px;
+    width: 50%;
     background-color: #3d3d3d;
     justify-content: center;
     border-radius: 10px;
  `
  
  export const RenderAulaContainer = styled.View`
- flex-direction: row;
- justify-content: space-between;
- margin-top: 5px;
- padding-left: 10px;
- padding-right: 10px;
- height: auto;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: auto;
  `
  
  export const DeleteButton = styled.TouchableOpacity`
-  padding: 5px;
-  border-radius: 10px;
-  align-items: center;
-  width: 40px;
+    padding: 5px;
+    border-radius: 10px;
+    align-items: center;
+    width: 40px;
  `
