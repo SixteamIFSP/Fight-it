@@ -6,9 +6,8 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
     container:  {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
         padding: 30,
+        paddingBottom: 50,
     },
     switchButtons: {
         flexDirection: 'row',
@@ -39,5 +38,6 @@ export const styles = StyleSheet.create({
     }, 
     inputes: {
         marginBottom:24,
+        width: '100%',
     },
 });

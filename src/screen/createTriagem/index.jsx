@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { DoubleButtonConfirmation } from "../../components/doubleButtonConfirmation";
 import { Input } from "../../components/input";
 import { Loading } from "../../components/loading";
@@ -8,16 +8,24 @@ import { createTriagem } from "../../controler/triagem";
 import {styles} from './style'
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { toastMessage } from "../../util/toastMessage";
+import {Picker} from '@react-native-picker/picker';
 
 export function CreateTriagem({navigation, route}) {
     const [loading, setLoading] =useState(false);
+    const [objetivo, setObjetivo] = useState('')
     const [altura, setAltura ] = useState('')
     const [date, setDate] = useState(new Date())
     const [selectectDateIsOpen, setSelectedDateIsOpen] = useState(false)
     const [peso, setPeso] = useState('')
-    const [probOrtopedico, setProbOrtopedico] = useState('')
-    const [doencaCronica, setDoencaCronica] = useState('')
-    const [lesoes, setLesoes] = useState('')
+    const [probOrtopedico, setProbOrtopedico] = useState('selecione')
+    const [probOrtopedicoResp, setProbOrtopedicoResp] = useState('')
+    const [doencaCronica, setDoencaCronica] = useState('selecione')
+    const [doencaCronicaResp, setDoencaCronicaResp] = useState('')
+    const [lesoes, setLesoes] = useState('selecione')
+    const [lesoesResp, setLesoesResp] = useState('')
+    const [didExercise, setDidExercise] = useState('selecione');
+    const [didExerciseResp, setDidExerciseResp] = useState('')
+    const [comentario, setComentario] = useState('')
 
      function handleBack() {
         navigation.navigate('CreateAccount')
@@ -25,18 +33,30 @@ export function CreateTriagem({navigation, route}) {
 
     async function handleConfirm() {
         const data = { 
+            objetivo, 
             dataNascimento: date.toLocaleDateString(), 
             altura, 
             peso, 
             problemaOrtopedico: probOrtopedico,
+            problemaOrtopedicoResposta: probOrtopedicoResp, 
             doencasCronicas: doencaCronica,
+            doencasCronicasResposta: doencaCronicaResp,
             lesoes, 
+            lesoesResposta: lesoesResp,
+            jaFezExercicios: didExercise, 
+            jaFezExerciciosResposta: didExerciseResp, 
+            comentario
         } 
-
+    console.log(data)
+    return 
        const formIncomplet = Object.keys(data).find( e => {
         if(e === 'dataNascimento') return 
-        return !data[e]
+        if(e === 'objetivo' && !data[e]) return true 
+        if(e === 'altura' && !data[e]) return true 
+        if(e === 'peso'&& !data[e]) return true 
+        return data[e] === 'selecione'
        } )
+       console.log(formIncomplet)
        if(formIncomplet) {
           toastMessage(false, 'Por favor, preencha todos os campos')
           return 
@@ -52,9 +72,17 @@ export function CreateTriagem({navigation, route}) {
      }
 
     return (
-        <View style={styles.container} >
+        <ScrollView style={styles.container} >
+         <View style={styles.container} >   
             <Text style={styles.TitleLogin}>Realizar triagem</Text>
             <Text style={styles.descriptionText}>Quase finalizando seu cadastro! Apenas precisamos de mais algumas informações de triagem.</Text>
+           
+            <Input
+                style={styles.inputes}
+                onChangeText={setObjetivo}
+                value={objetivo}
+                placeholder={'Objetivo do treinamento?'}
+            />
 
               <Input
                 style={styles.inputes}
@@ -78,24 +106,7 @@ export function CreateTriagem({navigation, route}) {
                 placeholder={'Peso(kg)'}
                 keyboardType='numeric'
             />
-            <Input
-                style={styles.inputes}
-                onChangeText={setProbOrtopedico}
-                value={probOrtopedico}
-                placeholder={'Algum problema ortopédico?'}
-            />
-            <Input
-                style={styles.inputes}
-                onChangeText={setDoencaCronica}
-                value={doencaCronica}
-                placeholder={'Alguma doença crónica?'}
-            />
-            <Input
-                style={styles.inputes}
-                onChangeText={setLesoes}
-                value={lesoes}
-                placeholder={'Alguma lesão?'}
-            />
+          
             <TouchableOpacity onPress={() => {setSelectedDateIsOpen(true)}}>
                 <Text>Data de nascimento</Text>
                 <Text>{date.toLocaleDateString()}</Text>
@@ -117,6 +128,109 @@ export function CreateTriagem({navigation, route}) {
               }}
               positiveButtonLabel="OK!" 
            />}
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Text>Você já praticou exercício físico antes? :</Text>
+              <Picker
+              style={{width: 100}}
+               selectedValue={didExercise}
+               onValueChange={(itemValue, itemIndex) =>
+                 setDidExercise(itemValue)
+               }>
+               <Picker.Item label="sim" value={true} />
+               <Picker.Item label="não" value={false} />
+              </Picker>
+              </View>
+              
+              <Input
+                style={styles.inputes}
+                onChangeText={setDidExerciseResp}
+                value={didExerciseResp}
+                placeholder={didExercise ? 'Qual(ais) e há quanto tempo?' :'Quanto tempo está sem praticar exercícios?'}
+              />
+
+             <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Text>Possui algum problema ortopédico? :</Text>
+              <Picker
+              style={{width: 100}}
+               selectedValue={probOrtopedico}
+               onValueChange={(itemValue, itemIndex) =>{
+                if(typeof itemValue !== 'boolean') return 
+                 setProbOrtopedico(itemValue)
+               }
+               }>
+               <Picker.Item label="selecione" value={'selecione'} />
+               <Picker.Item label="sim" value={true} />
+               <Picker.Item label="não" value={false} />
+              </Picker>
+              </View>
+              {
+                probOrtopedico === true && <Input
+                style={styles.inputes}
+                onChangeText={setProbOrtopedicoResp}
+                value={probOrtopedicoResp}
+                placeholder={'Qual(ais)?'}
+              />
+              }
+
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Text>Possui alguma doença crônica? :</Text>
+              <Picker
+              style={{width: 100}}
+               selectedValue={doencaCronica}
+               onValueChange={(itemValue, itemIndex) =>{
+                if(typeof itemValue !== 'boolean') return 
+                 setDoencaCronica(itemValue)
+               }
+               }>
+               <Picker.Item label="selecione" value={'selecione'} />
+               <Picker.Item label="sim" value={true} />
+               <Picker.Item label="não" value={false} />
+              </Picker>
+              </View>
+              {
+                doencaCronica === true && <Input
+                style={styles.inputes}
+                onChangeText={setDoencaCronicaResp}
+                value={doencaCronicaResp}
+                placeholder={'Qual(ais)?'}
+              />
+              }
+
+              
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Text>Possui alguma lesão? :</Text>
+              <Picker
+              style={{width: 100}}
+               selectedValue={lesoes}
+               onValueChange={(itemValue, itemIndex) =>{
+                console.log('item', itemValue)
+                if(typeof itemValue !== 'boolean') return 
+                 setLesoes(itemValue)
+               }
+               }>
+               <Picker.Item label="selecione" value={'selecione'} />
+               <Picker.Item label="sim" value={true} />
+               <Picker.Item label="não" value={false} />
+              </Picker>
+              </View>
+              {
+                lesoes === true && <Input
+                style={styles.inputes}
+                onChangeText={setLesoesResp}
+                value={lesoesResp}
+                placeholder={'Qual(ais)?'}
+              />
+              }
+
+              <View>
+              <Text>Gostaria de fazer algum outro comentário que possa ajudar na montagem do seu programa de treinamento?</Text>
+              <Input
+                style={styles.inputes}
+                onChangeText={setComentario}
+                value={comentario}
+                placeholder={''}
+              />
+              </View>
              
              {
                 !loading ? 
@@ -126,6 +240,7 @@ export function CreateTriagem({navigation, route}) {
                 :
                     <Loading loading={loading} size={18}/>
                 }
-        </View>
+          </View>
+        </ScrollView>
     )
 }
