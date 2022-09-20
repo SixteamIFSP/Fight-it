@@ -10,11 +10,11 @@ import { styles } from './styles';
 import { SwitchButton } from '../../components/switchbutton';
 import { Loading } from '../../components/loading';
 import { toastMessage } from '../../utils/toastMessage';
-// import { inputValidators } from '../../utils/inputValidators';
-import MaskInput from 'react-native-mask-input';
+import inputValidators from '../../utils/inputValidators';
+import MaskInput, { Masks } from 'react-native-mask-input';
 
 export function CreateAccount({ navigation, routes }) {
-    // const { validationEmail } = inputValidators()
+    const { validationEmail } = inputValidators()
     const { t } = useTranslation()
     const [loading, setLoading] = useState(false);
     const [name, setName] = useState('');
@@ -28,9 +28,9 @@ export function CreateAccount({ navigation, routes }) {
 
     const [typeTeacher, setTypeTeacher] = useState(true);
 
-    /*     const handleValidEmail = value => {
-            setEmailValidError(validationEmail(value));
-        }; */
+    const handleValidEmail = value => {
+        setEmailValidError(validationEmail(value));
+    };
 
     function validation() {
         if (name === '' | phone === '' | mail === '' | pass === '' | pass !== confirm)
@@ -93,19 +93,27 @@ export function CreateAccount({ navigation, routes }) {
                         placeholder={t('createAccount.name')}
                     /></View>
                 <View style={styles.inputes}>
-                    <MaskInput style={{ width: '80%', borderBottomColor: 'red', borderStyle: 'solid' }}
-                        onChangeText={(masked, unmasked) => { setMail(unmasked); console.log(masked) }}
+                    <Input
+                        onChangeText={(value) => { setMail(value); handleValidEmail(value) }}
                         value={mail}
-                        placeholderFillCharacter={t('login.mail')}
-                        mask={[/^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w\w+)+$/]}
+                        placeholder={t('login.mail')}
+                        keyboardType="email-address"
+                        autoComplete="email"
                     />
+                    {
+                        emailValidError ?
+                            <Text styles={{ backgroundColor: 'red' }}>
+                                {emailValidError}
+                            </Text>
+                            : null
+                    }
                 </View>
                 <View style={styles.inputes}>
-                    <Input
-                        keyboardType='phone-pad'
-                        onChangeText={setPhone}
+                    <MaskInput style={{ width: '70%', marginBottom: 12, marginTop: 5, borderWidth: 1, borderTopWidth: 0, borderLeftWidth: 0, borderRightWidth: 0 }}
+                        onChangeText={(masked, unmasked) => { setPhone(unmasked); console.log(masked) }}
                         value={phone}
-                        placeholder={t('createAccount.phone')}
+                        placeholderFillCharacter={t('createAccount.confirmPassword')}
+                        mask={Masks.BRL_PHONE}
                     />
                 </View>
                 <View style={styles.inputes}>
