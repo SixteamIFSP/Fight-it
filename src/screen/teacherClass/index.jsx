@@ -14,7 +14,7 @@ import { createClass, getClass } from "../../controler/class";
 import { useUser } from "../../hooks/user";
 import { DoubleButtonConfirmation } from "../../components/doubleButtonConfirmation";
 import { Input } from "../../components/input";
-import { toastMessage } from "../../util/toastMessage";
+import { toastMessage } from "../../utils/toastMessage";
 import { AddButton } from "../../components/addButton";
 import { Loading } from "../../components/loading";
 import { useTranslation } from 'react-i18next';

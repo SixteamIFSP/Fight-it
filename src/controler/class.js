@@ -1,5 +1,5 @@
 import { api } from "../services/api";
-import { toastMessage } from "../util/toastMessage";
+import { toastMessage } from "../utils/toastMessage";
 import axios from "axios";
 
 export async function getClass(setClasses, idUsuario, type){

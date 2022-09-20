@@ -2,7 +2,7 @@ import { api } from '../services/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { tokenKey } from '../configuration/constants'; 
-import { toastMessage } from '../util/toastMessage';
+import { toastMessage } from '../utils/toastMessage';
 
 export const UserContext = createContext();
 

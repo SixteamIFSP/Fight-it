@@ -5,7 +5,7 @@ import { Input } from '../../components/input';
 import { styles as stylesGlobal } from '../../global/styles';
 import { ButtonLinguage } from "../../components/buttonChangeLinguage";
 import { DoubleButtonConfirmation } from "../../components/doubleButtonConfirmation";
-import { toastMessage } from "../../util/toastMessage";
+import { toastMessage } from "../../utils/toastMessage";
 
 
 export function CreateAccountTeacher({ navigation, route }) {

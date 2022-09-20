@@ -9,12 +9,12 @@ import { styles as stylesGlobal } from '../../global/styles';
 import { styles } from './styles';
 import { SwitchButton } from '../../components/switchbutton';
 import { Loading } from '../../components/loading';
-import { toastMessage } from '../../util/toastMessage';
-import { checkMasks } from '../../util/checkMasks';
-
+import { toastMessage } from '../../utils/toastMessage';
+// import { inputValidators } from '../../utils/inputValidators';
+import MaskInput from 'react-native-mask-input';
 
 export function CreateAccount({ navigation, routes }) {
-    const { validationEmail } = checkMasks()
+    // const { validationEmail } = inputValidators()
     const { t } = useTranslation()
     const [loading, setLoading] = useState(false);
     const [name, setName] = useState('');
@@ -28,11 +28,9 @@ export function CreateAccount({ navigation, routes }) {
 
     const [typeTeacher, setTypeTeacher] = useState(true);
 
-    const handleValidEmail = value => {
-
-        setEmailValidError(validationEmail(value));
-
-    };
+    /*     const handleValidEmail = value => {
+            setEmailValidError(validationEmail(value));
+        }; */
 
     function validation() {
         if (name === '' | phone === '' | mail === '' | pass === '' | pass !== confirm)
@@ -90,25 +88,17 @@ export function CreateAccount({ navigation, routes }) {
             <View style={styles.inputesContainer}>
                 <View style={styles.inputes}>
                     <Input
-                        errorMessage onChangeText={setName}
+                        onChangeText={setName}
                         value={name}
                         placeholder={t('createAccount.name')}
                     /></View>
                 <View style={styles.inputes}>
-                    <Input
-                        onChangeText={(value) => { setMail(value); handleValidEmail(value) }}
+                    <MaskInput style={{ width: '80%', borderBottomColor: 'red', borderStyle: 'solid' }}
+                        onChangeText={(masked, unmasked) => { setMail(unmasked); console.log(masked) }}
                         value={mail}
-                        placeholder={t('login.mail')}
-                        keyboardType="email-address"
-                        autoComplete="email"
+                        placeholderFillCharacter={t('login.mail')}
+                        mask={[/^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w\w+)+$/]}
                     />
-                    {
-                        emailValidError ?
-                            <Text styles={{ backgroundColor: 'red' }}>
-                                {emailValidError}
-                            </Text>
-                            : null
-                    }
                 </View>
                 <View style={styles.inputes}>
                     <Input

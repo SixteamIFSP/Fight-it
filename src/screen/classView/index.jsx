@@ -6,7 +6,7 @@ import { DoubleButtonConfirmation } from "../../components/doubleButtonConfirmat
 import { Input } from "../../components/input";
 import { adicionarAluno, adicionarAula, getAllDataClass, getAlunosTurma, removeAula } from "../../controler/class";
 import { Loading } from "../../components/loading";
-import { toastMessage } from "../../util/toastMessage";
+import { toastMessage } from "../../utils/toastMessage";
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 import {
