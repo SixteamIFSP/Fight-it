@@ -112,7 +112,7 @@ export function CreateAccount({ navigation, routes }) {
                     <MaskInput style={{ width: '70%', marginBottom: 12, marginTop: 5, borderWidth: 1, borderTopWidth: 0, borderLeftWidth: 0, borderRightWidth: 0 }}
                         onChangeText={(masked, unmasked) => { setPhone(unmasked); console.log(masked) }}
                         value={phone}
-                        placeholderFillCharacter={t('createAccount.confirmPassword')}
+                        placeholderFillCharacter={t('createAccount.phone')}
                         mask={Masks.BRL_PHONE}
                     />
                 </View>
