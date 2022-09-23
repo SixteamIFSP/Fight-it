@@ -13,27 +13,32 @@ import { toastMessage } from '../../utils/toastMessage';
 import inputValidators from '../../utils/inputValidators';
 import MaskInput, { Masks } from 'react-native-mask-input';
 
-export function CreateAccount({ navigation, routes }) {
+export function CreateAccount({ navigation }) {
     const { validationEmail } = inputValidators()
     const { t } = useTranslation()
     const [loading, setLoading] = useState(false);
-    const [name, setName] = useState('');
 
+    //setter dos campos
+    const [name, setName] = useState('');
     const [mail, setMail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [password, setPassword] = useState('');
+    const [passwordConfirm, setPasswordConfirm] = useState('');
+    
+    //validations
     const [emailValidError, setEmailValidError] = useState('');
 
-    const [phone, setPhone] = useState('');
-    const [pass, setPass] = useState('');
-    const [confirm, setConfirm] = useState('');
+
 
     const [typeTeacher, setTypeTeacher] = useState(true);
 
     const handleValidEmail = value => {
+        setMail(value);
         setEmailValidError(validationEmail(value));
     };
 
     function validation() {
-        if (name === '' | phone === '' | mail === '' | pass === '' | pass !== confirm)
+        if (name === '' | phone === '' | mail === '' | password === '' | password !== passwordConfirm)
             return false;
         return true;
     };
@@ -46,7 +51,7 @@ export function CreateAccount({ navigation, routes }) {
                 nome: name,
                 email: mail,
                 telefone: phone,
-                senha: pass,
+                senha: password,
                 receberNot: 1,
             };
             setLoading(true);
@@ -94,7 +99,7 @@ export function CreateAccount({ navigation, routes }) {
                     /></View>
                 <View style={styles.inputes}>
                     <Input
-                        onChangeText={(value) => { setMail(value); handleValidEmail(value) }}
+                        onChangeText={(value) => { handleValidEmail(value) }}
                         value={mail}
                         placeholder={t('login.mail')}
                         keyboardType="email-address"
@@ -110,23 +115,23 @@ export function CreateAccount({ navigation, routes }) {
                 </View>
                 <View style={styles.inputes}>
                     <MaskInput style={{ width: '70%', marginBottom: 12, marginTop: 5, borderWidth: 1, borderTopWidth: 0, borderLeftWidth: 0, borderRightWidth: 0 }}
-                        onChangeText={(masked, unmasked) => { setPhone(unmasked); console.log(masked) }}
+                        onChangeText={(masked, unmasked) => { setPhone(unmasked); console.log(unmasked) }}
                         value={phone}
-                        placeholderFillCharacter={t('createAccount.phone')}
+                        placeholder={t('createAccount.phone')}
                         mask={Masks.BRL_PHONE}
                     />
                 </View>
                 <View style={styles.inputes}>
                     <Input
-                        onChangeText={setPass}
-                        value={pass}
+                        onChangeText={setPassword}
+                        value={password}
                         placeholder={t('login.password')}
                         secureTextEntry={true}
                     /></View>
                 <View style={styles.inputes}>
                     <Input
-                        onChangeText={setConfirm}
-                        value={confirm}
+                        onChangeText={setPasswordConfirm}
+                        value={passwordConfirm}
                         placeholder={t('createAccount.confirmPassword')}
                         secureTextEntry={true}
                     />
