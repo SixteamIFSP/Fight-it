@@ -13,6 +13,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { ConfigureAccount } from '../screen/configureAccount';
 import { ClassStack } from './classStack';
 import { CalendarTeacher } from '../screen/calendarTeacher';
+import App from '../services/notification';
 
 const TabNavegation = createBottomTabNavigator();
 const AppRoutes = createNativeStackNavigator();
@@ -86,7 +87,7 @@ function StackLoged() {
           tabBarInactiveTintColor: 'gray',
         })}>
           <TabNavegation.Screen options={{ title: "Home" }} navigationKey='HomeScreenStudent' name="HomeScreenStudent" component={HomeScreenStudent} />
-          {/* <TabNavegation.Screen navigationKey='Calendar' name="Calendar" component={HomeScreenStudent} />   */}
+          <TabNavegation.Screen navigationKey='Calendar' name="Calendar" component={App} />  
           {/* <TabNavegation.Screen navigationKey='Class' name="Class" component={HomeScreenStudent} />   */}
           {/* <TabNavegation.Screen navigationKey='Dashboard' name="Dashboard" component={HomeScreenStudent} />   */}
           <TabNavegation.Screen navigationKey='Config' name="Config" component={ConfigureAccount} />  

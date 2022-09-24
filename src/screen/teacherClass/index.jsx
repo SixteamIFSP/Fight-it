@@ -59,7 +59,7 @@ function LoadingClass({ user, setCreateNew, navigation }) {
         <>
             <AddButton handle={() => setCreateNew((value) => !value)} />
             <ContainerList>
-                {data.length >= 1 ? 
+                {data?.length >= 1 ? 
                     <FlatList
                         style={{width:'100%'}}
                         data={data}
