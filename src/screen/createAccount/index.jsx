@@ -8,6 +8,7 @@ import { createAccount } from '../../controler/account';
 import { styles as stylesGlobal } from '../../global/styles';
 import { styles } from './styles';
 import { SwitchButton } from '../../components/switchbutton';
+import { ErrorMessage } from '../../components/errorMessage';
 import { Loading } from '../../components/loading';
 import { toastMessage } from '../../utils/toastMessage';
 import inputValidators from '../../utils/inputValidators';
@@ -103,9 +104,7 @@ export function CreateAccount({ navigation }) {
                     />
                     {
                         emailValidError ?
-                            <Text style={styles.errorMessage}>
-                                {emailValidError}
-                            </Text>
+                            <ErrorMessage text={emailValidError}></ErrorMessage>
                             : null
                     }
                 </View>
