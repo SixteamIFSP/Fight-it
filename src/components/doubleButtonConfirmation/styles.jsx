@@ -13,7 +13,6 @@ export const ButtonConfirm = styled.TouchableOpacity`
 
 export const TextButton = styled.Text`
     text-align:center;
-    
     padding: 10px;
     background-color: ${({confirm}) => confirm ? '#3d3d3d' : '#cfcfcf'};
     color: ${({confirm}) => confirm ? '#cfcfcf' : '#3d3d3d'};
