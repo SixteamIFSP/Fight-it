@@ -15,7 +15,7 @@ import inputValidators from '../../utils/inputValidators';
 import MaskInput, { Masks } from 'react-native-mask-input';
 
 export function CreateAccount({ navigation }) {
-    const { validationEmail } = inputValidators()
+    const { validationEmail, validationName } = inputValidators()
     const { t } = useTranslation()
 
     const [loading, setLoading] = useState(false);
@@ -29,11 +29,16 @@ export function CreateAccount({ navigation }) {
     const [typeTeacher, setTypeTeacher] = useState(true);
 
     //validations
-    const [emailValidError, setEmailValidError] = useState('');
+    const [invalidEmailMessage, setInvalidEmailMessage] = useState('');
+    const [invalidNameMessage, setInvalidNameMessage] = useState('');
 
-    const handleValidEmail = value => {
+    const handleEmail = value => {
         setMail(value);
-        setEmailValidError(validationEmail(value));
+        setInvalidEmailMessage(validationEmail(value));
+    };
+    const handleName = value => {
+        setName(value);
+        setInvalidNameMessage(validationName(value));
     };
 
     function inputValidations() {
@@ -61,6 +66,7 @@ export function CreateAccount({ navigation }) {
             toastMessage(false, "Digite os campos corretamente!")
         }
     }
+
     function handleBack() {
         navigation.navigate('Login');
     };
@@ -90,21 +96,25 @@ export function CreateAccount({ navigation }) {
             <View style={styles.inputesContainer}>
                 <View style={styles.inputes}>
                     <Input
-                        onChangeText={setName}
+                        onChangeText={(value) => { handleName(value) }}
                         value={name}
                         placeholder={t('createAccount.name')}
-                    /></View>
+                    />
+                    {
+                        invalidNameMessage ? <ErrorMessage text={invalidNameMessage} /> : null
+                    }
+                </View>
                 <View style={styles.inputes}>
                     <Input
-                        onChangeText={(value) => { handleValidEmail(value) }}
+                        onChangeText={(value) => { handleEmail(value) }}
                         value={mail}
                         placeholder={t('login.mail')}
                         keyboardType="email-address"
                         autoComplete="email"
                     />
                     {
-                        emailValidError ?
-                            <ErrorMessage text={emailValidError}></ErrorMessage>
+                        invalidEmailMessage ?
+                            <ErrorMessage text={invalidEmailMessage}></ErrorMessage>
                             : null
                     }
                 </View>

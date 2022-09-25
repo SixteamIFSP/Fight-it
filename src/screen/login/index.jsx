@@ -7,25 +7,27 @@ import { useTranslation } from 'react-i18next';
 import { ButtonLinguage } from "../../components/buttonChangeLinguage";
 import { useUser } from "../../hooks/user";
 import { SwitchButton } from "../../components/switchbutton";
+import { ErrorMessage } from '../../components/errorMessage';
+import inputValidators from '../../utils/inputValidators';
 import {
-  Button,
   Text,
   View,
-  TextInput,
-  SafeAreaView,
   TouchableOpacity
 } from "react-native";
 import { Loading } from "../../components/loading";
 
 export function Login({ navigation }) {
+  const { validationEmail } = inputValidators()
   const [loading, setLoading] = useState(false);
   const [mail, setMail] = useState('');
   const [password, setPassword] = useState('');
   const [typeTeacher, setTypeTeacher] = useState(true);
+  //validations
+  const [invalidEmailMessage, setInvalidEmailMessage] = useState('');
   const { singIn } = useUser();
 
-  const { t } = useTranslation(); 
-  
+  const { t } = useTranslation();
+
   async function onHandleLogin() {
     //TODO:achar uma solução que não dê erro: setLoading(true);
     await singIn({ mail: mail, pass: password }, typeTeacher);
@@ -36,6 +38,11 @@ export function Login({ navigation }) {
     navigation.navigate('CreateAccount');
   }
 
+  const handleEmail = (value) => {
+    setMail(value);
+    setInvalidEmailMessage(validationEmail(value));
+
+  }
   return (
     <View style={stylesGlobal.container}>
       <ButtonLinguage />
@@ -53,15 +60,19 @@ export function Login({ navigation }) {
             type={!typeTeacher}
           ></SwitchButton>
         </View>
-
         <Input
-          onChangeText={setMail}
+          onChangeText={(value) => { handleEmail(value) }}
           value={mail}
           placeholder={t('login.mail')}
           keyboardType="email-address"
         />
+        {
+          invalidEmailMessage ?
+            <ErrorMessage text={invalidEmailMessage}></ErrorMessage>
+            : null
+        }
         <Input
-        style={styles.inputPassword}
+          style={styles.inputPassword}
           secureTextEntry={true}
           onChangeText={setPassword}
           value={password}
@@ -71,13 +82,12 @@ export function Login({ navigation }) {
           style={styles.button}
           onPress={onHandleLogin}
         >
-          { 
-            !loading ? 
+          {
+            !loading ?
               <Text> {t('login.connect')}</Text>
               :
-              <Loading loading={loading} size={18}/>
+              <Loading loading={loading} size={18} />
           }
-          
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.textTouchebles}
