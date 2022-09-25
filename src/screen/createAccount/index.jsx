@@ -16,6 +16,7 @@ import MaskInput, { Masks } from 'react-native-mask-input';
 export function CreateAccount({ navigation }) {
     const { validationEmail } = inputValidators()
     const { t } = useTranslation()
+
     const [loading, setLoading] = useState(false);
 
     //setter dos campos
@@ -24,29 +25,26 @@ export function CreateAccount({ navigation }) {
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
-    
+    const [typeTeacher, setTypeTeacher] = useState(true);
+
     //validations
     const [emailValidError, setEmailValidError] = useState('');
-
-
-
-    const [typeTeacher, setTypeTeacher] = useState(true);
 
     const handleValidEmail = value => {
         setMail(value);
         setEmailValidError(validationEmail(value));
     };
 
-    function validation() {
+    function inputValidations() {
         if (name === '' | phone === '' | mail === '' | password === '' | password !== passwordConfirm)
             return false;
         return true;
     };
 
-    async function handleConfirm() {
+    async function handleConfirmButton() {
         if (loading) return
 
-        if (validation()) {
+        if (inputValidations()) {
             const data = {
                 nome: name,
                 email: mail,
@@ -58,7 +56,6 @@ export function CreateAccount({ navigation }) {
             await createAccount(data, typeTeacher);
             setLoading(false);
             navigation.navigate('Login');
-
         } else {
             toastMessage(false, "Digite os campos corretamente!")
         }
@@ -70,7 +67,6 @@ export function CreateAccount({ navigation }) {
     return (
         <View style={stylesGlobal.container}>
             <ButtonLinguage></ButtonLinguage>
-
             <Text style={styles.TitleLogin}>Fight It</Text>
 
             <View style={styles.userTypeChoice}>
@@ -107,15 +103,15 @@ export function CreateAccount({ navigation }) {
                     />
                     {
                         emailValidError ?
-                            <Text styles={{ backgroundColor: 'red' }}>
+                            <Text style={styles.errorMessage}>
                                 {emailValidError}
                             </Text>
                             : null
                     }
                 </View>
                 <View style={styles.inputes}>
-                    <MaskInput style={{ width: '70%', marginBottom: 12, marginTop: 5, borderWidth: 1, borderTopWidth: 0, borderLeftWidth: 0, borderRightWidth: 0 }}
-                        onChangeText={(masked, unmasked) => { setPhone(unmasked); console.log(unmasked) }}
+                    <MaskInput style={styles.inputMask}
+                        onChangeText={(_, unmasked) => { setPhone(unmasked); }}
                         value={phone}
                         placeholder={t('createAccount.phone')}
                         mask={Masks.BRL_PHONE}
@@ -143,7 +139,7 @@ export function CreateAccount({ navigation }) {
                 {
                     !loading ?
                         <DoubleButtonConfirmation
-                            handleConfirm={handleConfirm}
+                            handleConfirm={handleConfirmButton}
                             handleBack={handleBack} />
                         :
                         <Loading loading={loading} size={18} />

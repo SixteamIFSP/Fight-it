@@ -29,5 +29,16 @@ export const styles = StyleSheet.create({
         marginBottom: 24,
         alignItems: 'center'
     },
-    errorMessage: { color: 'red', backgroundColor:'red' }
+    errorMessage: {
+        color: 'red'
+    },
+    inputMask: {
+        width: '70%',
+        marginBottom: 12,
+        marginTop: 5,
+        borderWidth: 1,
+        borderTopWidth: 0,
+        borderLeftWidth: 0,
+        borderRightWidth: 0
+    }
 });
