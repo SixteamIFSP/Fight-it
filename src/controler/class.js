@@ -11,10 +11,9 @@ export async function getClass(setClasses, idUsuario, type){
        } else {
             response = await api.get(`/turma/busca/${idUsuario}`);
        }
-       console.log(response?.data.result);
-        
         if (response?.data.status){
-            setClasses(response?.data.result)
+            setClasses(response?.data.resultado)
+            toastMessage(true, response?.data.mensagem) 
         } else{
             toastMessage(false, response?.data.mensagem)   
         }
