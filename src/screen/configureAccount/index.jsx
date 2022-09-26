@@ -6,7 +6,7 @@ import { CheckBox } from "../../components/checkbox";
 import { MaterialIcons } from '@expo/vector-icons'; 
 import { ChangeInfoAccount, ChangePassowrd, DeleteAccount, GetUserAccount } from "../../controler/account";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
-import { toastMessage } from "../../util/toastMessage";
+import { toastMessage } from "../../utils/toastMessage";
 import * as ImagePicker from 'expo-image-picker';
 import { useTranslation } from 'react-i18next';
 
@@ -324,7 +324,6 @@ export function ConfigureAccount() {
               setLoadingImage(false);
             
         } catch (error) {
-
             console.log(error.message);
         }
         

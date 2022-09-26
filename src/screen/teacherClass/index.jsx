@@ -9,15 +9,16 @@ import {
     TextTitle,
     CardCreateClasss,
 } from "./styles";
-import { ActivityIndicator, FlatList } from "react-native";
-import { createClass, getClass } from "../../controler/class";
+import { ActivityIndicator, FlatList, Text } from "react-native";
+import { createClass, getAulasByProfessor, getClass } from "../../controler/class";
 import { useUser } from "../../hooks/user";
 import { DoubleButtonConfirmation } from "../../components/doubleButtonConfirmation";
 import { Input } from "../../components/input";
-import { toastMessage } from "../../util/toastMessage";
+import { toastMessage } from "../../utils/toastMessage";
 import { AddButton } from "../../components/addButton";
 import { Loading } from "../../components/loading";
 import { useTranslation } from 'react-i18next';
+import { useIsFocused } from "@react-navigation/native";
 
 function CardTurma({ data, handleNewScreen }) {
     const { t } = useTranslation()
@@ -32,15 +33,19 @@ function CardTurma({ data, handleNewScreen }) {
 function LoadingClass({ user, setCreateNew, navigation }) {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
+    const isFocused = useIsFocused();
 
-    useEffect(() => {
-        handleLoadMore();
-    }, []);
+    useEffect(()=>{
+        function effect (){
+            console.log("TURMAs", isFocused )
+            handleLoadMore();
+        };
+        isFocused && effect();
+    }, [isFocused])
 
     async function handleLoadMore() {
-        if (loading) return;
+        if (loading) return;    
         setLoading(true);
-        
         await getClass(setData, user.userID, user.tipoUsuario === 1);
         setLoading(false);
     };
@@ -53,17 +58,20 @@ function LoadingClass({ user, setCreateNew, navigation }) {
         <>
             <AddButton handle={() => setCreateNew((value) => !value)} />
             <ContainerList>
-                <FlatList
-                    style={{width:'100%'}}
-                    data={data}
-                    renderItem={({ item }) => <CardTurma data={item} handleNewScreen={handleNewScreen}></CardTurma>}
-                    //onEndReached={handleLoadMore}
-                    onEndThreshold={0.01}
-                    keyExtractor={item => item.id}
-                    ListFooterComponent={
-                        <Loading loading={loading} size={30}></Loading>
-                    }
-                />
+                {data?.length >= 1 ? 
+                    <FlatList
+                        style={{width:'100%'}}
+                        data={data}
+                        renderItem={({ item }) => <CardTurma data={item} handleNewScreen={handleNewScreen}></CardTurma>}
+                        // onEndReached={handleLoadMore}
+                        onEndThreshold={0.01}
+                        keyExtractor={item => item.id}
+                        ListFooterComponent={
+                            <Loading loading={loading} size={30}></Loading>
+                        }
+                    />
+                    :<Text >Este professor nao possui turmas</Text>
+                }
             </ContainerList>
         </>
     )
@@ -83,7 +91,7 @@ function CreateClass({ user, setCreateNew }) {
             };
             createClass(data);
         } else {
-            toastMessage(false, t("toast.error.blank"))
+            toastMessage(false, t("toast.error.blank"));
         };
 
         cancel();

@@ -8,35 +8,54 @@ import { createAccount } from '../../controler/account';
 import { styles as stylesGlobal } from '../../global/styles';
 import { styles } from './styles';
 import { SwitchButton } from '../../components/switchbutton';
+import { ErrorMessage } from '../../components/errorMessage';
 import { Loading } from '../../components/loading';
-import { toastMessage } from '../../util/toastMessage'; 
+import { toastMessage } from '../../utils/toastMessage';
+import inputValidators from '../../utils/inputValidators';
+import MaskInput, { Masks } from 'react-native-mask-input';
 
-export function CreateAccount({ navigation, routes }) {
+export function CreateAccount({ navigation }) {
+    const { validationEmail, validationName } = inputValidators()
     const { t } = useTranslation()
-    const [loading, setLoading] =useState(false);
 
+    const [loading, setLoading] = useState(false);
+
+    //setter dos campos
     const [name, setName] = useState('');
     const [mail, setMail] = useState('');
     const [phone, setPhone] = useState('');
-    const [pass, setPass] = useState('');
-    const [confirm, setConfirm] = useState('');
-    const [typeTeacher, setTypeTeacher] = useState(false);
+    const [password, setPassword] = useState('');
+    const [passwordConfirm, setPasswordConfirm] = useState('');
+    const [typeTeacher, setTypeTeacher] = useState(true);
 
-    function validation() {
-        if (name === '' | phone === '' | mail === '' | pass === '' | pass !== confirm)
+    //validations
+    const [invalidEmailMessage, setInvalidEmailMessage] = useState('');
+    const [invalidNameMessage, setInvalidNameMessage] = useState('');
+
+    const handleEmail = value => {
+        setMail(value);
+        setInvalidEmailMessage(validationEmail(value));
+    };
+    const handleName = value => {
+        setName(value);
+        setInvalidNameMessage(validationName(value));
+    };
+
+    function inputValidations() {
+        if (name === '' | phone === '' | mail === '' | password === '' | password !== passwordConfirm)
             return false;
         return true;
     };
 
-    async function handleConfirm() {
+    async function handleConfirmButton() {
         if (loading) return
 
-        if (validation()) {
+        if (inputValidations()) {
             const data = {
                 nome: name,
                 email: mail,
                 telefone: phone,
-                senha: pass,
+                senha: password,
                 receberNot: 1,
             };
             if(!typeTeacher) {
@@ -47,11 +66,11 @@ export function CreateAccount({ navigation, routes }) {
             await createAccount(data, typeTeacher);
             setLoading(false);
             navigation.navigate('Login');
-            
         } else {
             toastMessage(false, "Digite os campos corretamente!")
         }
     }
+
     function handleBack() {
         navigation.navigate('Login');
     };
@@ -59,7 +78,6 @@ export function CreateAccount({ navigation, routes }) {
     return (
         <View style={stylesGlobal.container}>
             <ButtonLinguage></ButtonLinguage>
-
             <Text style={styles.TitleLogin}>Fight It</Text>
 
             <View style={styles.userTypeChoice}>
@@ -68,62 +86,78 @@ export function CreateAccount({ navigation, routes }) {
 
             <View style={styles.switchButtons}>
                 <SwitchButton
-                    onPress={() => setTypeTeacher(false)}
-                    text={t('createAccount.student')}
-                    type={!typeTeacher}
-                ></SwitchButton>
-                <SwitchButton
                     onPress={() => setTypeTeacher(true)}
                     text={t('createAccount.teacher')}
                     type={typeTeacher}
                 ></SwitchButton>
+                <SwitchButton
+                    onPress={() => setTypeTeacher(false)}
+                    text={t('createAccount.student')}
+                    type={!typeTeacher}
+                ></SwitchButton>
             </View>
 
-            <Input
-                style={styles.inputes}
-                onChangeText={setName}
-                value={name}
-                placeholder={t('createAccount.name')}
-            />
-            <Input
-                style={styles.inputes}
-                onChangeText={setMail}
-                value={mail}
-                placeholder={t('login.mail')}
-                keyboardType="email-address"
-            />
-            <Input
-                style={styles.inputes}
-                keyboardType='phone-pad'
-                onChangeText={setPhone}
-                value={phone}
-                placeholder={t('createAccount.phone')}
-            />
-            <Input
-                style={styles.inputes}
-                onChangeText={setPass}
-                value={pass}
-                placeholder={t('login.password')}
-                secureTextEntry={true}
-            />
-            <Input
-                style={styles.inputes}
-                onChangeText={setConfirm}
-                value={confirm}
-                placeholder={t('createAccount.confirmPassword')}
-                secureTextEntry={true}
-            />
+            <View style={styles.inputesContainer}>
+                <View style={styles.inputes}>
+                    <Input
+                        onChangeText={(value) => { handleName(value) }}
+                        value={name}
+                        placeholder={t('createAccount.name')}
+                    />
+                    {
+                        invalidNameMessage ? <ErrorMessage text={invalidNameMessage} /> : null
+                    }
+                </View>
+                <View style={styles.inputes}>
+                    <Input
+                        onChangeText={(value) => { handleEmail(value) }}
+                        value={mail}
+                        placeholder={t('login.mail')}
+                        keyboardType="email-address"
+                        autoComplete="email"
+                    />
+                    {
+                        invalidEmailMessage ?
+                            <ErrorMessage text={invalidEmailMessage}></ErrorMessage>
+                            : null
+                    }
+                </View>
+                <View style={styles.inputes}>
+                    <MaskInput style={styles.inputMask}
+                        onChangeText={(_, unmasked) => { setPhone(unmasked); }}
+                        value={phone}
+                        placeholder={t('createAccount.phone')}
+                        mask={Masks.BRL_PHONE}
+                    />
+                </View>
+                <View style={styles.inputes}>
+                    <Input
+                        onChangeText={setPassword}
+                        value={password}
+                        placeholder={t('login.password')}
+                        secureTextEntry={true}
+                    /></View>
+                <View style={styles.inputes}>
+                    <Input
+                        onChangeText={setPasswordConfirm}
+                        value={passwordConfirm}
+                        placeholder={t('createAccount.confirmPassword')}
+                        secureTextEntry={true}
+                    />
+                </View>
+            </View>
+
             <View style={styles.confirmationButton}>
 
                 {
-                !loading ? 
-                    <DoubleButtonConfirmation
-                        handleConfirm={handleConfirm}
-                        handleBack={handleBack} />
-                :
-                    <Loading loading={loading} size={18}/>
+                    !loading ?
+                        <DoubleButtonConfirmation
+                            handleConfirm={handleConfirmButton}
+                            handleBack={handleBack} />
+                        :
+                        <Loading loading={loading} size={18} />
                 }
-                    
+
             </View>
 
         </View>

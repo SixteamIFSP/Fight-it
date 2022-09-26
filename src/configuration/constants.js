@@ -1,16 +1,15 @@
 const inProduction = false;
-const aws = false
 
 const production = {
-  API_URL: aws ? '' : 'https://fight-it.herokuapp.com/',
+  API_URL:  'https://fight-it.herokuapp.com/',
   API_AUTHORIZATION: '',
-  IMAGES_URL: aws ? '' : 'https://fight-it.herokuapp.com',
+  IMAGES_URL: 'https://fight-it.herokuapp.com/imagem/document/',
 };
 
 const development = {
-  API_URL: aws ? '' : 'https://fight-it.herokuapp.com/',
+  API_URL: 'https://fight-it.herokuapp.com/',
   API_AUTHORIZATION: '',
-  IMAGES_URL: aws ? '' : 'https://fight-it.herokuapp.com/imagem/document/',
+  IMAGES_URL: 'https://fight-it.herokuapp.com/imagem/document/',
 };
 
 export const tokenKey = '@token';

@@ -1,8 +1,7 @@
 import { api } from "../services/api";
-import { toastMessage } from "../util/toastMessage";
+import { toastMessage } from "../utils/toastMessage";
 
 export async function createAccount(data, type){
-    
         try {
             let response;
             if (type){
@@ -29,10 +28,8 @@ export async function GetUserAccount(setDataUser,id, type){
     try {
         if(type){
             response = await api.get(`/user/busca/professor/${id}`,);
-            console.log(response);
        } else {
             response = await api.get(`/user/busca/aluno/${id}`,);
-            console.log(response);
        }
         
         if (response.data.status){

@@ -1,8 +1,8 @@
 import { StyleSheet } from "react-native";
-import { TextAlingLine } from "../../screen/configureAccount/styles";
 
 export const styles = StyleSheet.create({
     modal: {
+        position:'absolute',
         flex: 1,
         backgroundColor: 'white',
         justifyContent: 'center',

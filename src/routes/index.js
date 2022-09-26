@@ -14,6 +14,7 @@ import { ConfigureAccount } from '../screen/configureAccount';
 import { ClassStack } from './classStack';
 import { CreateTriagem } from '../screen/createTriagem';
 import { ClassView } from '../screen/classView';
+import { CalendarTeacher } from '../screen/calendarTeacher';
 
 const TabNavegation = createBottomTabNavigator();
 const AppRoutes = createNativeStackNavigator();
@@ -31,7 +32,8 @@ function StackLoged() {
 
         if (route.name === 'HomeScreenTeacher') {
           iconName = 'home';
-        } else if (route.name === 'Class') {
+        } 
+          else if (route.name === 'Class') {
           iconName = 'group';
         } 
          else if (route.name === 'Config') {
@@ -53,7 +55,7 @@ function StackLoged() {
     })}>
 
       <TabNavegation.Screen options={{ title: "Home", headerShown: false }} navigationKey='HomeScreenTeacher' name="HomeScreenTeacher" component={HomeScreenTeacher} />
-      <TabNavegation.Screen navigationKey='Calendar' name="Calendar" component={HomeScreenTeacher} />
+      <TabNavegation.Screen navigationKey='Calendar' name="Calendar" component={CalendarTeacher} />
       <TabNavegation.Screen options={{ headerShown: false }} navigationKey='Class' name="Class" component={ClassStack} />
       {/* <TabNavegation.Screen navigationKey='Dashboard' name="Dashboard" component={HomeScreenTeacher} /> */}
       <TabNavegation.Screen options={{ title: t(`nav.config`) }}  navigationKey='Config' name="Config" component={ConfigureAccount} />

@@ -2,17 +2,18 @@ import { api } from '../services/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { tokenKey } from '../configuration/constants'; 
-import { toastMessage } from '../util/toastMessage';
+import { toastMessage } from '../utils/toastMessage';
 
 export const UserContext = createContext();
 
-const data = {
-    nome: 'rian',
-    email: 'riansm100@gmail.com',
-    userID: '5',
-    tipoUsuario: 1,
-    pfp: "f9d20e32d01fe870da44cc00067b6dbf",
-}
+const data = undefined;
+// {
+//     nome: 'rian',
+//     email: 'riansm100@gmail.com',
+//     userID: '5',
+//     tipoUsuario: 1,
+//     pfp: "f9d20e32d01fe870da44cc00067b6dbf",
+// }
 
 function UserProvider({ children }) {
     const [user, setUser] = useState(data ? data : null);
@@ -44,7 +45,6 @@ function UserProvider({ children }) {
             });
             toastMessage(true, "Login efetuado com sucesso");
         } catch (error) {  
-            console.log(error);       
             toastMessage(false, "Erro de conexão!");
         }
     }

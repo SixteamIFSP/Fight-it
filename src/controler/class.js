@@ -1,8 +1,9 @@
 import { api } from "../services/api";
-import { toastMessage } from "../util/toastMessage";
+import { toastMessage } from "../utils/toastMessage";
+import axios from "axios";
 
 export async function getClass(setClasses, idUsuario, type){
-    
+    console.log(idUsuario);
     try {
         let response;
         if (type){
@@ -10,6 +11,7 @@ export async function getClass(setClasses, idUsuario, type){
        } else {
             response = await api.get(`/turma/busca/${idUsuario}`);
        }
+       console.log(response?.data.result);
         
         if (response?.data.status){
             setClasses(response?.data.result)
@@ -18,10 +20,13 @@ export async function getClass(setClasses, idUsuario, type){
         }
        
     } catch (error) {
-    
-        toastMessage(false, 'Erro de conexão!') 
+        console.log(error);
+
+        toastMessage(false, 'Erro de conexão!')
     }
 }
+
+
 
 export async function createClass(data){ // data => { nome:string, descricao:string, professorId:number}
     try {
@@ -37,6 +42,24 @@ export async function createClass(data){ // data => { nome:string, descricao:str
     } catch (error) {
         toastMessage(false, 'Erro de conexão!') 
     }
+}
+
+export async function getAllDataClass(setAlunos, setClass, data){
+    axios.all(
+        [
+            api.get(`/turma/alunos/${data}`), 
+            api.get(`/aula/busca_turma/${data}`),
+    ]
+    ).then(axios.spread((responseAlunos, responseAula) => {
+        console.log('aaaaa', data,responseAlunos.data, responseAula.data);
+     
+        setAlunos(responseAlunos?.data.result || [])
+        setClass(responseAula?.data.result || [])
+        
+    }))
+    .catch((error)=>{
+        console.log(error);
+    })
 }
 
 export async function getAlunosTurma(setAlunos, data){ // data => number
@@ -111,10 +134,7 @@ export async function adicionarAula(data){
 export async function removeAula(aula){
 
     try {
-        const response = await api.patch(`/aula/deletarAula`, {aula});
-
-        console.log(response?.data);
-
+        const response = await api.delete(`/aula/deletarAula`, {aula});
         if (response?.data.status){
             toastMessage(true, response?.data.mensagem) 
 
@@ -126,4 +146,21 @@ export async function removeAula(aula){
         toastMessage(false, 'Erro de conexão!') 
     }
 }
+
+export async function deleteAluno({turma, aluno}){
+    console.log(`/turma/excluir/aluno`, {turma, aluno});
+
+    try {
+        const response = await api.post(`/turma/excluir/aluno`, {turma, aluno});
+        if (response?.data.status){
+            toastMessage(true, response?.data.mensagem)
+        } else{
+            toastMessage(false, response?.data.mensagem) 
+        }
+        
+    } catch (error) {
+        toastMessage(false, 'Erro de conexão!') 
+    }
+}
+
 

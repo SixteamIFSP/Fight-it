@@ -7,7 +7,7 @@ import { createAccount } from "../../controler/account";
 import { createTriagem } from "../../controler/triagem";
 import {styles} from './style'
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { toastMessage } from "../../util/toastMessage";
+import { toastMessage } from "../../utils/toastMessage";
 import {Picker} from '@react-native-picker/picker';
 
 export function CreateTriagem({navigation, route}) {
@@ -47,8 +47,7 @@ export function CreateTriagem({navigation, route}) {
             jaFezExerciciosResposta: didExerciseResp, 
             comentario
         } 
-    console.log(data)
-    return 
+
        const formIncomplet = Object.keys(data).find( e => {
         if(e === 'dataNascimento') return 
         if(e === 'objetivo' && !data[e]) return true 

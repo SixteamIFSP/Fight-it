@@ -14,7 +14,9 @@ import {
     TextButtons
 } from "./styles";
 import { useTranslation } from "react-i18next";
-import { useFocusEffect } from "@react-navigation/native";
+import { useIsFocused } from "@react-navigation/native";
+import { useModal } from "../../hooks/modalConfirmation";
+import { deleteAluno } from "../../controler/class";
 
 function CardParamStudant({ item, handleGraphyc }) {
 
@@ -24,19 +26,32 @@ function CardParamStudant({ item, handleGraphyc }) {
         </ContainerCardParam>
     )
 };
-export function StudantView({ navigation, route }) {
+export function StudantView({ navigation, route:{params} }) {
     const { t } = useTranslation();
+    const { studantId, id, nome } = params;
+    const { setCallback } = useModal();
     const [loading, setLoading] = useState(false);
     const [paramsAluno, setParamsAluno] = useState([]);
     const [loadingGraphyc, setLoadingGraphyc] = useState(false);
     const [dataParams, setDataParams] = useState([]);
+    const isFocused = useIsFocused();
 
-    useEffect(() => {
-        handleLoadingParams()
-    }, [])
+    useEffect(()=>{
+        console.log("Chamou o Effect CLASS!!", isFocused);
+        function effect (){
+            handleLoadingParams()
+            setCallback("Deseja apagar aluno?", ()=>callBackDeleteStudentClass());
+        };
+        isFocused && effect();
+    }, [isFocused])
+
+    function callBackDeleteStudentClass(){
+        deleteAluno({ aluno:studantId, turma:id })
+        navigation.goBack();
+    }
     
     function handleEvaluation() {
-        navigation.navigate('EvaluationStudent', { ...route?.params, title: t("navigationHeader.Evaluation", { name: route?.params.nome }) })
+        navigation.navigate('EvaluationStudent', { params, title: t("navigationHeader.Evaluation", { name: nome }) })
     }
 
     function handleViewTriagem() {
@@ -48,8 +63,8 @@ export function StudantView({ navigation, route }) {
         setLoading(true);
 
         const data = {
-            aluno: route?.params.studantId,
-            turma: route?.params.id,
+            aluno: studantId,
+            turma: id,
         }
 
         // await getParamsAluno(data, setParamsAluno); - request comentado por estar quebrando o backend
@@ -60,7 +75,7 @@ export function StudantView({ navigation, route }) {
 
         setLoadingGraphyc(false)
         const data = {
-            aluno: route?.params.studantId,
+            aluno: studantId,
             parametro: idParam,
         }
         await getDesempenhoPorParametro(data, setDataParams) 
