@@ -34,6 +34,7 @@ import Divider from 'react-native-divider';
 import { useModal } from "../../hooks/modalConfirmation";
 import { useIsFocused } from "@react-navigation/native";
 import { deleteTurma } from '../../controler/class';
+import { LessonView } from "../LessonView";
 
 
 function AdicionarAula({ turmaId, setback }) {
@@ -56,6 +57,7 @@ function AdicionarAula({ turmaId, setback }) {
         }
         const data = {
             topicoAula,
+            descricao, 
             date: date.toLocaleDateString(),
             time: time.toLocaleTimeString(),
             equipamentos
@@ -234,14 +236,18 @@ function AdicionarAluno({ turmaId, setback}) {
 
 
 
-function RenderAula({aula, onDeleteAula, student}) {
-    console.log(aula)
+function RenderAula({aula, handleViewAula,  onDeleteAula, student}) {
+    
     return (
         <RenderAulaContainer>
              <Text>{aula.nome}</Text>
              {!student && <CancelarAula
              onPress={() => onDeleteAula(aula.id)}>
                 <TextWhite>Cancelar aula</TextWhite>
+            </CancelarAula>}
+            {student && <CancelarAula
+             onPress={() => handleViewAula(aula.id)}>
+                <TextWhite>Visualizar aula</TextWhite>
             </CancelarAula>}
         </RenderAulaContainer>
     )
@@ -253,13 +259,14 @@ export function ClassView({ navigation, route }) {
     const student = route?.params?.student
     const [dataAlunos, setDataAlunos] = useState([]);
     const [dateAula, setDateAula] = useState([]);
+    const [aulaid, setAulaID] = useState()
 
     const [page, setPage ] = useState(1);
     const { setCallback } = useModal();
     const isFocused = useIsFocused();
 
     function callBackDeleteTurma(){
-        deleteTurma(id);
+        // deleteTurma(id);
         navigation.goBack();
     }
     
@@ -275,8 +282,8 @@ export function ClassView({ navigation, route }) {
         getData()
         handleOpenPage(1);
     }
- 
-    
+
+  
     function onDeleteAula(aulaID) {
         if(student) return 
         removeAula(aulaID).then(() => {
@@ -352,9 +359,12 @@ export function ClassView({ navigation, route }) {
                     <ContentListagem
                         data={dateAula}
                         renderItem={
-                            ({ item }) => <RenderAula aula={item} onDeleteAula={onDeleteAula}  student={student}/>
+                            ({ item }) => <RenderAula handleViewAula={ (aulaid) => {
+                                setAulaID(aulaid)
+                                handleOpenPage(4)
+                            }} aula={item} onDeleteAula={onDeleteAula}  student={student}/>
                         }
-                        keyExtractor={item => item.Nome + '91'}>
+                        keyExtractor={item => item.nome + '91'}>
                     </ContentListagem>
                     :
                     <Text>{"nao ha aulas nessa turma"}</Text>
@@ -363,7 +373,8 @@ export function ClassView({ navigation, route }) {
             </ContainerList>
         </ContainerListColumn>,
         2: <AdicionarAluno setback={callback} turmaId={id}></AdicionarAluno>,
-        3: <AdicionarAula turmaId={id} setback={callback}/>
+        3: <AdicionarAula turmaId={id} setback={callback}/>,
+        4: <LessonView aulaid={aulaid} onBack={() => handleOpenPage(1) }/>
     }
 
     return (

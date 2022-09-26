@@ -163,3 +163,23 @@ export async function deleteAluno({turma, aluno}){
 }
 
 
+export async function getAulaByAulaID(aulaID, setAula){
+    
+
+    try {
+        const response = await api.get(`/urlDeBuscarAulaPorIDaindaNãoDesenvolvida` + aulaID);
+        if (response?.data.status){
+            toastMessage(true, response?.data.mensagem)
+            setAula(response?.data)
+        } else{
+            toastMessage(false, response?.data.mensagem) 
+            setAula(null)
+        }
+        
+    } catch (error) {
+        toastMessage(false, 'Erro de conexão!') 
+        setAula(null)
+    }
+}
+
+
