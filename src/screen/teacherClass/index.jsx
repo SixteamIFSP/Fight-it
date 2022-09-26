@@ -10,7 +10,7 @@ import {
     CardCreateClasss,
 } from "./styles";
 import { ActivityIndicator, FlatList, Text } from "react-native";
-import { createClass, getClass } from "../../controler/class";
+import { createClass, getAulasByProfessor, getClass } from "../../controler/class";
 import { useUser } from "../../hooks/user";
 import { DoubleButtonConfirmation } from "../../components/doubleButtonConfirmation";
 import { Input } from "../../components/input";
@@ -37,7 +37,6 @@ function LoadingClass({ user, setCreateNew, navigation }) {
 
     useEffect(()=>{
         function effect (){
-            setData([])
             console.log("TURMAs", isFocused )
             handleLoadMore();
         };
@@ -59,7 +58,7 @@ function LoadingClass({ user, setCreateNew, navigation }) {
         <>
             <AddButton handle={() => setCreateNew((value) => !value)} />
             <ContainerList>
-                {data.length >= 1 ? 
+                {data?.length >= 1 ? 
                     <FlatList
                         style={{width:'100%'}}
                         data={data}

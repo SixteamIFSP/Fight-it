@@ -58,6 +58,10 @@ export function CreateAccount({ navigation }) {
                 senha: password,
                 receberNot: 1,
             };
+            if(!typeTeacher) {
+                navigation.navigate('CreateTriagem', {data});
+                return 
+            }
             setLoading(true);
             await createAccount(data, typeTeacher);
             setLoading(false);
