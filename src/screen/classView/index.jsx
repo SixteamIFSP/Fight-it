@@ -289,7 +289,7 @@ export function ClassView({ navigation, route }) {
 
     useEffect(() => {
         console.log(route?.params)
-        if (page === pageDefault) {
+        if (page === 1) {
             if(route?.params?.student) {
                 //TODO: DEVE EXISTIR UM MÉTODO PARA BUSCAR TURMA PELO ID DO ALUNO
                 getAlunosTurma(setDataAlunos, 10);
