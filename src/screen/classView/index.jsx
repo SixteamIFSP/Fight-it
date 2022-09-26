@@ -238,7 +238,7 @@ function RenderAula({aula, onDeleteAula, student}) {
     console.log(aula)
     return (
         <RenderAulaContainer>
-             <Text>{aula.Nome}</Text>
+             <Text>{aula.nome}</Text>
              {!student && <CancelarAula
              onPress={() => onDeleteAula(aula.id)}>
                 <TextWhite>Cancelar aula</TextWhite>
