@@ -6,7 +6,7 @@ import { CalendarList,  LocaleConfig} from "react-native-calendars";
 import { ClassText, Container, ContainerFlat, ContainerList, ContentListagem, themeCalendar } from "./styles";
 import { getCalendar } from "../../controler/calendar";
 import { Text } from "react-native";
-import { dateToBrDefault } from "../../util/dateConvert";
+import { dateToBrDefault } from "../../utils/dateConvert";
 
 export function CalendarTeacher({ navigation, route }){
     const { t } = useTranslation();

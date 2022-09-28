@@ -54,6 +54,10 @@ export function StudantView({ navigation, route:{params} }) {
         navigation.navigate('EvaluationStudent', { params, title: t("navigationHeader.Evaluation", { name: nome }) })
     }
 
+    function handleViewTriagem() {
+        navigation.navigate('TriagemView', { ...route?.params, title: 'Triagem do '+route?.params.nome })
+    }
+
     async function handleLoadingParams() {
         if (loading) return;
         setLoading(true);
@@ -63,7 +67,7 @@ export function StudantView({ navigation, route:{params} }) {
             turma: id,
         }
 
-        await getParamsAluno(data, setParamsAluno);
+        // await getParamsAluno(data, setParamsAluno); - request comentado por estar quebrando o backend
         setLoading(false);
     }
 
@@ -74,8 +78,7 @@ export function StudantView({ navigation, route:{params} }) {
             aluno: studantId,
             parametro: idParam,
         }
-        await getDesempenhoPorParametro(data, setDataParams)
-
+        await getDesempenhoPorParametro(data, setDataParams) 
         setLoadingGraphyc(true)
 
     }
@@ -85,6 +88,9 @@ export function StudantView({ navigation, route:{params} }) {
             <ContainerButtons>
                 <ContentButtons onPress={() => handleEvaluation()}>
                     <TextButtons>{t("studentView.ButtonAvaliation")}</TextButtons>
+                </ContentButtons>
+                <ContentButtons onPress={() => handleViewTriagem()}>
+                    <TextButtons>{t("studentView.ButtonViewTriagem")}</TextButtons>
                 </ContentButtons>
             </ContainerButtons>
 

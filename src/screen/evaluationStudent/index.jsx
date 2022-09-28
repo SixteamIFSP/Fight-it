@@ -10,7 +10,7 @@ import {
     getEvaluetion, getParams,
     getTypesParams,
 } from "../../controler/evaluetion";
-import { toastMessage } from "../../util/toastMessage";
+import { toastMessage } from "../../utils/toastMessage";
 import {
     AlingButtons,
     AlingDropDown,

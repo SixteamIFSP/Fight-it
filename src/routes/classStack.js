@@ -6,6 +6,8 @@ import { TeacherClass } from "../screen/teacherClass";
 import { useTranslation } from 'react-i18next';
 import { ContainerSVG } from "../screen/configureAccount/styles";
 import { FontAwesome } from "@expo/vector-icons";
+import { deleteTurma } from "../controler/class";
+import { TriagemView } from "../screen/triagemView";
 import { useModal } from "../hooks/modalConfirmation";
 
 const StackClass = createNativeStackNavigator();
@@ -45,6 +47,8 @@ export function ClassStack(){
             name="StudantView"
             component={StudantView}></StackClass.Screen>
             <StackClass.Screen options={({route}) => ({title: route.params.title})} navigationKey='EvaluationStudent' name="EvaluationStudent" component={EvaluationStudent}></StackClass.Screen>
+
+            <StackClass.Screen options={({route}) => ({title: route.params.title})} navigationKey='TriagemView' name="TriagemView" component={TriagemView}></StackClass.Screen>
         </StackClass.Navigator>
     )
 

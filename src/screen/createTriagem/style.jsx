@@ -1,7 +1,14 @@
 
+
 import { StyleSheet } from "react-native";
 
+
 export const styles = StyleSheet.create({
+    container:  {
+        flex: 1,
+        padding: 30,
+        paddingBottom: 50,
+    },
     switchButtons: {
         flexDirection: 'row',
         width: '75%',
@@ -15,30 +22,22 @@ export const styles = StyleSheet.create({
         textAlign: 'center',
     },
     TitleLogin: {
+        fontSize: 23, 
+        fontWeight: 'bold', 
         marginTop: 12,
         marginBottom: 12,
+    },
+    descriptionText: {
+        fontSize: 15, 
+        marginTop: 12,
+        marginBottom: 20,
     },
     confirmationButton: {
         width: '100%',
         justifyContent: 'center',
-    },
-    inputesContainer: {
-        display: 'flex', width: '100%'
-    },
+    }, 
     inputes: {
-        marginBottom: 24,
-        alignItems: 'center'
+        marginBottom:24,
+        width: '100%',
     },
-    errorMessage: {
-        color: 'red'
-    },
-    inputMask: {
-        width: '70%',
-        marginBottom: 12,
-        marginTop: 5,
-        borderWidth: 1,
-        borderTopWidth: 0,
-        borderLeftWidth: 0,
-        borderRightWidth: 0
-    }
 });

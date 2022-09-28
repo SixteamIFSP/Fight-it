@@ -10,11 +10,11 @@ import {
     CardCreateClasss,
 } from "./styles";
 import { ActivityIndicator, FlatList, Text } from "react-native";
-import { createClass, getClass } from "../../controler/class";
+import { createClass, getAulasByProfessor, getClass } from "../../controler/class";
 import { useUser } from "../../hooks/user";
 import { DoubleButtonConfirmation } from "../../components/doubleButtonConfirmation";
 import { Input } from "../../components/input";
-import { toastMessage } from "../../util/toastMessage";
+import { toastMessage } from "../../utils/toastMessage";
 import { AddButton } from "../../components/addButton";
 import { Loading } from "../../components/loading";
 import { useTranslation } from 'react-i18next';
@@ -37,7 +37,6 @@ function LoadingClass({ user, setCreateNew, navigation }) {
 
     useEffect(()=>{
         function effect (){
-            setData([])
             console.log("TURMAs", isFocused )
             handleLoadMore();
         };
@@ -72,9 +71,6 @@ function LoadingClass({ user, setCreateNew, navigation }) {
                         }
                     />
                     :<Text >Este professor nao possui turmas</Text>
-
-
-                
                 }
             </ContainerList>
         </>

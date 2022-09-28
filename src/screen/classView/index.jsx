@@ -6,7 +6,7 @@ import { DoubleButtonConfirmation } from "../../components/doubleButtonConfirmat
 import { Input } from "../../components/input";
 import { adicionarAluno, adicionarAula, getAllDataClass, getAlunosTurma, removeAula } from "../../controler/class";
 import { Loading } from "../../components/loading";
-import { toastMessage } from "../../util/toastMessage";
+import { toastMessage } from "../../utils/toastMessage";
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 import {
@@ -34,6 +34,8 @@ import Divider from 'react-native-divider';
 import { useModal } from "../../hooks/modalConfirmation";
 import { useIsFocused } from "@react-navigation/native";
 import { deleteTurma } from '../../controler/class';
+import { LessonView } from "../LessonView";
+
 
 function AdicionarAula({ turmaId, setback }) {
     const [topicoAula, setTopicoAula] = useState('')
@@ -55,6 +57,7 @@ function AdicionarAula({ turmaId, setback }) {
         }
         const data = {
             topicoAula,
+            descricao, 
             date: date.toLocaleDateString(),
             time: time.toLocaleTimeString(),
             equipamentos
@@ -157,9 +160,10 @@ function AdicionarAula({ turmaId, setback }) {
     )
 }
 
-function RenderListAluno ({ item, navigation, data }) {
-    const { t } = useTranslation();
+const RenderListAluno = ({ item, navigation, data, student }) => {
+    const { t } = useTranslation()
     function handleTouch() {
+        if(student) return 
         navigation.navigate(
             'StudantView',
             {
@@ -176,7 +180,6 @@ function RenderListAluno ({ item, navigation, data }) {
         </TextTouchable>
     );
 };
-
 function AdicionarAluno({ turmaId, setback}) {
     const { t } = useTranslation();
     const [loading, setLoading] = useState(false);
@@ -231,30 +234,39 @@ function AdicionarAluno({ turmaId, setback}) {
     )
 };
 
-function RenderAula({aula, onDeleteAula}) {
+
+
+function RenderAula({aula, handleViewAula,  onDeleteAula, student}) {
+    
     return (
         <RenderAulaContainer>
              <Text>{aula.nome}</Text>
-             <CancelarAula
+             {!student && <CancelarAula
              onPress={() => onDeleteAula(aula.id)}>
                 <TextWhite>Cancelar aula</TextWhite>
-            </CancelarAula>
+            </CancelarAula>}
+            {student && <CancelarAula
+             onPress={() => handleViewAula(aula.id)}>
+                <TextWhite>Visualizar aula</TextWhite>
+            </CancelarAula>}
         </RenderAulaContainer>
     )
 }
 
 export function ClassView({ navigation, route }) {
     const { t } = useTranslation();
-    const { id, Nome, ProfessorId, Descricao } = route.params.data;
+    const data = route?.params?.data;
+    const student = route?.params?.student
     const [dataAlunos, setDataAlunos] = useState([]);
     const [dateAula, setDateAula] = useState([]);
+    const [aulaid, setAulaID] = useState()
 
     const [page, setPage ] = useState(1);
     const { setCallback } = useModal();
     const isFocused = useIsFocused();
 
     function callBackDeleteTurma(){
-        deleteTurma(id);
+        // deleteTurma(id);
         navigation.goBack();
     }
     
@@ -270,9 +282,10 @@ export function ClassView({ navigation, route }) {
         getData()
         handleOpenPage(1);
     }
- 
-    
+
+  
     function onDeleteAula(aulaID) {
+        if(student) return 
         removeAula(aulaID).then(() => {
             const index = dateAula.findIndex(e => e.id = aulaID)
             const data = dateAula
@@ -282,6 +295,16 @@ export function ClassView({ navigation, route }) {
     }
 
     useEffect(() => {
+        console.log(route?.params)
+        if (page === 1) {
+            if(route?.params?.student) {
+                //TODO: DEVE EXISTIR UM MÉTODO PARA BUSCAR TURMA PELO ID DO ALUNO
+                getAlunosTurma(setDataAlunos, 10);
+            } else { 
+                console.log(data?.id)
+                getAlunosTurma(setDataAlunos, data?.id);
+            }
+        }
         if (!isFocused) return;   
         function effect (){
             setCallback("Deseja apagar a turma?", ()=> callBackDeleteTurma() );
@@ -310,7 +333,9 @@ export function ClassView({ navigation, route }) {
                                 navigation={navigation}
                                 data={
                                     { nomeTurma: Nome, id: id, ProfessorId: ProfessorId }
-                                }></RenderListAluno>}
+                                }
+                                student={student}
+                                ></RenderListAluno>}
                         keyExtractor={item => `${item.Nome}` + '91'}>
                     </ContentListagem>
                     :
@@ -318,15 +343,15 @@ export function ClassView({ navigation, route }) {
                 }
                 </ContainerFlat>
 
-                <AddContainer>
+                {!student && <AddContainer>
                     <AddButton handle={() => handleOpenPage(2)} />
-                </AddContainer>
+                </AddContainer>}
 
             </ContainerList>
             <ContainerList>
-                <AddContainer>
+                {!student && <AddContainer>
                     <AddButton handle={() => handleOpenPage(3)} />
-                </AddContainer>
+                </AddContainer>}
                 <ClassText>Aulas:</ClassText>
                 <ContainerFlat>
                 {
@@ -334,9 +359,12 @@ export function ClassView({ navigation, route }) {
                     <ContentListagem
                         data={dateAula}
                         renderItem={
-                            ({ item }) => <RenderAula aula={item} onDeleteAula={onDeleteAula}/>
+                            ({ item }) => <RenderAula handleViewAula={ (aulaid) => {
+                                setAulaID(aulaid)
+                                handleOpenPage(4)
+                            }} aula={item} onDeleteAula={onDeleteAula}  student={student}/>
                         }
-                        keyExtractor={item => item.Nome + '91'}>
+                        keyExtractor={item => item.nome + '91'}>
                     </ContentListagem>
                     :
                     <Text>{"nao ha aulas nessa turma"}</Text>
@@ -345,11 +373,13 @@ export function ClassView({ navigation, route }) {
             </ContainerList>
         </ContainerListColumn>,
         2: <AdicionarAluno setback={callback} turmaId={id}></AdicionarAluno>,
-        3: <AdicionarAula turmaId={id} setback={callback}/>
+        3: <AdicionarAula turmaId={id} setback={callback}/>,
+        4: <LessonView aulaid={aulaid} onBack={() => handleOpenPage(1) }/>
     }
 
     return (
         <Container>
+          
            { pageView[page] }
             {/*grafico */}
         </Container>

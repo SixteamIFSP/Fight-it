@@ -1,9 +1,14 @@
-import { InputStyle } from "./styles"
+import { InputStyle, View } from "./styles";
+import { ErrorMessage } from '../../components/errorMessage';
 
-export function Input({ ...rest }) {
+export function Input({ errorMessage, ...rest }) {
     return (
-        <InputStyle
-            {...rest}
-        />
+        <View>
+            <InputStyle
+                {...rest}
+            />
+            {errorMessage ? <ErrorMessage text={errorMessage} ></ErrorMessage> : null}
+        </View>
+
     )
 }

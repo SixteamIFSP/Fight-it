@@ -1,5 +1,5 @@
 import { api } from "../services/api";
-import { toastMessage } from "../util/toastMessage";
+import { toastMessage } from "../utils/toastMessage";
 import axios from "axios";
 
 export async function getClass(setClasses, idUsuario, type){
@@ -54,10 +54,8 @@ export async function getAllDataClass(setAlunos, setClass, data){
 }
 
 export async function getAlunosTurma(setAlunos, data){ // data => number
-
     try {
         const response = await api.get(`/turma/alunos/${data}`);
-
         if (response?.data.status){
             setAlunos(response?.data.result);
 
@@ -153,6 +151,26 @@ export async function deleteAluno({turma, aluno}){
         
     } catch (error) {
         toastMessage(false, 'Erro de conexão!') 
+    }
+}
+
+
+export async function getAulaByAulaID(aulaID, setAula){
+    
+
+    try {
+        const response = await api.get(`/urlDeBuscarAulaPorIDaindaNãoDesenvolvida` + aulaID);
+        if (response?.data.status){
+            toastMessage(true, response?.data.mensagem)
+            setAula(response?.data)
+        } else{
+            toastMessage(false, response?.data.mensagem) 
+            setAula(null)
+        }
+        
+    } catch (error) {
+        toastMessage(false, 'Erro de conexão!') 
+        setAula(null)
     }
 }
 
