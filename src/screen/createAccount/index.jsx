@@ -15,9 +15,11 @@ import inputValidators from '../../utils/inputValidators';
 import MaskInput, { Masks } from 'react-native-mask-input';
 
 export function CreateAccount({ navigation }) {
+    //desestruturação dos imports
     const { validationEmail, validationName } = inputValidators()
     const { t } = useTranslation()
 
+    //loading
     const [loading, setLoading] = useState(false);
 
     //setter dos campos
@@ -32,6 +34,7 @@ export function CreateAccount({ navigation }) {
     const [invalidEmailMessage, setInvalidEmailMessage] = useState('');
     const [invalidNameMessage, setInvalidNameMessage] = useState('');
 
+    //funções chamadas após preenchimento dos campos
     const handleEmail = value => {
         setMail(value);
         setInvalidEmailMessage(validationEmail(value));
@@ -41,15 +44,25 @@ export function CreateAccount({ navigation }) {
         setInvalidNameMessage(validationName(value));
     };
 
+    //valida se os campos estão preenchidos corretamente
     function inputValidations() {
-        if (name === '' | phone === '' | mail === '' | password === '' | password !== passwordConfirm)
+        if (
+            name === ''
+            | phone === ''
+            | mail === ''
+            | password === ''
+            | password !== passwordConfirm
+            | invalidNameMessage !== ''
+            | invalidEmailMessage !== ''
+        )
             return false;
         return true;
     };
 
+
     async function handleConfirmButton() {
         if (loading) return
-
+        console.log('entrou aqui')
         if (inputValidations()) {
             const data = {
                 nome: name,
@@ -99,10 +112,8 @@ export function CreateAccount({ navigation }) {
                         onChangeText={(value) => { handleName(value) }}
                         value={name}
                         placeholder={t('createAccount.name')}
+                        errorMessage={invalidNameMessage ? invalidNameMessage : null}
                     />
-                    {
-                        invalidNameMessage ? <ErrorMessage text={invalidNameMessage} /> : null
-                    }
                 </View>
                 <View style={styles.inputes}>
                     <Input
@@ -111,12 +122,8 @@ export function CreateAccount({ navigation }) {
                         placeholder={t('login.mail')}
                         keyboardType="email-address"
                         autoComplete="email"
+                        errorMessage={invalidEmailMessage ? invalidEmailMessage : null}
                     />
-                    {
-                        invalidEmailMessage ?
-                            <ErrorMessage text={invalidEmailMessage}></ErrorMessage>
-                            : null
-                    }
                 </View>
                 <View style={styles.inputes}>
                     <MaskInput style={styles.inputMask}
@@ -144,7 +151,6 @@ export function CreateAccount({ navigation }) {
             </View>
 
             <View style={styles.confirmationButton}>
-
                 {
                     !loading ?
                         <DoubleButtonConfirmation
@@ -153,7 +159,6 @@ export function CreateAccount({ navigation }) {
                         :
                         <Loading loading={loading} size={18} />
                 }
-
             </View>
 
         </View>

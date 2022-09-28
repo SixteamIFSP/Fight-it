@@ -65,12 +65,8 @@ export function Login({ navigation }) {
           value={mail}
           placeholder={t('login.mail')}
           keyboardType="email-address"
+          errorMessage={invalidEmailMessage ? invalidEmailMessage : null}
         />
-        {
-          invalidEmailMessage ?
-            <ErrorMessage text={invalidEmailMessage}></ErrorMessage>
-            : null
-        }
         <Input
           style={styles.inputPassword}
           secureTextEntry={true}
