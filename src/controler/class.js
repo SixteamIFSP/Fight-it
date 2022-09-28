@@ -11,10 +11,9 @@ export async function getClass(setClasses, idUsuario, type){
        } else {
             response = await api.get(`/turma/busca/${idUsuario}`);
        }
-       console.log(response?.data.result);
-        
         if (response?.data.status){
-            setClasses(response?.data.result)
+            setClasses(response?.data.resultado)
+            toastMessage(true, response?.data.mensagem) 
         } else{
             toastMessage(false, response?.data.mensagem)   
         }
@@ -63,10 +62,8 @@ export async function getAllDataClass(setAlunos, setClass, data){
 }
 
 export async function getAlunosTurma(setAlunos, data){ // data => number
-
     try {
         const response = await api.get(`/turma/alunos/${data}`);
-
         if (response?.data.status){
             setAlunos(response?.data.result);
 
@@ -162,6 +159,26 @@ export async function deleteAluno({turma, aluno}){
         
     } catch (error) {
         toastMessage(false, 'Erro de conexão!') 
+    }
+}
+
+
+export async function getAulaByAulaID(aulaID, setAula){
+    
+
+    try {
+        const response = await api.get(`/urlDeBuscarAulaPorIDaindaNãoDesenvolvida` + aulaID);
+        if (response?.data.status){
+            toastMessage(true, response?.data.mensagem)
+            setAula(response?.data)
+        } else{
+            toastMessage(false, response?.data.mensagem) 
+            setAula(null)
+        }
+        
+    } catch (error) {
+        toastMessage(false, 'Erro de conexão!') 
+        setAula(null)
     }
 }
 

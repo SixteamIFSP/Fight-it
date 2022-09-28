@@ -109,7 +109,8 @@
         },
         "studentView":{
             "Header":"Evaluation",
-            "ButtonAvaliation":"Evaluate Student"
+            "ButtonAvaliation":"Evaluate Student",
+            "ButtonViewTriagem":"View Triagem"
         },
         "evaluationStudent":{
             "Header":"CREATE EVALUETION",
