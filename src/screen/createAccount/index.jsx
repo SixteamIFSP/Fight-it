@@ -8,7 +8,6 @@ import { createAccount } from '../../controler/account';
 import { styles as stylesGlobal } from '../../global/styles';
 import { styles } from './styles';
 import { SwitchButton } from '../../components/switchbutton';
-import { ErrorMessage } from '../../components/errorMessage';
 import { Loading } from '../../components/loading';
 import { toastMessage } from '../../utils/toastMessage';
 import inputValidators from '../../utils/inputValidators';
@@ -52,8 +51,6 @@ export function CreateAccount({ navigation }) {
             | mail === ''
             | password === ''
             | password !== passwordConfirm
-            | invalidNameMessage !== ''
-            | invalidEmailMessage !== ''
         )
             return false;
         return true;
@@ -62,7 +59,6 @@ export function CreateAccount({ navigation }) {
 
     async function handleConfirmButton() {
         if (loading) return
-        console.log('entrou aqui')
         if (inputValidations()) {
             const data = {
                 nome: name,

@@ -255,8 +255,9 @@ function RenderAula({aula, handleViewAula,  onDeleteAula, student}) {
 
 export function ClassView({ navigation, route }) {
     const { t } = useTranslation();
+    const { Descricao, ProfessorId, Nome, id } = route.params.data;
     const data = route?.params?.data;
-    const student = route?.params?.student
+    const student = route?.params?.student;
     const [dataAlunos, setDataAlunos] = useState([]);
     const [dateAula, setDateAula] = useState([]);
     const [aulaid, setAulaID] = useState()
@@ -295,13 +296,11 @@ export function ClassView({ navigation, route }) {
     }
 
     useEffect(() => {
-        console.log(route?.params)
         if (page === 1) {
             if(route?.params?.student) {
                 //TODO: DEVE EXISTIR UM MÉTODO PARA BUSCAR TURMA PELO ID DO ALUNO
                 getAlunosTurma(setDataAlunos, 10);
-            } else { 
-                console.log(data?.id)
+            } else {
                 getAlunosTurma(setDataAlunos, data?.id);
             }
         }

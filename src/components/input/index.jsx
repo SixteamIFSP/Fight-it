@@ -7,7 +7,7 @@ export function Input({ errorMessage, ...rest }) {
             <InputStyle
                 {...rest}
             />
-            {errorMessage ? <ErrorMessage text={errorMessage} ></ErrorMessage> : null}
+            {errorMessage ? <ErrorMessage text={errorMessage}></ErrorMessage> : null}
         </View>
 
     )
