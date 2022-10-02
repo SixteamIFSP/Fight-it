@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Text, TouchableOpacity, ScrollView } from "react-native";
+import { Text, TouchableOpacity, ScrollView, View } from "react-native";
 import { AddButton } from "../../components/addButton";
 import { DoubleButtonConfirmation } from "../../components/doubleButtonConfirmation";
 import { Input } from "../../components/input";
@@ -151,30 +151,34 @@ function AdicionarAula({ turmaId, setback }) {
                     disabled={!equipamento}
                     onPress={() => {
                         setEquipamentos(e => [...e, equipamento])
-                        setEquipamento('')
                     }}>
                     <TextWhite style={{ textAlign: 'center' }}>Adicionar</TextWhite>
                 </AdicionarAulaButton>
             </AddEquipamentContainer>
+            {
+                equipamentos && equipamentos.length ?
+                    <View>
+                        <Text style={{ fontSize: 16, marginBottom: 12, fontWeight: '700' }}>Equipamentos da aula:</Text>
+                        <ScrollView style={{ marginTop: 10 }}>
+                            {equipamentos.map((equipamento, index) => <Equipamento key={index}>
+                                <Text>{equipamento}</Text>
+                                <DeleteButton onPress={() => {
+                                    const eqpm = equipamentos
+                                    eqpm.splice(index, 1)
+                                    setEquipamentos([...eqpm])
+                                }}>
+                                    <Text style={{ color: 'black' }}>X</Text>
+                                </DeleteButton>
+                            </Equipamento>)}
+                        </ScrollView>
+                    </View> : null
+            }
 
-            <Text style={{ fontSize: 16, marginBottom: 12, fontWeight: '700' }}>Equipamentos da aula:</Text>
-            <ScrollView style={{ marginTop: 10 }}>
-                {equipamentos.map((equipamento, index) => <Equipamento key={index}>
-                    <Text>{equipamento}</Text>
-                    <DeleteButton onPress={() => {
-                        const eqpm = equipamentos
-                        eqpm.splice(index, 1)
-                        setEquipamentos([...eqpm])
-                    }}>
-                        <Text style={{ color: 'black' }}>X</Text>
-                    </DeleteButton>
-                </Equipamento>)}
-            </ScrollView>
-            <DoubleButtonConfirmation
-                handleBack={handleBack}
-                handleConfirm={handleSubmit
-                }></DoubleButtonConfirmation>
-        </AdicionarAulaContainer>
+            <DoubleButtonConfirmation style={{alignSelf:'flex-end'}}
+            handleBack={handleBack}
+            handleConfirm={handleSubmit
+            }></DoubleButtonConfirmation>
+        </AdicionarAulaContainer >
     )
 }
 
