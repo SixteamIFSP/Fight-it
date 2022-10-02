@@ -51,6 +51,7 @@ export const TextDescription = styled.Text`
     text-align:center;
     font-weight: 700;
     font-size: 16px;
+    margin-bottom: 12px;
     `;
 
 export const TextTouchable = styled.TouchableOpacity`
@@ -85,6 +86,7 @@ export const CancelarAula = styled.TouchableOpacity`
  export const AdicionarAulaContainer = styled.View`
     padding: 20px; 
     flex: 1;
+    width: 100%
  `
  export const Divisor =  styled.View`
     width:90%;
@@ -116,3 +118,6 @@ export const CancelarAula = styled.TouchableOpacity`
     align-items: center;
     width: 40px;
  `
+ export const ClassDateContainer = styled.TouchableOpacity`
+    width: 100%;
+    margin-bottom:16px`
