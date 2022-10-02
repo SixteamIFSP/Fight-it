@@ -29,11 +29,11 @@ export const ContainerList = styled.View`
     margin-bottom: 20px;
     padding-top: 16px;
     padding-left: 10px;
-    `;
+`;
 
 export const ContentListagem = styled.FlatList`
     width:100%; 
-    `;
+`;
 
 export const ContainerFlat = styled.View`
     max-height:100%;
@@ -51,6 +51,7 @@ export const TextDescription = styled.Text`
     text-align:center;
     font-weight: 700;
     font-size: 16px;
+    margin-bottom: 12px;
     `;
 
 export const TextTouchable = styled.TouchableOpacity`
@@ -64,15 +65,15 @@ export const ClassText = styled.Text`
     margin-top: 10px;
 `;
 
-export const TextWhite  = styled.Text`
+export const TextWhite = styled.Text`
     color: white;
     font-weight: bold;
-`
+`;
 export const Equipamento = styled.View`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-`
+`;
 
 export const CancelarAula = styled.TouchableOpacity`
     padding: 4px;
@@ -80,39 +81,51 @@ export const CancelarAula = styled.TouchableOpacity`
     padding-right: 10px;
     background-color: #3d3d3d;
     border-radius: 10;
- `
+ `;
 
- export const AdicionarAulaContainer = styled.View`
+export const AdicionarAulaContainer = styled.View`
     padding: 20px; 
     flex: 1;
- `
- export const Divisor =  styled.View`
+    width: 100%
+ `;
+export const Divisor = styled.View`
     width:90%;
     margin:20% 5% 20% 5%;
     border-color:black;
     border-top-width:1px
- `
- 
- export const AdicionarAulaButton = styled.TouchableOpacity`
+ `;
+
+export const AdicionarAulaButton = styled.TouchableOpacity`
     padding: 10px;
-    width: 50%;
     background-color: #3d3d3d;
     justify-content: center;
     border-radius: 10px;
- `
- 
- export const RenderAulaContainer = styled.View`
+    width: 30%;
+    margin-bottom: 16px;
+ `;
+
+export const RenderAulaContainer = styled.View`
     flex-direction: row;
     justify-content: space-between;
     margin-top: 5px;
     padding-left: 10px;
     padding-right: 10px;
     height: auto;
- `
- 
- export const DeleteButton = styled.TouchableOpacity`
+ `;
+
+export const DeleteButton = styled.TouchableOpacity`
     padding: 5px;
     border-radius: 10px;
     align-items: center;
     width: 40px;
- `
+ `;
+export const ClassDateContainer = styled.TouchableOpacity`
+    width: 100%;
+    margin-bottom:16px;
+`;
+export const AddEquipamentContainer = styled.TouchableOpacity`
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: baseline;
+`;

@@ -325,9 +325,7 @@ export function ConfigureAccount() {
         } catch (error) {
             console.log(error.message);
         }
-        
-
-
+    
     }
 
     return (

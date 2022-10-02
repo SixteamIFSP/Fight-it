@@ -33,9 +33,9 @@ export function Login({ navigation }) {
       toastMessage(false, "Preencha os campos!");
       return
   }
-    setLoading(true);
+      // setLoading(true);
     await singIn({ mail: mail, pass: password }, typeTeacher);
-    setLoading(false);
+     // setLoading(false);
   }
 
   function onHandleCreateAccount() {
