@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Text, View, TouchableOpacity, ScrollView } from "react-native";
+import { Text, TouchableOpacity, ScrollView } from "react-native";
 import { AddButton } from "../../components/addButton";
 import { DoubleButtonConfirmation } from "../../components/doubleButtonConfirmation";
 import { Input } from "../../components/input";
@@ -33,7 +33,7 @@ import {
 import Divider from 'react-native-divider';
 import { useModal } from "../../hooks/modalConfirmation";
 import { useIsFocused } from "@react-navigation/native";
-import { deleteTurma } from '../../controler/class';
+// import { deleteTurma } from '../../controler/class';
 import { LessonView } from "../LessonView";
 
 
