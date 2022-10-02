@@ -7,7 +7,6 @@ import { useTranslation } from 'react-i18next';
 import { ButtonLinguage } from "../../components/buttonChangeLinguage";
 import { useUser } from "../../hooks/user";
 import { SwitchButton } from "../../components/switchbutton";
-import { ErrorMessage } from '../../components/errorMessage';
 import inputValidators from '../../utils/inputValidators';
 import {
   Text,

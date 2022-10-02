@@ -22,70 +22,84 @@ export function CreateAccount({ navigation }) {
     const [loading, setLoading] = useState(false);
 
     //setter dos campos
-    const [name, setName] = useState('');
-    const [mail, setMail] = useState('');
-    const [phone, setPhone] = useState('');
+    const [userName, setUserName] = useState('');
+    const [userEmail, setUserEmail] = useState('');
+    const [userPhone, setUserPhone] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [typeTeacher, setTypeTeacher] = useState(true);
 
     const [invalidEmailMessage, setInvalidEmailMessage] = useState('');
     const [invalidNameMessage, setInvalidNameMessage] = useState('');
-    
+
     const errors = useRef([]);
 
     const handleEmail = (value) => {
-        setMail(value);
+        setUserEmail(value);
         setInvalidEmailMessage(validationEmail(value));
 
     };
     const handleName = (value) => {
-        setName(value);
+        setUserName(value);
         setInvalidNameMessage(validationName(value));
     };
+    const emptyInputsVerify = {
+        emptyUserName: () => {
+            errors.current.push('Nome não preenchido'); return false
+        },
+        emptyUserEmail: () => {
+            errors.current.push('Email não preenchido'); return false
+        },
+        emptyUserPhone: () => {
+            errors.current.push('Telefone não preenchido'); return false
+        },
+        emptyPassword: () => {
+            errors.current.push('Senha não preenchida'); return false
+        },
+        emptyPasswordConfirm: () => {
+            errors.current.push('Confirmação não preenchida'); return false
+        },
+        differentPasswords: () => {
+            errors.current.push('Senha diferente da confirmação'); return false
+        }
+    };
+    const {
+        emptyUserName,
+        emptyUserEmail,
+        emptyUserPhone,
+        emptyPassword,
+        emptyPasswordConfirm,
+        differentPasswords
+    } = emptyInputsVerify;
 
-    function inputValidations() {
+    const inputValidations = () => {
         errors.current = [];
         if (
-            name === '' |
-            phone === '' |
-            mail === '' |
+            userName === '' |
+            userPhone === '' |
+            userEmail === '' |
             password === '' |
             passwordConfirm === '' |
             password !== passwordConfirm
         ) {
-
-            (name === '') && errors.current.push('Nome não preenchido');
-            (mail === '') && errors.current.push('E-mail não preenchido');
-            (phone === '') && errors.current.push('Telefone não preenchido');
-            (password === '') && errors.current.push('Senha não preenchida');
-            (passwordConfirm === '') && errors.current.push('Confirmação não preenchida');
-            (password !== passwordConfirm) && errors.current.push('Senha diferente da confirmação');
+            if (userName === '') emptyUserName();
+            if (userEmail === '') emptyUserEmail();
+            if (userPhone === '') emptyUserPhone();
+            if (password === '') emptyPassword();
+            if (passwordConfirm === '') emptyPasswordConfirm();
+            if (password !== passwordConfirm) differentPasswords();
+        } else {
+            return true;
         }
     };
 
-    //valida se os campos estão preenchidos corretamente
-    function oldValidations() {
-        if (
-            name === ''
-            | phone === ''
-            | mail === ''
-            | password === ''
-            | password !== passwordConfirm
-        )
-            return false;
-
-        return true;
-    };
-
-
     async function handleConfirmButton() {
-        if (loading) return
+        if (loading) return;
         if (inputValidations()) {
             const data = {
-                nome: name,
-                email: mail,
-                telefone: phone,
+                nome: userName,
+                email: userEmail,
+                telefone: userPhone,
                 senha: password,
                 receberNot: 1,
             };
@@ -137,7 +151,7 @@ export function CreateAccount({ navigation }) {
                 <View style={styles.inputes}>
                     <Input
                         onChangeText={(value) => { handleName(value) }}
-                        value={name}
+                        value={userName}
                         placeholder={t('createAccount.name')}
                         errorMessage={invalidNameMessage ? invalidNameMessage : null}
                     />
@@ -145,7 +159,7 @@ export function CreateAccount({ navigation }) {
                 <View style={styles.inputes}>
                     <Input
                         onChangeText={(value) => { handleEmail(value) }}
-                        value={mail}
+                        value={userEmail}
                         placeholder={t('login.mail')}
                         keyboardType="email-address"
                         autoComplete="email"
@@ -154,8 +168,8 @@ export function CreateAccount({ navigation }) {
                 </View>
                 <View style={styles.inputes}>
                     <MaskInput style={styles.inputMask}
-                        onChangeText={(_, unmasked) => { setPhone(unmasked); }}
-                        value={phone}
+                        onChangeText={(_, unmasked) => { setUserPhone(unmasked); }}
+                        value={userPhone}
                         placeholder={t('createAccount.phone')}
                         mask={Masks.BRL_PHONE}
                     />
