@@ -8,7 +8,6 @@ import { createAccount } from '../../controler/account';
 import { styles as stylesGlobal } from '../../global/styles';
 import { styles } from './styles';
 import { SwitchButton } from '../../components/switchbutton';
-import { ErrorMessage } from '../../components/errorMessage';
 import { Loading } from '../../components/loading';
 import { toastMessage } from '../../utils/toastMessage';
 import inputValidators from '../../utils/inputValidators';
@@ -23,43 +22,104 @@ export function CreateAccount({ navigation }) {
     const [loading, setLoading] = useState(false);
 
     //setter dos campos
-    const [name, setName] = useState('');
-    const [mail, setMail] = useState('');
-    const [phone, setPhone] = useState('');
+    const [userName, setUserName] = useState('');
+    const [userEmail, setUserEmail] = useState('');
+    const [userPhone, setUserPhone] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [typeTeacher, setTypeTeacher] = useState(true);
+
+    const [invalidEmailMessage, setInvalidEmailMessage] = useState('');
+    const [invalidNameMessage, setInvalidNameMessage] = useState('');
+
     const errors = useRef([]);
-    const [invalidMessage, setInvalidMessage] = useState({name:null, mail:null});
+
+    const handleEmail = (value) => {
+        setUserEmail(value);
+        setInvalidEmailMessage(validationEmail(value));
+
+    };
+    const handleName = (value) => {
+        setUserName(value);
+        setInvalidNameMessage(validationName(value));
+    };
+    const emptyInputsVerify = {
+        emptyUserName: () => {
+            errors.current.push('Nome não preenchido'); return false
+        },
+        emptyUserEmail: () => {
+            errors.current.push('Email não preenchido'); return false
+        },
+        emptyUserPhone: () => {
+            errors.current.push('Telefone não preenchido'); return false
+        },
+        emptyPassword: () => {
+            errors.current.push('Senha não preenchida'); return false
+        },
+        emptyPasswordConfirm: () => {
+            errors.current.push('Confirmação não preenchida'); return false
+        },
+        differentPasswords: () => {
+            errors.current.push('Senha diferente da confirmação'); return false
+        }
+    };
+    const {
+        emptyUserName,
+        emptyUserEmail,
+        emptyUserPhone,
+        emptyPassword,
+        emptyPasswordConfirm,
+        differentPasswords
+    } = emptyInputsVerify;
+
+    const inputValidations = () => {
+        errors.current = [];
+        if (
+            userName === '' |
+            userPhone === '' |
+            userEmail === '' |
+            password === '' |
+            passwordConfirm === '' |
+            password !== passwordConfirm
+        ) {
+            if (userName === '') emptyUserName();
+            if (userEmail === '') emptyUserEmail();
+            if (userPhone === '') emptyUserPhone();
+            if (password === '') emptyPassword();
+            if (passwordConfirm === '') emptyPasswordConfirm();
+            if (password !== passwordConfirm) differentPasswords();
+        } else {
+            return true;
+        }
+    };
 
     async function handleConfirmButton() {
-        if (loading) return
-        console.log('entrou aqui')
+        if (loading) return;
         if (inputValidations()) {
             const data = {
-                nome: name,
-                email: mail,
-                telefone: phone,
+                nome: userName,
+                email: userEmail,
+                telefone: userPhone,
                 senha: password,
                 receberNot: 1,
             };
-            if(!typeTeacher) {
-                navigation.navigate('CreateTriagem', {data});
-                return 
+            if (!typeTeacher) {
+                navigation.navigate('CreateTriagem', { data });
+                return
             }
             setLoading(true);
             await createAccount(data, typeTeacher);
             setLoading(false);
             navigation.navigate('Login');
         } else {
-            let errorsText  = "Digite os campos corretamente: "
+            let errorsText = "Digite os campos corretamente: "
             errors.current.map((value) => {
-                errorsText = errorsText+`\n ${value}`
-            })
+                errorsText = errorsText + `\n ${value}`
+            });
 
-            toastMessage(false, errorsText)
+            toastMessage(false, errorsText);
         }
-    }
+    };
 
     function handleBack() {
         navigation.navigate('Login');
@@ -90,7 +150,7 @@ export function CreateAccount({ navigation }) {
                 <View style={styles.inputes}>
                     <Input
                         onChangeText={(value) => { handleName(value) }}
-                        value={name}
+                        value={userName}
                         placeholder={t('createAccount.name')}
                         errorMessage={invalidMessage.name ? invalidMessage.name : null}
                     />
@@ -98,7 +158,7 @@ export function CreateAccount({ navigation }) {
                 <View style={styles.inputes}>
                     <Input
                         onChangeText={(value) => { handleEmail(value) }}
-                        value={mail}
+                        value={userEmail}
                         placeholder={t('login.mail')}
                         keyboardType="email-address"
                         autoComplete="email"
@@ -107,8 +167,8 @@ export function CreateAccount({ navigation }) {
                 </View>
                 <View style={styles.inputes}>
                     <MaskInput style={styles.inputMask}
-                        onChangeText={(_, unmasked) => { setPhone(unmasked); }}
-                        value={phone}
+                        onChangeText={(_, unmasked) => { setUserPhone(unmasked); }}
+                        value={userPhone}
                         placeholder={t('createAccount.phone')}
                         mask={Masks.BRL_PHONE}
                     />
