@@ -30,30 +30,7 @@ export function CreateAccount({ navigation }) {
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [typeTeacher, setTypeTeacher] = useState(true);
     const errors = useRef([]);
-
-    function validation() {
-        errors.current = [];
-        if (
-            name === '' |
-            phone === '' |
-            mail === '' |
-            pass === '' |
-            confirm === '' |
-            pass !== confirm
-        ){
-
-            (name === '') && errors.current.push('Nome não preenchido');
-            (mail === '') && errors.current.push('E-mail não preenchido');
-            (phone === '') && errors.current.push('Telefone não preenchido');
-            (pass === '') && errors.current.push('Senha não preenchida');
-            (confirm === '') && errors.current.push('Confirmação não preenchida');
-            (pass !== confirm) && errors.current.push('Senha diferente da confirmação');
-
-            return false;
-        }
-        return true;
-    };
-
+    const [invalidMessage, setInvalidMessage] = useState({name:null, mail:null});
 
     async function handleConfirmButton() {
         if (loading) return
@@ -90,7 +67,6 @@ export function CreateAccount({ navigation }) {
 
     return (
         <View style={stylesGlobal.container}>
-            <ButtonLinguage></ButtonLinguage>
             <Text style={styles.TitleLogin}>Fight It</Text>
 
             <View style={styles.userTypeChoice}>
@@ -116,7 +92,7 @@ export function CreateAccount({ navigation }) {
                         onChangeText={(value) => { handleName(value) }}
                         value={name}
                         placeholder={t('createAccount.name')}
-                        errorMessage={invalidNameMessage ? invalidNameMessage : null}
+                        errorMessage={invalidMessage.name ? invalidMessage.name : null}
                     />
                 </View>
                 <View style={styles.inputes}>
@@ -126,7 +102,7 @@ export function CreateAccount({ navigation }) {
                         placeholder={t('login.mail')}
                         keyboardType="email-address"
                         autoComplete="email"
-                        errorMessage={invalidEmailMessage ? invalidEmailMessage : null}
+                        errorMessage={invalidMessage.mail ? invalidMessage.mail : null}
                     />
                 </View>
                 <View style={styles.inputes}>

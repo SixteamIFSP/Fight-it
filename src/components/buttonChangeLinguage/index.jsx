@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { TouchableOpacity } from "react-native";
+import { Text, TouchableOpacity } from "react-native";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { useTranslation } from "react-i18next";
 
 export function ButtonLinguage() {
-    const { i18n } = useTranslation();
+    const { t, i18n } = useTranslation();
     const [linguage, setLinguage] = useState(true);
 
     const changeLanguage = (lng) => {
@@ -21,8 +21,8 @@ export function ButtonLinguage() {
     }, [linguage])
 
     return (
-        <TouchableOpacity onPress={changeLinguage}>
-            <MaterialCommunityIcons name="translate" size={24} color="black" />
+        <TouchableOpacity  onPress={changeLinguage}>
+            <Text>{`${t("translate")} ${i18n.language.toUpperCase()}`}</Text> 
         </TouchableOpacity>
     )
 

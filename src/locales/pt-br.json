@@ -1,6 +1,11 @@
 {
     "translation": {
         "appName": "Fight It",
+        "translate": "tradução:",
+        "header":{
+            "teacher":"Professor",
+            "student":"Aluno"
+        },
         "validation": {
             "confirm": "Confirmar",
             "cancel": "Cancelar"
@@ -55,13 +60,12 @@
             "teacher":{
                 "message":"Olá professor"
             }
-        },
-        "header":{
-            "teacher":"Professor",
-            "student":"Aluno"
-        },
+        },  
         "nav":{
-            "config": "Configuração"
+            "config": "Configuração",
+            "home": "Home",
+            "calendar": "Calendário",
+            "class": "Turma"
         },
         "configScreen":{
             "Header":"Minha Conta",
