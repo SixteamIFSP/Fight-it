@@ -100,6 +100,8 @@ export const AdicionarAulaButton = styled.TouchableOpacity`
     background-color: #3d3d3d;
     justify-content: center;
     border-radius: 10px;
+    width: 30%;
+    margin-bottom: 16px;
  `;
 
 export const RenderAulaContainer = styled.View`
@@ -119,11 +121,11 @@ export const DeleteButton = styled.TouchableOpacity`
  `;
 export const ClassDateContainer = styled.TouchableOpacity`
     width: 100%;
-    margin-bottom:16px
+    margin-bottom:16px;
 `;
 export const AddEquipamentContainer = styled.TouchableOpacity`
-    flex-direction: row,
-    flex-wrap: nowrap,
-    justify-content: flex-start,
-    align-items: center
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: baseline;
 `;

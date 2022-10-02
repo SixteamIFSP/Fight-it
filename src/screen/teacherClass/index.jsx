@@ -37,7 +37,6 @@ function LoadingClass({ user, setCreateNew, navigation }) {
 
     useEffect(()=>{
         function effect (){
-            console.log("TURMAs", isFocused )
             handleLoadMore();
         };
         isFocused && effect();

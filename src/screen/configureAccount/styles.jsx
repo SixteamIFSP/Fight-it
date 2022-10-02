@@ -106,7 +106,6 @@ export const ContainerImage = styled.View`
     align-items:center;
     justify-content: center;
 `
-
 export const AreaImage = styled.View`
     width: 70px;
     height: 70px;
@@ -117,10 +116,7 @@ export const AreaImage = styled.View`
 export const ButtonImage = styled.TouchableOpacity`
     width:100%;
     height:100%;
-
     background-color:#3d3d3d;
     align-items:center;
-    justify-content: center;
-   
-
+    justify-content: center; 
 `;

@@ -141,13 +141,13 @@ function AdicionarAula({ turmaId, setback }) {
             <TextDescription>Equipamentos</TextDescription>
             {/* SportsKabaddi */}
             {/* SportsMma */}
-            <AddEquipamentContainer style={{width:'100%'}}>
-            <Input style={{width: '70%'}}
-                value={equipamento}
-                placeholder={'Nome do equipamento'}
-                onChangeText={setEquipamento}
-            />
-                <AdicionarAulaButton style={{width: '30%'}}
+            <AddEquipamentContainer style={{ width: '100%' }}>
+                <Input style={{ width: '70%', alignSelf: 'flex-start' }}
+                    value={equipamento}
+                    placeholder={'Nome do equipamento'}
+                    onChangeText={setEquipamento}
+                />
+                <AdicionarAulaButton
                     disabled={!equipamento}
                     onPress={() => {
                         setEquipamentos(e => [...e, equipamento])
@@ -157,7 +157,7 @@ function AdicionarAula({ turmaId, setback }) {
                 </AdicionarAulaButton>
             </AddEquipamentContainer>
 
-            <Text>Equipamentos da aula:</Text>
+            <Text style={{ fontSize: 16, marginBottom: 12, fontWeight: '700' }}>Equipamentos da aula:</Text>
             <ScrollView style={{ marginTop: 10 }}>
                 {equipamentos.map((equipamento, index) => <Equipamento key={index}>
                     <Text>{equipamento}</Text>
