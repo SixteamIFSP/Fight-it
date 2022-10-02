@@ -29,7 +29,7 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }, 
+    },
     "plugins": [
       [
         "expo-image-picker",
@@ -37,11 +37,13 @@
           "photosPermission": "The app accesses your photos to let you share them with your friends."
         }
       ],
-      ["expo-notifications",
-      {
-        "icon": "./local/assets/icon.png",
-        "color": "#ffffff"
-      }]
+      [
+        "expo-notifications",
+        {
+          "icon": "./local/assets/icon.png",
+          "color": "#ffffff"
+        }
+      ]
     ]
   }
 }
