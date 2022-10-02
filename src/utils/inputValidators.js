@@ -9,7 +9,7 @@ const inputValidators = () => {
         }
     };
     const validationName = value => {
-        let nameReg = /^[a-zA-Z]{2,40}( [a-zA-Z]{2,40})+$/;
+        let nameReg = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ'\s]+$/;
 
         if (!nameReg.test(value)) {
             return 'Digite um nome válido';
