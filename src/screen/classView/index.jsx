@@ -31,6 +31,7 @@ import {
     styles,
     Divisor,
     ClassDateContainer,
+    AddEquipamentContainer
 } from "./styles";
 import Divider from 'react-native-divider';
 import { useModal } from "../../hooks/modalConfirmation";
@@ -75,41 +76,46 @@ function AdicionarAula({ turmaId, setback }) {
         <AdicionarAulaContainer>
             <TextDescription>Adicionar aula</TextDescription>
             <Input
-                style={{ width: '100%', marginBottom: 16 }}
+                style={{ marginBottom: 16 }}
                 value={topicoAula}
                 placeholder={'Tópico da aula'}
                 onChangeText={setTopicoAula}
             />
             <ClassDateContainer>
-                <Text>Data da aula</Text>
+                <Text style={{ fontSize: 16, marginBottom: 12, fontWeight: '700' }}>Data da aula</Text>
                 <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => { setSelectedDateIsOpen(true) }}>
                     <Text>{date.toLocaleDateString()}</Text>
-                    <MaterialIcons name="edit" size={40} color="#000" />
+                    <MaterialIcons style={{ fontSize: 16, marginLeft: 12 }} name="edit" size={40} color="#000" />
                 </TouchableOpacity>
             </ClassDateContainer>
 
+            <ClassDateContainer>
+                <Text style={{ fontSize: 16, marginBottom: 12, fontWeight: '700' }}>Horário da aula</Text>
+                <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => { setSelectTimeIsOpen(true) }}>
+                    <Text>{time.toLocaleTimeString()}</Text>
+                    <MaterialIcons style={{ fontSize: 16, marginLeft: 12 }} name="edit" size={40} color="#000" />
+                </TouchableOpacity>
+            </ClassDateContainer>
 
-            <TouchableOpacity onPress={() => { setSelectTimeIsOpen(true) }}>
-                <Text>Horário da aula</Text>
-                <Text>{time.toLocaleTimeString()}</Text>
-            </TouchableOpacity>
-            {selectectDateIsOpen && <DateTimePicker
-                themeVariant="dark"
-                testID="dateTimePicker"
-                value={date}
-                mode="date"
-                format="DD-MM-YYYY"
-                minimumDate={new Date() - 1}
-                is24Hour={true}
-                display="default"
-                onChange={(event, date) => {
-                    if (date) {
-                        setDate(date)
-                    }
-                    setSelectedDateIsOpen(false)
-                }}
-                positiveButtonLabel="OK!"
-            />}
+            {
+                selectectDateIsOpen && <DateTimePicker
+                    themeVariant="dark"
+                    testID="dateTimePicker"
+                    value={date}
+                    mode="date"
+                    format="DD-MM-YYYY"
+                    minimumDate={new Date() - 1}
+                    is24Hour={true}
+                    display="default"
+                    onChange={(event, date) => {
+                        if (date) {
+                            setDate(date)
+                        }
+                        setSelectedDateIsOpen(false)
+                    }}
+                    positiveButtonLabel="OK!"
+                />
+            }
             {
                 selectTimeIsOpen && < DateTimePicker
                     testID="dateTimePicker"
@@ -126,27 +132,31 @@ function AdicionarAula({ turmaId, setback }) {
                 />
             }
             <Input
+                style={{ marginBottom: 16 }}
                 value={descricao}
                 placeholder={'Descrição da aula'}
                 onChangeText={setDescricao}
             />
-            <Divisor></Divisor>
 
             <TextDescription>Equipamentos</TextDescription>
-
-            <Input
+            {/* SportsKabaddi */}
+            {/* SportsMma */}
+            <AddEquipamentContainer style={{width:'100%'}}>
+            <Input style={{width: '70%'}}
                 value={equipamento}
                 placeholder={'Nome do equipamento'}
                 onChangeText={setEquipamento}
             />
-            <AdicionarAulaButton
-                disabled={!equipamento}
-                onPress={() => {
-                    setEquipamentos(e => [...e, equipamento])
-                    setEquipamento('')
-                }}>
-                <TextWhite >Adicionar equipamento</TextWhite>
-            </AdicionarAulaButton>
+                <AdicionarAulaButton style={{width: '30%'}}
+                    disabled={!equipamento}
+                    onPress={() => {
+                        setEquipamentos(e => [...e, equipamento])
+                        setEquipamento('')
+                    }}>
+                    <TextWhite style={{ textAlign: 'center' }}>Adicionar</TextWhite>
+                </AdicionarAulaButton>
+            </AddEquipamentContainer>
+
             <Text>Equipamentos da aula:</Text>
             <ScrollView style={{ marginTop: 10 }}>
                 {equipamentos.map((equipamento, index) => <Equipamento key={index}>
