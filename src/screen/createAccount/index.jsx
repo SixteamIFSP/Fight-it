@@ -50,17 +50,17 @@ export function CreateAccount({ navigation }) {
             name === '' |
             phone === '' |
             mail === '' |
-            pass === '' |
-            confirm === '' |
-            pass !== confirm
+            password === '' |
+            passwordConfirm === '' |
+            password !== passwordConfirm
         ) {
 
             (name === '') && errors.current.push('Nome não preenchido');
             (mail === '') && errors.current.push('E-mail não preenchido');
             (phone === '') && errors.current.push('Telefone não preenchido');
-            (pass === '') && errors.current.push('Senha não preenchida');
-            (confirm === '') && errors.current.push('Confirmação não preenchida');
-            (pass !== confirm) && errors.current.push('Senha diferente da confirmação');
+            (password === '') && errors.current.push('Senha não preenchida');
+            (passwordConfirm === '') && errors.current.push('Confirmação não preenchida');
+            (password !== passwordConfirm) && errors.current.push('Senha diferente da confirmação');
         }
     };
 
