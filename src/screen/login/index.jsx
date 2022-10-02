@@ -15,7 +15,7 @@ import {
   TouchableOpacity
 } from "react-native";
 import { Loading } from "../../components/loading";
-import { toastMessage } from "../../util/toastMessage";
+import { toastMessage } from "../../utils/toastMessage";
 
 export function Login({ navigation }) {
   const { validationEmail } = inputValidators()
