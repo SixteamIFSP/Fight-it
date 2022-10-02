@@ -28,9 +28,23 @@ export function CreateAccount({ navigation }) {
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [typeTeacher, setTypeTeacher] = useState(true);
+
+    const [invalidEmailMessage, setInvalidEmailMessage] = useState('');
+    const [invalidNameMessage, setInvalidNameMessage] = useState('');
+    
     const errors = useRef([]);
 
-    function validation() {
+    const handleEmail = (value) => {
+        setMail(value);
+        setInvalidEmailMessage(validationEmail(value));
+
+    };
+    const handleName = (value) => {
+        setName(value);
+        setInvalidNameMessage(validationName(value));
+    };
+
+    function inputValidations() {
         errors.current = [];
         if (
             name === '' |
@@ -39,7 +53,7 @@ export function CreateAccount({ navigation }) {
             pass === '' |
             confirm === '' |
             pass !== confirm
-        ){
+        ) {
 
             (name === '') && errors.current.push('Nome não preenchido');
             (mail === '') && errors.current.push('E-mail não preenchido');
@@ -47,9 +61,11 @@ export function CreateAccount({ navigation }) {
             (pass === '') && errors.current.push('Senha não preenchida');
             (confirm === '') && errors.current.push('Confirmação não preenchida');
             (pass !== confirm) && errors.current.push('Senha diferente da confirmação');
+        }
+    };
 
     //valida se os campos estão preenchidos corretamente
-    function inputValidations() {
+    function oldValidations() {
         if (
             name === ''
             | phone === ''
@@ -58,7 +74,7 @@ export function CreateAccount({ navigation }) {
             | password !== passwordConfirm
         )
             return false;
-        }
+
         return true;
     };
 
@@ -73,23 +89,23 @@ export function CreateAccount({ navigation }) {
                 senha: password,
                 receberNot: 1,
             };
-            if(!typeTeacher) {
-                navigation.navigate('CreateTriagem', {data});
-                return 
+            if (!typeTeacher) {
+                navigation.navigate('CreateTriagem', { data });
+                return
             }
             setLoading(true);
             await createAccount(data, typeTeacher);
             setLoading(false);
             navigation.navigate('Login');
         } else {
-            let errorsText  = "Digite os campos corretamente: "
+            let errorsText = "Digite os campos corretamente: "
             errors.current.map((value) => {
-                errorsText = errorsText+`\n ${value}`
-            })
+                errorsText = errorsText + `\n ${value}`
+            });
 
-            toastMessage(false, errorsText)
+            toastMessage(false, errorsText);
         }
-    }
+    };
 
     function handleBack() {
         navigation.navigate('Login');
