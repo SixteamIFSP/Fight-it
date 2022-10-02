@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text, View } from 'react-native'
 import { ButtonLinguage } from '../../components/buttonChangeLinguage';
@@ -28,20 +28,25 @@ export function CreateAccount({ navigation }) {
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [typeTeacher, setTypeTeacher] = useState(true);
+    const errors = useRef([]);
 
-    //validations
-    const [invalidEmailMessage, setInvalidEmailMessage] = useState('');
-    const [invalidNameMessage, setInvalidNameMessage] = useState('');
+    function validation() {
+        errors.current = [];
+        if (
+            name === '' |
+            phone === '' |
+            mail === '' |
+            pass === '' |
+            confirm === '' |
+            pass !== confirm
+        ){
 
-    //funções chamadas após preenchimento dos campos
-    const handleEmail = value => {
-        setMail(value);
-        setInvalidEmailMessage(validationEmail(value));
-    };
-    const handleName = value => {
-        setName(value);
-        setInvalidNameMessage(validationName(value));
-    };
+            (name === '') && errors.current.push('Nome não preenchido');
+            (mail === '') && errors.current.push('E-mail não preenchido');
+            (phone === '') && errors.current.push('Telefone não preenchido');
+            (pass === '') && errors.current.push('Senha não preenchida');
+            (confirm === '') && errors.current.push('Confirmação não preenchida');
+            (pass !== confirm) && errors.current.push('Senha diferente da confirmação');
 
     //valida se os campos estão preenchidos corretamente
     function inputValidations() {
@@ -53,6 +58,7 @@ export function CreateAccount({ navigation }) {
             | password !== passwordConfirm
         )
             return false;
+        }
         return true;
     };
 
@@ -76,7 +82,12 @@ export function CreateAccount({ navigation }) {
             setLoading(false);
             navigation.navigate('Login');
         } else {
-            toastMessage(false, "Digite os campos corretamente!")
+            let errorsText  = "Digite os campos corretamente: "
+            errors.current.map((value) => {
+                errorsText = errorsText+`\n ${value}`
+            })
+
+            toastMessage(false, errorsText)
         }
     }
 

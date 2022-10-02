@@ -11,21 +11,13 @@ export async function getClass(setClasses, idUsuario, type){
        } else {
             response = await api.get(`/turma/busca/${idUsuario}`);
        }
-        if (response?.data.status){
-            setClasses(response?.data.resultado)
-            toastMessage(true, response?.data.mensagem) 
-        } else{
-            toastMessage(false, response?.data.mensagem)   
-        }
+       console.log(response?.data, idUsuario, type);
+       setClasses(response?.data.resultado || []);
        
     } catch (error) {
-        console.log(error);
-
-        toastMessage(false, 'Erro de conexão!')
+        toastMessage(false, 'Erro de conexão!');
     }
 }
-
-
 
 export async function createClass(data){ // data => { nome:string, descricao:string, professorId:number}
     try {

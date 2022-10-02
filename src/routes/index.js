@@ -15,6 +15,7 @@ import { ClassStack } from './classStack';
 import { CreateTriagem } from '../screen/createTriagem';
 import { ClassView } from '../screen/classView';
 import { CalendarTeacher } from '../screen/calendarTeacher';
+import App from '../services/notification';
 
 const TabNavegation = createBottomTabNavigator();
 const AppRoutes = createNativeStackNavigator();
@@ -88,7 +89,7 @@ function StackLoged() {
           tabBarInactiveTintColor: 'gray',
         })}>
           <TabNavegation.Screen options={{ title: "Home" }} navigationKey='HomeScreenStudent' name="HomeScreenStudent" component={HomeScreenStudent} />
-          {/* <TabNavegation.Screen navigationKey='Calendar' name="Calendar" component={HomeScreenStudent} />   */}
+          <TabNavegation.Screen navigationKey='Calendar' name="Calendar" component={App} />
           <TabNavegation.Screen navigationKey='Class' name="Class" component={ClassView} initialParams={{student: true}}  />  
           {/* <TabNavegation.Screen navigationKey='Dashboard' name="Dashboard" component={HomeScreenStudent} />   */}
           <TabNavegation.Screen navigationKey='Config' name="Config" component={ConfigureAccount} />  
@@ -99,6 +100,11 @@ function StackLoged() {
   const User = {
     1: <Teacher />,
     2: <Studant />,
+  }
+
+  const stack = {
+    true: <StackAuth />,
+    false: <StackLoged />,
   }
 
   return (
@@ -131,10 +137,13 @@ function StackAuth() {
 
 export function Router() {
   const { user } = useUser();
+
+  const stack = {
+    'true': <StackAuth />,
+    'false': <StackLoged />,
+  }
  
   return (
-  <>
-    {user == null ? <StackAuth /> : <StackLoged />}
-  </>
+    stack[`${user == null}`]
   )
 }
