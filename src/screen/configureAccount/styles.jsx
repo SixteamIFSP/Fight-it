@@ -37,6 +37,7 @@ export const TextInfo = styled.Text`
     width:100%;
     text-align:left;
     font-size:18px;
+  }
 `;
 export const RowConfirmation = styled.View`
     flex-direction:row;

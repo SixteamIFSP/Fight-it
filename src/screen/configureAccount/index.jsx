@@ -3,8 +3,13 @@ import { useUser } from "../../hooks/user";
 import { FontAwesome } from '@expo/vector-icons';
 import { Input } from "../../components/input";
 import { CheckBox } from "../../components/checkbox";
-import { MaterialIcons } from '@expo/vector-icons'; 
-import { ChangeInfoAccount, ChangePassowrd, DeleteAccount, GetUserAccount } from "../../controler/account";
+import { MaterialIcons } from '@expo/vector-icons';
+import {
+    ChangeInfoAccount,
+    ChangePassowrd,
+    DeleteAccount,
+    GetUserAccount
+} from "../../controler/account";
 import { toastMessage } from "../../utils/toastMessage";
 import * as ImagePicker from 'expo-image-picker';
 import { useTranslation } from 'react-i18next';
@@ -44,7 +49,9 @@ const DataUser = () => {
     const [notification, setNotification] = useState()
 
     useEffect(() => {
-        GetUserAccount((data) => setDataUser(data), user?.userID, user?.tipoUsuario === 1,)
+        GetUserAccount(
+            (data) => setDataUser(data), user?.userID, user?.tipoUsuario === 1
+        )
     }, [])
 
     useEffect(() => {
@@ -118,7 +125,10 @@ const DataUser = () => {
                 <TextDescription>{t('form.notification')}:</TextDescription>
                 {
                     editable ?
-                        <CheckBox isChecked={notification} onPress={() => setNotification((value) => !value)}></CheckBox>
+                        <CheckBox
+                            isChecked={notification}
+                            onPress={() => setNotification((value) => !value)}
+                        ></CheckBox>
                         : <TextInfo>{notification ? 'Ativo' : 'Desativado'}</TextInfo>
                 }
             </TextAlingLine>
@@ -138,7 +148,7 @@ const DataUser = () => {
     )
 };
 // Compomente de troca de senha
-export const ChangePassword = ({ editable, setEditable}) => {
+export const ChangePassword = ({ editable, setEditable }) => {
     const { user } = useUser();
 
     const [oldPass, setOldPass] = useState('');
@@ -159,13 +169,13 @@ export const ChangePassword = ({ editable, setEditable}) => {
                 ChangePassowrd(data, user.TipoUsuario === 1)
 
             } else {
-                
-                toastMessage(false,  "Preencha os campos corretamente"); // sem t
+
+                toastMessage(false, "Preencha os campos corretamente"); // sem t
 
                 //toastMessage(false,  t("msg.completeFields")); // com t 
 
 
-               
+
             }
             setEditable((value) => !value)
 
@@ -176,7 +186,7 @@ export const ChangePassword = ({ editable, setEditable}) => {
     };
     return (
         editable ?
-            <ConteinerInfo style={{marginTop: 20}}>
+            <ConteinerInfo style={{ marginTop: 20 }}>
                 <TextHeader>{t("changePass.Header")}</TextHeader>
                 <TextDescription>{t("changePass.OldPass")}</TextDescription>
                 <Input
@@ -236,14 +246,14 @@ const ConfirmDelete = ({ deletable, setDeletable }) => {
                 DeleteAccount(data, user.tipoUsuario === 1, () => logOut())
             } else {
 
-                toastMessage(false, "Preencha os campos corretamente") 
+                toastMessage(false, "Preencha os campos corretamente")
             }
-            
+
         } catch (error) {
 
-            toastMessage(false, "Erro de conexão") 
+            toastMessage(false, "Erro de conexão")
         }
-      
+
 
         setDeletable(false)
     };
@@ -282,50 +292,48 @@ const ConfirmDelete = ({ deletable, setDeletable }) => {
 
 export function ConfigureAccount() {
     const { t } = useTranslation();
-    const  { user, modifyUser}  = useUser();
+    const { user, modifyUser } = useUser();
     const [editablePass, setEditablePass] = useState(false);
     const [loadingImage, setLoadingImage] = useState(false);
     const [deletable, setDeletable] = useState(false);
     const [imageSelect, setImageSelect] = useState(user?.pfp);
 
-    useEffect(()=>{
+    useEffect(() => {
         setImageSelect(user?.pfp)
-    },[user]);
+    }, [user]);
 
     useEffect(() => {
         (async () => {
-         
-            const cameraRollStatus =
-              await ImagePicker.requestMediaLibraryPermissionsAsync();
-          
-            if (
-              cameraRollStatus.status !== "granted" 
-            ) {
-              alert("Usuario sem permição para utilizar mídias");
-            }
-          
-        })();
-      }, []);
 
-      const pickImage = async () => {
+            const cameraRollStatus =
+                await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+            if (
+                cameraRollStatus.status !== "granted"
+            ) {
+                alert("Usuario sem permição para utilizar mídias");
+            }
+
+        })();
+    }, []);
+
+    const pickImage = async () => {
 
         try {
             let result = await ImagePicker.launchImageLibraryAsync({
                 mediaTypes: "Images",
                 aspect: [4, 3],
                 quality: 1,
-              })
-      
-              console.log(result);
-              
-              setLoadingImage(true);
-              await upload(result, user, modifyUser)
-              setLoadingImage(false);
-            
+            });
+
+            setLoadingImage(true);
+            await upload(result, user, modifyUser)
+            setLoadingImage(false);
+
         } catch (error) {
             console.log(error.message);
         }
-    
+
     }
 
     return (
@@ -337,27 +345,27 @@ export function ConfigureAccount() {
                     <ContainerImage>
                         <AreaImage>
                             {
-                                !loadingImage ?  
-                                    (imageSelect !== null? 
+                                !loadingImage ?
+                                    (imageSelect !== null ?
                                         <Image
                                             source={
-                                                {uri:variables.IMAGES_URL+imageSelect}
+                                                { uri: variables.IMAGES_URL + imageSelect }
                                             }
                                             style={{
-                                                width:"100%",
-                                                height:"100%"
+                                                width: "100%",
+                                                height: "100%"
                                             }}
-                                        />   
+                                        />
+                                        :
+                                        <ButtonImage onPress={() => pickImage()}>
+                                            <MaterialIcons name="add-a-photo" size={40} color="#dddddd" />
+                                        </ButtonImage>)
                                     :
-                                    <ButtonImage onPress = {()=> pickImage()}>
-                                        <MaterialIcons name="add-a-photo" size={40} color="#dddddd" />
-                                    </ButtonImage>         )
-                                :
-                                <AreaImage>
-                                    <Loading   loading={loadingImage} size={40}/>
-                                </AreaImage>
+                                    <AreaImage>
+                                        <Loading loading={loadingImage} size={40} />
+                                    </AreaImage>
                             }
-                        
+
                         </AreaImage>
                     </ContainerImage>
                     <DataUser></DataUser>
