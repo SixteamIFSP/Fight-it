@@ -127,7 +127,6 @@ export function CreateAccount({ navigation }) {
 
     return (
         <View style={stylesGlobal.container}>
-            <ButtonLinguage></ButtonLinguage>
             <Text style={styles.TitleLogin}>Fight It</Text>
 
             <View style={styles.userTypeChoice}>
@@ -153,7 +152,7 @@ export function CreateAccount({ navigation }) {
                         onChangeText={(value) => { handleName(value) }}
                         value={userName}
                         placeholder={t('createAccount.name')}
-                        errorMessage={invalidNameMessage ? invalidNameMessage : null}
+                        errorMessage={invalidMessage.name ? invalidMessage.name : null}
                     />
                 </View>
                 <View style={styles.inputes}>
@@ -163,7 +162,7 @@ export function CreateAccount({ navigation }) {
                         placeholder={t('login.mail')}
                         keyboardType="email-address"
                         autoComplete="email"
-                        errorMessage={invalidEmailMessage ? invalidEmailMessage : null}
+                        errorMessage={invalidMessage.mail ? invalidMessage.mail : null}
                     />
                 </View>
                 <View style={styles.inputes}>

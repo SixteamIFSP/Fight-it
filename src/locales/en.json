@@ -1,6 +1,11 @@
 {
     "translation": {
         "appName": "Fight It",
+        "translate": "translate:",
+        "header":{
+            "teacher":"Teacher",
+            "student":"Student"
+        },
         "validation": {
             "confirm": "Confirm",
             "cancel": "Cancel"
@@ -56,13 +61,12 @@
             "teacher":{
                 "message":"Hello! teacher"
             }
-        },
-        "header":{
-            "teacher":"Teacher",
-            "student":"Student"
-        },
+        },  
         "nav":{
-            "config": "Configuration"
+            "config": "Configuration",
+            "home": "Home",
+            "calendar": "Calendar",
+            "class": "Class"
         },
         "configScreen":{
             "Header":"My Account",

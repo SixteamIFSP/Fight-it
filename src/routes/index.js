@@ -27,7 +27,7 @@ function StackLoged() {
 
   const Teacher = () => {
     return (
-    <TabNavegation.Navigator initialRouteName="HomeScreenTeacher"  screenOptions={({ route }) => ({
+    <TabNavegation.Navigator  initialRouteName="HomeScreenTeacher"  screenOptions={({ route }) => ({
       tabBarIcon: ({ focused, color }) => {
         let iconName;
 
@@ -52,14 +52,39 @@ function StackLoged() {
       },
       tabBarActiveTintColor: 'black',
       tabBarInactiveTintColor: 'gray',
-      tabBarShowLabel:false,
+      
     })}>
 
-      <TabNavegation.Screen options={{ title: "Home", headerShown: false }} navigationKey='HomeScreenTeacher' name="HomeScreenTeacher" component={HomeScreenTeacher} />
-      <TabNavegation.Screen navigationKey='Calendar' name="Calendar" component={CalendarTeacher} />
-      <TabNavegation.Screen options={{ headerShown: false }} navigationKey='Class' name="Class" component={ClassStack} />
+      <TabNavegation.Screen options={{ 
+          title: t("appName"), 
+          tabBarLabel: t(`nav.home`),
+        }}
+        navigationKey='HomeScreenTeacher'
+        name="HomeScreenTeacher"
+        component={HomeScreenTeacher} />
+      <TabNavegation.Screen options={{ 
+          title: t("appName"), 
+          tabBarLabel: t(`nav.calendar`)
+        }} 
+        navigationKey='Calendar'
+        name="Calendar"
+        component={CalendarTeacher} />
+      <TabNavegation.Screen options={{
+          title: t("appName"), 
+          tabBarLabel: t(`nav.class`),
+          headerShown: false
+          }}
+          navigationKey='Class'
+          name="Class"
+          component={ClassStack} />
       {/* <TabNavegation.Screen navigationKey='Dashboard' name="Dashboard" component={HomeScreenTeacher} /> */}
-      <TabNavegation.Screen options={{ title: t(`nav.config`) }}  navigationKey='Config' name="Config" component={ConfigureAccount} />
+      <TabNavegation.Screen options={{
+          title: t("appName"), 
+          tabBarLabel: t(`nav.config`)
+        }}
+        navigationKey='Config'
+        name="Config"
+        component={ConfigureAccount} />
 
     </TabNavegation.Navigator>
     )
@@ -88,11 +113,38 @@ function StackLoged() {
           tabBarActiveTintColor: 'black',
           tabBarInactiveTintColor: 'gray',
         })}>
-          <TabNavegation.Screen options={{ title: "Home" }} navigationKey='HomeScreenStudent' name="HomeScreenStudent" component={HomeScreenStudent} />
-          <TabNavegation.Screen navigationKey='Calendar' name="Calendar" component={App} />
-          <TabNavegation.Screen navigationKey='Class' name="Class" component={ClassView} initialParams={{student: true}}  />  
+          <TabNavegation.Screen options={{
+          title: t("appName"), 
+          tabBarLabel: t(`nav.home`),
+          }}
+          navigationKey='HomeScreenStudent'
+          name="HomeScreenStudent"
+          component={HomeScreenStudent} />
+          <TabNavegation.Screen
+            options={{
+              title: t("appName"), 
+              tabBarLabel: t(`nav.calendar`),
+            }}
+          navigationKey='Calendar'
+          name="Calendar"
+          component={App} />
+          <TabNavegation.Screen 
+          options={{
+            title: t("appName"), 
+            tabBarLabel: t(`nav.class`),
+            headerShown: false
+          }}
+          navigationKey='Class'
+          name="Class"
+          component={ClassView}
+          initialParams={{student: true}}  />  
           {/* <TabNavegation.Screen navigationKey='Dashboard' name="Dashboard" component={HomeScreenStudent} />   */}
-          <TabNavegation.Screen navigationKey='Config' name="Config" component={ConfigureAccount} />  
+          <TabNavegation.Screen
+            options={{
+              title: t("appName"), 
+              tabBarLabel: t(`nav.class`),
+            }}
+          navigationKey='Config' name="Config" component={ConfigureAccount} />  
         </TabNavegation.Navigator>
         )
   }

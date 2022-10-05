@@ -6,6 +6,11 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
+    containerLocale:{
+        position:'absolute',
+        top:12,
+        right:5,
+    },
     input: {
         width: '70%',
         margin: 12,

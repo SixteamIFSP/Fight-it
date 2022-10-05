@@ -27,7 +27,6 @@ export function Login({ navigation }) {
   const { singIn } = useUser();
 
   const { t } = useTranslation();
-
   async function onHandleLogin() {
     //TODO:achar uma solução que não dê erro: 
     if (mail === '' || password === '') {
@@ -50,7 +49,9 @@ export function Login({ navigation }) {
   }
   return (
     <View style={stylesGlobal.container}>
-      <ButtonLinguage />
+      <View style={styles.containerLocale}>
+        <ButtonLinguage />
+      </View>
       <View style={styles.container}>
         <Text style={styles.TitleLogin}>Fight It</Text>
         <View style={styles.switchButtons}>
