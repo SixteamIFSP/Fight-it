@@ -4,9 +4,9 @@ import { StyleSheet } from "react-native";
 
 
 export const styles = StyleSheet.create({
-    container:  {
+    container: {
         flex: 1,
-        padding: 30,
+        padding: 20,
         paddingBottom: 50,
     },
     switchButtons: {
@@ -22,22 +22,40 @@ export const styles = StyleSheet.create({
         textAlign: 'center',
     },
     TitleLogin: {
-        fontSize: 23, 
-        fontWeight: 'bold', 
+        fontSize: 24,
+        fontWeight: 'bold',
         marginTop: 12,
         marginBottom: 12,
+        alignSelf: 'center',
     },
     descriptionText: {
-        fontSize: 15, 
-        marginTop: 12,
+        fontSize: 15,
         marginBottom: 20,
     },
     confirmationButton: {
         width: '100%',
         justifyContent: 'center',
-    }, 
+    },
     inputes: {
-        marginBottom:24,
         width: '100%',
     },
+    personalDataContainer: {
+        width: '100%',
+    },
+    personalDataTitle: {
+        fontSize: 16,
+        fontWeight: 'bold'
+    },
+    target: {
+        marginBottom: 6,
+        width: '100%'
+    },
+    birthDate: {
+        width: '100%',
+        flexDirection: 'row'
+    },
+    birthDateTitle: {
+        marginRight: 20
+    }
+
 });

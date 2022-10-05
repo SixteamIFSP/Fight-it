@@ -152,7 +152,7 @@ export function CreateAccount({ navigation }) {
                         onChangeText={(value) => { handleName(value) }}
                         value={userName}
                         placeholder={t('createAccount.name')}
-                        errorMessage={invalidMessage.name ? invalidMessage.name : null}
+                        errorMessage={invalidNameMessage ? invalidNameMessage : null}
                     />
                 </View>
                 <View style={styles.inputes}>
@@ -162,7 +162,7 @@ export function CreateAccount({ navigation }) {
                         placeholder={t('login.mail')}
                         keyboardType="email-address"
                         autoComplete="email"
-                        errorMessage={invalidMessage.mail ? invalidMessage.mail : null}
+                        errorMessage={invalidEmailMessage ? invalidEmailMessage : null}
                     />
                 </View>
                 <View style={styles.inputes}>
