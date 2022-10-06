@@ -218,30 +218,27 @@ export function CreateTriagem({ navigation, route }) {
           }
         </View>
 
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Text>Possui alguma lesão? :</Text>
-          <Picker
-            style={{ width: 100 }}
-            selectedValue={lesoes}
-            onValueChange={(itemValue, itemIndex) => {
-              console.log('item', itemValue)
-              if (typeof itemValue !== 'boolean') return
-              setLesoes(itemValue)
-            }
-            }>
-            <Picker.Item label="selecione" value={'selecione'} />
-            <Picker.Item label="sim" value={true} />
-            <Picker.Item label="não" value={false} />
-          </Picker>
+        <View>
+          <View style={styles.anamneseAlignRadioButtons}>
+            <Text>Possui alguma lesão?</Text>
+            <RadioButton
+              isChecked={lesoes}
+              onPress={() => { setLesoes(!lesoes) }}
+              size={16}
+              label={'Sim'}
+              horizontal
+            ></RadioButton>
+          </View>
+          {
+            lesoes ?
+              <Input
+                style={styles.inputes}
+                onChangeText={setLesoesResp}
+                value={lesoesResp}
+                placeholder={'Qual(ais)?'}
+              /> : null
+          }
         </View>
-        {
-          lesoes === true && <Input
-            style={styles.inputes}
-            onChangeText={setLesoesResp}
-            value={lesoesResp}
-            placeholder={'Qual(ais)?'}
-          />
-        }
 
         <View>
           <Text>Gostaria de fazer algum outro comentário que possa ajudar na montagem do seu programa de treinamento?</Text>
@@ -249,7 +246,7 @@ export function CreateTriagem({ navigation, route }) {
             style={styles.inputes}
             onChangeText={setComentario}
             value={comentario}
-            placeholder={''}
+            placeholder={'Digite aqui'}
           />
         </View>
 
