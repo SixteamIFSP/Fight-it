@@ -84,6 +84,7 @@ export function CreateTriagem({ navigation, route }) {
             Precisamos apenas de mais algumas informações!
           </Text>
         </View>
+
         <View style={styles.personalDataContainer}>
           <Text style={styles.personalDataTitle}>Dados Pessoais:</Text>
           <View style={styles.inputes}>
@@ -148,9 +149,11 @@ export function CreateTriagem({ navigation, route }) {
             />
           }
         </View>
-        <View style={styles.anamneseData}>
-          <Text style={styles.personalDataTitle}>Anamnese:</Text>
-          <View style={styles.anamneseDidExercise}>
+
+        <View style={styles.anamneseDidExerciseContainer}>
+          <Text style={styles.anamneseTitle}>Anamnese:</Text>
+
+          <View style={styles.anamneseAlignRadioButtons}>
             <Text>Você já praticou exercício físico antes?</Text>
             <RadioButton
               isChecked={didExercise}
@@ -160,65 +163,60 @@ export function CreateTriagem({ navigation, route }) {
               horizontal
             ></RadioButton>
           </View>
+          {
+            didExercise ?
+              <Input
+                style={styles.inputes}
+                onChangeText={setDidExerciseResp}
+                value={didExerciseResp}
+                placeholder={'Qual(ais) e há quanto tempo?'}
+              /> : null
+          }
         </View>
-        {
-          didExercise ?
-            <Input
+
+        <View>
+          <View style={styles.anamneseAlignRadioButtons}>
+            <Text>Possui algum problema ortopédico?</Text>
+            <RadioButton
+              isChecked={probOrtopedico}
+              onPress={() => { setProbOrtopedico(!probOrtopedico) }}
+              size={16}
+              label={'Sim'}
+              horizontal
+            ></RadioButton>
+          </View>
+          {
+            probOrtopedico ?
+              <Input
+                style={styles.inputes}
+                onChangeText={setProbOrtopedicoResp}
+                value={probOrtopedicoResp}
+                placeholder={'Qual(ais)?'}
+              /> : null
+          }
+        </View>
+
+        <View>
+          <View style={styles.anamneseAlignRadioButtons}>
+            <Text>Possui alguma doença crônica?</Text>
+            <RadioButton
+              isChecked={doencaCronica}
+              onPress={() => { setDoencaCronica(!doencaCronica) }}
+              size={16}
+              label={'Sim'}
+              horizontal
+            ></RadioButton>
+          </View>
+          {
+            doencaCronica ? <Input
               style={styles.inputes}
-              onChangeText={setDidExerciseResp}
-              value={didExerciseResp}
-              placeholder={'Qual(ais) e há quanto tempo?'}
-            /> : null
-        }
-
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Text>Possui algum problema ortopédico? :</Text>
-          <Picker
-            style={{ width: 100 }}
-            selectedValue={probOrtopedico}
-            onValueChange={(itemValue, itemIndex) => {
-              if (typeof itemValue !== 'boolean') return
-              setProbOrtopedico(itemValue)
-            }
-            }>
-            <Picker.Item label="selecione" value={'selecione'} />
-            <Picker.Item label="sim" value={true} />
-            <Picker.Item label="não" value={false} />
-          </Picker>
+              onChangeText={setDoencaCronicaResp}
+              value={doencaCronicaResp}
+              placeholder={'Qual(ais)?'}
+            />
+              : null
+          }
         </View>
-        {
-          probOrtopedico === true && <Input
-            style={styles.inputes}
-            onChangeText={setProbOrtopedicoResp}
-            value={probOrtopedicoResp}
-            placeholder={'Qual(ais)?'}
-          />
-        }
-
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Text>Possui alguma doença crônica? :</Text>
-          <Picker
-            style={{ width: 100 }}
-            selectedValue={doencaCronica}
-            onValueChange={(itemValue, itemIndex) => {
-              if (typeof itemValue !== 'boolean') return
-              setDoencaCronica(itemValue)
-            }
-            }>
-            <Picker.Item label="selecione" value={'selecione'} />
-            <Picker.Item label="sim" value={true} />
-            <Picker.Item label="não" value={false} />
-          </Picker>
-        </View>
-        {
-          doencaCronica === true && <Input
-            style={styles.inputes}
-            onChangeText={setDoencaCronicaResp}
-            value={doencaCronicaResp}
-            placeholder={'Qual(ais)?'}
-          />
-        }
-
 
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <Text>Possui alguma lesão? :</Text>

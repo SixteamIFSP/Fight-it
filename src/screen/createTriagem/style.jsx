@@ -53,11 +53,15 @@ export const styles = StyleSheet.create({
     birthDateCalendar: {
         marginTop: 12
     },
-    anamneseData: {
+    anamneseTitle: {
+        fontSize: 16,
+        fontWeight: 'bold'
+    },
+    anamneseDidExerciseContainer: {
         marginTop: 12
     },
-    anamneseDidExercise: {
-        flexDirection:'column',
+    anamneseAlignRadioButtons: {
+        flexDirection: 'column',
         marginTop: 8
     }
 
