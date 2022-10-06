@@ -32,10 +32,10 @@ export function Login({ navigation }) {
     if (mail === '' || password === '') {
       toastMessage(false, "Preencha os campos!");
       return
-  }
-      // setLoading(true);
+    }
+    // setLoading(true);
     await singIn({ mail: mail, pass: password }, typeTeacher);
-     // setLoading(false);
+    // setLoading(false);
   }
 
   function onHandleCreateAccount() {

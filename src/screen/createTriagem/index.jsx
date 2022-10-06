@@ -9,6 +9,8 @@ import { styles } from './style'
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { toastMessage } from "../../utils/toastMessage";
 import { Picker } from '@react-native-picker/picker';
+import { MaterialIcons } from '@expo/vector-icons';
+import { RadioButton } from "../../components/radioButton";
 
 export function CreateTriagem({ navigation, route }) {
   const [loading, setLoading] = useState(false);
@@ -23,13 +25,14 @@ export function CreateTriagem({ navigation, route }) {
   const [doencaCronicaResp, setDoencaCronicaResp] = useState('')
   const [lesoes, setLesoes] = useState('selecione')
   const [lesoesResp, setLesoesResp] = useState('')
-  const [didExercise, setDidExercise] = useState('selecione');
+  const [didExercise, setDidExercise] = useState(false);
   const [didExerciseResp, setDidExerciseResp] = useState('')
   const [comentario, setComentario] = useState('')
 
+
   function handleBack() {
     navigation.navigate('CreateAccount')
-  }
+  };
 
   async function handleConfirm() {
     const data = {
@@ -68,7 +71,7 @@ export function CreateTriagem({ navigation, route }) {
     await createTriagem(data, idChumbadoEnquantoServicoCreateAccountNaoRetornaID)
     setLoading(false);
     navigation.navigate('Login');
-  }
+  };
 
   return (
     <ScrollView style={styles.container} >
@@ -82,16 +85,8 @@ export function CreateTriagem({ navigation, route }) {
             Precisamos apenas de mais algumas informações!
           </Text>
         </View>
-        <View style={styles.target}>
-          <Input
-            onChangeText={setObjetivo}
-            value={objetivo}
-            placeholder={'Objetivo do treinamento?'}
-          />
-        </View>
         <View style={styles.personalDataContainer}>
           <Text style={styles.personalDataTitle}>Dados Pessoais:</Text>
-
           <View style={styles.inputes}>
             <Input
               onChangeText={(e) => {
@@ -100,7 +95,7 @@ export function CreateTriagem({ navigation, route }) {
               }}
               value={altura}
               maxLength={3}
-              placeholder={'Altura'}
+              placeholder={'Altura em centímetros (cm)'}
               keyboardType='numeric'
             />
           </View>
@@ -118,12 +113,22 @@ export function CreateTriagem({ navigation, route }) {
             />
           </View>
           <View style={styles.birthDate}>
-            <Text styles={{marginRight: 20}}>Data de nascimento:</Text>
-            <TouchableOpacity onPress={() => { setSelectedDateIsOpen(true) }}>
-              <Text>{date.toLocaleDateString()}</Text>
-            </TouchableOpacity>
+            <Text>Data de nascimento:</Text>
+            <View style={styles.birthDateCalendar}>
+              <TouchableOpacity
+                style={{ flexDirection: 'row' }}
+                onPress={() => { setSelectedDateIsOpen(true) }}>
+                <Text>
+                  {date.toLocaleDateString()}
+                </Text>
+                <MaterialIcons
+                  style={{ fontSize: 16, marginLeft: 12 }}
+                  name="edit"
+                  size={40}
+                  color="#000" />
+              </TouchableOpacity>
+            </View>
           </View>
-
           {
             selectectDateIsOpen && <DateTimePicker
               themeVariant="dark"
@@ -144,26 +149,28 @@ export function CreateTriagem({ navigation, route }) {
             />
           }
         </View>
-
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Text>Você já praticou exercício físico antes? :</Text>
-          <Picker
-            style={{ width: 100 }}
-            selectedValue={didExercise}
-            onValueChange={(itemValue, itemIndex) =>
-              setDidExercise(itemValue)
-            }>
-            <Picker.Item label="sim" value={true} />
-            <Picker.Item label="não" value={false} />
-          </Picker>
+        <View style={styles.anamneseData}>
+          <Text style={styles.personalDataTitle}>Anamnese:</Text>
+          <View style={styles.anamneseDidExercise}>
+            <Text>Você já praticou exercício físico antes?</Text>
+            <RadioButton
+              isChecked={didExercise}
+              onPress={() => { setDidExercise(!didExercise) }}
+              size={16}
+              label={'Sim'}
+              horizontal
+            ></RadioButton>
+          </View>
         </View>
-
-        <Input
-          style={styles.inputes}
-          onChangeText={setDidExerciseResp}
-          value={didExerciseResp}
-          placeholder={didExercise ? 'Qual(ais) e há quanto tempo?' : 'Quanto tempo está sem praticar exercícios?'}
-        />
+        {
+          didExercise ?
+            <Input
+              style={styles.inputes}
+              onChangeText={setDidExerciseResp}
+              value={didExerciseResp}
+              placeholder={'Qual(ais) e há quanto tempo?'}
+            /> : null
+        }
 
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <Text>Possui algum problema ortopédico? :</Text>

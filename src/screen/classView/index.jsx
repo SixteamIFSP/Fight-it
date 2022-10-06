@@ -174,10 +174,10 @@ function AdicionarAula({ turmaId, setback }) {
                     </View> : null
             }
 
-            <DoubleButtonConfirmation style={{alignSelf:'flex-end'}}
-            handleBack={handleBack}
-            handleConfirm={handleSubmit
-            }></DoubleButtonConfirmation>
+            <DoubleButtonConfirmation style={{ alignSelf: 'flex-end' }}
+                handleBack={handleBack}
+                handleConfirm={handleSubmit
+                }></DoubleButtonConfirmation>
         </AdicionarAulaContainer >
     )
 }

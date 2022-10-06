@@ -46,16 +46,19 @@ export const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold'
     },
-    target: {
-        marginBottom: 6,
-        width: '100%'
-    },
     birthDate: {
         width: '100%',
-        flexDirection: 'row'
+        flexDirection: 'column'
     },
-    birthDateTitle: {
-        marginRight: 20
+    birthDateCalendar: {
+        marginTop: 12
+    },
+    anamneseData: {
+        marginTop: 12
+    },
+    anamneseDidExercise: {
+        flexDirection:'column',
+        marginTop: 8
     }
 
 });
