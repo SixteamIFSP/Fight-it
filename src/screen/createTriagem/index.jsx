@@ -49,20 +49,19 @@ export function CreateTriagem({ navigation, route }) {
       jaFezExercicios: didExercise,
       jaFezExerciciosResposta: didExerciseResp,
       comentario
-    }
-
+    };
     const formIncomplet = Object.keys(data).find(e => {
       if (e === 'dataNascimento') return
       if (e === 'objetivo' && !data[e]) return true
       if (e === 'altura' && !data[e]) return true
       if (e === 'peso' && !data[e]) return true
       return data[e] === 'selecione'
-    })
-    console.log(formIncomplet)
+    });
+    console.log(formIncomplet);
     if (formIncomplet) {
       toastMessage(false, 'Por favor, preencha todos os campos')
       return
-    }
+    };
 
     setLoading(true);
     //TODO: CREATE ACCOUNT DEVE RETORNAR ID PARA QUE SEJA POSSÍVEL CRIAR A TRIAGEM DO ALUNO  SENDO CADASTRADO
