@@ -3,10 +3,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { tokenKey } from '../configuration/constants'; 
 import { toastMessage } from '../utils/toastMessage';
+import { inProduction } from '../configuration/constants';
 
 export const UserContext = createContext();
 
-const data =  // undefined;
+function UserProvider({ children }) {
+
+    const data = inProduction ?  undefined :
 {
     nome: 'rian',
     email: 'riansm100@gmail.com',
@@ -15,7 +18,6 @@ const data =  // undefined;
     pfp: "f9d20e32d01fe870da44cc00067b6dbf",
 }
 
-function UserProvider({ children }) {
     const [user, setUser] = useState(data ? data : null);
 
     async function modifyUser(value){
