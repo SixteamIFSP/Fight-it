@@ -277,8 +277,7 @@ function RenderAula({ aula, handleViewAula, onDeleteAula, student }) {
 
 export function ClassView({ navigation, route }) {
     const { t } = useTranslation();
-    const { Descricao, ProfessorId, Nome, id } = route.params.data;
-    const data = route?.params?.data;
+    const { Descricao, ProfessorId, Nome, id, data} = route.params.data;
     const student = route?.params?.student;
     const [dataAlunos, setDataAlunos] = useState([]);
     const [dateAula, setDateAula] = useState([]);

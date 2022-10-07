@@ -17,6 +17,7 @@ import { useTranslation } from "react-i18next";
 import { useIsFocused } from "@react-navigation/native";
 import { useModal } from "../../hooks/modalConfirmation";
 import { deleteAluno } from "../../controler/class";
+import { useUser } from "../../hooks/user";
 
 function CardParamStudant({ item, handleGraphyc }) {
 
@@ -28,6 +29,7 @@ function CardParamStudant({ item, handleGraphyc }) {
 };
 export function StudantView({ navigation, route:{params} }) {
     const { t } = useTranslation();
+    const { user } = useUser();
     const { studantId, id, nome } = params;
     const { setCallback } = useModal();
     const [loading, setLoading] = useState(false);
@@ -80,11 +82,12 @@ export function StudantView({ navigation, route:{params} }) {
         }
         await getDesempenhoPorParametro(data, setDataParams) 
         setLoadingGraphyc(true)
-
     }
 
     return (
         <Container>
+        {user == 1 ? (
+
             <ContainerButtons>
                 <ContentButtons onPress={() => handleEvaluation()}>
                     <TextButtons>{t("studentView.ButtonAvaliation")}</TextButtons>
@@ -93,6 +96,19 @@ export function StudantView({ navigation, route:{params} }) {
                     <TextButtons>{t("studentView.ButtonViewTriagem")}</TextButtons>
                 </ContentButtons>
             </ContainerButtons>
+        ):
+        <>
+                <Divider
+                    borderColor="#000"
+                    color="#000"
+                    orientation="center"
+                >
+                    {"Datas de aulas"}
+                </Divider>
+
+                <Text>implementando!</Text>
+        </>
+        }
 
             <ContainerDesempenho>
                 <Divider
