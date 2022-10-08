@@ -51,5 +51,9 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         flexDirection: 'column',
         alignItems: 'center',
+    },
+    requiredField: {
+        width: '70%',
+        color: 'red'
     }
 });

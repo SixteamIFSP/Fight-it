@@ -191,7 +191,7 @@ export function CreateAccount({ navigation }) {
                     />
                     {
                         phoneEmpty ?
-                            <Text style={{width: '70%', color:'red'}}>Campo Obrigatório</Text>
+                            <Text style={styles.requiredField}>Campo Obrigatório</Text>
                             :
                             null
                     }

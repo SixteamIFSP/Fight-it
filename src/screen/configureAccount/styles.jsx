@@ -3,6 +3,7 @@ import styled from 'styled-components/native'
 export const Container = styled.ScrollView`
     flex:1;
     width:100%;
+    overflow: visible;
 `;
 export const TextHeader = styled.Text`
     width:100%;
@@ -34,12 +35,14 @@ export const TextDescription = styled.Text`
     margin-left:10px;
 `;
 export const TextInfo = styled.Text`
-    width:100%;
+    width:80%;
     text-align:left;
     font-size:18px;
+    flex-wrap: wrap;
   }
 `;
 export const RowConfirmation = styled.View`
+    width:100%;
     flex-direction:row;
     justify-content:flex-end;
     align-items:center;
@@ -86,19 +89,19 @@ export const TextButton = styled.Text`
     width: 100%;
 `;
 export const ConteinerInfoDelete = styled.View`
-width:90%;
-padding: 20px;
-height:auto;
-margin-bottom:20px;
-margin-right: auto;
-margin-left: auto;
-border-color:black;
-border-width:0.5px;
-border-radius:4px;
-background-color: white;
-border-top-width:6px;
-border-top-color: #ce0000;
-border-style: solid;
+    width:90%;
+    padding: 20px;
+    height:auto;
+    margin-bottom:16px;
+    margin-right: auto;
+    margin-left: auto;
+    border-color:black;
+    border-width:0.5px;
+    border-radius:4px;
+    background-color: white;
+    border-top-width:6px;
+    border-top-color: #ce0000;
+    border-style: solid;
 `;
 
 export const ContainerImage = styled.View`
@@ -110,7 +113,6 @@ export const ContainerImage = styled.View`
 export const AreaImage = styled.View`
     width: 70px;
     height: 70px;
-    
     overflow:hidden;
     border-radius:50px;
 `;
@@ -121,3 +123,36 @@ export const ButtonImage = styled.TouchableOpacity`
     align-items:center;
     justify-content: center; 
 `;
+export const HorizontalButtonsContainer = styled.TouchableOpacity`
+    width: 100%;
+    height: 50%;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 20px;
+    margin-bottom:16px;
+`;
+export const ConfirmButton = styled.Text`
+    text-align:center;
+    padding:5px;
+    font-size:14px;
+    font-weight:bold;
+    border-color:black;
+    border-width:0.5px;
+    border-radius:5px;
+    background-color:rgb(221, 221, 221);
+    width:40%;
+    height: 100%;
+`;
+export const DeleteAccountButton = styled.Text`
+    text-align:center;
+    padding:5px;
+    font-size:14px;
+    font-weight:bold;
+    border-color:black;
+    border-width:0.5px;
+    border-radius:5px;
+    background-color:rgb(221, 221, 221);
+    width:40%;
+    height: 100%;
+`;
+
