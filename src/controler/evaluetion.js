@@ -21,7 +21,7 @@ export async function getEvaluetion(data, setValue) {
 export async function createEvaluetion(data) { //data => nome:string, date:(string:yyyy-MM-dd), idAluno:number
     try {
         const response = await api.post('/desempenho/criar/desempenho', { ...data });
-
+       console.log(response.data)
 
         if (response.data.status) {
             toastMessage(true, response?.data.mensagem);

@@ -14,7 +14,7 @@ function UserProvider({ children }) {
     nome: 'rian',
     email: 'riansm100@gmail.com',
     userID: '5',
-    tipoUsuario: 2,
+    tipoUsuario: 1,
     pfp: "f9d20e32d01fe870da44cc00067b6dbf",
 }
 

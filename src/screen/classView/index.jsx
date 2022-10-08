@@ -38,6 +38,7 @@ import { useModal } from "../../hooks/modalConfirmation";
 import { useIsFocused } from "@react-navigation/native";
 // import { deleteTurma } from '../../controler/class';
 import { LessonView } from "../LessonView";
+import { useUser } from "../../hooks/user";
 
 
 function AdicionarAula({ turmaId, setback }) {
@@ -178,7 +179,7 @@ function AdicionarAula({ turmaId, setback }) {
                 handleBack={handleBack}
                 handleConfirm={handleSubmit
                 }></DoubleButtonConfirmation>
-        </AdicionarAulaContainer >
+        </AdicionarAulaContainer>
     )
 }
 
@@ -277,8 +278,9 @@ function RenderAula({ aula, handleViewAula, onDeleteAula, student }) {
 
 export function ClassView({ navigation, route }) {
     const { t } = useTranslation();
+    const { user } = useUser();
     const { Descricao, ProfessorId, Nome, id, data} = route.params.data;
-    const student = route?.params?.student;
+    const student = user.tipoUsuario === 2;
     const [dataAlunos, setDataAlunos] = useState([]);
     const [dateAula, setDateAula] = useState([]);
     const [aulaid, setAulaID] = useState()

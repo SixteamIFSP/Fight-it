@@ -53,11 +53,11 @@ export function StudantView({ navigation, route:{params} }) {
     }
     
     function handleEvaluation() {
-        navigation.navigate('EvaluationStudent', { params, title: t("navigationHeader.Evaluation", { name: nome }) })
+        navigation.navigate('EvaluationStudent', { ...params, title: t("navigationHeader.Evaluation", { name: nome })  })
     }
 
     function handleViewTriagem() {
-        navigation.navigate('TriagemView', { ...route?.params, title: 'Triagem do '+route?.params.nome })
+        navigation.navigate('TriagemView', { ...params, title: `Triagem do ${nome}` })
     }
 
     async function handleLoadingParams() {
@@ -69,7 +69,9 @@ export function StudantView({ navigation, route:{params} }) {
             turma: id,
         }
 
-        // await getParamsAluno(data, setParamsAluno); - request comentado por estar quebrando o backend
+        console.log(data);
+
+        await getParamsAluno(data, setParamsAluno);
         setLoading(false);
     }
 
@@ -86,7 +88,7 @@ export function StudantView({ navigation, route:{params} }) {
 
     return (
         <Container>
-        {user == 1 ? (
+        {user.tipoUsuario === 1 ? (
 
             <ContainerButtons>
                 <ContentButtons onPress={() => handleEvaluation()}>
@@ -118,8 +120,8 @@ export function StudantView({ navigation, route:{params} }) {
                 >
                     {t("studentView.Header")}
                 </Divider>
-
-                <FlatList
+                {paramsAluno.length > 0   ? (
+                    <FlatList
                     horizontal={true}
                     data={paramsAluno}
                     renderItem={
@@ -140,6 +142,12 @@ export function StudantView({ navigation, route:{params} }) {
                         );
                     }}
                 />
+                ):
+                (
+                    <Text>Não há desempenhos</Text>
+                )
+                }
+               
                 <Loading loading={loading} size={30}></Loading>
                 {loadingGraphyc &&
                     <LineChart
