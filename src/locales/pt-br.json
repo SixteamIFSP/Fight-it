@@ -7,8 +7,8 @@
             "student":"Aluno"
         },
         "validation": {
-            "confirm": "Confirmar",
-            "cancel": "Cancelar"
+            "confirm": "CONFIRMAR",
+            "cancel": "CANCELAR"
         }, 
         "form":{
             "mail": "E-mail",
@@ -20,7 +20,7 @@
         },
         "toast":{
             "error":{
-                "blank":"Erro: Preencha todos os campos!",
+                "blank":"Preencha os Campos Obrigatórios!",
                 "invalid": {
                     "email":"Digite um e-mail valido"
                 }

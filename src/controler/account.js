@@ -101,7 +101,7 @@ export async function DeleteAccount(data, type, logout){ // data => {id:number, 
             response = await api.delete('/user/excluir/aluno', {data:{...data}});
        }
         if (response.data.status){
-            toastMessage(true, 'Usuário excluido com sucesso!')
+            toastMessage(true, 'Conta desativada com sucesso!')
             desconect();
         } else{
             toastMessage(false, 'Erro ao atualizar')   

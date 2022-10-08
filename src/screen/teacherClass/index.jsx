@@ -69,7 +69,7 @@ function LoadingClass({ user, setCreateNew, navigation }) {
                             <Loading loading={loading} size={30}></Loading>
                         }
                     />
-                    :<Text >Este professor nao possui turmas</Text>
+                    :<Text >Este professor não possui turmas</Text>
                 }
             </ContainerList>
         </>
@@ -89,11 +89,11 @@ function CreateClass({ user, setCreateNew }) {
                 professorId: user.userID,
             };
             createClass(data);
+            cancel();
         } else {
             toastMessage(false, t("toast.error.blank"));
         };
-
-        cancel();
+        
     };
     function cancel() {
         setCreateNew(false);

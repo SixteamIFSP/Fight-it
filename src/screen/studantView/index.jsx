@@ -40,7 +40,7 @@ export function StudantView({ navigation, route:{params} }) {
         console.log("Chamou o Effect CLASS!!", isFocused);
         function effect (){
             handleLoadingParams()
-            setCallback("Deseja apagar aluno?", ()=>callBackDeleteStudentClass());
+            setCallback("Deseja remover aluno?", ()=>callBackDeleteStudentClass());
         };
         isFocused && effect();
     }, [isFocused])
