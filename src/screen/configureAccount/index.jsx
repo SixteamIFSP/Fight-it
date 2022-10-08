@@ -251,9 +251,8 @@ const ConfirmDelete = ({ deletable, setDeletable }) => {
 
         } catch (error) {
 
-            toastMessage(false, "Erro de conexão")
-        }
-
+            toastMessage(false, "Erro de conexão");
+        };
 
         setDeletable(false)
     };
