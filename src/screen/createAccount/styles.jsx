@@ -40,5 +40,16 @@ export const styles = StyleSheet.create({
         borderTopWidth: 0,
         borderLeftWidth: 0,
         borderRightWidth: 0
+    },
+    passwordsDontMatch: {
+        color: 'red',
+        alignSelf: 'center'
+    },
+    phoneInputContainer: {
+        marginBottom: 24,
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        alignItems: 'center',
     }
 });
