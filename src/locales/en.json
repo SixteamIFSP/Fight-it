@@ -7,8 +7,8 @@
             "student":"Student"
         },
         "validation": {
-            "confirm": "Confirm",
-            "cancel": "Cancel"
+            "confirm": "CONFIRM",
+            "cancel": "CANCEL"
         }, 
         "form":{
             "mail": "E-mail",
@@ -21,7 +21,7 @@
         },
         "toast":{
             "error":{
-                "blank":"Error: Fill in all fields!",
+                "blank":"Fill in all the required fields!",
                 "invalid": {
                     "email":"Enter a valid email"
                 }
@@ -112,12 +112,12 @@
             }
         },
         "studentView":{
-            "Header":"Evaluation",
-            "ButtonAvaliation":"Evaluate Student",
+            "Header":"RATING",
+            "ButtonAvaliation":"Rate Student",
             "ButtonViewTriagem":"View Triagem"
         },
         "evaluationStudent":{
-            "Header":"CREATE EVALUETION",
+            "Header":"CREATE RATING",
             "Description":"Performance Dates",
             "Fields":{
                 "Name":"Name: {{name}}",

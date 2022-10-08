@@ -265,11 +265,11 @@ function RenderAula({ aula, handleViewAula, onDeleteAula, student }) {
             <Text>{aula.nome}</Text>
             {!student && <CancelarAula
                 onPress={() => onDeleteAula(aula.id)}>
-                <TextWhite>Cancelar aula</TextWhite>
+                <TextWhite>Cancelar Aula</TextWhite>
             </CancelarAula>}
             {student && <CancelarAula
                 onPress={() => handleViewAula(aula.id)}>
-                <TextWhite>Visualizar aula</TextWhite>
+                <TextWhite>Visualizar Aula</TextWhite>
             </CancelarAula>}
         </RenderAulaContainer>
     )
@@ -289,7 +289,7 @@ export function ClassView({ navigation, route }) {
     const isFocused = useIsFocused();
 
     function callBackDeleteTurma() {
-        // deleteTurma(id);
+        //deleteTurma(id);
         navigation.goBack();
     }
 
@@ -342,6 +342,7 @@ export function ClassView({ navigation, route }) {
             <ContainerListColumn>
                 <ContainerList>
                     <ClassText>{t('classView.Student.Header')}</ClassText>
+                    <ClassText>{Descricao}</ClassText>
                     <ContainerFlat>
                         {
                             dataAlunos.length >= 1 ?
@@ -360,7 +361,7 @@ export function ClassView({ navigation, route }) {
                                     keyExtractor={item => `${item.Nome}` + '91'}>
                                 </ContentListagem>
                                 :
-                                <Text>{"nao ha alunos nessa turma"}</Text>
+                                <Text>{"Não há alunos nessa turma"}</Text>
                         }
                     </ContainerFlat>
 
@@ -388,7 +389,7 @@ export function ClassView({ navigation, route }) {
                                     keyExtractor={item => item.nome + '91'}>
                                 </ContentListagem>
                                 :
-                                <Text>{"nao ha aulas nessa turma"}</Text>
+                                <Text>{"Não há alunos nessa turma"}</Text>
                         }
                     </ContainerFlat>
                 </ContainerList>
