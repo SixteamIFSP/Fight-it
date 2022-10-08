@@ -11,7 +11,7 @@ import { HomeScreenStudent } from '../screen/homeScreenStudent';
 import { useTranslation } from 'react-i18next';
 import { FontAwesome } from '@expo/vector-icons';
 import { ConfigureAccount } from '../screen/configureAccount';
-import { ClassStack } from './classStack';
+import { ClassStackAluno, ClassStackTeacher } from './classStack';
 import { CreateTriagem } from '../screen/createTriagem';
 import { ClassView } from '../screen/classView';
 import { CalendarTeacher } from '../screen/calendarTeacher';
@@ -76,7 +76,7 @@ function StackLoged() {
           }}
           navigationKey='Class'
           name="Class"
-          component={ClassStack} />
+          component={ClassStackTeacher} />
       {/* <TabNavegation.Screen navigationKey='Dashboard' name="Dashboard" component={HomeScreenTeacher} /> */}
       <TabNavegation.Screen options={{
           title: t("appName"), 
@@ -136,7 +136,7 @@ function StackLoged() {
           }}
           navigationKey='Class'
           name="Class"
-          component={ClassView}
+          component={ClassStackAluno}
           initialParams={{student: true}}  />  
           {/* <TabNavegation.Screen navigationKey='Dashboard' name="Dashboard" component={HomeScreenStudent} />   */}
           <TabNavegation.Screen

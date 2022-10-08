@@ -66,14 +66,15 @@ function CreatePerformace({ dataParams, setCreatePerformace }) {
     function handleSubmit() {
         if (nomeDesempenho !== '' & dataCriacao !== null) {
             const date = new Date();
+
             const data = {
                 nome: nomeDesempenho,
-                date: `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`,
+                date: date,
                 alunoId: dataParams?.studantId,
                 turma: dataParams?.turma,
-                professor: dataParams?.professorId,
             };
-            createEvaluetion(data)
+
+            createEvaluetion(data);
             setCreatePerformace(false);
         } else {
             toastMessage(false, 'Preencha corretamente os campos')

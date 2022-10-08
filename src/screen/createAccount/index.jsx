@@ -32,8 +32,6 @@ export function CreateAccount({ navigation }) {
     const [invalidEmailMessage, setInvalidEmailMessage] = useState('');
     const [invalidNameMessage, setInvalidNameMessage] = useState('');
 
-    const errors = useRef([]);
-
     const handleEmail = (value) => {
         setUserEmail(value);
         setInvalidEmailMessage(validationEmail(value));
@@ -43,54 +41,18 @@ export function CreateAccount({ navigation }) {
         setUserName(value);
         setInvalidNameMessage(validationName(value));
     };
-    const emptyInputsVerify = {
-        emptyUserName: () => {
-            errors.current.push('Nome não preenchido'); return false
-        },
-        emptyUserEmail: () => {
-            errors.current.push('Email não preenchido'); return false
-        },
-        emptyUserPhone: () => {
-            errors.current.push('Telefone não preenchido'); return false
-        },
-        emptyPassword: () => {
-            errors.current.push('Senha não preenchida'); return false
-        },
-        emptyPasswordConfirm: () => {
-            errors.current.push('Confirmação não preenchida'); return false
-        },
-        differentPasswords: () => {
-            errors.current.push('Senha diferente da confirmação'); return false
-        }
-    };
-    const {
-        emptyUserName,
-        emptyUserEmail,
-        emptyUserPhone,
-        emptyPassword,
-        emptyPasswordConfirm,
-        differentPasswords
-    } = emptyInputsVerify;
-
+ 
     const inputValidations = () => {
-        errors.current = [];
         if (
-            userName === '' |
-            userPhone === '' |
-            userEmail === '' |
-            password === '' |
-            passwordConfirm === '' |
+            userName === ''         |
+            userPhone === ''        |
+            userEmail === ''        |
+            password === ''         |
+            passwordConfirm === ''  |
             password !== passwordConfirm
-        ) {
-            if (userName === '') emptyUserName();
-            if (userEmail === '') emptyUserEmail();
-            if (userPhone === '') emptyUserPhone();
-            if (password === '') emptyPassword();
-            if (passwordConfirm === '') emptyPasswordConfirm();
-            if (password !== passwordConfirm) differentPasswords();
-        } else {
-            return true;
-        }
+        ) return false
+
+        return true
     };
 
     async function handleConfirmButton() {
@@ -179,6 +141,7 @@ export function CreateAccount({ navigation }) {
                         value={password}
                         placeholder={t('login.password')}
                         secureTextEntry={true}
+                        errorMessage={invalidPassword ? invalidPassword : null}
                     /></View>
                 <View style={styles.inputes}>
                     <Input

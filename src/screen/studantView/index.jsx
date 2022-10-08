@@ -17,6 +17,7 @@ import { useTranslation } from "react-i18next";
 import { useIsFocused } from "@react-navigation/native";
 import { useModal } from "../../hooks/modalConfirmation";
 import { deleteAluno } from "../../controler/class";
+import { useUser } from "../../hooks/user";
 
 function CardParamStudant({ item, handleGraphyc }) {
 
@@ -28,6 +29,7 @@ function CardParamStudant({ item, handleGraphyc }) {
 };
 export function StudantView({ navigation, route:{params} }) {
     const { t } = useTranslation();
+    const { user } = useUser();
     const { studantId, id, nome } = params;
     const { setCallback } = useModal();
     const [loading, setLoading] = useState(false);
@@ -51,11 +53,11 @@ export function StudantView({ navigation, route:{params} }) {
     }
     
     function handleEvaluation() {
-        navigation.navigate('EvaluationStudent', { params, title: t("navigationHeader.Evaluation", { name: nome }) })
+        navigation.navigate('EvaluationStudent', { ...params, title: t("navigationHeader.Evaluation", { name: nome })  })
     }
 
     function handleViewTriagem() {
-        navigation.navigate('TriagemView', { ...route?.params, title: 'Triagem do '+route?.params.nome })
+        navigation.navigate('TriagemView', { ...params, title: `Triagem do ${nome}` })
     }
 
     async function handleLoadingParams() {
@@ -67,7 +69,9 @@ export function StudantView({ navigation, route:{params} }) {
             turma: id,
         }
 
-        // await getParamsAluno(data, setParamsAluno); - request comentado por estar quebrando o backend
+        console.log(data);
+
+        await getParamsAluno(data, setParamsAluno);
         setLoading(false);
     }
 
@@ -80,11 +84,12 @@ export function StudantView({ navigation, route:{params} }) {
         }
         await getDesempenhoPorParametro(data, setDataParams) 
         setLoadingGraphyc(true)
-
     }
 
     return (
         <Container>
+        {user.tipoUsuario === 1 ? (
+
             <ContainerButtons>
                 <ContentButtons onPress={() => handleEvaluation()}>
                     <TextButtons>{t("studentView.ButtonAvaliation")}</TextButtons>
@@ -93,6 +98,19 @@ export function StudantView({ navigation, route:{params} }) {
                     <TextButtons>{t("studentView.ButtonViewTriagem")}</TextButtons>
                 </ContentButtons>
             </ContainerButtons>
+        ):
+        <>
+                <Divider
+                    borderColor="#000"
+                    color="#000"
+                    orientation="center"
+                >
+                    {"Datas de aulas"}
+                </Divider>
+
+                <Text>implementando!</Text>
+        </>
+        }
 
             <ContainerDesempenho>
                 <Divider
@@ -102,8 +120,8 @@ export function StudantView({ navigation, route:{params} }) {
                 >
                     {t("studentView.Header")}
                 </Divider>
-
-                <FlatList
+                {paramsAluno.length > 0   ? (
+                    <FlatList
                     horizontal={true}
                     data={paramsAluno}
                     renderItem={
@@ -124,6 +142,12 @@ export function StudantView({ navigation, route:{params} }) {
                         );
                     }}
                 />
+                ):
+                (
+                    <Text>Não há desempenhos</Text>
+                )
+                }
+               
                 <Loading loading={loading} size={30}></Loading>
                 {loadingGraphyc &&
                     <LineChart

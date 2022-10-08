@@ -22,9 +22,22 @@ import { useIsFocused } from "@react-navigation/native";
 
 function CardTurma({ data, handleNewScreen }) {
     const { t } = useTranslation()
+    const { user } = useUser();
+
+    const condicionalNavigate = user.tipoUsuario == 1 ? {
+        tela: "ClassView",
+        title: t("navigationHeader.ClassDescription", {name:data?.TurmaNome}),
+        data: {...data, nomeTurma:data?.TurmaNome}
+    } :
+    {
+        tela: "StudantView",
+        title: "Avaliação",
+        data: {...data, nomeTurma:data?.TurmaNome}
+    }
+
     // TODO: COLOCAR AS INFORMAÇÕES DENTRO DE CADA CARD E VALIDAR SE EXISTE OU NÃO INFORMAÇÕES.
     return (
-        <CardView onPress={()=>handleNewScreen('ClassView', {title: t("navigationHeader.ClassDescription", {name:data?.TurmaNome}), data:{...data, nomeTurma:data?.TurmaNome}})}>
+        <CardView onPress={()=>handleNewScreen(condicionalNavigate.tela, {title: condicionalNavigate.title, data:condicionalNavigate.data})}>
             <CardTitle>{data?.TurmaNome}</CardTitle>
         </CardView>
     )
@@ -34,6 +47,8 @@ function LoadingClass({ user, setCreateNew, navigation }) {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const isFocused = useIsFocused();
+
+    console.log("teste usuario", user);
 
     useEffect(()=>{
         function effect (){
@@ -55,7 +70,10 @@ function LoadingClass({ user, setCreateNew, navigation }) {
 
     return (
         <>
-            <AddButton handle={() => setCreateNew((value) => !value)} />
+            {
+                (user.tipoUsuario === 1) &&
+                <AddButton handle={() => setCreateNew((value) => !value)} />
+            }
             <ContainerList>
                 {data?.length >= 1 ? 
                     <FlatList
