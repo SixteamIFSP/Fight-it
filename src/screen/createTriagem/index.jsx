@@ -8,27 +8,24 @@ import { createTriagem } from "../../controler/triagem";
 import { styles } from './style'
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { toastMessage } from "../../utils/toastMessage";
-import { Picker } from '@react-native-picker/picker';
 import { MaterialIcons } from '@expo/vector-icons';
 import { RadioButton } from "../../components/radioButton";
 
 export function CreateTriagem({ navigation, route }) {
   const [loading, setLoading] = useState(false);
-  const [objetivo, setObjetivo] = useState('')
-  const [altura, setAltura] = useState('')
-  const [date, setDate] = useState(new Date())
-  const [selectectDateIsOpen, setSelectedDateIsOpen] = useState(false)
-  const [peso, setPeso] = useState('')
-  const [probOrtopedico, setProbOrtopedico] = useState(false)
-  const [probOrtopedicoResp, setProbOrtopedicoResp] = useState('')
-  const [doencaCronica, setDoencaCronica] = useState(false)
-  const [doencaCronicaResp, setDoencaCronicaResp] = useState('')
-  const [lesoes, setLesoes] = useState(false)
-  const [lesoesResp, setLesoesResp] = useState('')
+  const [altura, setAltura] = useState('');
+  const [date, setDate] = useState(new Date());
+  const [selectectDateIsOpen, setSelectedDateIsOpen] = useState(false);
+  const [peso, setPeso] = useState('');
+  const [probOrtopedico, setProbOrtopedico] = useState(false);
+  const [probOrtopedicoResp, setProbOrtopedicoResp] = useState('');
+  const [doencaCronica, setDoencaCronica] = useState(false);
+  const [doencaCronicaResp, setDoencaCronicaResp] = useState('');
+  const [lesoes, setLesoes] = useState(false);
+  const [lesoesResp, setLesoesResp] = useState('');
   const [didExercise, setDidExercise] = useState(false);
-  const [didExerciseResp, setDidExerciseResp] = useState('')
-  const [comentario, setComentario] = useState('')
-
+  const [didExerciseResp, setDidExerciseResp] = useState('');
+  const [comentario, setComentario] = useState('');
 
   function handleBack() {
     navigation.navigate('CreateAccount')
@@ -36,7 +33,6 @@ export function CreateTriagem({ navigation, route }) {
 
   async function handleConfirm() {
     const data = {
-      objetivo,
       dataNascimento: date.toLocaleDateString(),
       altura,
       peso,
@@ -50,14 +46,13 @@ export function CreateTriagem({ navigation, route }) {
       jaFezExerciciosResposta: didExerciseResp,
       comentario
     };
+    console.log(data);
     const formIncomplet = Object.keys(data).find(e => {
       if (e === 'dataNascimento') return
-      if (e === 'objetivo' && !data[e]) return true
       if (e === 'altura' && !data[e]) return true
       if (e === 'peso' && !data[e]) return true
       return data[e] === 'selecione'
     });
-    console.log(formIncomplet);
     if (formIncomplet) {
       toastMessage(false, 'Por favor, preencha todos os campos')
       return
@@ -65,9 +60,10 @@ export function CreateTriagem({ navigation, route }) {
 
     setLoading(true);
     //TODO: CREATE ACCOUNT DEVE RETORNAR ID PARA QUE SEJA POSSÍVEL CRIAR A TRIAGEM DO ALUNO  SENDO CADASTRADO
-    const id = await createAccount(route.params.data, false);
-    const idChumbadoEnquantoServicoCreateAccountNaoRetornaID = 5
-    await createTriagem(data, idChumbadoEnquantoServicoCreateAccountNaoRetornaID)
+    const response = await createAccount(route.params.data, false);
+    const idAluno = response.id;
+    console.log(idAluno);
+    await createTriagem(data, idAluno)
     setLoading(false);
     navigation.navigate('Login');
   };
@@ -89,9 +85,8 @@ export function CreateTriagem({ navigation, route }) {
           <Text style={styles.personalDataTitle}>Dados Pessoais:</Text>
           <View style={styles.inputes}>
             <Input
-              onChangeText={(e) => {
-                if (isNaN(Number(e))) return
-                setAltura(e)
+              onChangeText={(value) => {
+                setAltura(value)
               }}
               value={altura}
               maxLength={3}
