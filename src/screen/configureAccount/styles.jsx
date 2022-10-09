@@ -39,7 +39,7 @@ export const TextInfo = styled.Text`
     text-align:left;
     font-size:18px;
     flex-wrap: wrap;
-  }
+  
 `;
 export const RowConfirmation = styled.View`
     width:100%;
@@ -155,4 +155,15 @@ export const DeleteAccountButton = styled.Text`
     width:40%;
     height: 100%;
 `;
+
+export const SaveButton = styled.TouchableOpacity`
+ background-color:#3d3d3d;
+ padding: 10px 20px;
+ border-radius: 3px;
+`
+
+export const SaveButtonText = styled.Text`
+   color:rgb(221, 221, 221);
+
+`
 

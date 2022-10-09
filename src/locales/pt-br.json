@@ -84,7 +84,7 @@
         "exclude":{
             "Header":"Excluir Conta",
             "LabelUser":"Validação de usuário",
-            "placeholder":"Para excluir conta digite sua senha!"
+            "placeholder":"Digite sua senha!"
         },
         "navigationHeader":{
             "Class":"Turma",

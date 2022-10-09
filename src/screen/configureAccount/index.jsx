@@ -33,7 +33,9 @@ import {
     AreaImage,
     HorizontalButtonsContainer,
     ConfirmButton,
-    DeleteAccountButton
+    DeleteAccountButton,
+    SaveButton,
+    SaveButtonText
 } from "./styles";
 import { Image } from "react-native";
 import { upload } from "../../controler/image";
@@ -143,9 +145,11 @@ const DataUser = () => {
                         <CancelButton>{t('validation.cancel')}</CancelButton>
                     </ContainerCancelButton>
                 }
-                <ContainerSVG onPress={() => save()}>
-                    <FontAwesome name={editable ? 'save' : 'pencil'} size={30} color="black" />
-                </ContainerSVG>
+               
+               {!editable &&  (<ContainerSVG onPress={() => save()}>
+                    <FontAwesome name={'pencil'} size={30} color="black" />
+                </ContainerSVG>)}
+               {editable &&  <SaveButton onPress={() => save()} ><SaveButtonText>Salvar</SaveButtonText></SaveButton>}
             </RowConfirmation>
         </ConteinerInfo>
     )
@@ -173,7 +177,7 @@ export const ChangePassword = ({ editable, setEditable }) => {
 
             } else {
 
-                toastMessage(false, "Preencha os campos corretamente"); // sem t
+                toastMessage(false, "A confirmação das senhas não conferem"); // sem t
                 //toastMessage(false,  t("msg.completeFields")); // com t 
             }
             setEditable((value) => !value)
@@ -217,9 +221,11 @@ export const ChangePassword = ({ editable, setEditable }) => {
                             <CancelButton>{t('validation.cancel')}</CancelButton>
                         </ContainerCancelButton>
                     }
-                    <ContainerSVG onPress={() => save()}>
-                        <FontAwesome name={editable ? 'save' : 'pencil'} size={30} color="black" />
-                    </ContainerSVG>
+
+                    {!editable &&  (<ContainerSVG onPress={() => save()}>
+                    <FontAwesome name={'pencil'} size={30} color="black" />
+                    </ContainerSVG>)}
+                    {editable &&  <SaveButton onPress={() => save()} ><SaveButtonText>Salvar</SaveButtonText></SaveButton>}
 
                 </RowConfirmation>
 
