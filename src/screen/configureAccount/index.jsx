@@ -282,7 +282,7 @@ const ConfirmDelete = ({ deletable, setDeletable }) => {
                                 onPress={() => setDeletable(false)}>
                                 {t('validation.cancel')}
                             </DeleteAccountButton>
-                            <ConfirmButton onPress={() => handleDelete()}>Excluir</ConfirmButton>
+                            <ConfirmButton onPress={() => handleDelete()}>EXCLUIR</ConfirmButton>
                         </HorizontalButtonsContainer>
 
                     </RowConfirmation>

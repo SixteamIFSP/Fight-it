@@ -134,7 +134,6 @@ export const HorizontalButtonsContainer = styled.TouchableOpacity`
 export const ConfirmButton = styled.Text`
     text-align:center;
     padding:5px;
-    font-size:14px;
     font-weight:bold;
     border-color:black;
     border-width:0.5px;
