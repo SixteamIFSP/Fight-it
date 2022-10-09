@@ -12,6 +12,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { RadioButton } from "../../components/radioButton";
 
 export function CreateTriagem({ navigation, route }) {
+
   const [loading, setLoading] = useState(false);
   const [altura, setAltura] = useState('');
   const [date, setDate] = useState(new Date());
@@ -27,45 +28,58 @@ export function CreateTriagem({ navigation, route }) {
   const [didExerciseResp, setDidExerciseResp] = useState('');
   const [comentario, setComentario] = useState('');
 
+  const [errorMessageAltura, setErrorMessageAltura] = useState('');
+  const [errorMessagePeso, setErrorMessagePeso] = useState('');
+
+  const handleAltura = (value) => {
+    setAltura(value);
+    setErrorMessageAltura('');
+  };
   function handleBack() {
     navigation.navigate('CreateAccount')
   };
 
-  async function handleConfirm() {
-    const data = {
-      dataNascimento: date.toLocaleDateString(),
-      altura,
-      peso,
-      problemaOrtopedico: probOrtopedico,
-      problemaOrtopedicoResposta: probOrtopedicoResp,
-      doencasCronicas: doencaCronica,
-      doencasCronicasResposta: doencaCronicaResp,
-      lesoes,
-      lesoesResposta: lesoesResp,
-      jaFezExercicios: didExercise,
-      jaFezExerciciosResposta: didExerciseResp,
-      comentario
+  const inputValidations = () => {
+    if (altura === '' | peso === '') {
+      if (altura === '') {
+        setErrorMessageAltura('Campo Obrigatório');
+      };
+      if (peso === '') {
+        setErrorMessagePeso('Campo Obrigatório');
+      };
+    } else {
+      return true;
     };
-    console.log(data);
-    const formIncomplet = Object.keys(data).find(e => {
-      if (e === 'dataNascimento') return
-      if (e === 'altura' && !data[e]) return true
-      if (e === 'peso' && !data[e]) return true
-      return data[e] === 'selecione'
-    });
-    if (formIncomplet) {
-      toastMessage(false, 'Por favor, preencha todos os campos')
-      return
-    };
+  };
 
-    setLoading(true);
-    //TODO: CREATE ACCOUNT DEVE RETORNAR ID PARA QUE SEJA POSSÍVEL CRIAR A TRIAGEM DO ALUNO  SENDO CADASTRADO
-    const response = await createAccount(route.params.data, false);
-    const idAluno = response.id;
-    console.log(idAluno);
-    await createTriagem(data, idAluno)
-    setLoading(false);
-    navigation.navigate('Login');
+  async function handleConfirm() {
+    if (inputValidations()) {
+      const data = {
+        dataNascimento: date.toLocaleDateString(),
+        altura,
+        peso,
+        problemaOrtopedico: probOrtopedico,
+        problemaOrtopedicoResposta: probOrtopedicoResp,
+        doencasCronicas: doencaCronica,
+        doencasCronicasResposta: doencaCronicaResp,
+        lesoes,
+        lesoesResposta: lesoesResp,
+        jaFezExercicios: didExercise,
+        jaFezExerciciosResposta: didExerciseResp,
+        comentario
+      };
+
+      setLoading(true);
+      const response = await createAccount(route.params.data, false);
+      const idAluno = response.id;
+      await createTriagem(data, idAluno)
+      setLoading(false);
+      navigation.navigate('Login');
+    } else {
+      const errorText = "Preencha os campos corretamente!"
+      toastMessage(false, errorText);
+    }
+
   };
 
   return (
@@ -85,26 +99,27 @@ export function CreateTriagem({ navigation, route }) {
           <Text style={styles.personalDataTitle}>Dados Pessoais:</Text>
           <View style={styles.inputes}>
             <Input
-              onChangeText={(value) => {
-                setAltura(value)
-              }}
+              style={{ borderColor: `${errorMessageAltura ? 'red' : 'black'}` }}
+              onChangeText={(value) => { handleAltura(value) }}
               value={altura}
               maxLength={3}
               placeholder={'Altura em centímetros (cm)'}
-              keyboardType='numeric'
+              keyboardType={'numeric'}
+              errorMessage={errorMessageAltura || ''}
             />
           </View>
           <View style={styles.inputes}>
             <Input
-              style={styles.inputes}
+              style={{ borderColor: `${errorMessagePeso ? 'red' : 'black'}` }}
               onChangeText={(e) => {
-                if (isNaN(Number(e))) return
-                setPeso(e)
+                setPeso(e);
+                setErrorMessagePeso('');
               }}
               maxLength={3}
               value={peso}
               placeholder={'Peso(kg)'}
-              keyboardType='numeric'
+              keyboardType={'numeric'}
+              errorMessage={errorMessagePeso || ''}
             />
           </View>
           <View style={styles.birthDate}>
