@@ -4,7 +4,7 @@ import { Text, TouchableOpacity, ScrollView, View } from "react-native";
 import { AddButton } from "../../components/addButton";
 import { DoubleButtonConfirmation } from "../../components/doubleButtonConfirmation";
 import { Input } from "../../components/input";
-import { adicionarAluno, adicionarAula, getAllDataClass, getAlunosTurma, removeAula } from "../../controler/class";
+import { adicionarAluno, adicionarAula, getAllDataClass , removeAula } from "../../controler/class";
 import { Loading } from "../../components/loading";
 import { toastMessage } from "../../utils/toastMessage";
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -59,19 +59,19 @@ function AdicionarAula({ turmaId, setback }) {
             toastMessage(false, 'Digite um tópico de aula');
             return
         }
+
         const data = {
-            topicoAula,
+            topico: topicoAula,
             descricao,
-            date: date.toLocaleDateString(),
-            time: time.toLocaleTimeString(),
-            equipamentos
+            data: `${date.toLocaleDateString()} ${time.toLocaleTimeString()}`,
+            turma: turmaId
         }
+
+        console.log(data);
+
         adicionarAula(data)
         setback();
     }
-
-    useEffect(() => {
-    }, [])
 
     return (
         <AdicionarAulaContainer>
@@ -177,8 +177,8 @@ function AdicionarAula({ turmaId, setback }) {
 
             <DoubleButtonConfirmation style={{ alignSelf: 'flex-end' }}
                 handleBack={handleBack}
-                handleConfirm={handleSubmit
-                }></DoubleButtonConfirmation>
+                handleConfirm={handleSubmit}
+            />
         </AdicionarAulaContainer>
     )
 }
@@ -259,19 +259,15 @@ function AdicionarAluno({ turmaId, setback }) {
 
 
 
-function RenderAula({ aula, handleViewAula, onDeleteAula, student }) {
+function RenderAula({ aula, onDeleteAula }) {
 
     return (
         <RenderAulaContainer>
             <Text>{aula.nome}</Text>
-            {!student && <CancelarAula
-                onPress={() => onDeleteAula(aula.id)}>
+            <CancelarAula
+                onPress={() => onDeleteAula(aula)}>
                 <TextWhite>Cancelar Aula</TextWhite>
-            </CancelarAula>}
-            {student && <CancelarAula
-                onPress={() => handleViewAula(aula.id)}>
-                <TextWhite>Visualizar Aula</TextWhite>
-            </CancelarAula>}
+            </CancelarAula>
         </RenderAulaContainer>
     )
 }
@@ -303,47 +299,39 @@ export function ClassView({ navigation, route }) {
     }
 
     function callback() {
-        getData()
+        getData();
         handleOpenPage(1);
     }
 
+    function onDeleteAula(aula) {
+        const date = new Date();
 
-    function onDeleteAula(aulaID) {
-        if (student) return
-        removeAula(aulaID).then(() => {
-            const index = dateAula.findIndex(e => e.id = aulaID)
-            const data = dateAula
-            data.splice(index, 1)
-            setDateAula([...data])
-        })
+        if (date > aula.data){
+            toastMessage(false, "não é possivel cancelar esta aula")
+            return
+        }
+        const novaLista = dateAula.filter(({id}) => id !==  aula.id);
+        setDateAula(novaLista);
+        removeAula(aula.id)
     }
 
     useEffect(() => {
-        if (page === 1) {
-            if (route?.params?.student) {
-                //TODO: DEVE EXISTIR UM MÉTODO PARA BUSCAR TURMA PELO ID DO ALUNO
-                getAlunosTurma(setDataAlunos, 10);
-            } else {
-                getAlunosTurma(setDataAlunos, data?.id);
-            }
-        }
         if (!isFocused) return;
         function effect() {
             setCallback("Deseja apagar a turma?", () => callBackDeleteTurma());
-            //getAlunosTurma(setDataAlunos, id);
             getData();
         };
 
         effect();
-        //
-    }, []);
+    }, [isFocused]);
 
     const pageView = {
         1:
             <ContainerListColumn>
+            <ClassText>{Descricao}</ClassText>
                 <ContainerList>
                     <ClassText>{t('classView.Student.Header')}</ClassText>
-                    <ClassText>{Descricao}</ClassText>
+                    
                     <ContainerFlat>
                         {
                             dataAlunos.length >= 1 ?
@@ -387,7 +375,7 @@ export function ClassView({ navigation, route }) {
                                             handleOpenPage(4)
                                         }} aula={item} onDeleteAula={onDeleteAula} student={student} />
                                     }
-                                    keyExtractor={item => item.nome + '91'}>
+                                    keyExtractor={item => `${item.id}-${item.nome}-dataAula`}>
                                 </ContentListagem>
                                 :
                                 <Text>{"Não há alunos nessa turma"}</Text>

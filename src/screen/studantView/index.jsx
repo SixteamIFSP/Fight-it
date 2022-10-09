@@ -39,7 +39,6 @@ export function StudantView({ navigation, route:{params} }) {
     const isFocused = useIsFocused();
 
     useEffect(()=>{
-        console.log("Chamou o Effect CLASS!!", isFocused);
         function effect (){
             handleLoadingParams()
             setCallback("Deseja remover aluno?", ()=>callBackDeleteStudentClass());
@@ -69,7 +68,7 @@ export function StudantView({ navigation, route:{params} }) {
             turma: id,
         }
 
-        console.log(data);
+     
 
         await getParamsAluno(data, setParamsAluno);
         setLoading(false);

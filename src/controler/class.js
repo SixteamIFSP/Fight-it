@@ -11,7 +11,6 @@ export async function getClass(setClasses, idUsuario, type){
        } else {
             response = await api.get(`/turma/busca/${idUsuario}`);
        }
-       console.log(response?.data, idUsuario, type);
        setClasses(response?.data.resultado || []);
        
     } catch (error) {
@@ -41,9 +40,7 @@ export async function getAllDataClass(setAlunos, setClass, data){
             api.get(`/turma/alunos/${data}`), 
             api.get(`/aula/busca_turma/${data}`),
     ]
-    ).then(axios.spread((responseAlunos, responseAula) => {
-        console.log('aaaaa', data,responseAlunos.data, responseAula.data);
-     
+    ).then(axios.spread((responseAlunos, responseAula) => {     
         setAlunos(responseAlunos?.data.result || [])
         setClass(responseAula?.data.result || [])
         
@@ -56,8 +53,9 @@ export async function getAllDataClass(setAlunos, setClass, data){
 export async function getAlunosTurma(setAlunos, data){ // data => number
     try {
         const response = await api.get(`/turma/alunos/${data}`);
+
         if (response?.data.status){
-            setAlunos(response?.data.result);
+            setAlunos(response?.data.result || []);
 
         } else{
             if (response?.data.result == null)
@@ -107,8 +105,6 @@ export async function adicionarAula(data){
 
     try {
         const response = await api.post(`/aula/criarAula`, {...data});
-
-
         if (response?.data.status){
             toastMessage(true, response?.data.message) 
 
@@ -122,38 +118,27 @@ export async function adicionarAula(data){
     }
 }
 
-export async function removeAula(aula){
-
+export async function removeAula(id){
     try {
-        const response = await api.delete(`/aula/deletarAula`, {aula});
-        if (response?.data.status){
-            toastMessage(true, response?.data.mensagem) 
+        const response = await api.delete(`/aula/deletarAula/${id}`);
+        toastMessage(response?.data.status, response?.data.message)
 
-        } else{
-            toastMessage(false, response?.data.mensagem) 
-        }
-        
     } catch (error) {
         toastMessage(false, 'Erro de conexão!') 
     }
 }
 
-export async function deleteAluno({turma, aluno}){
-    console.log(`/turma/excluir/aluno`, {turma, aluno});
-
+export async function deleteAluno(data){
     try {
-        const response = await api.post(`/turma/excluir/aluno`, {turma, aluno});
-        if (response?.data.status){
-            toastMessage(true, response?.data.mensagem)
-        } else{
-            toastMessage(false, response?.data.mensagem) 
-        }
+        const response = await api.post(`/turma/excluir/aluno`, {...data});  
+            toastMessage(response?.data.status, response?.data.mensagem)
+    
         
     } catch (error) {
+        console.log(error)
         toastMessage(false, 'Erro de conexão!') 
     }
 }
-
 
 export async function getAulaByAulaID(aulaID, setAula){
     

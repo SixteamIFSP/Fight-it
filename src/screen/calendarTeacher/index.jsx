@@ -27,10 +27,6 @@ export function CalendarTeacher({ navigation, route }){
 
     useEffect(()=>{
         if (dates.length === 0) return
-        console.log("AAAAAAA", dates);
-        console.log("bbbbbbb", new Date(dates[0].data).toISOString().slice(0, 10));
-
-
         dates.map((date)=>{
             
             setSelectedDates((oldSelectedDates)=> {

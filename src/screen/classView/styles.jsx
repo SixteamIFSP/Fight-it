@@ -13,7 +13,7 @@ export const AddContainerView = styled(Container)`
 
 export const ContainerListColumn = styled.View`
     width:90%;
-    height:50%;
+    height:45%;
     flex-direction:column;
     margin-right: auto;
     margin-left: auto;

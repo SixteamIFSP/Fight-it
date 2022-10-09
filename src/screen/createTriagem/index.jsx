@@ -57,7 +57,6 @@ export function CreateTriagem({ navigation, route }) {
       if (e === 'peso' && !data[e]) return true
       return data[e] === 'selecione'
     });
-    console.log(formIncomplet);
     if (formIncomplet) {
       toastMessage(false, 'Por favor, preencha todos os campos')
       return

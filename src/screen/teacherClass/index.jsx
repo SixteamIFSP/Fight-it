@@ -48,7 +48,6 @@ function LoadingClass({ user, setCreateNew, navigation }) {
     const [loading, setLoading] = useState(false);
     const isFocused = useIsFocused();
 
-    console.log("teste usuario", user);
 
     useEffect(()=>{
         function effect (){

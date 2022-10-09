@@ -3,10 +3,6 @@ import { FlatList, Text, TouchableOpacity, View } from "react-native";
 import { getAulaByAulaID } from "../../controler/class";
 import {AulaContainer, Container, Retornar, SubTitle, Title, Value, Equipamentos} from './style'
 
-
-
-
-
 export function LessonView({aulaid, onBack}) {
     const [aula, setAula] = useState({})
 
