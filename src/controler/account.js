@@ -77,9 +77,9 @@ export async function ChangePassowrd(data, type) {
         }
 
         if (response.data.status) {
-            toastMessage(true, 'Atualizado com sucesso!')
+            toastMessage(true, 'Senha atualizada com sucesso!')
         } else {
-            toastMessage(false, 'Erro ao atualizar')
+            toastMessage(false, 'Insira a senha atual')
         }
 
     } catch (error) {
