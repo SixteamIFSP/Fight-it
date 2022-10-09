@@ -11,7 +11,6 @@ import { Loading } from '../../components/loading';
 import { toastMessage } from '../../utils/toastMessage';
 import inputValidators from '../../utils/inputValidators';
 import MaskInput, { Masks } from 'react-native-mask-input';
-import { ErrorMessage } from '../../components/errorMessage';
 
 export function CreateAccount({ navigation }) {
     //desestruturação dos imports
