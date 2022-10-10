@@ -4,9 +4,9 @@ import { useTranslation } from "react-i18next";
 import { useUser } from "../../hooks/user"
 import { CalendarList,  LocaleConfig} from "react-native-calendars";
 import { ClassText, Container, ContainerFlat, ContainerList, ContentListagem, themeCalendar } from "./styles";
-import { getCalendar } from "../../controler/calendar";
+import { getArrayDates, getCalendar } from "../../controler/calendar";
 import { Text } from "react-native";
-import { dateToBrDefault } from "../../utils/dateConvert";
+import { convertDataUTC, dateSplit, dateToBrDefault } from "../../utils/dateConvert";
 
 export function CalendarTeacher({ navigation, route }){
     const { t } = useTranslation();
@@ -25,21 +25,34 @@ export function CalendarTeacher({ navigation, route }){
         isFocused && effect();
     }, [isFocused])
 
-    useEffect(()=>{
-        if (dates.length === 0) return
-        dates.map((date)=>{
+    // useEffect(()=>{
+    //     if (dates.length === 0) return
+    //     dates.map((date)=>{
             
-            setSelectedDates((oldSelectedDates)=> {
-                return { ...oldSelectedDates, [new Date(date.data).toISOString().slice(0, 10)]:{selected: true,}}
-            })
-        })
+    //         setSelectedDates((oldSelectedDates)=> {
+    //             return { ...oldSelectedDates, [new Date(date.data).toISOString().slice(0, 10)]:{selected: true,}}
+    //         })
+    //     })
         
-    }, [dates])
+    // }, [dates])
+
+    function arrayToObject(array){
+        var object = {};
+
+        array.map((value) => 
+        object[dateSplit(
+            convertDataUTC(value).toISOString()
+            )] = {marked: true})
+
+        console.log({object})
+
+        setSelectedDates((value) => {return {...value, ...object}})
+    }
 
     async function handleLoading(){
         if(isLoading) return
         setLoading(true);
-        await getCalendar(user.userID, user.tipoUsuario===1, setDates);
+        await getArrayDates(user.userID, user.tipoUsuario===1, arrayToObject);
         setLoading(false);
     }
 

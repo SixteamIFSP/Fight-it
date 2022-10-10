@@ -36,7 +36,7 @@ import {
 import Divider from 'react-native-divider';
 import { useModal } from "../../hooks/modalConfirmation";
 import { useIsFocused } from "@react-navigation/native";
-// import { deleteTurma } from '../../controler/class';
+ import { deleteTurma } from '../../controler/class';
 import { LessonView } from "../LessonView";
 import { useUser } from "../../hooks/user";
 
@@ -60,10 +60,14 @@ function AdicionarAula({ turmaId, setback }) {
             return
         }
 
+        let newDate = new Date(date);
+        
+        newDate.setHours(time.getHours());
+        newDate.setMinutes(time.getMinutes());
         const data = {
             topico: topicoAula,
             descricao,
-            data: `${date.toLocaleDateString()} ${time.toLocaleTimeString()}`,
+            data: newDate,
             turma: turmaId
         }
 
@@ -275,7 +279,7 @@ function RenderAula({ aula, onDeleteAula }) {
 export function ClassView({ navigation, route }) {
     const { t } = useTranslation();
     const { user } = useUser();
-    const { Descricao, ProfessorId, Nome, id, data} = route.params.data;
+    const { Descricao, ProfessorId, Nome, id } = route.params.data;
     const student = user.tipoUsuario === 2;
     const [dataAlunos, setDataAlunos] = useState([]);
     const [dateAula, setDateAula] = useState([]);
@@ -286,7 +290,7 @@ export function ClassView({ navigation, route }) {
     const isFocused = useIsFocused();
 
     function callBackDeleteTurma() {
-        //deleteTurma(id);
+        deleteTurma(id);
         navigation.goBack();
     }
 
