@@ -31,6 +31,11 @@ import {
     ButtonImage,
     ContainerImage,
     AreaImage,
+    HorizontalButtonsContainer,
+    ConfirmButton,
+    DeleteAccountButton,
+    SaveButton,
+    SaveButtonText
 } from "./styles";
 import { Image } from "react-native";
 import { upload } from "../../controler/image";
@@ -91,7 +96,7 @@ const DataUser = () => {
 
     return (
         <ConteinerInfo>
-            <TextAlingLine>
+            <TextAlingLine style={{alignItems:'center'}}>
                 <TextDescription>{t('form.name')}:</TextDescription>
                 {
                     editable ?
@@ -140,9 +145,11 @@ const DataUser = () => {
                         <CancelButton>{t('validation.cancel')}</CancelButton>
                     </ContainerCancelButton>
                 }
-                <ContainerSVG onPress={() => save()}>
-                    <FontAwesome name={editable ? 'save' : 'pencil'} size={30} color="black" />
-                </ContainerSVG>
+               
+               {!editable &&  (<ContainerSVG onPress={() => save()}>
+                    <FontAwesome name={'pencil'} size={30} color="black" />
+                </ContainerSVG>)}
+               {editable &&  <SaveButton onPress={() => save()} ><SaveButtonText>Salvar</SaveButtonText></SaveButton>}
             </RowConfirmation>
         </ConteinerInfo>
     )
@@ -170,12 +177,8 @@ export const ChangePassword = ({ editable, setEditable }) => {
 
             } else {
 
-                toastMessage(false, "Preencha os campos corretamente"); // sem t
-
+                toastMessage(false, "A confirmação das senhas não conferem"); // sem t
                 //toastMessage(false,  t("msg.completeFields")); // com t 
-
-
-
             }
             setEditable((value) => !value)
 
@@ -218,9 +221,11 @@ export const ChangePassword = ({ editable, setEditable }) => {
                             <CancelButton>{t('validation.cancel')}</CancelButton>
                         </ContainerCancelButton>
                     }
-                    <ContainerSVG onPress={() => save()}>
-                        <FontAwesome name={editable ? 'save' : 'pencil'} size={30} color="black" />
-                    </ContainerSVG>
+
+                    {!editable &&  (<ContainerSVG onPress={() => save()}>
+                    <FontAwesome name={'pencil'} size={30} color="black" />
+                    </ContainerSVG>)}
+                    {editable &&  <SaveButton onPress={() => save()} ><SaveButtonText>Salvar</SaveButtonText></SaveButton>}
 
                 </RowConfirmation>
 
@@ -244,6 +249,7 @@ const ConfirmDelete = ({ deletable, setDeletable }) => {
                     senha: password,
                 };
                 DeleteAccount(data, user.tipoUsuario === 1, () => logOut())
+                toastMessage(false, "Conta excluída !")
             } else {
 
                 toastMessage(false, "Preencha os campos corretamente")
@@ -251,16 +257,15 @@ const ConfirmDelete = ({ deletable, setDeletable }) => {
 
         } catch (error) {
 
-            toastMessage(false, "Erro de conexão")
-        }
-
+            toastMessage(false, "Erro de conexão");
+        };
 
         setDeletable(false)
     };
     return (
         deletable ?
             (
-                <ConteinerInfoDelete style={{ marginTop: 20, marginBottom: 20 }}>
+                <ConteinerInfoDelete style={{ marginTop: 16, marginBottom: 20 }}>
                     <TextHeader>{t("exclude.Header")}</TextHeader>
                     <TextDescription>
                         {t("exclude.LabelUser")}
@@ -272,12 +277,14 @@ const ConfirmDelete = ({ deletable, setDeletable }) => {
                         onChangeText={setPassword}
                     ></Input>
                     <RowConfirmation>
-                        <ContainerCancelButton onPress={() => setDeletable(false)}>
-                            <CancelButton>{t('validation.cancel')}</CancelButton>
-                        </ContainerCancelButton>
-                        <ContainerSVG onPress={() => handleDelete()}>
-                            <FontAwesome name={'trash'} size={30} color="#cc0000" />
-                        </ContainerSVG>
+                        <HorizontalButtonsContainer>
+                            <DeleteAccountButton
+                                onPress={() => setDeletable(false)}>
+                                {t('validation.cancel')}
+                            </DeleteAccountButton>
+                            <ConfirmButton onPress={() => handleDelete()}>EXCLUIR</ConfirmButton>
+                        </HorizontalButtonsContainer>
+
                     </RowConfirmation>
                 </ConteinerInfoDelete>
             )

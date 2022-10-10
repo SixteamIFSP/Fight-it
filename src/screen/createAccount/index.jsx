@@ -1,7 +1,6 @@
 import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text, View } from 'react-native'
-import { ButtonLinguage } from '../../components/buttonChangeLinguage';
 import { DoubleButtonConfirmation } from '../../components/doubleButtonConfirmation';
 import { Input } from '../../components/input';
 import { createAccount } from '../../controler/account';
@@ -31,17 +30,45 @@ export function CreateAccount({ navigation }) {
 
     const [invalidEmailMessage, setInvalidEmailMessage] = useState('');
     const [invalidNameMessage, setInvalidNameMessage] = useState('');
+    const [invalidPassowrdMessage, setInvalidPassowrdMessage] = useState('');
+    const [invalidPassowrdConfirmMessage, setInvalidPassowrdConfirmMessage] = useState('');
+
+    const errors = useRef([]);
+
+    //criando constantes para validar se os campos estão preenchidos
+    const [nameEmpty, setNameEmpty] = useState(false);
+    const [emailEmpty, setEmailEmpty] = useState(false);
+    const [phoneEmpty, setPhoneEmpty] = useState(false);
+    const [passwordEmpty, setPasswordEmpty] = useState(false);
+    const [passwordConfirmEmpty, setPasswordConfirmEmpty] = useState(false);
+
 
     const handleEmail = (value) => {
+        setEmailEmpty(false);
         setUserEmail(value);
         setInvalidEmailMessage(validationEmail(value));
 
     };
     const handleName = (value) => {
+        setNameEmpty(false);
         setUserName(value);
         setInvalidNameMessage(validationName(value));
     };
- 
+    const handlePassword = (value) => {
+        setPasswordEmpty(false);
+        setPassword(value);
+        setInvalidPassowrdMessage('');
+    };
+    const handlePasswordConfirm = (value) => {
+        setPasswordConfirmEmpty(false);
+        setPasswordConfirm(value);
+        setInvalidPassowrdConfirmMessage('');
+    };
+    const handlePhone = (value) => {
+        setUserPhone(value);
+        setPhoneEmpty(false);
+    };
+
     const inputValidations = () => {
         if (
             userName === ''         |
@@ -50,9 +77,27 @@ export function CreateAccount({ navigation }) {
             password === ''         |
             passwordConfirm === ''  |
             password !== passwordConfirm
-        ) return false
-
-        return true
+        ) {
+            if (userName === '') {
+                setNameEmpty(true);
+                setInvalidNameMessage('Campo Obrigatório');
+            };
+            if (userEmail === '') {
+                setEmailEmpty(true);
+                setInvalidEmailMessage('Campo Obrigatório');
+            };
+            if (userPhone === '') setPhoneEmpty(true);
+            if (password === '') {
+                setPasswordEmpty(true);
+                setInvalidPassowrdMessage('Campo Obrigatório');
+            };
+            if (passwordConfirm === '') {
+                setPasswordConfirmEmpty(true);
+                setInvalidPassowrdConfirmMessage('Campo Obrigatório');
+            };
+        } else {
+            return true;
+        }
     };
 
     async function handleConfirmButton() {
@@ -74,11 +119,7 @@ export function CreateAccount({ navigation }) {
             setLoading(false);
             navigation.navigate('Login');
         } else {
-            let errorsText = "Digite os campos corretamente: "
-            errors.current.map((value) => {
-                errorsText = errorsText + `\n ${value}`
-            });
-
+            let errorsText = "Preencha os campos corretamente!"
             toastMessage(false, errorsText);
         }
     };
@@ -111,6 +152,7 @@ export function CreateAccount({ navigation }) {
             <View style={styles.inputesContainer}>
                 <View style={styles.inputes}>
                     <Input
+                        style={{ borderColor: `${nameEmpty ? 'red' : 'black'}` }}
                         onChangeText={(value) => { handleName(value) }}
                         value={userName}
                         placeholder={t('createAccount.name')}
@@ -119,6 +161,7 @@ export function CreateAccount({ navigation }) {
                 </View>
                 <View style={styles.inputes}>
                     <Input
+                        style={{ borderColor: `${emailEmpty ? 'red' : 'black'}` }}
                         onChangeText={(value) => { handleEmail(value) }}
                         value={userEmail}
                         placeholder={t('login.mail')}
@@ -127,29 +170,64 @@ export function CreateAccount({ navigation }) {
                         errorMessage={invalidEmailMessage ? invalidEmailMessage : null}
                     />
                 </View>
-                <View style={styles.inputes}>
-                    <MaskInput style={styles.inputMask}
-                        onChangeText={(_, unmasked) => { setUserPhone(unmasked); }}
+                <View style={styles.phoneInputContainer}>
+                    <MaskInput
+                        style={{
+                            width: '70%',
+                            marginBottom: 12,
+                            marginTop: 5,
+                            borderWidth: 1,
+                            borderTopWidth: 0,
+                            borderLeftWidth: 0,
+                            borderRightWidth: 0,
+                            borderColor: `${phoneEmpty ? 'red' : 'black'}`
+                        }}
+                        onChangeText={(_, unmasked) => { handlePhone(unmasked) }}
                         value={userPhone}
                         placeholder={t('createAccount.phone')}
                         mask={Masks.BRL_PHONE}
                     />
+                    {
+                        phoneEmpty ?
+                            <Text style={styles.requiredField}>Campo Obrigatório</Text>
+                            :
+                            null
+                    }
                 </View>
                 <View style={styles.inputes}>
                     <Input
-                        onChangeText={setPassword}
+                        style={{
+                            borderColor: `${passwordEmpty || (password !== passwordConfirm)
+                                ?
+                                'red' : 'black'}`
+                        }}
+                        onChangeText={(value) => { handlePassword(value) }}
                         value={password}
                         placeholder={t('login.password')}
                         secureTextEntry={true}
-                        errorMessage={invalidPassword ? invalidPassword : null}
-                    /></View>
+                        errorMessage={invalidPassowrdMessage ? invalidPassowrdMessage : null}
+                    />
+                </View>
                 <View style={styles.inputes}>
                     <Input
-                        onChangeText={setPasswordConfirm}
+                        style={{
+                            borderColor: `${passwordConfirmEmpty || (password !== passwordConfirm)
+                                ? 'red' : 'black'}`
+                        }}
+                        onChangeText={(value) => { handlePasswordConfirm(value) }}
                         value={passwordConfirm}
                         placeholder={t('createAccount.confirmPassword')}
                         secureTextEntry={true}
+                        errorMessage={invalidPassowrdConfirmMessage ? invalidPassowrdConfirmMessage : null}
+
                     />
+                    {
+                        password !== passwordConfirm
+                            ?
+                            <Text style={styles.passwordsDontMatch}>Senhas não conferem</Text>
+                            :
+                            null
+                    }
                 </View>
             </View>
 
