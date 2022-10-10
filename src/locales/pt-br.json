@@ -41,6 +41,13 @@
             "name": "Nome",
             "phone": "Telefone",
             "confirmPassword": "Confirmar Senha",
+            "invalidNameMessage": "Campo Obrigatório",
+            "invalidEmailMessage": "Campo Obrigatório",
+            "invalidPassowrdMessage": "Campo Obrigatório",
+            "invalidPassowrdConfirmMessage": "Campo Obrigatório",
+            "errorsText": "Preencha os campos corretamente!",
+            "requiredField":"Campo Obrigatório",
+            "passwordsDontMatch":"Senhas não conferem",
             "triage": {
                 "title": "Triagem",
                 "description": "Responda o formulário de triagem para saber seu condicionamento físico:",
@@ -143,8 +150,45 @@
                 "Create":"Criar novo parâmetro"
                
             }
+        },
+
+        "sorting": {
+            "title": "Triagem",
+			"sortingHeader1": "Estamos quase finalizando seu cadastro.",
+            "sortingHeader2": "Precisamos apenas de mais algumas informações!",
+            "personalData": "Dados Pessoais:",
+			"height": "Altura em centímetros (cm)",
+			"weight": "Peso(kg)",
+            "birthDate": "Data de nascimento:",
+            
+            "anamnesis": "Anamnese:",
+            "anamneseDidExercise": "Você já praticou exercício físico antes?",
+			"anamneseDidExerciseLabel": "Sim",
+			"anamneseDidExerciseWhich": "Qual(ais) e há quanto tempo?",
+				
+			"anamneseDidOrthProb": "Possui algum problema ortopédico?",
+			"anamneseDidOrthProbLabel": "Sim",
+			"anamneseDidOrthProbWhich": "Qual(ais)?",
+
+			"anamneseChronicIll": "Possui alguma doença crônica?",
+			"anamneseChronicIllLabel": "Sim",
+			"anamneseChronicIllWhich": "Qual(ais)?",
+
+			"anamneseInjuries": "Possui alguma lesão?",
+			"anamneseInjuriesLabel": "Sim",
+			"anamneseInjuriesWhich": "Qual(ais)?",
+            
+            "anamneseComments1": "Gostaria de fazer algum outro comentário que possa ajudar na montagem do seu programa de treinamento?",
+            "anamneseComments2":"Digite aqui",
+
+			"errorMessageHeight": "Campo Obrigatório",
+			"errorMessageWeight": "Campo Obrigatório",
+			"loadingErrorText":   "Preencha os campos corretamente!"
+        },
+
+        "inputValidators": {
+            "validationEmail": "Digite um email válido",
+            "validationName": "Digite um nome válido"
         }
-
-
     }
 }

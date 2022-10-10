@@ -42,6 +42,13 @@
             "name": "Name",
             "phone": "Phone",
             "confirmPassword": "Confirm Passoword",
+            "invalidNameMessage": "Required field",
+            "invalidEmailMessage": "Required field",
+            "invalidPassowrdMessage": "Required field",
+            "invalidPassowrdConfirmMessage": "Required field",
+            "errorsText": "Fill in the fields correctly!",
+            "requiredField": "Required field",
+            "passwordsDontMatch": "Passwords do not match",
             "triage": {
                 "title": "Triage",
                 "description": "Answer the screening form to know your fitness:",
@@ -144,6 +151,46 @@
                 "Create":"Create new parameter"
                
             }
+        },
+        "sorting": {
+            "title": "Sorting",
+			"sortingHeader1": "We are almost finishing your registration.",
+            "sortingHeader2": "We just need some more information",
+            "personalData": "Personal Data:",
+			"height": "Height in centimeters (cm)",
+			"weight": "weight (kg)",
+            "birthDate": "Birth Date:",
+            
+			"anamnesis": "Anamnesis:",
+				
+			"anamneseDidExercise": "Have you practiced physical exercise before?",
+			"anamneseDidExerciseLabel": "Yes",
+			"anamneseDidExerciseWhich": "Which one(s) and for how long?",
+				
+			"anamneseDidOrthProb": "Do you have an orthopedic problem?",
+			"anamneseDidOrthProbLabel": "Yes",
+			"anamneseDidOrthProbWhich": "Which one(s)?",
+
+			"anamneseChronicIll": "Do you have any chronic illness?",
+			"anamneseChronicIllLabel": "Yes",
+			"anamneseChronicIllWhich": "Which one(s)?",
+
+			"anamneseInjuries": "Do you have any injuries?",
+			"anamneseInjuriesLabel": "Yes",
+			"anamneseInjuriesWhich": "Which one(s)?",
+
+		
+			"anamneseComments1": "Would you like to make any other comments that might help you in setting up your training program?",
+			"anamneseComments2":"Type here",
+
+			"errorMessageHeight": "Required field",
+			"errorMessageWeight": "Required field",
+			"loadingErrorText":   "Fill in the fields correctly"
+		},
+
+        "inputValidators": {
+            "validationEmail": "Enter a valid email address",
+            "validationName": "Enter a valid name"
         }
     }
 }

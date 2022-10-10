@@ -1,9 +1,13 @@
+import { useTranslation } from 'react-i18next';
+
+
 const inputValidators = () => {
+    const { t } = useTranslation()
     const validationEmail = value => {
         let emailReg = /^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w\w+)+$/;
 
         if (!emailReg.test(value)) {
-            return 'Digite um email válido';
+            return (t('inputValidators.validationEmail'));
         } else if (emailReg.test(value)) {
             return '';
         }
@@ -12,7 +16,7 @@ const inputValidators = () => {
         let nameReg = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ'\s]+$/;
 
         if (!nameReg.test(value)) {
-            return 'Digite um nome válido';
+            return (t('inputValidators.validationName'));
         } else if (nameReg.test(value)) {
             return '';
         };
