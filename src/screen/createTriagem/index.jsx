@@ -10,6 +10,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { toastMessage } from "../../utils/toastMessage";
 import { MaterialIcons } from '@expo/vector-icons';
 import { RadioButton } from "../../components/radioButton";
+import { useTranslation } from 'react-i18next';
 
 export function CreateTriagem({ navigation, route }) {
 
@@ -30,6 +31,8 @@ export function CreateTriagem({ navigation, route }) {
 
   const [errorMessageAltura, setErrorMessageAltura] = useState('');
   const [errorMessagePeso, setErrorMessagePeso] = useState('');
+  
+  const { t } = useTranslation()
 
   const handleAltura = (value) => {
     setAltura(value);
@@ -42,10 +45,10 @@ export function CreateTriagem({ navigation, route }) {
   const inputValidations = () => {
     if (altura === '' | peso === '') {
       if (altura === '') {
-        setErrorMessageAltura('Campo Obrigatório');
+        setErrorMessageAltura(t('sorting.errorMessageHeight'))
       };
       if (peso === '') {
-        setErrorMessagePeso('Campo Obrigatório');
+        setErrorMessagePeso(t('sorting.errorMessageWeight'))
       };
     } else {
       return true;
@@ -76,7 +79,7 @@ export function CreateTriagem({ navigation, route }) {
       setLoading(false);
       navigation.navigate('Login');
     } else {
-      const errorText = "Preencha os campos corretamente!"
+      const errorText = (t('sorting.loadingErrorText'));
       toastMessage(false, errorText);
     }
 
@@ -85,25 +88,25 @@ export function CreateTriagem({ navigation, route }) {
   return (
     <ScrollView style={styles.container} >
       <View style={styles.container}>
-        <Text style={styles.TitleLogin}>Triagem</Text>
+        <Text style={styles.TitleLogin}>{t('sorting.title')}</Text>
         <View style={styles.descriptionText}>
           <Text>
-            Estamos quase finalizando seu cadastro.
+          {t('sorting.sortingHeader1')}
           </Text>
           <Text>
-            Precisamos apenas de mais algumas informações!
+          {t('sorting.sortingHeader2')}
           </Text>
         </View>
 
         <View style={styles.personalDataContainer}>
-          <Text style={styles.personalDataTitle}>Dados Pessoais:</Text>
+          <Text style={styles.personalDataTitle}> {t('sorting.personalData')}</Text>
           <View style={styles.inputes}>
             <Input
               style={{ borderColor: `${errorMessageAltura ? 'red' : 'black'}` }}
               onChangeText={(value) => { handleAltura(value) }}
               value={altura}
               maxLength={3}
-              placeholder={'Altura em centímetros (cm)'}
+              placeholder={t('sorting.height')}
               keyboardType={'numeric'}
               errorMessage={errorMessageAltura || ''}
             />
@@ -117,13 +120,13 @@ export function CreateTriagem({ navigation, route }) {
               }}
               maxLength={3}
               value={peso}
-              placeholder={'Peso(kg)'}
+              placeholder={t('sorting.weight')}
               keyboardType={'numeric'}
               errorMessage={errorMessagePeso || ''}
             />
           </View>
           <View style={styles.birthDate}>
-            <Text>Data de nascimento:</Text>
+            <Text>{t('sorting.birthDate')}</Text>
             <View style={styles.birthDateCalendar}>
               <TouchableOpacity
                 style={{ flexDirection: 'row' }}
@@ -161,15 +164,15 @@ export function CreateTriagem({ navigation, route }) {
         </View>
 
         <View style={styles.anamneseDidExerciseContainer}>
-          <Text style={styles.anamneseTitle}>Anamnese:</Text>
+          <Text style={styles.anamneseTitle}>{t('sorting.anamnesis')}</Text>
 
           <View style={styles.anamneseAlignRadioButtons}>
-            <Text>Você já praticou exercício físico antes?</Text>
+            <Text>{t('sorting.anamneseDidExercise')}</Text>
             <RadioButton
               isChecked={didExercise}
               onPress={() => { setDidExercise(!didExercise) }}
               size={16}
-              label={'Sim'}
+              label={t('sorting.anamneseDidExerciseLabel')}
               horizontal
             ></RadioButton>
           </View>
@@ -179,19 +182,19 @@ export function CreateTriagem({ navigation, route }) {
                 style={styles.inputes}
                 onChangeText={setDidExerciseResp}
                 value={didExerciseResp}
-                placeholder={'Qual(ais) e há quanto tempo?'}
+                placeholder={t('sorting.anamneseDidExerciseWhich')}
               /> : null
           }
         </View>
 
         <View>
           <View style={styles.anamneseAlignRadioButtons}>
-            <Text>Possui algum problema ortopédico?</Text>
+            <Text>{t('sorting.anamneseDidOrthProb')}</Text>
             <RadioButton
               isChecked={probOrtopedico}
               onPress={() => { setProbOrtopedico(!probOrtopedico) }}
               size={16}
-              label={'Sim'}
+              label={t('sorting.anamneseDidOrthProbLabel')}
               horizontal
             ></RadioButton>
           </View>
@@ -201,19 +204,19 @@ export function CreateTriagem({ navigation, route }) {
                 style={styles.inputes}
                 onChangeText={setProbOrtopedicoResp}
                 value={probOrtopedicoResp}
-                placeholder={'Qual(ais)?'}
+                placeholder={t('sorting.anamneseDidOrthProbWhich')}
               /> : null
           }
         </View>
 
         <View>
           <View style={styles.anamneseAlignRadioButtons}>
-            <Text>Possui alguma doença crônica?</Text>
+            <Text>{t('sorting.anamneseChronicIll')}</Text>
             <RadioButton
               isChecked={doencaCronica}
               onPress={() => { setDoencaCronica(!doencaCronica) }}
               size={16}
-              label={'Sim'}
+              label={t('sorting.anamneseChronicIllLabel')}
               horizontal
             ></RadioButton>
           </View>
@@ -222,7 +225,7 @@ export function CreateTriagem({ navigation, route }) {
               style={styles.inputes}
               onChangeText={setDoencaCronicaResp}
               value={doencaCronicaResp}
-              placeholder={'Qual(ais)?'}
+              placeholder={t('sorting.anamneseChronicIllWhich')}
             />
               : null
           }
@@ -230,12 +233,12 @@ export function CreateTriagem({ navigation, route }) {
 
         <View>
           <View style={styles.anamneseAlignRadioButtons}>
-            <Text>Possui alguma lesão?</Text>
+            <Text>{t('sorting.anamneseInjuries')}</Text>
             <RadioButton
               isChecked={lesoes}
               onPress={() => { setLesoes(!lesoes) }}
               size={16}
-              label={'Sim'}
+              label={t('sorting.anamneseInjuriesLabel')}
               horizontal
             ></RadioButton>
           </View>
@@ -245,18 +248,18 @@ export function CreateTriagem({ navigation, route }) {
                 style={styles.inputes}
                 onChangeText={setLesoesResp}
                 value={lesoesResp}
-                placeholder={'Qual(ais)?'}
+                placeholder={t('sorting.anamneseInjuriesWhich')}
               /> : null
           }
         </View>
 
         <View>
-          <Text>Gostaria de fazer algum outro comentário que possa ajudar na montagem do seu programa de treinamento?</Text>
+          <Text>{t('sorting.anamneseComments1')}</Text>
           <Input
             style={styles.inputes}
             onChangeText={setComentario}
             value={comentario}
-            placeholder={'Digite aqui'}
+            placeholder={t('sorting.anamneseComments2')}
           />
         </View>
 

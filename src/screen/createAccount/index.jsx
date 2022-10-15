@@ -80,20 +80,20 @@ export function CreateAccount({ navigation }) {
         ) {
             if (userName === '') {
                 setNameEmpty(true);
-                setInvalidNameMessage('Campo Obrigatório');
+                setInvalidNameMessage(t('createAccount.invalidNameMessage'));
             };
             if (userEmail === '') {
                 setEmailEmpty(true);
-                setInvalidEmailMessage('Campo Obrigatório');
+                setInvalidEmailMessage(t('createAccount.invalidEmailMessage'));
             };
             if (userPhone === '') setPhoneEmpty(true);
             if (password === '') {
                 setPasswordEmpty(true);
-                setInvalidPassowrdMessage('Campo Obrigatório');
+                setInvalidPassowrdMessage(t('createAccount.invalidPassowrdMessage'));
             };
             if (passwordConfirm === '') {
                 setPasswordConfirmEmpty(true);
-                setInvalidPassowrdConfirmMessage('Campo Obrigatório');
+                setInvalidPassowrdConfirmMessage(t('createAccount.invalidPassowrdConfirmMessage'));
             };
         } else {
             return true;
@@ -119,7 +119,7 @@ export function CreateAccount({ navigation }) {
             setLoading(false);
             navigation.navigate('Login');
         } else {
-            let errorsText = "Preencha os campos corretamente!"
+            let errorsText = (t('createAccount.errorsText'))
             toastMessage(false, errorsText);
         }
     };
@@ -189,7 +189,8 @@ export function CreateAccount({ navigation }) {
                     />
                     {
                         phoneEmpty ?
-                            <Text style={styles.requiredField}>Campo Obrigatório</Text>
+                            <Text style={styles.requiredField}>{t('createAccount.requiredField')}
+                            </Text>
                             :
                             null
                     }
@@ -224,7 +225,7 @@ export function CreateAccount({ navigation }) {
                     {
                         password !== passwordConfirm
                             ?
-                            <Text style={styles.passwordsDontMatch}>Senhas não conferem</Text>
+                            <Text style={styles.passwordsDontMatch}>{t('createAccount.passwordsDontMatch')}</Text>
                             :
                             null
                     }
