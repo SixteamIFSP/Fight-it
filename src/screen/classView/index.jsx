@@ -39,6 +39,7 @@ import { useIsFocused } from "@react-navigation/native";
  import { deleteTurma } from '../../controler/class';
 import { LessonView } from "../LessonView";
 import { useUser } from "../../hooks/user";
+import { AdicionarAluno } from "../../components/addAuno";
 
 
 function AdicionarAula({ turmaId, setback }) {
@@ -207,59 +208,60 @@ const RenderListAluno = ({ item, navigation, data, student }) => {
         </TextTouchable>
     );
 };
-function AdicionarAluno({ turmaId, setback }) {
-    const { t } = useTranslation();
-    const [loading, setLoading] = useState(false);
-    const [mail, setMail] = useState('');
 
-    function handleBack() {
-        setback()
-    }
-    async function handleSubmit() {
-        if (mail === '' || mail.indexOf("@") === -1) {
-            toastMessage(false, t("toast.error.invalid.email"));
-            setback(false);
+// function AdicionarAluno({ turmaId, setback }) {
+//     const { t } = useTranslation();
+//     const [loading, setLoading] = useState(false);
+//     const [mail, setMail] = useState('');
 
-            return
-        };
-        setLoading(true)
-        const data = {
-            email: mail,
-            turmaId: turmaId,
-        };
-        await adicionarAluno(data);
-        setLoading(false)
-        setback(false);
-    };
+//     function handleBack() {
+//         setback()
+//     }
+//     async function handleSubmit() {
+//         if (mail === '' || mail.indexOf("@") === -1) {
+//             toastMessage(false, t("toast.error.invalid.email"));
+//             setback(false);
 
-    return (
-        <AddContainerView>
-            <Divider
-                borderColor="#000"
-                color="#000"
-                orientation="center"
-            >{t('addStudentClass.Header')}
-            </Divider>
-            <Input
-                style={{ marginTop: 20 }}
-                value={mail}
-                placeholder={t("addStudentClass.Placeholder.mail")}
-                keyboardType="email-address"
-                onChangeText={setMail}
-            />
-            {
-                !loading ?
-                    <DoubleButtonConfirmation
-                        handleBack={handleBack}
-                        handleConfirm={handleSubmit
-                        }
-                    />
-                    :
-                    <Loading loading={loading} size={18} />
-            }
-        </AddContainerView>
-    )
-};
+//             return
+//         };
+//         setLoading(true)
+//         const data = {
+//             email: mail,
+//             turmaId: turmaId,
+//         };
+//         await adicionarAluno(data);
+//         setLoading(false)
+//         setback(false);
+//     };
+
+//     return (
+//         <AddContainerView>
+//             <Divider
+//                 borderColor="#000"
+//                 color="#000"
+//                 orientation="center"
+//             >{t('addStudentClass.Header')}
+//             </Divider>
+//             <Input
+//                 style={{ marginTop: 20 }}
+//                 value={mail}
+//                 placeholder={t("addStudentClass.Placeholder.mail")}
+//                 keyboardType="email-address"
+//                 onChangeText={setMail}
+//             />
+//             {
+//                 !loading ?
+//                     <DoubleButtonConfirmation
+//                         handleBack={handleBack}
+//                         handleConfirm={handleSubmit
+//                         }
+//                     />
+//                     :
+//                     <Loading loading={loading} size={18} />
+//             }
+//         </AddContainerView>
+//     )
+// };
 
 
 

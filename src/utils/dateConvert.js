@@ -12,3 +12,9 @@ export function dateToBrDefault(date){
 export function dateSplit(date){
     return date.slice(0, 10);
 }
+
+export function convertDateToBrString(date){
+    let string = date.toISOString();
+    string  = dateSplit(string);
+    return dateToBrDefault(date)
+}
