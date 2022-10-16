@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text, View } from 'react-native'
 import { DoubleButtonConfirmation } from '../../components/doubleButtonConfirmation';
@@ -32,8 +32,6 @@ export function CreateAccount({ navigation }) {
     const [invalidNameMessage, setInvalidNameMessage] = useState('');
     const [invalidPassowrdMessage, setInvalidPassowrdMessage] = useState('');
     const [invalidPassowrdConfirmMessage, setInvalidPassowrdConfirmMessage] = useState('');
-
-    const errors = useRef([]);
 
     //criando constantes para validar se os campos estão preenchidos
     const [nameEmpty, setNameEmpty] = useState(false);

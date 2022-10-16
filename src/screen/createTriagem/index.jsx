@@ -11,6 +11,7 @@ import { toastMessage } from "../../utils/toastMessage";
 import { MaterialIcons } from '@expo/vector-icons';
 import { RadioButton } from "../../components/radioButton";
 import { useTranslation } from 'react-i18next';
+import { convertDateToBrString } from "../../utils/dateConvert";
 
 export function CreateTriagem({ navigation, route }) {
 
@@ -31,13 +32,14 @@ export function CreateTriagem({ navigation, route }) {
 
   const [errorMessageAltura, setErrorMessageAltura] = useState('');
   const [errorMessagePeso, setErrorMessagePeso] = useState('');
-  
+
   const { t } = useTranslation()
 
   const handleAltura = (value) => {
     setAltura(value);
     setErrorMessageAltura('');
   };
+
   function handleBack() {
     navigation.navigate('CreateAccount')
   };
@@ -91,10 +93,10 @@ export function CreateTriagem({ navigation, route }) {
         <Text style={styles.TitleLogin}>{t('sorting.title')}</Text>
         <View style={styles.descriptionText}>
           <Text>
-          {t('sorting.sortingHeader1')}
+            {t('sorting.sortingHeader1')}
           </Text>
           <Text>
-          {t('sorting.sortingHeader2')}
+            {t('sorting.sortingHeader2')}
           </Text>
         </View>
 
@@ -132,7 +134,7 @@ export function CreateTriagem({ navigation, route }) {
                 style={{ flexDirection: 'row' }}
                 onPress={() => { setSelectedDateIsOpen(true) }}>
                 <Text>
-                  {date.toLocaleDateString()}
+                  {convertDateToBrString(date)}
                 </Text>
                 <MaterialIcons
                   style={{ fontSize: 16, marginLeft: 12 }}
@@ -152,9 +154,9 @@ export function CreateTriagem({ navigation, route }) {
               maximumDate={new Date()}
               is24Hour={true}
               display="default"
-              onChange={(event, date) => {
+              onChange={(_, date) => {
                 if (date) {
-                  setDate(date)
+                  setDate(date);
                 }
                 setSelectedDateIsOpen(false)
               }}
