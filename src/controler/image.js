@@ -63,3 +63,28 @@ export async function setImagePerson (responseImage){
 
 
 }
+
+
+export async function justUploadImage(image){
+
+    try {
+        const form = new FormData();
+        form.append('image', {
+            uri: image.uri,
+            name: 'image.jpg',
+            type: 'image/jpeg'
+        })
+      
+        const response = await api.post(`/imagem/document`,  form, { headers: {'Content-Type': 'multipart/form-data'}});
+
+        if (response?.data.status){
+            return response?.data
+        } else{
+            toastMessage(false, response?.data.mensagem);
+        }
+
+    } catch (error) {
+        console.log(error)
+        toastMessage(false, 'Erro de conexão!');
+    }
+}

@@ -8,6 +8,7 @@ import { ContainerSVG } from "../screen/configureAccount/styles";
 import { FontAwesome } from "@expo/vector-icons";
 import { TriagemView } from "../screen/triagemView";
 import { useModal } from "../hooks/modalConfirmation";
+import { UploadMaterial } from "../screen/UploadMaterial";
 
 export function ClassStackAluno(){
     const StackClass = createNativeStackNavigator();
@@ -91,6 +92,8 @@ export function ClassStackTeacher(){
             <StackClass.Screen options={({route}) => ({title: route.params.title})} navigationKey='EvaluationStudent' name="EvaluationStudent" component={EvaluationStudent}></StackClass.Screen>
 
             <StackClass.Screen options={({route}) => ({title: route.params.title})} navigationKey='TriagemView' name="TriagemView" component={TriagemView}></StackClass.Screen>
+
+            <StackClass.Screen options={({route}) => ({title: route.params.title})} navigationKey='MaterialExtra' name="MaterialExtra" component={UploadMaterial}></StackClass.Screen>
         </StackClass.Navigator>
     )
 }

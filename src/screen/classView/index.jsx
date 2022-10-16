@@ -265,10 +265,10 @@ function AdicionarAluno({ turmaId, setback }) {
 
 
 
-function RenderAula({ aula, onDeleteAula }) {
+function RenderAula({ aula, onDeleteAula, onSelectAula }) {
 
     return (
-        <RenderAulaContainer>
+        <RenderAulaContainer onPress={() => onSelectAula(aula.nome, aula.id)}>
             <Text>{aula.nome}</Text>
             <CancelarAula
                 onPress={() => onDeleteAula(aula)}>
@@ -319,6 +319,10 @@ export function ClassView({ navigation, route }) {
         const novaLista = dateAula.filter(({id}) => id !==  aula.id);
         setDateAula(novaLista);
         removeAula(aula.id)
+    }
+
+    function onSelectAula(nometurma, aulaid) { 
+        navigation.navigate('MaterialExtra', {title:'Upload do material extra', nometurma, aulaid});
     }
 
     useEffect(() => {
@@ -379,7 +383,7 @@ export function ClassView({ navigation, route }) {
                                         ({ item }) => <RenderAula handleViewAula={(aulaid) => {
                                             setAulaID(aulaid)
                                             handleOpenPage(4)
-                                        }} aula={item} onDeleteAula={onDeleteAula} student={student} />
+                                        }} aula={item} onDeleteAula={onDeleteAula} onSelectAula={onSelectAula} student={student} />
                                     }
                                     keyExtractor={item => `${item.id}-${item.nome}-dataAula`}>
                                 </ContentListagem>
