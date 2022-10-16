@@ -78,6 +78,7 @@ function AdicionarAula({ turmaId, setback }) {
     }
 
     return (
+        <ScrollView>
         <AdicionarAulaContainer>
             <TextDescription>Adicionar aula</TextDescription>
             <Input
@@ -184,6 +185,7 @@ function AdicionarAula({ turmaId, setback }) {
                 handleConfirm={handleSubmit}
             />
         </AdicionarAulaContainer>
+        </ScrollView>
     )
 }
 
