@@ -265,10 +265,16 @@ function AdicionarAluno({ turmaId, setback }) {
 
 
 
-function RenderAula({ aula, onDeleteAula, onSelectAula }) {
+function RenderAula({ aula, onDeleteAula, onSelectAula, student, handleViewAula }) {
 
     return (
-        <RenderAulaContainer onPress={() => onSelectAula(aula.nome, aula.id)}>
+        <RenderAulaContainer onPress={() => {
+            if(student) {
+                handleViewAula()
+                return 
+            } 
+            onSelectAula(aula.nome, aula.id)
+            }}>
             <Text>{aula.nome}</Text>
             <CancelarAula
                 onPress={() => onDeleteAula(aula)}>
