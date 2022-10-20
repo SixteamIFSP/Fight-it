@@ -34,6 +34,27 @@ export async function createClass(data){ // data => { nome:string, descricao:str
     }
 }
 
+export async function changeClass(data){
+
+    console.log({data});
+    try {
+        const response = await api.post(`/turma/alterar`, {...data});
+
+        console.log(response?.data);
+
+
+        if (response?.data.status){
+            toastMessage(true, response?.data.mensagem) 
+
+        } else{
+            toastMessage(false, response?.data.mensagem) 
+        }
+
+    } catch(error) {
+        toastMessage(false, 'Erro de conexão!') 
+    }
+}
+
 export async function getAllDataClass(setAlunos, setClass, data){
     axios.all(
         [

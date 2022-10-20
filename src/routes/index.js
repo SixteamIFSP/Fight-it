@@ -3,11 +3,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Login } from '../screen/login';
 import { CreateAccount } from '../screen/createAccount';
-import { CreateAccountTeacher } from '../screen/createAccountTeacher';
-import { CreateAccountStudent } from '../screen/addCertificado';
 import { useUser } from '../hooks/user';
-import { HomeScreenTeacher } from '../screen/homeScreenTeacher';
-import { HomeScreenStudent } from '../screen/homeScreenStudent';
+import { HomeScreen } from '../screen/homeScreen';
 import { useTranslation } from 'react-i18next';
 import { FontAwesome } from '@expo/vector-icons';
 import { ConfigureAccount } from '../screen/configureAccount';
@@ -16,10 +13,10 @@ import { CreateTriagem } from '../screen/createTriagem';
 import { ClassView } from '../screen/classView';
 import { CalendarTeacher } from '../screen/calendarTeacher';
 import App from '../services/notification';
+import { Header } from '../components/header';
 
 const TabNavegation = createBottomTabNavigator();
 const AppRoutes = createNativeStackNavigator();
-const StackStudant = createNativeStackNavigator();
 
 function StackLoged() {
   const { t } = useTranslation();
@@ -58,10 +55,12 @@ function StackLoged() {
       <TabNavegation.Screen options={{ 
           title: t("appName"), 
           tabBarLabel: t(`nav.home`),
+          header: (props)=> <Header props={props}></Header>
         }}
+        
         navigationKey='HomeScreenTeacher'
         name="HomeScreenTeacher"
-        component={HomeScreenTeacher} />
+        component={HomeScreen} />
       <TabNavegation.Screen options={{ 
           title: t("appName"), 
           tabBarLabel: t(`nav.calendar`)
@@ -119,7 +118,7 @@ function StackLoged() {
           }}
           navigationKey='HomeScreenStudent'
           name="HomeScreenStudent"
-          component={HomeScreenStudent} />
+          component={HomeScreen} />
           <TabNavegation.Screen
             options={{
               title: t("appName"), 
