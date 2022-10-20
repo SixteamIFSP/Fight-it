@@ -3,15 +3,15 @@ import { useIsFocused } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import { useUser } from "../../hooks/user"
 import { CalendarList,  LocaleConfig} from "react-native-calendars";
-import { ClassText, Container, ContainerFlat, ContainerList, ContentListagem, themeCalendar } from "./styles";
+import { Container, themeCalendar } from "./styles";
 import { getArrayDates, getCalendar } from "../../controler/calendar";
-import { Text } from "react-native";
 import { convertDataUTC, dateSplit, dateToBrDefault } from "../../utils/dateConvert";
+import { ListCalendarDates } from "../../components/listCalendarDates";
 
 export function CalendarTeacher({ navigation, route }){
     const { t } = useTranslation();
     const { user } = useUser();
-    const [dates, setDates] = useState([]);
+    const [selectedDate, setSelectedDate] = useState(new Date());
     const [selectedDates, setSelectedDates] = useState({});
 
     const isFocused = useIsFocused();
@@ -25,16 +25,6 @@ export function CalendarTeacher({ navigation, route }){
         isFocused && effect();
     }, [isFocused])
 
-    // useEffect(()=>{
-    //     if (dates.length === 0) return
-    //     dates.map((date)=>{
-            
-    //         setSelectedDates((oldSelectedDates)=> {
-    //             return { ...oldSelectedDates, [new Date(date.data).toISOString().slice(0, 10)]:{selected: true,}}
-    //         })
-    //     })
-        
-    // }, [dates])
 
     function arrayToObject(array){
         var object = {};
@@ -44,9 +34,8 @@ export function CalendarTeacher({ navigation, route }){
             convertDataUTC(value).toISOString()
             )] = {marked: true})
 
-        console.log({object})
 
-        setSelectedDates((value) => {return {...value, ...object}})
+        setSelectedDates((value) => {return {...object}})
     }
 
     async function handleLoading(){
@@ -54,6 +43,10 @@ export function CalendarTeacher({ navigation, route }){
         setLoading(true);
         await getArrayDates(user.userID, user.tipoUsuario===1, arrayToObject);
         setLoading(false);
+    }
+
+    function handleDateSelected(dateCalendar){
+        setSelectedDate(new Date(dateCalendar.timestamp))
     }
 
     LocaleConfig.locales['pt-BR'] = {
@@ -114,10 +107,10 @@ export function CalendarTeacher({ navigation, route }){
                 theme={themeCalendar}
 
                 onDayPress={(day) => {
-                    console.log('selected day', day);
+                    handleDateSelected(day);
                 }}
                 onDayLongPress={(day) => {
-                    console.log('selected day', day);
+                    handleDateSelected(day);
                 }}
                 
                 // onVisibleMonthsChange={(months) => {console.log('now these months are visible', months);}}
@@ -132,24 +125,8 @@ export function CalendarTeacher({ navigation, route }){
                 windowSize={300}
             />
 
+            <ListCalendarDates selectedDate={selectedDate}/>
 
-            <ContainerList>
-                <ClassText>{"Aulas"}</ClassText>
-                <ContainerFlat>
-                    {<ContentListagem
-                        data={dates}
-                        renderItem={
-                            ({ item }) => 
-                            <>
-                                <Text>{item.nome}</Text>
-                                <Text>{dateToBrDefault(new Date(item.data).toISOString().slice(0, 10))}</Text>
-                            </>
-                            }
-                        
-                        >
-                    </ContentListagem> }
-                </ContainerFlat>
-            </ContainerList>
         </Container>
     )
 } 

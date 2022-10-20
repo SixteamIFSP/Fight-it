@@ -28,3 +28,15 @@ export async function getDesempenhoPorParametro(data, setValue ){ // data => { "
         toastMessage(false, 'Erro de conexão!');
     }
 }
+
+export async function getAluno(data, setValue ){ // data:string
+    try {
+        const response = await api.get(`/aluno/busca/${data}`);
+
+        if (response?.data.status)
+            setValue(response?.data.result || []);
+
+    } catch (error) {
+        toastMessage(false, 'Erro de conexão!');
+    }
+}
