@@ -6,9 +6,15 @@ export const Container = styled.View`
     height: 100%;
 `;
 
+export const ContainerHeader = styled.View`
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 10px;
+`;
+
 export const AddContainerView = styled(Container)`
-     align-items:center;
-     padding: 15px;
+    align-items:center;
+    padding: 15px;
 `;
 
 export const ContainerListColumn = styled.View`
