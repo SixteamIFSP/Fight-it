@@ -81,6 +81,7 @@ function AdicionarAula({ turmaId, setback }) {
     }
 
     return (
+        <ScrollView>
         <AdicionarAulaContainer>
             <TextDescription>Adicionar aula</TextDescription>
             <Input
@@ -187,6 +188,7 @@ function AdicionarAula({ turmaId, setback }) {
                 handleConfirm={handleSubmit}
             />
         </AdicionarAulaContainer>
+        </ScrollView>
     )
 }
 
@@ -212,10 +214,16 @@ const RenderListAluno = ({ item, navigation, data, student }) => {
 };
 
 
-function RenderAula({ aula, onDeleteAula }) {
+function RenderAula({ aula, onDeleteAula, onSelectAula, student, handleViewAula }) {
 
     return (
-        <RenderAulaContainer>
+        <RenderAulaContainer onPress={() => {
+            if(student) {
+                handleViewAula()
+                return 
+            } 
+            onSelectAula(aula.nome, aula.id)
+            }}>
             <Text>{aula.nome}</Text>
             <CancelarAula
                 onPress={() => onDeleteAula(aula)}>
@@ -268,7 +276,10 @@ export function ClassView({ navigation, route }) {
         removeAula(aula.id)
     }
 
-    function updateClass(){
+    function onSelectAula(nometurma, aulaid) { 
+        navigation.navigate('MaterialExtra', {title:'Upload do material extra', nometurma, aulaid});
+    
+        function updateClass(){
         navigation.goBack();
     }
 
@@ -337,7 +348,7 @@ export function ClassView({ navigation, route }) {
                                         ({ item }) => <RenderAula handleViewAula={(aulaid) => {
                                             setAulaID(aulaid)
                                             handleOpenPage(4)
-                                        }} aula={item} onDeleteAula={onDeleteAula} student={student} />
+                                        }} aula={item} onDeleteAula={onDeleteAula} onSelectAula={onSelectAula} student={student} />
                                     }
                                     keyExtractor={item => `${item.id}-${item.nome}-dataAula`}>
                                 </ContentListagem>

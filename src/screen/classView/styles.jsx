@@ -110,7 +110,7 @@ export const AdicionarAulaButton = styled.TouchableOpacity`
     margin-bottom: 16px;
  `;
 
-export const RenderAulaContainer = styled.View`
+export const RenderAulaContainer = styled.TouchableOpacity`
     flex-direction: row;
     justify-content: space-between;
     margin-top: 5px;
