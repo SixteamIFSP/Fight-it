@@ -278,8 +278,9 @@ export function ClassView({ navigation, route }) {
 
     function onSelectAula(nometurma, aulaid) { 
         navigation.navigate('MaterialExtra', {title:'Upload do material extra', nometurma, aulaid});
+    }
     
-        function updateClass(){
+    function updateClass(){
         navigation.goBack();
     }
 
