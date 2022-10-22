@@ -11,10 +11,12 @@ import inputValidators from '../../utils/inputValidators';
 import {
   Text,
   View,
-  TouchableOpacity
+  TouchableOpacity,
+  Image
 } from "react-native";
 import { Loading } from "../../components/loading";
 import { toastMessage } from "../../utils/toastMessage";
+import Logo from "../../../assets/adaptive-icon.png";
 
 export function Login({ navigation }) {
   const { validationEmail } = inputValidators()
@@ -53,7 +55,7 @@ export function Login({ navigation }) {
         <ButtonLinguage />
       </View>
       <View style={styles.container}>
-        <Text style={styles.TitleLogin}>Fight It</Text>
+        <Image source={Logo} style={{width:300, height:300}} />       
         <View style={styles.switchButtons}>
           <SwitchButton
             onPress={() => setTypeTeacher(true)}

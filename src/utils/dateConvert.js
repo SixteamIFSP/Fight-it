@@ -1,9 +1,5 @@
 export function convertDataUTC(data){
     var tzoffset = (new Date()).getTimezoneOffset() * (60000 * 2);
-    console.log("data",tzoffset);
-    //console.log("data2", data.setMinutes(data.getMinutes() - (tzoffset * -1)));
-    console.log("data",new Date(new Date(data)-(tzoffset*-1)));
-
     return new Date(new Date(data) - tzoffset);
 };
 

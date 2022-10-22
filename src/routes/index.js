@@ -153,11 +153,6 @@ function StackLoged() {
     2: <Studant />,
   }
 
-  const stack = {
-    true: <StackAuth />,
-    false: <StackLoged />,
-  }
-
   return (
     User[user?.tipoUsuario]
   )
