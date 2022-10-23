@@ -32,9 +32,9 @@ export async function postMaterialExtra( nomeMaterial, descricao, aulaId, key){
 export async function getMaterialExtra(aulaId){
 
     try {
-        const response = await api.post(`/materialExtra/busca_arquivo/` + aulaId,  body);
+        const response = await api.get(`/materialExtra/busca_arquivo/` + aulaId);
         if (response?.data.status){
-            toastMessage(true, 'Material extra públicado com sucesso!')
+            toastMessage(true, 'Material extra encontrado com sucesso!')
             return response?.data
         } else {
             toastMessage(false, response?.data.mensagem);

@@ -181,3 +181,18 @@ export async function getAulaByAulaID(aulaID, setAula){
 }
 
 
+export async function postAulaFeedback(aulaid, message) { 
+    try {
+        const response = await api.post(`/urlPostAulaFeedback` + aulaid, {message});
+        if (response?.data.status){
+            toastMessage(true, response?.data.mensagem)
+        } else{
+            toastMessage(false, response?.data.mensagem) 
+        }
+        
+    } catch (error) {
+        toastMessage(false, 'Erro de conexão!') 
+    }
+}
+
+
