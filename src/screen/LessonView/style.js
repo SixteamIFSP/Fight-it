@@ -13,7 +13,7 @@ align-items: center;
 export const Retornar = styled.TouchableOpacity`
 padding: 6px;
 align-items: center;
-background-color: grey;
+background-color: #595959;
 border-radius: 10px;
 width: 100px;
 `
@@ -33,6 +33,13 @@ font-size: 17px;
 margin-bottom: 10px;
 `
 
-export const Equipamentos = styled.TouchableOpacity`
-height: 400px;
+export const Equipamentos = styled.FlatList`
+height: 35%;
+`
+
+export const MaterialViewButton = styled.TouchableOpacity`
+  background-color: #595959;
+  width: 100%;
+  padding: 15px;
+  border-radius: 4px;
 `

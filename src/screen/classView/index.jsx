@@ -361,7 +361,7 @@ export function ClassView({ navigation, route }) {
             </ContainerListColumn>),
         2: <AdicionarAluno setback={callback} turmaId={id}></AdicionarAluno>,
         3: <AdicionarAula turmaId={id} setback={callback} />,
-        4: <LessonView aulaid={aulaid} onBack={() => handleOpenPage(1)} />,
+        4: <LessonView navigation={navigation} aulaid={aulaid} onBack={() => handleOpenPage(1)} />,
         5: <EditTurma navigation={navigation} turmaId={id} setback={()=>callback()}></EditTurma>
         
     }

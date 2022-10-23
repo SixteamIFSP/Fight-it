@@ -27,3 +27,19 @@ export async function postMaterialExtra( nomeMaterial, descricao, aulaId, key){
         toastMessage(false, 'Erro de conexão!');
     }
 }
+
+
+export async function getMaterialExtra(aulaId){
+
+    try {
+        const response = await api.get(`/materialExtra/busca_arquivo/` + aulaId);
+        if (response?.data.status){
+            toastMessage(true, 'Material extra encontrado com sucesso!')
+            return response?.data
+        } else {
+            toastMessage(false, response?.data.mensagem);
+        }
+    } catch (error) {
+        toastMessage(false, 'Erro de conexão!');
+    }
+}
