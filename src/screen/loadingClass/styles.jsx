@@ -31,3 +31,10 @@ export const CardDescription = styled.Text`
     font-size:18px;
     margin-bottom:20px;
 `;
+
+export const ViewButton = styled.View`
+    width:100%;
+    margin-top:20px;
+    margin-bottom:20px;
+    align-items:center;
+`;

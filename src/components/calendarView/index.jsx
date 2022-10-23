@@ -11,7 +11,7 @@ import { ListCalendarDates } from "../../components/listCalendarDates";
 export function CalendarView({handleChangeView}){
     const { t } = useTranslation();
     const { user } = useUser();
-    const [selectedDate, setSelectedDate] = useState(new Date());
+    const [selectedDate, setSelectedDate] = useState( new Date().setHours(0));
     const [selectedDates, setSelectedDates] = useState({});
     const isFocused = useIsFocused();
     const [ isLoading, setLoading ] = useState(false);
@@ -32,8 +32,7 @@ export function CalendarView({handleChangeView}){
             convertDataUTC(value).toISOString()
             )] = {marked: true})
 
-
-        setSelectedDates((value) => {return {...object}})
+        setSelectedDates(() => {return {...object}})
     }
 
     async function handleLoading(){

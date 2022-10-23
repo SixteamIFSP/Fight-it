@@ -22,7 +22,7 @@ export function CalendarTeacher({ navigation, route }){
 
     const view = {
         1:<CalendarView handleChangeView={setViewPosition} />,
-        2:<LoadingClass handleNewScreen={handleNewScreen}  user={user} navigation={navigation} />,
+        2:<LoadingClass handleBack={handleBack} handleNewScreen={handleNewScreen}  user={user} navigation={navigation} />,
         3:<AdicionarAula setback={handleBack} turmaId={turmaId} ></AdicionarAula>
     }
 

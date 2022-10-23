@@ -5,9 +5,8 @@ import { ClassText, ContainerFlat, ContainerList, ContentListagem } from "./styl
 import { CardAula } from "../cardAula";
 import { convertDataUTC, convertDateToBrString, dateSplit } from "../../utils/dateConvert";
 import { getCalendarList } from "../../controler/calendar";
-import { ContainerHeader } from "../calendarView/styles";
+import { ContainerHeader, TextHeader } from "../calendarView/styles";
 import { AddButton } from "../addButton";
-
 
 export function ListCalendarDates({selectedDate, addHandle}){
     const { user } = useUser();
@@ -15,7 +14,7 @@ export function ListCalendarDates({selectedDate, addHandle}){
 
     useEffect(() => {
         const date = dateSplit(selectedDate);
-        console.log(user);
+        console.log(selectedDate);
 
         getCalendarList(user.userID, date, user.tipoUsuario===1, setDates);
     }, [selectedDate]);
@@ -23,29 +22,31 @@ export function ListCalendarDates({selectedDate, addHandle}){
     return (
     <ContainerList>
         <ClassText>{"Aulas"}</ClassText>
+       
         <ContainerHeader>
-        <Text>
-            Aulas marcadas: {convertDateToBrString(new Date(selectedDate))}
-        </Text>
+            <Text>
+                Aulas marcadas: {convertDateToBrString(new Date(selectedDate))}
+            </Text>
 
-        {
-            user.tipoUsuario === 1 &&
-            <AddButton handle={addHandle} ></AddButton>
-        }
-        </ContainerHeader>
-        
-            <ContainerFlat>
-                { dates.length > 0 ? 
-                    <ContentListagem
-                    data={dates}
-                    renderItem={
-                        ({ item }) => <CardAula item={item}/>}
-                    >
-                    </ContentListagem>
-                    :
-                    <Text>Não há aulas para essa data</Text>
-                }
+            {
+                (user.tipoUsuario === 1) ?
             
+                <AddButton handle={addHandle} />
+                :<></>
+            }  
+            
+        </ContainerHeader>
+        <ContainerFlat>
+            { dates.length > 0 ? 
+                <ContentListagem
+                data={dates}
+                renderItem={
+                    ({ item }) => <CardAula item={item}/>}
+                >
+                </ContentListagem>
+                :
+                <Text>Não há aulas para essa data</Text>
+            }
         </ContainerFlat>
     </ContainerList>
     )

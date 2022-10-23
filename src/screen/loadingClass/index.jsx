@@ -3,10 +3,11 @@ import { useIsFocused } from "@react-navigation/native";
 import { Loading } from "../../components/loading";
 import { FlatList, Text } from "react-native";
 import { AddButton } from "../../components/addButton";
-import { CardTitle, CardView, ContainerList } from "./styles";
+import { CardTitle, CardView, ContainerList, ViewButton } from "./styles";
 import { getClass } from "../../controler/class";
 import { useTranslation } from "react-i18next";
 import { useUser } from "../../hooks/user";
+import { Button } from "../../components/button";
 
 function CardTurma({ data, handleNewScreen }) {
     const { t } = useTranslation()
@@ -31,7 +32,7 @@ function CardTurma({ data, handleNewScreen }) {
     )
 };
 
-export function LoadingClass({handleNewScreen,  user, setCreateNew, navigation }) {
+export function LoadingClass({handleNewScreen, handleBack,  user, setCreateNew, navigation }) {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const isFocused = useIsFocused();
@@ -83,6 +84,12 @@ export function LoadingClass({handleNewScreen,  user, setCreateNew, navigation }
                     :<Text >Este professor não possui turmas</Text>
                 }
             </ContainerList>
+           {
+            handleBack!==undefined &&
+                <ViewButton>
+                    <Button handle={handleBack} text={"Voltar"}></Button>
+                </ViewButton>
+           }
         </>
     )
 };

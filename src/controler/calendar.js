@@ -20,7 +20,6 @@ export async function getCalendar(id, type, setDates){
 }
 
 export async function getCalendarList(id, date, type, setDates){
-
     try {
         let response;
         if (type){
