@@ -27,10 +27,9 @@ export function CardAula({item}){
 
             </InfoContainer>
             <ButtonsContainer>
-                <Button handle={handle} text="Apagar"></Button>
                 <Button></Button>
+                <Button handle={handle} text="Apagar"></Button>
             </ButtonsContainer>
-
         </Container>
 
 

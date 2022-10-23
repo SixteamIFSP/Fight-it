@@ -1,31 +1,30 @@
 import { useEffect, useState } from "react";
 import { ScrollView } from "react-native";
 import { getTriagem } from "../../controler/triagem";
+import { convertDateToBrString } from "../../utils/dateConvert";
 import { Container, TextAnswer, TextQuestion, TextTitle } from './style'
 
-export function TriagemView({ route }) {
+export function TriagemView({ route, route:{params}}) {
+    const { studantId } = params;
+    
     const [dadosTriagem, setDadosTriagem] = useState({
         objetivo: '',
-        dataNascimento: '',
-        altura: '',
-        peso: '',
-        problemaOrtopedico: false,
-        problemaOrtopedicoResposta: '',
-        doencasCronicas: false,
-        doencasCronicasResposta: '',
-        lesoes: false,
-        lesoesResposta: '',
-        jaFezExercicios: false,
-        jaFezExerciciosResposta: '',
+        Data_Nascimento: '',
+        Altura: '',
+        Peso: '',
+        Problema_Ortopedico: "0",
+        Doencas_Cronicas: "0",
+        Lesoes: "0",
         comentario: ''
     })
     const [theresTriagem, setTheresTriagem] = useState(true)
 
     useEffect(() => {
         //route.params?.studentId. Enquanto não temos triagem criada com o ID do aluno, colocamos id
-        getTriagem(5).then(response => {
+        getTriagem(studantId).then(response => {
             if (response) {
-                setDadosTriagem(response)
+                console.log(response);
+                setDadosTriagem(response[0]);
             }
         }).catch(e => {
             setTheresTriagem(false)
@@ -37,33 +36,23 @@ export function TriagemView({ route }) {
             <Container>
                 <TextTitle>Última triagem</TextTitle>
 
-                <TextQuestion>Objetivo: </TextQuestion>
-                <TextAnswer>{dadosTriagem.altura}</TextAnswer>
-
                 <TextQuestion>Altura: </TextQuestion>
-                <TextAnswer>{dadosTriagem.altura}</TextAnswer>
+                <TextAnswer>{dadosTriagem?.Altura}</TextAnswer>
 
                 <TextQuestion>Peso: </TextQuestion>
-                <TextAnswer>{dadosTriagem.peso}</TextAnswer>
-
-                <TextQuestion>Data de nascimento: </TextQuestion>
-                <TextAnswer>{dadosTriagem.dataNascimento}</TextAnswer>
+                <TextAnswer>{dadosTriagem?.Peso}</TextAnswer>
 
                 <TextQuestion>Alguma lesão?: </TextQuestion>
-                <TextAnswer>{dadosTriagem.lesoes ? 'Sim' : 'Não'}. {dadosTriagem.lesoesResposta}</TextAnswer>
+                <TextAnswer>{dadosTriagem?.Lesoes !== "0" ? 'Sim' : 'Não'}. {dadosTriagem.Lesoes === '0' ? '' : dadosTriagem.Lesoes}</TextAnswer>
 
                 <TextQuestion>Algum problema ortopédico?: </TextQuestion>
-                <TextAnswer>{dadosTriagem.problemaOrtopedico ? 'Sim' : 'Não'}. {dadosTriagem.lesoesResposta}</TextAnswer>
+                <TextAnswer>{dadosTriagem?.Problema_Ortopedico !== "0" ? 'Sim' : 'Não'}. {dadosTriagem.Problema_Ortopedico === '0' ? '' : dadosTriagem.Problema_Ortopedico}</TextAnswer>
 
                 <TextQuestion>Alguma doença crónica?: </TextQuestion>
-                <TextAnswer> {dadosTriagem.doencasCronicas ? 'Sim' : 'Não'}. {dadosTriagem.doencasCronicasResposta}</TextAnswer>
-
-
-                <TextQuestion>Já fez exercícios?: </TextQuestion>
-                <TextAnswer> {dadosTriagem.jaFezExercicios ? 'Sim' : 'Não'}. {dadosTriagem.jaFezExerciciosResposta}</TextAnswer>
+                <TextAnswer> {dadosTriagem?.Doencas_Cronicas !== "0" ? 'Sim' : 'Não'}. {dadosTriagem.Doencas_Cronicas === '0' ? '' : dadosTriagem.Doencas_Cronicas}</TextAnswer>
 
                 <TextQuestion>Comentário: </TextQuestion>
-                <TextAnswer>{dadosTriagem.comentario}</TextAnswer>
+                <TextAnswer>{dadosTriagem?.comentario}</TextAnswer>
 
             </Container>
         </ScrollView>

@@ -60,7 +60,7 @@ export function CreateTriagem({ navigation, route }) {
   async function handleConfirm() {
     if (inputValidations()) {
       const data = {
-        dataNascimento: date.toLocaleDateString(),
+        dataNascimento: date,
         altura,
         peso,
         problemaOrtopedico: probOrtopedico,
