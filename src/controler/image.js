@@ -39,9 +39,6 @@ export async function setImagePerson (responseImage){
         },
     }
 
-    console.log(data[1]);
-
-
     try {
         if (responseImage.tipoUsuario===1){
             response = await api.post(`/imagem/document/pfp/professor`, {professor:responseImage.userID, imagekey: responseImage.Key});

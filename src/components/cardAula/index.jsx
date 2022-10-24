@@ -1,10 +1,22 @@
 import React from "react";
 import { Text, View } from "react-native";
+import { removeAula } from "../../controler/class";
+import { useModal } from "../../hooks/modalConfirmation";
 import { convertDateToBrString, convertDateToTimeString } from "../../utils/dateConvert";
 import { Button } from "../button";
 import { ButtonsContainer, Container, InfoContainer } from "./styles";
 
 export function CardAula({item}){
+    const { changeModal, setCallback } = useModal();
+
+    function handle(){
+        callModal();
+        changeModal();
+    }
+
+    function callModal(){
+        setCallback("Apagar aula?", ()=>removeAula(item.id))
+    }
 
     return (
         <Container>
@@ -16,9 +28,8 @@ export function CardAula({item}){
             </InfoContainer>
             <ButtonsContainer>
                 <Button></Button>
-                <Button></Button>
+                <Button handle={handle} text="Apagar"></Button>
             </ButtonsContainer>
-
         </Container>
 
 

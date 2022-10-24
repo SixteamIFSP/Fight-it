@@ -20,7 +20,6 @@ export function AdicionarAluno({ turmaId, setback }){
         async function  handleBusca(){
             Keyboard.dismiss();
             const value = InputQueryRef?.current.text
-            console.log(value);
             if (!value) return
  
             setLoading(true)

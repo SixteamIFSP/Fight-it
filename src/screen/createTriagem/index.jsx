@@ -60,7 +60,7 @@ export function CreateTriagem({ navigation, route }) {
   async function handleConfirm() {
     if (inputValidations()) {
       const data = {
-        dataNascimento: date.toLocaleDateString(),
+        dataNascimento: date,
         altura,
         peso,
         problemaOrtopedico: probOrtopedico,
@@ -151,7 +151,7 @@ export function CreateTriagem({ navigation, route }) {
               value={date}
               mode="date"
               format="DD-MM-YYYY"
-              maximumDate={new Date()}
+              maximumDate={new Date(2017, 2, 1)}
               is24Hour={true}
               display="default"
               onChange={(_, date) => {
