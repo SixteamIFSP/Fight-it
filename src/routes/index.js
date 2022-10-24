@@ -22,6 +22,8 @@ function StackLoged() {
   const { t } = useTranslation();
   const { user } = useUser();
 
+  
+
   const Teacher = () => {
     return (
     <TabNavegation.Navigator  initialRouteName="HomeScreenTeacher"  screenOptions={({ route }) => ({

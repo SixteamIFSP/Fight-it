@@ -23,7 +23,8 @@ export function stringTimeSlice(date){
 }
 
 export function convertDateToBrString(date){
-    let string = date.toISOString();
+    const dateNew = new Date(date);
+    let string = dateNew.toISOString();
     string  = dateSplit(string);
     return dateToBrDefault(string)
 }

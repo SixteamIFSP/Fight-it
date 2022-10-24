@@ -10,7 +10,6 @@ export async function createTriagem(data, alunoId){
         } else{
             toastMessage(false, response?.data.mensagem)   
         }
-        
     } catch (error) {
         toastMessage(false, 'Erro de conexão!') 
     }

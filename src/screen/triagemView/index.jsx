@@ -6,33 +6,28 @@ import { Container, TextAnswer, TextQuestion, TextTitle } from './style'
 
 export function TriagemView({ route, route:{params}}) {
     const { studantId } = params;
-    
-    const [dadosTriagem, setDadosTriagem] = useState({
-        objetivo: '',
-        Data_Nascimento: '',
-        Altura: '',
-        Peso: '',
-        Problema_Ortopedico: "0",
-        Doencas_Cronicas: "0",
-        Lesoes: "0",
-        comentario: ''
-    })
-    const [theresTriagem, setTheresTriagem] = useState(true)
+    const [dadosTriagem, setDadosTriagem] = useState(null)
 
     useEffect(() => {
         //route.params?.studentId. Enquanto não temos triagem criada com o ID do aluno, colocamos id
         getTriagem(studantId).then(response => {
             if (response) {
                 console.log(response);
+
+
                 setDadosTriagem(response[0]);
             }
-        }).catch(e => {
-            setTheresTriagem(false)
         })
     }, [])
 
     return (
-        <ScrollView style={{ flex: 1, padding: 10 }}>
+        <ScrollView style={{ flex: 1, padding: 10 }}>{
+            !dadosTriagem ? 
+            <Container>
+                <TextTitle>Última triagem: 00-00-0000</TextTitle>
+                <TextQuestion>Aluno não possui triagem. </TextQuestion>
+            </Container>
+            :
             <Container>
                 <TextTitle>Última triagem</TextTitle>
 
@@ -52,9 +47,10 @@ export function TriagemView({ route, route:{params}}) {
                 <TextAnswer> {dadosTriagem?.Doencas_Cronicas !== "0" ? 'Sim' : 'Não'}. {dadosTriagem.Doencas_Cronicas === '0' ? '' : dadosTriagem.Doencas_Cronicas}</TextAnswer>
 
                 <TextQuestion>Comentário: </TextQuestion>
-                <TextAnswer>{dadosTriagem?.comentario}</TextAnswer>
+                <TextAnswer>{dadosTriagem?.comentario || 'Não há comentário'}</TextAnswer>
 
             </Container>
+        }
         </ScrollView>
     )
 }
