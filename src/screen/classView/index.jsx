@@ -8,7 +8,7 @@ import { adicionarAluno, adicionarAula, getAllDataClass , removeAula } from "../
 import { Loading } from "../../components/loading";
 import { toastMessage } from "../../utils/toastMessage";
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { MaterialIcons } from '@expo/vector-icons';
+import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
 
 import {
     Container,
@@ -31,7 +31,8 @@ import {
     styles,
     Divisor,
     ClassDateContainer,
-    AddEquipamentContainer
+    AddEquipamentContainer,
+    ContainerHeader
 } from "./styles";
 import Divider from 'react-native-divider';
 import { useModal } from "../../hooks/modalConfirmation";
@@ -39,6 +40,8 @@ import { useIsFocused } from "@react-navigation/native";
  import { deleteTurma } from '../../controler/class';
 import { LessonView } from "../LessonView";
 import { useUser } from "../../hooks/user";
+import { AdicionarAluno } from "../../components/addAuno";
+import { EditTurma } from "../../components/editTurma";
 
 
 function AdicionarAula({ turmaId, setback }) {
@@ -78,6 +81,7 @@ function AdicionarAula({ turmaId, setback }) {
     }
 
     return (
+        <ScrollView>
         <AdicionarAulaContainer>
             <TextDescription>Adicionar aula</TextDescription>
             <Input
@@ -184,6 +188,7 @@ function AdicionarAula({ turmaId, setback }) {
                 handleConfirm={handleSubmit}
             />
         </AdicionarAulaContainer>
+        </ScrollView>
     )
 }
 
@@ -207,66 +212,18 @@ const RenderListAluno = ({ item, navigation, data, student }) => {
         </TextTouchable>
     );
 };
-function AdicionarAluno({ turmaId, setback }) {
-    const { t } = useTranslation();
-    const [loading, setLoading] = useState(false);
-    const [mail, setMail] = useState('');
 
-    function handleBack() {
-        setback()
-    }
-    async function handleSubmit() {
-        if (mail === '' || mail.indexOf("@") === -1) {
-            toastMessage(false, t("toast.error.invalid.email"));
-            setback(false);
 
-            return
-        };
-        setLoading(true)
-        const data = {
-            email: mail,
-            turmaId: turmaId,
-        };
-        await adicionarAluno(data);
-        setLoading(false)
-        setback(false);
-    };
+function RenderAula({ aula, onDeleteAula, onSelectAula, student, handleViewAula }) {
 
     return (
-        <AddContainerView>
-            <Divider
-                borderColor="#000"
-                color="#000"
-                orientation="center"
-            >{t('addStudentClass.Header')}
-            </Divider>
-            <Input
-                style={{ marginTop: 20 }}
-                value={mail}
-                placeholder={t("addStudentClass.Placeholder.mail")}
-                keyboardType="email-address"
-                onChangeText={setMail}
-            />
-            {
-                !loading ?
-                    <DoubleButtonConfirmation
-                        handleBack={handleBack}
-                        handleConfirm={handleSubmit
-                        }
-                    />
-                    :
-                    <Loading loading={loading} size={18} />
-            }
-        </AddContainerView>
-    )
-};
-
-
-
-function RenderAula({ aula, onDeleteAula }) {
-
-    return (
-        <RenderAulaContainer>
+        <RenderAulaContainer onPress={() => {
+            if(student) {
+                handleViewAula()
+                return 
+            } 
+            onSelectAula(aula.nome, aula.id)
+            }}>
             <Text>{aula.nome}</Text>
             <CancelarAula
                 onPress={() => onDeleteAula(aula)}>
@@ -319,6 +276,14 @@ export function ClassView({ navigation, route }) {
         removeAula(aula.id)
     }
 
+    function onSelectAula(nometurma, aulaid) { 
+        navigation.navigate('MaterialExtra', {title:'Upload do material extra', nometurma, aulaid});
+    }
+    
+    function updateClass(){
+        navigation.goBack();
+    }
+
     useEffect(() => {
         if (!isFocused) return;
         function effect() {
@@ -331,8 +296,15 @@ export function ClassView({ navigation, route }) {
 
     const pageView = {
         1:
-            <ContainerListColumn>
-            <ClassText>{Descricao}</ClassText>
+            (<ContainerListColumn>
+                <ContainerHeader>
+                    <ClassText>{Descricao}</ClassText>
+
+                    <TouchableOpacity onPress={() => handleOpenPage(5)}>
+                        <FontAwesome name={'pencil'} size={30} color="black" />
+                    </TouchableOpacity>
+
+                </ContainerHeader>
                 <ContainerList>
                     <ClassText>{t('classView.Student.Header')}</ClassText>
                     
@@ -377,7 +349,7 @@ export function ClassView({ navigation, route }) {
                                         ({ item }) => <RenderAula handleViewAula={(aulaid) => {
                                             setAulaID(aulaid)
                                             handleOpenPage(4)
-                                        }} aula={item} onDeleteAula={onDeleteAula} student={student} />
+                                        }} aula={item} onDeleteAula={onDeleteAula} onSelectAula={onSelectAula} student={student} />
                                     }
                                     keyExtractor={item => `${item.id}-${item.nome}-dataAula`}>
                                 </ContentListagem>
@@ -386,10 +358,12 @@ export function ClassView({ navigation, route }) {
                         }
                     </ContainerFlat>
                 </ContainerList>
-            </ContainerListColumn>,
+            </ContainerListColumn>),
         2: <AdicionarAluno setback={callback} turmaId={id}></AdicionarAluno>,
         3: <AdicionarAula turmaId={id} setback={callback} />,
-        4: <LessonView aulaid={aulaid} onBack={() => handleOpenPage(1)} />
+        4: <LessonView navigation={navigation} aulaid={aulaid} onBack={() => handleOpenPage(1)} />,
+        5: <EditTurma navigation={navigation} turmaId={id} setback={()=>callback()}></EditTurma>
+        
     }
 
     return (
