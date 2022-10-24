@@ -19,10 +19,7 @@ function UserProvider({ children }) {
     pfp: "f9d20e32d01fe870da44cc00067b6dbf",
 }
     const [user, setUser] = useState(data ? data : null);
-
-    u
-
-
+    
     async function modifyUser(value){
         setUser(value)
     }
