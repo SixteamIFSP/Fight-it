@@ -3,15 +3,30 @@ import { styles as stylesGlobal } from "../../global/styles";
 import { ButtonLogout } from "../../components/buttonLogout";
 import { useTranslation } from "react-i18next";
 import { useUser } from "../../hooks/user";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ContainerExitButton, ContainerText } from "./styles";
+import { generatePushNotificationsToken } from "../../services/generetePushNotificationToken";
 
 export function HomeScreen({ navigation }) {
   const { t } = useTranslation();
-  const { user } = useUser();
+  const { user, modifyUser } = useUser();
 
-  console.log(user);
+  async function getNotification (){
+   
+    //registerForPushNotificationsAsync()
+    const date = await generatePushNotificationsToken();
+    
+    console.log({ date });
+    return date
+  }
 
+  useEffect(async () => {
+    //console.log(user);
+    if(user.token) return
+    const newToken =  await getNotification();
+    modifyUser({...user, token:newToken})
+    
+  }, []);
   return (
     <View style={stylesGlobal.container}>
       <ContainerExitButton>

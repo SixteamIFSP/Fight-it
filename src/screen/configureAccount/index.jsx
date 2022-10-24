@@ -173,7 +173,8 @@ export const ChangePassword = ({ editable, setEditable }) => {
                     senhaAntiga: oldPass,
                     senha: newSenha
                 }
-                ChangePassowrd(data, user.TipoUsuario === 1)
+
+                ChangePassowrd(data, user.tipoUsuario == 1)
 
             } else {
 

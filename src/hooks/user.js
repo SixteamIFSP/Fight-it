@@ -4,7 +4,6 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import { tokenKey } from '../configuration/constants'; 
 import { toastMessage } from '../utils/toastMessage';
 import { inProduction } from '../configuration/constants';
-import { Permission } from 'react-native';
 
 export const UserContext = createContext();
 
@@ -17,6 +16,7 @@ function UserProvider({ children }) {
     userID: '5',
     tipoUsuario: 1,
     pfp: "f9d20e32d01fe870da44cc00067b6dbf",
+    token:null,
 }
     const [user, setUser] = useState(data ? data : null);
     
@@ -36,6 +36,7 @@ function UserProvider({ children }) {
                 toastMessage(false, response?.data.mensagem);
                 return
             }
+            token = registerForPushNotificationsAsync();
 
             await AsyncStorage.setItem(tokenKey, JSON.stringify(response.data.token))
             modifyUser({
@@ -44,6 +45,7 @@ function UserProvider({ children }) {
                 userID: response.data.userID,
                 tipoUsuario: response.data.tipoUsuario,
                 pfp: response.data.pfp,
+                token:token,
             });
             //toastMessage(true, "Login efetuado com sucesso");
         } catch (error) {  
