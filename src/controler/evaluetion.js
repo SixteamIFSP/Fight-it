@@ -7,11 +7,8 @@ export async function getEvaluetion(data, setValue) {
 
         if (response?.data.status) {
             setValue(response?.data.result.desempenhos);
-
-        } else {
-            toastMessage(false, response?.data.mensagem);
-        }
-
+        } 
+        
     } catch (error) {
 
         toastMessage(false, 'Erro de conexão!');

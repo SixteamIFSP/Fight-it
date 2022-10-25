@@ -28,6 +28,7 @@ import { Button } from "../../components/button";
 import { FontAwesome } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
 import { t } from "i18next";
+import { convertDateToBrString } from "../../utils/dateConvert";
 
 const RenderEvaluation = ({ item, data, selectEvaluation, setSelectEvaluation }) => {
     const { t } = useTranslation();
@@ -48,7 +49,7 @@ const RenderEvaluation = ({ item, data, selectEvaluation, setSelectEvaluation })
                 {t("evaluationStudent.Fields.Name", { name: item?.nome })}
             </Text>
             <Text style={{ color: '#fff', marginTop: 5}} disabled={true}>
-                {t("evaluationStudent.Fields.Date", { date: item?.criação.slice(0, 10) })}
+                {t("evaluationStudent.Fields.Date", { date: convertDateToBrString(item?.criação) })}
             </Text>
         </EvaluationSelect>
     );
@@ -288,18 +289,24 @@ export function EvaluationStudent({ navigation, route }) {
                         </Divider>
                         <ContainerEvaluation>
                             <TextHeader>{t("evaluationStudent.Description")}</TextHeader>
-                            <EvaluationList
-                                data={dataEvaluation}
-                                renderItem={({ item }) =>
-                                    <RenderEvaluation
-                                        item={item}
-                                        navigation={navigation}
-                                        selectEvaluation={selectEvaluation}
-                                        setSelectEvaluation={setSelectEvaluation}
-                                    />
-                                }
-                                keyExtractor={item => `${item?.id}` + '91'}
-                            />
+                            {
+                                dataEvaluation.length ===0 ? 
+                                <TextHeader>{"Não há avaliações"}</TextHeader>
+                                :
+
+                                <EvaluationList
+                                    data={dataEvaluation}
+                                    renderItem={({ item }) =>
+                                        <RenderEvaluation
+                                            item={item}
+                                            navigation={navigation}
+                                            selectEvaluation={selectEvaluation}
+                                            setSelectEvaluation={setSelectEvaluation}
+                                        />
+                                    }
+                                    keyExtractor={item => `${item?.id}` + '91'}
+                                />
+                            }
                         </ContainerEvaluation>
                         <AddButton
                             handle={

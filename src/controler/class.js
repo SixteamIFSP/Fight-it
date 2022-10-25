@@ -9,11 +9,13 @@ export async function getClass(setClasses, idUsuario, type){
         if (type){
             response = await api.get(`/turma/busca/${idUsuario}`);
        } else {
-            response = await api.get(`/turma/busca/${idUsuario}`);
+            response = await api.get(`/turma/busca/aluno/${idUsuario}`);
        }
-       setClasses(response?.data.resultado || []);
        
+       console.log(response?.data);
+       setClasses(response?.data.resultado || []);
     } catch (error) {
+        console.log(error);
         toastMessage(false, 'Erro de conexão!');
     }
 }

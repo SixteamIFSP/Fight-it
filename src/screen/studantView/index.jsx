@@ -18,6 +18,7 @@ import { useIsFocused } from "@react-navigation/native";
 import { useModal } from "../../hooks/modalConfirmation";
 import { deleteAluno } from "../../controler/class";
 import { useUser } from "../../hooks/user";
+import { convertDateToBrString } from "../../utils/dateConvert";
 
 function CardParamStudant({ item, handleGraphyc }) {
 
@@ -67,8 +68,6 @@ export function StudantView({ navigation, route:{params} }) {
             aluno: studantId,
             turma: id,
         }
-
-     
 
         await getParamsAluno(data, setParamsAluno);
         setLoading(false);
@@ -151,10 +150,10 @@ export function StudantView({ navigation, route:{params} }) {
                 {loadingGraphyc &&
                     <LineChart
                         data={{
-                            labels: dataParams?.map((value) => value?.data.slice(0, 10)),
+                            labels: ['', ...dataParams?.map((value) => convertDateToBrString(value?.data))],
                             datasets: [
                                 {
-                                    data: dataParams?.map((value) => value.valor)
+                                    data: [0, ...dataParams?.map((value) => value.valor)]
                                 }
                             ]
                         }}

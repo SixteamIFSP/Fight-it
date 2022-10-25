@@ -4,6 +4,7 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import { tokenKey } from '../configuration/constants'; 
 import { toastMessage } from '../utils/toastMessage';
 import { inProduction } from '../configuration/constants';
+import { Permission } from 'react-native';
 
 export const UserContext = createContext();
 
@@ -17,9 +18,8 @@ function UserProvider({ children }) {
     tipoUsuario: 1,
     pfp: "f9d20e32d01fe870da44cc00067b6dbf",
 }
-
     const [user, setUser] = useState(data ? data : null);
-
+    
     async function modifyUser(value){
         setUser(value)
     }
@@ -45,7 +45,7 @@ function UserProvider({ children }) {
                 tipoUsuario: response.data.tipoUsuario,
                 pfp: response.data.pfp,
             });
-            toastMessage(true, "Login efetuado com sucesso");
+            //toastMessage(true, "Login efetuado com sucesso");
         } catch (error) {  
             toastMessage(false, "Erro de conexão!");
         }
