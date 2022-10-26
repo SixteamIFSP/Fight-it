@@ -243,8 +243,6 @@ export const ChangePassword = ({ editable, setEditable }) => {
             setEditable((value) => !value)
         } else {
             //logica de envio
-            console.log(newPassword, 'newPassword');
-
             if (newPassword !== '' && (newPassword.length >= 6) && (confirmNewPassword === newPassword) && oldPass !== '') {
                 setNewPasswordEmpty(false);
                 setConfirmNewPasswordEmpty(false);
@@ -261,7 +259,7 @@ export const ChangePassword = ({ editable, setEditable }) => {
                     setNewPasswordEmpty(true);
                 }
                 if (!confirmNewPassword) {
-                    setConfirmNewPassword(true);
+                    setConfirmNewPasswordEmpty(true);
                 }
                 if (!oldPass) {
                     setOldPassEmpty(true);
@@ -280,30 +278,30 @@ export const ChangePassword = ({ editable, setEditable }) => {
                 <TextHeader>{t("changePass.Header")}</TextHeader>
                 <TextDescription>{t("changePass.OldPass")}</TextDescription>
                 <Input
-                    style={{ marginBottom: 10, width: '100%' }}
+                    style={{ marginBottom: 6, width: '100%' }}
                     secureTextEntry={true}
                     value={oldPass}
-                    onChangeText={(value)=>{setOldPass(value); setOldPassEmpty(false)}}
+                    onChangeText={(value) => { setOldPass(value); setOldPassEmpty(false) }}
                     errorMessage={oldPasswordEmpty ? t('createAccount.requiredField') : ''}
                 ></Input>
                 <TextDescription>{t("changePass.NewPass")}</TextDescription>
                 <Input
-                    style={{ marginBottom: 10, width: '100%' } }
+                    style={{ marginBottom: 6, width: '100%' }}
                     secureTextEntry={true}
                     value={newPassword}
-                    onChangeText={setNewPassword}
+                    onChangeText={(value) => { setNewPassword(value); setNewPasswordEmpty(false) }}
                     errorMessage={newPasswordEmpty ? t('createAccount.requiredField') : ''}
                 ></Input>
                 <TextDescription>{t("changePass.ConfirmPass")}</TextDescription>
                 <Input
-                    style={{ marginBottom: 10, width: '100%' }}
+                    style={{ marginBottom: 6, width: '100%' }}
                     secureTextEntry={true}
                     value={confirmNewPassword}
-                    onChangeText={setConfirmNewPassword}
+                    onChangeText={(value) => { setConfirmNewPassword(value); setConfirmNewPasswordEmpty(false) }}
                     errorMessage={confirmPasswordEmpty ? t('createAccount.requiredField') : ''}>
                 </Input>
                 {
-                    newPassword !== confirmNewPassword
+                    (newPassword && confirmNewPassword) && (newPassword !== confirmNewPassword)
                         ?
                         <Text
                             style={{

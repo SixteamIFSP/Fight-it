@@ -221,7 +221,7 @@ export function CreateAccount({ navigation }) {
 
                     />
                     {
-                        password !== passwordConfirm
+                        (password !== passwordConfirm)
                             ?
                             <Text style={styles.passwordsDontMatch}>{t('createAccount.passwordsDontMatch')}</Text>
                             :

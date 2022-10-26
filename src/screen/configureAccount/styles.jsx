@@ -33,6 +33,7 @@ export const TextDescription = styled.Text`
     text-align:left;
     margin-right:10px;
     margin-left:10px;
+    margin-top:16px;
 `;
 export const TextInfo = styled.Text`
     width:80%;
@@ -56,7 +57,7 @@ export const ContainerSVG = styled.TouchableOpacity`
 `;
 export const ContainerCancelButton = styled.TouchableOpacity`
     width:50%;
-    margin-top: 16px;
+    margin-top: 25px;
     margin-left:auto;
     margin-right: auto;
 `;
