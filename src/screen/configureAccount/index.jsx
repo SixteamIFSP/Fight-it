@@ -231,24 +231,22 @@ export const ChangePassword = ({ editable, setEditable }) => {
     const { user } = useUser();
 
     const [oldPass, setOldPass] = useState('');
-    const [newSenha, setNewSenha] = useState('');
-    const [confirm, setConfirm] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+    const [confirmNewPassword, setConfirmNewPassword] = useState('');
 
     function save() {
         if (!editable) {
             setEditable((value) => !value)
         } else {
             //logica de envio
-            if (newSenha !== '' & newSenha.length > 6 & confirm === newSenha & oldPass !== '') {
+            if (newPassword !== '' & newPassword.length > 6 & confirmNewPassword === newPassword & oldPass !== '') {
                 let data = {
                     id: user.userID,
                     senhaAntiga: oldPass,
-                    senha: newSenha
+                    senha: newPassword
                 }
                 ChangePassowrd(data, user.TipoUsuario === 1)
-
             } else {
-
                 toastMessage(false, "A confirmação das senhas não conferem"); // sem t
                 //toastMessage(false,  t("msg.completeFields")); // com t 
             }
@@ -271,18 +269,16 @@ export const ChangePassword = ({ editable, setEditable }) => {
                     onChangeText={setOldPass}></Input>
                 <TextDescription>{t("changePass.NewPass")}</TextDescription>
                 <Input
-
                     style={{ marginBottom: 10, width: '100%' }}
                     secureTextEntry={true}
-                    value={newSenha}
-                    onChangeText={setNewSenha}></Input>
-
+                    value={newPassword}
+                    onChangeText={setNewPassword}></Input>
                 <TextDescription>{t("changePass.ConfirmPass")}</TextDescription>
                 <Input
                     style={{ marginBottom: 10, width: '100%' }}
                     secureTextEntry={true}
-                    value={confirm}
-                    onChangeText={setConfirm}>
+                    value={confirmNewPassword}
+                    onChangeText={setConfirmNewPassword}>
                 </Input>
 
                 <RowConfirmation>
