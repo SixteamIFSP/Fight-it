@@ -66,7 +66,7 @@ const DataUser = () => {
         if (value.length < 11) {
             setInvalidPhoneLengthMessage(t('createAccount.invalidPhoneNumber'));
             setTelefone(value);
-        } else { 
+        } else {
             setInvalidPhoneLengthMessage('');
             setTelefone(value);
         }
@@ -234,24 +234,41 @@ export const ChangePassword = ({ editable, setEditable }) => {
     const [newPassword, setNewPassword] = useState('');
     const [confirmNewPassword, setConfirmNewPassword] = useState('');
 
+    const [newPasswordEmpty, setNewPasswordEmpty] = useState(false);
+    const [confirmPasswordEmpty, setConfirmNewPasswordEmpty] = useState(false);
+    const [oldPasswordEmpty, setOldPassEmpty] = useState(false);
+
     function save() {
         if (!editable) {
             setEditable((value) => !value)
         } else {
             //logica de envio
-            if (newPassword !== '' & newPassword.length > 6 & confirmNewPassword === newPassword & oldPass !== '') {
+            console.log(newPassword, 'newPassword');
+
+            if (newPassword !== '' && (newPassword.length >= 6) && (confirmNewPassword === newPassword) && oldPass !== '') {
+                setNewPasswordEmpty(false);
+                setConfirmNewPasswordEmpty(false);
+                setOldPassEmpty(false);
                 let data = {
                     id: user.userID,
                     senhaAntiga: oldPass,
                     senha: newPassword
                 }
-                ChangePassowrd(data, user.TipoUsuario === 1)
+                ChangePassowrd(data, user.TipoUsuario === 1);
+                setEditable((value) => !value)
             } else {
-                toastMessage(false, "A confirmação das senhas não conferem"); // sem t
+                if (!newPassword) {
+                    setNewPasswordEmpty(true);
+                }
+                if (!confirmNewPassword) {
+                    setConfirmNewPassword(true);
+                }
+                if (!oldPass) {
+                    setOldPassEmpty(true);
+                }
+                toastMessage(false, "Digite os campos corretamente !"); // sem t
                 //toastMessage(false,  t("msg.completeFields")); // com t 
             }
-            setEditable((value) => !value)
-
         }
     };
     function cancel() {
@@ -266,21 +283,37 @@ export const ChangePassword = ({ editable, setEditable }) => {
                     style={{ marginBottom: 10, width: '100%' }}
                     secureTextEntry={true}
                     value={oldPass}
-                    onChangeText={setOldPass}></Input>
+                    onChangeText={(value)=>{setOldPass(value); setOldPassEmpty(false)}}
+                    errorMessage={oldPasswordEmpty ? t('createAccount.requiredField') : ''}
+                ></Input>
                 <TextDescription>{t("changePass.NewPass")}</TextDescription>
                 <Input
-                    style={{ marginBottom: 10, width: '100%' }}
+                    style={{ marginBottom: 10, width: '100%' } }
                     secureTextEntry={true}
                     value={newPassword}
-                    onChangeText={setNewPassword}></Input>
+                    onChangeText={setNewPassword}
+                    errorMessage={newPasswordEmpty ? t('createAccount.requiredField') : ''}
+                ></Input>
                 <TextDescription>{t("changePass.ConfirmPass")}</TextDescription>
                 <Input
                     style={{ marginBottom: 10, width: '100%' }}
                     secureTextEntry={true}
                     value={confirmNewPassword}
-                    onChangeText={setConfirmNewPassword}>
+                    onChangeText={setConfirmNewPassword}
+                    errorMessage={confirmPasswordEmpty ? t('createAccount.requiredField') : ''}>
                 </Input>
-
+                {
+                    newPassword !== confirmNewPassword
+                        ?
+                        <Text
+                            style={{
+                                color: 'red',
+                                alignSelf: 'center'
+                            }}
+                        >{t('createAccount.passwordsDontMatch')}</Text>
+                        :
+                        null
+                }
                 <RowConfirmation>
                     {
                         (editable) &&
@@ -290,14 +323,28 @@ export const ChangePassword = ({ editable, setEditable }) => {
                         </ContainerCancelButton>
                     }
 
-                    {!editable && (<ContainerSVG onPress={() => save()}>
-                        <FontAwesome name={'pencil'} size={30} color="black" />
-                    </ContainerSVG>)}
-                    {editable && <SaveButton onPress={() => save()} ><SaveButtonText>Salvar</SaveButtonText></SaveButton>}
+                    {
+                        !editable
+                        && (
+                            <ContainerSVG
+                                onPress={() => save()}
+                            >
+                                <FontAwesome
+                                    name={'pencil'}
+                                    size={30}
+                                    color="black"
+                                />
+                            </ContainerSVG>)}
+                    {
+                        editable
+                        && <SaveButton
+                            onPress={() => save()}
+                        ><SaveButtonText>Salvar</SaveButtonText>
+                        </SaveButton>}
 
                 </RowConfirmation>
 
-            </ConteinerInfo>
+            </ConteinerInfo >
             :
             <ButtonConfigure onPress={() => setEditable(true)}>
                 <TextButton>{t("configScreen.ChangePass")}</TextButton>
