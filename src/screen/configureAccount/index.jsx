@@ -92,7 +92,7 @@ const DataUser = () => {
             setEditable((value) => !value)
         } else {
             //logica de envio
-            if (nome !== '' && !invalidNameMessage && telefone !== '' && email === user.email) {
+            if (nome !== '' && !invalidNameMessage && !invalidPhoneLengthMessage && telefone !== '' && email === user.email) {
                 let data = {
                     id: user?.userID,
                     nome: nome,
