@@ -4,16 +4,22 @@ import { FontAwesome } from '@expo/vector-icons';
 import { Input } from "../../components/input";
 import { CheckBox } from "../../components/checkbox";
 import { MaterialIcons } from '@expo/vector-icons';
+import { toastMessage } from "../../utils/toastMessage";
+import * as ImagePicker from 'expo-image-picker';
+import { useTranslation } from 'react-i18next';
+import { Image, Text, View } from "react-native";
+import { upload } from "../../controler/image";
+import { variables } from "../../configuration/constants";
+import { Loading } from "../../components/loading";
+import { t } from "i18next";
+import inputValidators from '../../utils/inputValidators';
+import MaskInput, { Masks } from 'react-native-mask-input';
 import {
     ChangeInfoAccount,
     ChangePassowrd,
     DeleteAccount,
     GetUserAccount
 } from "../../controler/account";
-import { toastMessage } from "../../utils/toastMessage";
-import * as ImagePicker from 'expo-image-picker';
-import { useTranslation } from 'react-i18next';
-
 import {
     ButtonConfigure,
     CancelButton,
@@ -37,21 +43,35 @@ import {
     SaveButton,
     SaveButtonText
 } from "./styles";
-import { Image } from "react-native";
-import { upload } from "../../controler/image";
-import { variables } from "../../configuration/constants";
-import { Loading } from "../../components/loading";
-import { t } from "i18next";
 
 // Compomente de SHOW e EDIT de dados do usuário
 const DataUser = () => {
+    const { validationEmail, validationName } = inputValidators();
     const { user, modifyUser } = useUser();
     const [dataUser, setDataUser] = useState();
     const [editable, setEditable] = useState(false);
     const [nome, setNome] = useState(`${user?.nome}`);
     const [email, setEmail] = useState(`${user?.email}`);
     const [telefone, setTelefone] = useState('');
-    const [notification, setNotification] = useState()
+    const [notification, setNotification] = useState();
+
+    const [invalidNameMessage, setInvalidNameMessage] = useState('');
+    const [invalidPhoneLengthMessage, setInvalidPhoneLengthMessage] = useState('');
+
+    const handleNameInput = (value) => {
+        setInvalidNameMessage(validationName(value));
+        if (!invalidNameMessage) setNome(value);
+    };
+    const handlePhoneInput = (value) => {
+        if (value.length < 11) {
+            setInvalidPhoneLengthMessage(t('createAccount.invalidPhoneNumber'));
+            setTelefone(value);
+        } else { 
+            setInvalidPhoneLengthMessage('');
+            setTelefone(value);
+        }
+
+    };
 
     useEffect(() => {
         GetUserAccount(
@@ -72,7 +92,7 @@ const DataUser = () => {
             setEditable((value) => !value)
         } else {
             //logica de envio
-            if (nome !== '' & telefone !== '' & email === user.email) {
+            if (nome !== '' && !invalidNameMessage && telefone !== '' && email === user.email) {
                 let data = {
                     id: user?.userID,
                     nome: nome,
@@ -82,25 +102,28 @@ const DataUser = () => {
                 }
                 ChangeInfoAccount(data, user?.tipoUsuario === 1);
                 modifyUser({ ...user, nome: nome, })
-
+                setEditable((value) => !value)
             } else {
-                toastMessage(false, 'Erro ao Atualizar dados');
+                toastMessage(false, 'Digite os campos corretamente');
             }
-
-            setEditable((value) => !value)
         }
     }
+
     function cancel() {
         setEditable(false);
     }
 
     return (
         <ConteinerInfo>
-            <TextAlingLine style={{alignItems:'center'}}>
+            <TextAlingLine style={{ alignItems: 'center' }}>
                 <TextDescription>{t('form.name')}:</TextDescription>
                 {
                     editable ?
-                        <Input value={nome} onChangeText={setNome}></Input>
+                        <Input
+                            value={nome}
+                            onChangeText={(value) => handleNameInput(value)}
+                            errorMessage={invalidNameMessage || ''}
+                        ></Input>
                         : <TextInfo>{dataUser?.Nome ? dataUser?.Nome : user.nome}</TextInfo>
                 }
             </TextAlingLine>
@@ -108,22 +131,64 @@ const DataUser = () => {
                 <TextDescription>{t('form.mail')}:</TextDescription>
                 {
                     editable ?
-                        <Input editable={false} value={email}></Input>
+                        <Input
+                            editable={false}
+                            value={email}
+                        ></Input>
                         : <TextInfo>{dataUser?.Email ? dataUser?.Email : user.email}</TextInfo>
                 }
             </TextAlingLine>
             <TextAlingLine>
-                <TextDescription>{t('form.phone')}:</TextDescription>
+                <TextDescription>{t('form.phone')}</TextDescription>
                 {
                     editable ?
-                        <Input
-                            autoComplete={'tel'}
-                            keyboardType={'phone-pad'}
-                            value={telefone}
-                            placeholder={"Digite seu numero:"}
-                            onChangeText={setTelefone}
-                        ></Input>
-                        : <TextInfo>{dataUser?.Telefone}</TextInfo>
+                        <View style={{ width: '75%', alignSelf: 'flex-end' }}>
+                            <MaskInput
+                                style={{
+                                    width: '90%',
+                                    marginBottom: 12,
+                                    marginTop: 5,
+                                    borderWidth: 1,
+                                    borderTopWidth: 0,
+                                    borderLeftWidth: 0,
+                                    borderRightWidth: 0,
+                                    borderColor: 'black'
+                                }}
+                                onChangeText={(_, unmasked) => { handlePhoneInput(unmasked) }}
+                                value={telefone}
+                                placeholder={t('createAccount.phone')}
+                                mask={Masks.BRL_PHONE}
+                            />
+                            {
+                                invalidPhoneLengthMessage ?
+                                    <Text
+                                        style={{
+                                            width: '70%',
+                                            color: 'red'
+                                        }}
+                                    >{t('createAccount.invalidPhoneNumber')}
+                                    </Text>
+                                    :
+                                    null
+                            }
+                        </View>
+                        :
+                        <MaskInput
+                            style={{
+                                width: '100%',
+                                marginBottom: 12,
+                                marginTop: 5,
+                                borderWidth: 1,
+                                borderTopWidth: 0,
+                                borderLeftWidth: 0,
+                                borderRightWidth: 0,
+                                borderColor: 'white',
+                                fontSize: 18
+                            }}
+                            value={dataUser?.Telefone}
+                            placeholder={t('createAccount.phone')}
+                            mask={Masks.BRL_PHONE}
+                        />
                 }
             </TextAlingLine>
             <TextAlingLine>
@@ -134,7 +199,7 @@ const DataUser = () => {
                             isChecked={notification}
                             onPress={() => setNotification((value) => !value)}
                         ></CheckBox>
-                        : <TextInfo>{notification ? 'Ativo' : 'Desativado'}</TextInfo>
+                        : <TextInfo>{notification ? 'Sim' : 'Não'}</TextInfo>
                 }
             </TextAlingLine>
             <RowConfirmation>
@@ -145,11 +210,18 @@ const DataUser = () => {
                         <CancelButton>{t('validation.cancel')}</CancelButton>
                     </ContainerCancelButton>
                 }
-               
-               {!editable &&  (<ContainerSVG onPress={() => save()}>
+
+                {!editable && (<ContainerSVG onPress={() => save()}>
                     <FontAwesome name={'pencil'} size={30} color="black" />
                 </ContainerSVG>)}
-               {editable &&  <SaveButton onPress={() => save()} ><SaveButtonText>Salvar</SaveButtonText></SaveButton>}
+                {
+                    editable
+                    &&
+                    <SaveButton
+                        onPress={() => save()}
+                    >
+                        <SaveButtonText>Salvar</SaveButtonText>
+                    </SaveButton>}
             </RowConfirmation>
         </ConteinerInfo>
     )
@@ -222,10 +294,10 @@ export const ChangePassword = ({ editable, setEditable }) => {
                         </ContainerCancelButton>
                     }
 
-                    {!editable &&  (<ContainerSVG onPress={() => save()}>
-                    <FontAwesome name={'pencil'} size={30} color="black" />
+                    {!editable && (<ContainerSVG onPress={() => save()}>
+                        <FontAwesome name={'pencil'} size={30} color="black" />
                     </ContainerSVG>)}
-                    {editable &&  <SaveButton onPress={() => save()} ><SaveButtonText>Salvar</SaveButtonText></SaveButton>}
+                    {editable && <SaveButton onPress={() => save()} ><SaveButtonText>Salvar</SaveButtonText></SaveButton>}
 
                 </RowConfirmation>
 
@@ -311,16 +383,12 @@ export function ConfigureAccount() {
 
     useEffect(() => {
         (async () => {
-
-            const cameraRollStatus =
-                await ImagePicker.requestMediaLibraryPermissionsAsync();
-
+            const cameraRollStatus = await ImagePicker.requestMediaLibraryPermissionsAsync();
             if (
                 cameraRollStatus.status !== "granted"
             ) {
                 alert("Usuario sem permição para utilizar mídias");
             }
-
         })();
     }, []);
 
@@ -348,7 +416,6 @@ export function ConfigureAccount() {
             {!editablePass &&
                 <>
                     <TextHeader>{t("configScreen.Header")}</TextHeader>
-
                     <ContainerImage>
                         <AreaImage>
                             {
@@ -372,7 +439,6 @@ export function ConfigureAccount() {
                                         <Loading loading={loadingImage} size={40} />
                                     </AreaImage>
                             }
-
                         </AreaImage>
                     </ContainerImage>
                     <DataUser></DataUser>

@@ -39,6 +39,7 @@ export const TextInfo = styled.Text`
     text-align:left;
     font-size:18px;
     flex-wrap: wrap;
+    width: 100%;
   
 `;
 export const RowConfirmation = styled.View`
