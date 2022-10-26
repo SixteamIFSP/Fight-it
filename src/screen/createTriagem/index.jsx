@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ScrollView, Text, TouchableOpacity, View, CheckBox } from "react-native";
+import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { DoubleButtonConfirmation } from "../../components/doubleButtonConfirmation";
 import { Input } from "../../components/input";
 import { Loading } from "../../components/loading";
@@ -52,9 +52,13 @@ export function CreateTriagem({ navigation, route }) {
       if (peso === '') {
         setErrorMessagePeso(t('sorting.errorMessageWeight'))
       };
-    } else {
-      return true;
-    };
+    } else if ((didExercise && !didExerciseResp)
+      || (probOrtopedico && !probOrtopedicoResp)
+      || (doencaCronica && !doencaCronicaResp)
+      || (lesoes && !lesoesResp)) {
+      return false;
+    }
+    else { return true }
   };
 
   async function handleConfirm() {
@@ -181,10 +185,11 @@ export function CreateTriagem({ navigation, route }) {
           {
             didExercise ?
               <Input
-                style={styles.inputes}
+                style={{ borderColor: `${didExercise && !didExerciseResp ? 'red' : 'black'}`, width: '100%' }}
                 onChangeText={setDidExerciseResp}
                 value={didExerciseResp}
                 placeholder={t('sorting.anamneseDidExerciseWhich')}
+                errorMessage={didExercise && !didExerciseResp ? t('createAccount.requiredField') : null}
               /> : null
           }
         </View>
@@ -203,10 +208,11 @@ export function CreateTriagem({ navigation, route }) {
           {
             probOrtopedico ?
               <Input
-                style={styles.inputes}
+                style={{ borderColor: `${probOrtopedico && !probOrtopedicoResp ? 'red' : 'black'}`, width: '100%' }}
                 onChangeText={setProbOrtopedicoResp}
                 value={probOrtopedicoResp}
                 placeholder={t('sorting.anamneseDidOrthProbWhich')}
+                errorMessage={probOrtopedico && !probOrtopedicoResp ? t('createAccount.requiredField') : null}
               /> : null
           }
         </View>
@@ -223,12 +229,14 @@ export function CreateTriagem({ navigation, route }) {
             ></RadioButton>
           </View>
           {
-            doencaCronica ? <Input
-              style={styles.inputes}
-              onChangeText={setDoencaCronicaResp}
-              value={doencaCronicaResp}
-              placeholder={t('sorting.anamneseChronicIllWhich')}
-            />
+            doencaCronica ?
+              <Input
+                style={{ borderColor: `${doencaCronica && !doencaCronicaResp ? 'red' : 'black'}`, width: '100%' }}
+                onChangeText={setDoencaCronicaResp}
+                value={doencaCronicaResp}
+                placeholder={t('sorting.anamneseChronicIllWhich')}
+                errorMessage={doencaCronica && !doencaCronicaResp ? t('createAccount.requiredField') : null}
+              />
               : null
           }
         </View>
@@ -247,10 +255,11 @@ export function CreateTriagem({ navigation, route }) {
           {
             lesoes ?
               <Input
-                style={styles.inputes}
+                style={{ borderColor: `${lesoes && !lesoesResp ? 'red' : 'black'}`, width: '100%' }}
                 onChangeText={setLesoesResp}
                 value={lesoesResp}
                 placeholder={t('sorting.anamneseInjuriesWhich')}
+                errorMessage={lesoes && !lesoesResp ? t('createAccount.requiredField') : null}
               /> : null
           }
         </View>
