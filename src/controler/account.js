@@ -7,14 +7,12 @@ export async function createAccount(data, type) {
         if (type) {
             response = await api.post('/user/cadastro/professor', { ...data });
         } else {
-            response = await api.post('/user/cadastro/aluno', { ...data });
+            response = await api.post('/user/cadastro/aluno', data);
         }
 
         if (response.data.status) {
-            toastMessage(true, response?.data.mensagem);
             return response.data;
         } else {
-            toastMessage(false, response?.data.mensagem);
             return response.data;
         }
 

@@ -77,7 +77,6 @@ export function CreateTriagem({ navigation, route }) {
         jaFezExerciciosResposta: didExerciseResp,
         comentario
       };
-
       setLoading(true);
       const response = await createAccount(route.params.data, false);
       const idAluno = response.id;

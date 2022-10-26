@@ -10,7 +10,6 @@ import { FontAwesome } from '@expo/vector-icons';
 import { ConfigureAccount } from '../screen/configureAccount';
 import { ClassStackAluno, ClassStackTeacher } from './classStack';
 import { CreateTriagem } from '../screen/createTriagem';
-import { ClassView } from '../screen/classView';
 import { CalendarTeacher } from '../screen/calendarTeacher';
 import App from '../services/notification';
 import { Header } from '../components/header';
