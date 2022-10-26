@@ -189,6 +189,67 @@
         "inputValidators": {
             "validationEmail": "Digite um email válido",
             "validationName": "Digite um nome válido"
+        },
+
+        "calendar":{
+            "monthNames": {
+                "jan": "Janeiro",
+                "feb": "Fevereiro",
+                "mar": "Março",
+                "apr": "Abril",
+                "may": "Maio",
+                "jun": "Junho",
+                "jul": "Julho",
+                "aug": "Agosto",
+                "sept": "Setembro",
+                "oct": "Outubro",
+                "nov": "Novembro",
+                "dec": "Dezembro"
+            },
+
+            "monthNamesShort": {
+                "january": "Jan",
+                "february": "Fev",
+                "march": "Mar",
+                "april": "Abr",
+                "may": "Mai",
+                "june": "Jun",
+                "july": "Jul",
+                "august": "Ago",
+                "september": "Set",
+                "october": "Out",
+                "november": "Nov",
+                "december": "Dez"
+            },            
+             
+            "dayNames": {
+                "sunday": "Domingo",
+                "monday": "Segunda",
+                "tuesday": "Terça",
+                "wednesday": "Quarta",
+                "thursday": "Quinta",
+                "friday": "Sexta",
+                "saturday": "Sábado"
+            },
+             
+            "dayNamesShort": {
+                "sun": "Dom.",
+                "mon": "Seg.",
+                "tue": "Ter.",
+                "wed": "Qua.",
+                "thu": "Qui.",
+                "fri": "Sex.",
+                "sat": "Sab."                  
+            },     
+            
+            "today": "Hoje"
+        },
+
+        "ListCalendarDate": {
+            "classes" : "Aulas",
+            "scheduledclasses": "Aulas marcadas",
+            "thereAreNo": "Não há aulas para essa data",
+            
         }
     }
 }
