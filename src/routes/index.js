@@ -49,7 +49,7 @@ function StackLoged() {
         // You can return any component that you like here!
         return <FontAwesome name={iconName} size={28} color={color} />;
       },
-      tabBarActiveTintColor: 'black',
+      tabBarActiveTintColor: '#ff0000',
       tabBarInactiveTintColor: 'gray',
       
     })}>
@@ -99,8 +99,8 @@ function StackLoged() {
     
             if (route.name === 'HomeScreenStudent') {
               iconName = 'home';
-            // } else if (route.name === 'Calendar') {
-            //   iconName = 'calendar';
+             } else if (route.name === 'Calendar') {
+               iconName = 'calendar';
             } else if (route.name === 'Class') {
               iconName = 'group';
             // } else if (route.name === 'Dashboard') {
@@ -111,12 +111,13 @@ function StackLoged() {
   
             return <FontAwesome name={iconName} size={size} color={color} />;
           },
-          tabBarActiveTintColor: 'black',
+          tabBarActiveTintColor: '#ff0000',
           tabBarInactiveTintColor: 'gray',
         })}>
           <TabNavegation.Screen options={{
           title: t("appName"), 
           tabBarLabel: t(`nav.home`),
+          header: (props)=> <Header props={props}></Header>
           }}
           navigationKey='HomeScreenStudent'
           name="HomeScreenStudent"
@@ -128,7 +129,7 @@ function StackLoged() {
             }}
           navigationKey='Calendar'
           name="Calendar"
-          component={App} />
+          component={CalendarTeacher} />
           <TabNavegation.Screen 
           options={{
             title: t("appName"), 

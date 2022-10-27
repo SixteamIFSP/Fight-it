@@ -3,7 +3,6 @@ import { toastMessage } from "../utils/toastMessage";
 import axios from "axios";
 
 export async function getClass(setClasses, idUsuario, type){
-    console.log(idUsuario);
     try {
         let response;
         if (type){
@@ -12,7 +11,6 @@ export async function getClass(setClasses, idUsuario, type){
             response = await api.get(`/turma/busca/aluno/${idUsuario}`);
        }
        
-       console.log(response?.data);
        setClasses(response?.data.resultado || []);
     } catch (error) {
         console.log(error);
@@ -30,6 +28,7 @@ export async function createClass(data){ // data => { nome:string, descricao:str
         } else{
             toastMessage(false, response?.data.mensagem) 
         }
+        console.log(response);
         
     } catch (error) {
         toastMessage(false, 'Erro de conexão!') 
@@ -37,8 +36,6 @@ export async function createClass(data){ // data => { nome:string, descricao:str
 }
 
 export async function changeClass(data){
-
-    console.log({data});
     try {
         const response = await api.post(`/turma/alterar`, {...data});
 

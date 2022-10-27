@@ -19,10 +19,10 @@ export function AdicionarAluno({ turmaId, setback }){
 
         async function  handleBusca(){
             Keyboard.dismiss();
-            const value = InputQueryRef?.current.text
+            const value = InputQueryRef?.current.text;
             if (!value) return
  
-            setLoading(true)
+            setLoading(true);
 
             await getAluno(value, setAlunos);
 
@@ -30,7 +30,7 @@ export function AdicionarAluno({ turmaId, setback }){
         }
     
         function handleBack() {
-            setback()
+            setback();
         }
 
         async function handleSubmit(id) {

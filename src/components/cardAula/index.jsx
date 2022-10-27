@@ -2,11 +2,13 @@ import React from "react";
 import { Text, View } from "react-native";
 import { removeAula } from "../../controler/class";
 import { useModal } from "../../hooks/modalConfirmation";
+import { useUser } from "../../hooks/user";
 import { convertDateToBrString, convertDateToTimeString } from "../../utils/dateConvert";
 import { Button } from "../button";
 import { ButtonsContainer, Container, InfoContainer } from "./styles";
 
 export function CardAula({item}){
+    const user = useUser();
     const { changeModal, setCallback } = useModal();
 
     function handle(){
@@ -28,10 +30,13 @@ export function CardAula({item}){
             </InfoContainer>
             <ButtonsContainer>
                 <Button></Button>
-                <Button handle={handle} text="Apagar"></Button>
+                {
+                    user.tipoUsuario ?
+                        <Button handle={handle} text="Apagar"></Button>
+                    :
+                        <></>
+                }
             </ButtonsContainer>
         </Container>
-
-
     )
 }

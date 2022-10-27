@@ -17,11 +17,49 @@ function UserProvider({ children }) {
     tipoUsuario: 1,
     pfp: "f9d20e32d01fe870da44cc00067b6dbf",
     token:null,
+    expoToken:"ExponentPushToken[A5KQQwEGE2OfSFUhG7yc6N]"
 }
     const [user, setUser] = useState(data ? data : null);
     
     async function modifyUser(value){
         setUser(value)
+    }
+
+    async function updateExpoToken(data, typeTeacher){
+        let response;
+        console.log("data", data);
+
+        try {
+            if (typeTeacher){
+                response = await api.patch(`/user/update/expotoken/professor`, { ...data });
+            } else {
+                response = await api.patch(`/user/update/expotoken/aluno`,  { ...data });
+            }
+            
+        } catch (error) {  
+            console.log("ERROR add coiso lá", error);
+        }
+    }
+
+    async function forgotPassword(mail, typeTeacher){
+        let response;
+        console.log("mail", mail);
+
+        try {
+            if (typeTeacher){
+                response = await api.get(`/email/recuperarProfessor/${mail}`);
+            } else {
+                response = await api.get(`/email/recuperarAluno/${mail}`);
+            }
+            
+            if (!response?.data.status) { 
+                toastMessage(false, response?.data.mensagem);
+                return
+            }
+        } catch (error) {  
+            console.log("ERROR", error);
+            toastMessage(false, "Erro de conexão!");
+        }
     }
 
     async function singIn({mail, pass}, typeTeacher){
@@ -36,19 +74,21 @@ function UserProvider({ children }) {
                 toastMessage(false, response?.data.mensagem);
                 return
             }
-            token = registerForPushNotificationsAsync();
+            
+            await AsyncStorage.setItem(tokenKey, JSON.stringify(response?.data.token));
 
-            await AsyncStorage.setItem(tokenKey, JSON.stringify(response.data.token))
             modifyUser({
-                nome: response.data.nome,
-                email: response.data.email,
-                userID: response.data.userID,
-                tipoUsuario: response.data.tipoUsuario,
-                pfp: response.data.pfp,
-                token:token,
+                nome: response?.data.nome,
+                email: response?.data.email,
+                userID: response?.data.userID,
+                tipoUsuario: response?.data.tipoUsuario,
+                pfp: response?.data.pfp,
+                token: response?.data.tokenNotification || '',
+                expoToken: response?.data.expotoken || '',
             });
             //toastMessage(true, "Login efetuado com sucesso");
         } catch (error) {  
+            console.log("ERROR", error);
             toastMessage(false, "Erro de conexão!");
         }
     }
@@ -63,6 +103,8 @@ function UserProvider({ children }) {
             logOut,
             user,
             modifyUser,
+            forgotPassword,
+            updateExpoToken
         }}>
 
             {children}

@@ -29,9 +29,10 @@ function CardParamStudant({ item, handleGraphyc }) {
     )
 };
 export function StudantView({ navigation, route:{params} }) {
+   
     const { t } = useTranslation();
     const { user } = useUser();
-    const { studantId, id, nome } = params;
+    const { studantId, id, nome, data } = params;
     const { setCallback } = useModal();
     const [loading, setLoading] = useState(false);
     const [paramsAluno, setParamsAluno] = useState([]);
@@ -64,23 +65,40 @@ export function StudantView({ navigation, route:{params} }) {
         if (loading) return;
         setLoading(true);
 
-        const data = {
-            aluno: studantId,
-            turma: id,
+        let dataSubmit;
+
+        if (user.tipoUsuario ===1){
+            dataSubmit = {
+                aluno: studantId,
+                turma: id,
+            }
+        } else {
+            dataSubmit = {
+                aluno: user.userID,
+                turma: data.id,
+            }
         }
 
-        await getParamsAluno(data, setParamsAluno);
+        await getParamsAluno(dataSubmit, setParamsAluno);
         setLoading(false);
     }
 
     async function handleLoadingGraphyc(idParam) {
-
+        
         setLoadingGraphyc(false)
-        const data = {
-            aluno: studantId,
-            parametro: idParam,
+        let paransLoadingGraphyc
+        if ( user.tipoUsuario ===1) {
+            paransLoadingGraphyc = {
+                aluno: studantId,
+                parametro: idParam,
+            } 
+        } else {
+            paransLoadingGraphyc = {
+                aluno: user.userID,
+                parametro: idParam,
+            } 
         }
-        await getDesempenhoPorParametro(data, setDataParams) 
+        await getDesempenhoPorParametro(paransLoadingGraphyc, setDataParams) 
         setLoadingGraphyc(true)
     }
 

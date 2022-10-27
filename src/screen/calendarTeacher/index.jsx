@@ -14,7 +14,6 @@ export function CalendarTeacher({ navigation, route }){
     }
 
     function handleNewScreen(tela, {data}){
-
         console.log("teste", tela, data.id);
         setViewPosition(3)
         setTurmaId(data.id)

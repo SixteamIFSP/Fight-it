@@ -2,8 +2,12 @@ import { api } from "../services/api";
 import { toastMessage } from "../utils/toastMessage";
 
 export async function getParamsAluno(data, setValue ){ // data => { "aluno": number, "turma": number}
+    console.log("getParans", data);
+
     try {
         const response = await api.post(`/desempenho/parametros/aluno`, {...data});
+
+        console.log(response?.data);
 
         if (response?.data.status)
             setValue(response?.data.result.parametros || []);

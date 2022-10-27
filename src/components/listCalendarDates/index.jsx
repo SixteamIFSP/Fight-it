@@ -41,7 +41,8 @@ export function ListCalendarDates({selectedDate, addHandle}){
                 <ContentListagem
                 data={dates}
                 renderItem={
-                    ({ item }) => <CardAula item={item}/>}
+                    ({ item }) => <CardAula item={item}/>
+                }
                 >
                 </ContentListagem>
                 :
