@@ -8,6 +8,7 @@
         },
         "validation": {
             "confirm": "CONFIRM",
+            "submit": "SUBMIT",
             "cancel": "CANCEL"
         }, 
         "form":{
@@ -30,9 +31,10 @@
         "login": {
             "mail": "E-mail",
             "password": "Password",
-            "connect": "Connect",
+            "connect": "CONNECT",
             "forgotPass": "Forgot Password?",
-            "CreateAccount": "Create Account"
+            "CreateAccount": "Create Account",
+            "back":"Cancel"
         },
         "createAccount": {
             "title": "Create Account",
@@ -67,6 +69,11 @@
             },
             "teacher":{
                 "message":"Hello! teacher"
+            },
+            "dashboard":{
+                "student":"Number of students",
+                "classes":"Number of classes",
+                "lessons":"Number of lessons"
             }
         },  
         "nav":{

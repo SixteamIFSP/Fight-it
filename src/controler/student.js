@@ -6,9 +6,6 @@ export async function getParamsAluno(data, setValue ){ // data => { "aluno": num
 
     try {
         const response = await api.post(`/desempenho/parametros/aluno`, {...data});
-
-        console.log(response?.data);
-
         if (response?.data.status)
             setValue(response?.data.result.parametros || []);
 

@@ -113,7 +113,11 @@ export function Login({ navigation }) {
         >
           {
             !load ?
-              <Text> {t('login.connect')}</Text>
+              <Text> 
+                {
+                  forgotPass? t('validation.submit') : t('login.connect')  
+                }
+              </Text>
               :
               <Loading loading={load} size={18} />
           }
@@ -125,25 +129,25 @@ export function Login({ navigation }) {
               style={styles.textTouchebles}
               onPress={onHandleCreateAccount}
             >
-            <Text>{t('login.CreateAccount')}</Text>
+            <Text>
+              {
+                 t('login.CreateAccount')
+              }
+            </Text>
             </TouchableOpacity>
           </>
           :
           <></>
         }
-
           <TouchableOpacity
             style={styles.textTouchebles}
             onPress={handleForgot}
           >
             <Text>{
-              forgotPass  ? t('Voltar') : t("Esqueceu a senha")
+              forgotPass  ? t('login.back') : t("login.forgotPass")
               }
             </Text>
-          </TouchableOpacity>
-       
-        
-        
+          </TouchableOpacity>  
       </View>
     </View>
 

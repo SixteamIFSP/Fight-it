@@ -38,11 +38,6 @@ export function LoadingClass({handleNewScreen, handleBack,  user, setCreateNew, 
     const isFocused = useIsFocused();
 
     useEffect(()=>{
-        console.log(data);
-    },[data])
-
-    useEffect(()=>{
-        console.log(isFocused, loading);
         function effect (){
             handleLoadMore();
         };

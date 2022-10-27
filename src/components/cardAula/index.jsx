@@ -10,6 +10,7 @@ import { ButtonsContainer, Container, InfoContainer } from "./styles";
 export function CardAula({item}){
     const user = useUser();
     const { changeModal, setCallback } = useModal();
+    
 
     function handle(){
         callModal();
@@ -29,9 +30,8 @@ export function CardAula({item}){
 
             </InfoContainer>
             <ButtonsContainer>
-                <Button></Button>
                 {
-                    user.tipoUsuario ?
+                    user.tipoUsuario ===1 ?
                         <Button handle={handle} text="Apagar"></Button>
                     :
                         <></>

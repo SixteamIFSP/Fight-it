@@ -27,8 +27,6 @@ function UserProvider({ children }) {
 
     async function updateExpoToken(data, typeTeacher){
         let response;
-        console.log("data", data);
-
         try {
             if (typeTeacher){
                 response = await api.patch(`/user/update/expotoken/professor`, { ...data });

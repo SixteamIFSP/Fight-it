@@ -57,19 +57,16 @@ export function HomeScreen({ navigation }) {
         {
           user.tipoUsuario === 1 ? 
           <GridDashboard>
-            <CardDashboard text={"Quantidade de Alunos"} value={dashboardData?.Alunos} />
+            <CardDashboard text={t("homePage.dashboard.student")} value={dashboardData?.Alunos} />
           </GridDashboard>
           : <></>
         }
         <GridDashboard>
-          <CardDashboard text={"Quantidade de Aulas"} value={dashboardData?.Aula} />
-          <CardDashboard text={"Quantidade de turmas"} value={dashboardData?.Turmas} />
+          <CardDashboard text={t("homePage.dashboard.lessons")} value={dashboardData?.Aula} />
+          <CardDashboard text={t("homePage.dashboard.classes")} value={dashboardData?.Turmas} />
         </GridDashboard>
-        
-      </ContainerContent>
-      
-     
-      </View>
+      </ContainerContent>     
+    </View>
   );
 }
 

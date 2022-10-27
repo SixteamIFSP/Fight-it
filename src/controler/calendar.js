@@ -20,18 +20,14 @@ export async function getCalendar(id, type, setDates){
 }
 
 export async function getCalendarList(id, date, type, setDates){
-    console.log(id, date, type);
     try {
         let response;
         if (type){
             response = await api.get(`/aula/busca_professor/${id}/${date}`);
         } else {
             response = await api.get(`/aula/busca_aluno/${id}/${date}`);
-        }
-       
-        console.log()
-        setDates(response.data.result || [])
-       
+        }    
+        setDates(response.data.result || [])      
     } catch (error) {
         console.log(error);
         toastMessage(false, 'Erro de conexão!') 

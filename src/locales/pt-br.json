@@ -8,6 +8,7 @@
         },
         "validation": {
             "confirm": "CONFIRMAR",
+            "submit": "ENVIAR",
             "cancel": "CANCELAR"
         }, 
         "form":{
@@ -29,9 +30,11 @@
         "login": {
             "mail": "E-mail",
             "password": "Senha",
-            "connect": "Conectar",
-            "forgotPass": "Esqueci a senha",
-            "CreateAccount": "Criar Conta"
+            "connect": "CONECTAR",
+            "forgotPass": "Esqueci a senha?",
+            "CreateAccount": "Criar Conta",
+            "back":"Cancelar"
+
         },
         "createAccount": {
             "title": "Criar Conta",
@@ -66,6 +69,11 @@
             },
             "teacher":{
                 "message":"Olá professor"
+            },
+            "dashboard":{
+                "student":"Quantidade de alunos",
+                "classes":"Quantidade de turmas",
+                "lessons":"Quantidade de aulas"
             }
         },  
         "nav":{

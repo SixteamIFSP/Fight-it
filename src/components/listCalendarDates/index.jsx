@@ -14,8 +14,6 @@ export function ListCalendarDates({selectedDate, addHandle}){
 
     useEffect(() => {
         const date = dateSplit(selectedDate);
-        console.log(selectedDate);
-
         getCalendarList(user.userID, date, user.tipoUsuario===1, setDates);
     }, [selectedDate]);
 
