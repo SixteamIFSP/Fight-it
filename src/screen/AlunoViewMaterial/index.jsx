@@ -74,7 +74,7 @@ export function AlunoViewMaterial({navigation, route}) {
                 )
                })}
                 </ScrollView>
-               {/* {materiais && materiais?.length > 0 && <FeedbackButton onPress={() => setModal(e => !e)}>
+               {materiais && materiais?.length > 0 && <FeedbackButton onPress={() => setModal(e => !e)}>
                    <Text style={{color: 'white', fontWeight: 'bold', fontSize: 16}}>Envie um feedback!</Text>
                </FeedbackButton>}
 
@@ -93,7 +93,7 @@ export function AlunoViewMaterial({navigation, route}) {
                                  </Modal>
                                </TouchableWithoutFeedback>
                             </ModalContainer>
-                         </TouchableWithoutFeedback>} */}
+                         </TouchableWithoutFeedback>}
          </Container>
      
     )
