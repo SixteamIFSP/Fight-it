@@ -66,6 +66,26 @@ export async function getAllDataClass(setAlunos, setClass, data){
     })
 }
 
+export async function getAulasByTurma(setAulas,  turmaid){
+
+        try {
+            const response = await api.get(`/aula/busca_turma/${turmaid}`)
+            if (response?.data.status){
+                setAulas(response?.data.result || []);
+    
+            } else{
+                if (response?.data.result == null)
+                    toastMessage(false, 'Aulas não encontradas');
+                else 
+                    toastMessage(false, 'Erro ao buscar dos dados');
+            }
+            
+        } catch (error) {
+            console.log(error.message)
+            toastMessage(false, 'Erro de conexão!') 
+        }
+}
+
 export async function getAlunosTurma(setAlunos, data){ // data => number
     try {
         const response = await api.get(`/turma/alunos/${data}`);

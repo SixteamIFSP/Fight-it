@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Dimensions, FlatList, Text, View } from "react-native";
+import { Dimensions, FlatList, Text, TouchableOpacity, View } from "react-native";
 import { Loading } from "../../components/loading";
 import { getDesempenhoPorParametro, getParamsAluno } from "../../controler/student";
 import { LineChart } from "react-native-chart-kit";
@@ -16,7 +16,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { useIsFocused } from "@react-navigation/native";
 import { useModal } from "../../hooks/modalConfirmation";
-import { deleteAluno } from "../../controler/class";
+import { deleteAluno, getAulasByTurma } from "../../controler/class";
 import { useUser } from "../../hooks/user";
 import { convertDateToBrString } from "../../utils/dateConvert";
 
@@ -39,6 +39,11 @@ export function StudantView({ navigation, route:{params} }) {
     const [loadingGraphyc, setLoadingGraphyc] = useState(false);
     const [dataParams, setDataParams] = useState([]);
     const isFocused = useIsFocused();
+    const [aulas, setAulas] = useState([])
+     
+   useEffect(() => {
+    getAulas()
+   }, [])
 
     useEffect(()=>{
         function effect (){
@@ -83,6 +88,10 @@ export function StudantView({ navigation, route:{params} }) {
         setLoading(false);
     }
 
+   function getAulas() {
+    getAulasByTurma(setAulas, id ?? data.id)
+   }
+
     async function handleLoadingGraphyc(idParam) {
         
         setLoadingGraphyc(false)
@@ -100,6 +109,10 @@ export function StudantView({ navigation, route:{params} }) {
         }
         await getDesempenhoPorParametro(paransLoadingGraphyc, setDataParams) 
         setLoadingGraphyc(true)
+    }
+
+   function navigateToAula(aulaid) {
+    navigation.navigate('LessonView', {title:'Visualizar aula', aulaid});
     }
 
     return (
@@ -124,7 +137,16 @@ export function StudantView({ navigation, route:{params} }) {
                     {"Datas de aulas"}
                 </Divider>
 
-                <Text>implementando!</Text>
+               <View style={{padding: 5}}>
+               {(!aulas || !aulas.length) && <Text>Sem aulas</Text>}
+               {aulas.map(aula => {
+                return <TouchableOpacity
+                onPress={() =>{
+                    navigateToAula(aula.id)
+                }}
+                ><Text style={{fontSize: 17, fontWeight: 'bold'}}>Aula: {aula.nome } no dia: {new Date(aula.data).toLocaleString()}</Text></TouchableOpacity>
+               })}
+               </View>
         </>
         }
 
