@@ -28,6 +28,7 @@ import { useUser } from "../../hooks/user";
 import { AdicionarAluno } from "../../components/addAluno";
 import { EditTurma } from "../../components/editTurma";
 import { AdicionarAula } from "../../components/addAula";
+import { t } from "i18next";
 
 const RenderListAluno = ({ item, navigation, data, student }) => {
     const { t } = useTranslation()
@@ -64,7 +65,7 @@ function RenderAula({ aula, onDeleteAula, onSelectAula, student, handleViewAula 
             <Text>{aula.nome}</Text>
             <CancelarAula
                 onPress={() => onDeleteAula(aula)}>
-                <TextWhite>Cancelar Aula</TextWhite>
+                <TextWhite>{t("classView.classCancel")}</TextWhite>
             </CancelarAula>
         </RenderAulaContainer>
     )
@@ -205,9 +206,7 @@ export function ClassView({ navigation, route }) {
 
     return (
         <Container>
-
             {pageView[page]}
-            {/*grafico */}
         </Container>
     );
 }

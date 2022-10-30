@@ -283,9 +283,8 @@ const ConfirmDelete = ({ deletable, setDeletable }) => {
                                 onPress={() => setDeletable(false)}>
                                 {t('validation.cancel')}
                             </DeleteAccountButton>
-                            <ConfirmButton onPress={() => handleDelete()}>EXCLUIR</ConfirmButton>
+                            <ConfirmButton onPress={() => handleDelete()}>{t("validation.confirm")}</ConfirmButton>
                         </HorizontalButtonsContainer>
-
                     </RowConfirmation>
                 </ConteinerInfoDelete>
             )
@@ -312,21 +311,17 @@ export function ConfigureAccount() {
 
     useEffect(() => {
         (async () => {
-
             const cameraRollStatus =
                 await ImagePicker.requestMediaLibraryPermissionsAsync();
-
             if (
                 cameraRollStatus.status !== "granted"
             ) {
                 alert("Usuario sem permição para utilizar mídias");
             }
-
         })();
     }, []);
 
     const pickImage = async () => {
-
         try {
             let result = await ImagePicker.launchImageLibraryAsync({
                 mediaTypes: "Images",
@@ -341,7 +336,6 @@ export function ConfigureAccount() {
         } catch (error) {
             console.log(error.message);
         }
-
     }
 
     return (
@@ -349,7 +343,6 @@ export function ConfigureAccount() {
             {!editablePass &&
                 <>
                     <TextHeader>{t("configScreen.Header")}</TextHeader>
-
                     <ContainerImage>
                         <AreaImage>
                             {
@@ -373,10 +366,9 @@ export function ConfigureAccount() {
                                         <Loading loading={loadingImage} size={40} />
                                     </AreaImage>
                             }
-
                         </AreaImage>
                     </ContainerImage>
-                    <DataUser></DataUser>
+                    <DataUser/>
                 </>}
             <ChangePassword editable={editablePass} setEditable={setEditablePass}></ChangePassword>
             <ConfirmDelete deletable={deletable} setDeletable={setDeletable}></ConfirmDelete>

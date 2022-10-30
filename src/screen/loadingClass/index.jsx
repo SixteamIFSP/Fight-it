@@ -8,6 +8,7 @@ import { getClass } from "../../controler/class";
 import { useTranslation } from "react-i18next";
 import { useUser } from "../../hooks/user";
 import { Button } from "../../components/button";
+import { t } from "i18next";
 
 function CardTurma({ data, handleNewScreen }) {
     const { t } = useTranslation()
@@ -36,6 +37,7 @@ export function LoadingClass({handleNewScreen, handleBack,  user, setCreateNew, 
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const isFocused = useIsFocused();
+    const { user: { tipoUsuario } } = useUser();
 
     useEffect(()=>{
         function effect (){
@@ -56,7 +58,7 @@ export function LoadingClass({handleNewScreen, handleBack,  user, setCreateNew, 
         <>
             {
                 setCreateNew === undefined &&
-                    <Text>Escolha uma turma para adicionar uma aula</Text>
+                    <Text>{t("loadingClass.addlesson")}</Text>
             }
             
             {
@@ -76,7 +78,11 @@ export function LoadingClass({handleNewScreen, handleBack,  user, setCreateNew, 
                             <Loading loading={loading} size={30}></Loading>
                         }
                     />
-                    :<Text >Este professor não possui turmas</Text>
+                    :<Text >
+                        {
+                            tipoUsuario === 1 ? t("loadingClass.noClassTeacher") : t("loadingClass.noClassStudent")
+                        }
+                    </Text>
                 }
             </ContainerList>
            {

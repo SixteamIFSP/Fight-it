@@ -83,7 +83,7 @@ export function Login({ navigation }) {
           ></SwitchButton>
         </View>
         {forgotPass ?  
-          <Text>Recuperar conta com e-mail:</Text>
+          <Text>{t("login.recoverMail")}</Text>
           : 
           <></>
         }

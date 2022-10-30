@@ -76,7 +76,7 @@ export function AdicionarAluno({ turmaId, setback }){
                     !loading ?
                         
                             (alunos.length < 1) ?
-                                <Text>Sem Alunos</Text>
+                                <Text>{t("addStudents.empty")}</Text>
                             :
 
                             <FlatList

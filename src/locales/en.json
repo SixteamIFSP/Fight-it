@@ -34,7 +34,8 @@
             "connect": "CONNECT",
             "forgotPass": "Forgot Password?",
             "CreateAccount": "Create Account",
-            "back":"Cancel"
+            "back":"Cancel",
+            "recoverMail":"Recover account with email:"
         },
         "createAccount": {
             "title": "Create Account",
@@ -117,7 +118,13 @@
         "classView":{
             "Student":{
                 "Header":"Student listing"  
-            }
+            },
+            "classCancel":"Cancel class"
+        },
+        "loadingClass":{
+            "addlesson":"Choose a class to add lesson",
+            "noClassTeacher":"This teacher has no classes",
+            "noClassStudent":"This Student does not have classes"
         },
         "addStudentClass":{
             "Header":"Add Student",
@@ -129,6 +136,27 @@
             "Header":"RATING",
             "ButtonAvaliation":"Rate Student",
             "ButtonViewTriagem":"View Triagem"
+        },
+        "addStudents":{
+            "empty":"No students"
+        },
+        "addLession":{
+            "messages":{
+                "addTopic":"Enter a lesson topic"
+            },
+            "header":"Add Lession",
+            "placeholder":{
+                "topic":"Topic of the lesson",
+                "date":"Lesson date",
+                "time":"Lesson time",
+                "description":"Lesson description"
+            },
+            "equipment":{
+                "header":"Equipments",
+                "description":"Equipment name",
+                "add":"Add",
+                "selected":"Lesson equipments"
+            }
         },
         "evaluationStudent":{
             "Header":"CREATE RATING",
@@ -241,7 +269,6 @@
                 "saturday": "Saturday"
                 
             },
-             
             "dayNamesShort":{
                 "sun": "Sun.",
                 "mon": "Mon.",
@@ -251,14 +278,12 @@
                 "fri": "Fri.",
                 "sat": "Sat."                 
             },      
-            
             "today": "Today"
         },
-
         "ListCalendarDate": {
             "classes" : "Classes",
             "scheduledclasses": "Scheduled classes",
-            "thereAreNo": "There are no classes for this date",
+            "thereAreNo": "There are no classes for this date"
             
             }
     }
