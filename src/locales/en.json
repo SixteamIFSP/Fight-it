@@ -8,6 +8,7 @@
         },
         "validation": {
             "confirm": "CONFIRM",
+            "submit": "SUBMIT",
             "cancel": "CANCEL"
         }, 
         "form":{
@@ -30,9 +31,11 @@
         "login": {
             "mail": "E-mail",
             "password": "Password",
-            "connect": "Connect",
+            "connect": "CONNECT",
             "forgotPass": "Forgot Password?",
-            "CreateAccount": "Create Account"
+            "CreateAccount": "Create Account",
+            "back":"Cancel",
+            "recoverMail":"Recover account with email:"
         },
         "createAccount": {
             "title": "Create Account",
@@ -49,6 +52,7 @@
             "errorsText": "Fill in the fields correctly!",
             "requiredField": "Required field",
             "passwordsDontMatch": "Passwords do not match",
+            "invalidPhoneNumber": "Invalid Phone Number",
             "triage": {
                 "title": "Triage",
                 "description": "Answer the screening form to know your fitness:",
@@ -67,6 +71,11 @@
             },
             "teacher":{
                 "message":"Hello! teacher"
+            },
+            "dashboard":{
+                "student":"Number of students",
+                "classes":"Number of classes",
+                "lessons":"Number of lessons"
             }
         },  
         "nav":{
@@ -110,7 +119,13 @@
         "classView":{
             "Student":{
                 "Header":"Student listing"  
-            }
+            },
+            "classCancel":"Cancel class"
+        },
+        "loadingClass":{
+            "addlesson":"Choose a class to add lesson",
+            "noClassTeacher":"This teacher has no classes",
+            "noClassStudent":"This Student does not have classes"
         },
         "addStudentClass":{
             "Header":"Add Student",
@@ -122,6 +137,27 @@
             "Header":"RATING",
             "ButtonAvaliation":"Rate Student",
             "ButtonViewTriagem":"View Triagem"
+        },
+        "addStudents":{
+            "empty":"No students"
+        },
+        "addLession":{
+            "messages":{
+                "addTopic":"Enter a lesson topic"
+            },
+            "header":"Add Lession",
+            "placeholder":{
+                "topic":"Topic of the lesson",
+                "date":"Lesson date",
+                "time":"Lesson time",
+                "description":"Lesson description"
+            },
+            "equipment":{
+                "header":"Equipments",
+                "description":"Equipment name",
+                "add":"Add",
+                "selected":"Lesson equipments"
+            }
         },
         "evaluationStudent":{
             "Header":"CREATE RATING",
@@ -234,7 +270,6 @@
                 "saturday": "Saturday"
                 
             },
-             
             "dayNamesShort":{
                 "sun": "Sun.",
                 "mon": "Mon.",
@@ -244,14 +279,12 @@
                 "fri": "Fri.",
                 "sat": "Sat."                 
             },      
-            
             "today": "Today"
         },
-
         "ListCalendarDate": {
             "classes" : "Classes",
             "scheduledclasses": "Scheduled classes",
-            "thereAreNo": "There are no classes for this date",
+            "thereAreNo": "There are no classes for this date"
             
             }
     }

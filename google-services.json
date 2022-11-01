@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1031967357227",
+    "project_id": "fight-it-3b48e",
+    "storage_bucket": "fight-it-3b48e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1031967357227:android:d89bec6dd7372657ac6d6e",
+        "android_client_info": {
+          "package_name": "com.ifsp.sixteam.fightit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1031967357227-t4gclcuhgrmb1sj714bt7d73l8innmtu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3p_-G2jWVvWE6pDy0W971tCN6Ti8arZA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1031967357227-t4gclcuhgrmb1sj714bt7d73l8innmtu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

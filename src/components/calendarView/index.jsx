@@ -8,10 +8,6 @@ import { getArrayDates, getCalendar } from "../../controler/calendar";
 import { convertDataUTC, dateSplit, dateToBrDefault } from "../../utils/dateConvert";
 import { ListCalendarDates } from "../../components/listCalendarDates";
 
-
-
-
-
 export function CalendarView({handleChangeView}){
     const { t } = useTranslation();
     const { user } = useUser();
@@ -49,50 +45,6 @@ export function CalendarView({handleChangeView}){
     function handleDateSelected(dateCalendar){
         setSelectedDate(new Date(dateCalendar.timestamp))
     }
-/*
-   LocaleConfig.locales['pt-BR'] = {
-        monthNames: [
-          'Janeiro',
-          'Fevereiro',
-          'Março',
-          'Abril',
-          'Maio',
-          'Junho',
-          'Julho',
-          'Agosto',
-          'Setembro',
-          'Outubro',
-          'Novembro',
-          'Dezembro'
-        ],
-        monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul.', 'Ago', 'Set', 'Oct', 'Nov', 'Dec'],
-        dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
-        dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
-        today: "Aujourd'hui"
-    }
-
-    LocaleConfig.locales['en'] = {
-        monthNames: [
-          'Janeiro',
-          'Fevereiro',
-          'Março',
-          'Abril',
-          'Maio',
-          'Junho',
-          'Julho',
-          'Agosto',
-          'Setembro',
-          'Outubro',
-          'Novembro',
-          'Dezembro'
-        ],
-        monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul.', 'Ago', 'Set', 'Oct', 'Nov', 'Dec'],
-        dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
-        dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
-        today: "Aujourd'hui"
-    }   
-
-    LocaleConfig.defaultLocale = 'pt-BR'; */
 
     LocaleConfig.locales['en'] = {
         monthNames: [
@@ -149,9 +101,6 @@ export function CalendarView({handleChangeView}){
     },   
    
     LocaleConfig.defaultLocale = 'en';
-
-   //LocaleConfig.defaultLocale = i18n;
-
 
     function addHandle(){
         handleChangeView(2);

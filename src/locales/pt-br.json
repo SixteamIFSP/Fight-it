@@ -8,6 +8,7 @@
         },
         "validation": {
             "confirm": "CONFIRMAR",
+            "submit": "ENVIAR",
             "cancel": "CANCELAR"
         }, 
         "form":{
@@ -29,9 +30,11 @@
         "login": {
             "mail": "E-mail",
             "password": "Senha",
-            "connect": "Conectar",
-            "forgotPass": "Esqueci a senha",
-            "CreateAccount": "Criar Conta"
+            "connect": "CONECTAR",
+            "forgotPass": "Esqueci a senha?",
+            "CreateAccount": "Criar Conta",
+            "back":"Cancelar",
+            "recoverMail":"Recuperar conta com e-mail:"
         },
         "createAccount": {
             "title": "Criar Conta",
@@ -39,7 +42,7 @@
             "student": "Aluno",
             "teacher": "Professor",
             "name": "Nome",
-            "phone": "Telefone",
+            "phone": "Telefone:",
             "confirmPassword": "Confirmar Senha",
             "invalidNameMessage": "Campo Obrigatório",
             "invalidEmailMessage": "Campo Obrigatório",
@@ -48,6 +51,7 @@
             "errorsText": "Preencha os campos corretamente!",
             "requiredField":"Campo Obrigatório",
             "passwordsDontMatch":"Senhas não conferem",
+            "invalidPhoneNumber":"Digite um número válido",
             "triage": {
                 "title": "Triagem",
                 "description": "Responda o formulário de triagem para saber seu condicionamento físico:",
@@ -66,6 +70,11 @@
             },
             "teacher":{
                 "message":"Olá professor"
+            },
+            "dashboard":{
+                "student":"Quantidade de alunos",
+                "classes":"Quantidade de turmas",
+                "lessons":"Quantidade de aulas"
             }
         },  
         "nav":{
@@ -89,7 +98,7 @@
             "ConfirmPass":"Confirmação de Senha"
         },
         "exclude":{
-            "Header":"Excluir Conta",
+            "Header":"Desativar Conta",
             "LabelUser":"Validação de usuário",
             "placeholder":"Digite sua senha!"
         },
@@ -109,7 +118,13 @@
         "classView":{
             "Student":{
                 "Header":"Listagem de alunos"  
-            }
+            },
+            "classCancel":"Cancelar Aula"
+        },
+        "loadingClass":{
+            "addlesson":"Escolha uma turma para adicionar uma aula",
+            "noClassTeacher":"Este professor não possui turmas",
+            "noClassStudent":"Este Aluno não possui turmas"
         },
         "addStudentClass":{
             "Header":"Adicionar Aluno",
@@ -121,6 +136,27 @@
             "Header":"Desempenho",
             "ButtonAvaliation":"Avaliar Aluno",
             "ButtonViewTriagem":"Visualizar Triagem"
+        },
+        "addStudents":{
+            "empty":"No students"
+        },
+        "addLession":{
+            "messages":{
+                "addTopic":"Digite um tópico de aula"
+            },
+            "header":"Adicionar aula",
+            "placeholder":{
+                "topic":"Tópico da aula",
+                "date":"Data da aula",
+                "time":"Horário da aula",
+                "description":"Descrição da aula"
+            },
+            "equipment":{
+                "header":"Equipamentos",
+                "description":"Nome do equipamento",
+                "add":"Adicionar",
+                "selected":"Equipamentos da aula"
+            }
         },
         "evaluationStudent":{
             "Header":"AVALIAÇÃO",
@@ -135,7 +171,6 @@
             "Label":{
                 "Name":"Nome do desempenho",
                 "Date":"Nome do desempenho"
-
             }
         }, 
         "parameterCriation":{
@@ -148,10 +183,8 @@
             "Buttons":{
                 "Submit":"Enviar parâmetro",
                 "Create":"Criar novo parâmetro"
-               
             }
         },
-
         "sorting": {
             "title": "Triagem",
 			"sortingHeader1": "Estamos quase finalizando seu cadastro.",
@@ -248,7 +281,7 @@
         "ListCalendarDate": {
             "classes" : "Aulas",
             "scheduledclasses": "Aulas marcadas",
-            "thereAreNo": "Não há aulas para essa data",
+            "thereAreNo": "Não há aulas para essa data"
             
         }
     }

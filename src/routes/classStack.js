@@ -10,6 +10,7 @@ import { TriagemView } from "../screen/triagemView";
 import { useModal } from "../hooks/modalConfirmation";
 import { UploadMaterial } from "../screen/UploadMaterial";
 import { AlunoViewMaterial } from "../screen/AlunoViewMaterial";
+import { LessonView } from "../screen/LessonView";
 
 export function ClassStackAluno(){
     const StackClass = createNativeStackNavigator();
@@ -52,6 +53,9 @@ export function ClassStackAluno(){
             <StackClass.Screen options={({route}) => ({title: route.params.title})} navigationKey='TriagemView' name="TriagemView" component={TriagemView}></StackClass.Screen>
 
             <StackClass.Screen options={({route}) => ({title: route.params.title})} navigationKey='AlunoViewMaterial' name="AlunoViewMaterial" component={AlunoViewMaterial}></StackClass.Screen>
+
+            <StackClass.Screen options={({route}) => ({title: route.params.title})} navigationKey='LessonView' name="LessonView" component={LessonView}></StackClass.Screen>
+            
         </StackClass.Navigator>
     )
 }

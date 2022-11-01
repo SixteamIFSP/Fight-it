@@ -16,8 +16,6 @@ export function ListCalendarDates({selectedDate, addHandle}){
 
     useEffect(() => {
         const date = dateSplit(selectedDate);
-        console.log(selectedDate);
-
         getCalendarList(user.userID, date, user.tipoUsuario===1, setDates);
     }, [selectedDate]);
 
@@ -43,7 +41,8 @@ export function ListCalendarDates({selectedDate, addHandle}){
                 <ContentListagem
                 data={dates}
                 renderItem={
-                    ({ item }) => <CardAula item={item}/>}
+                    ({ item }) => <CardAula item={item}/>
+                }
                 >
                 </ContentListagem>
                 :

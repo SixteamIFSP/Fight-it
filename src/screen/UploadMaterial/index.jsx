@@ -80,7 +80,7 @@ export function UploadMaterial({ navigation, route }) {
 
     return (
         <Container>
-           <Text> turma: {route.params.nometurma}</Text>
+           <Text> Aula: {route.params.nometurma}</Text>
            <NomeMaterial>
               <Input 
                 style={{ borderColor: `${invalidNomeMaterial ? 'red' : 'black'}` }}

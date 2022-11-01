@@ -12,9 +12,6 @@ export function TriagemView({ route, route:{params}}) {
         //route.params?.studentId. Enquanto não temos triagem criada com o ID do aluno, colocamos id
         getTriagem(studantId).then(response => {
             if (response) {
-                console.log(response);
-
-
                 setDadosTriagem(response[0]);
             }
         })

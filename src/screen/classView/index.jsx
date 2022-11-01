@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Text, TouchableOpacity } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { AddButton } from "../../components/addButton";
 import { getAllDataClass , removeAula } from "../../controler/class";
 import { toastMessage } from "../../utils/toastMessage";
@@ -28,6 +28,7 @@ import { useUser } from "../../hooks/user";
 import { AdicionarAluno } from "../../components/addAluno";
 import { EditTurma } from "../../components/editTurma";
 import { AdicionarAula } from "../../components/addAula";
+import { t } from "i18next";
 
 const RenderListAluno = ({ item, navigation, data, student }) => {
     const { t } = useTranslation()
@@ -54,18 +55,24 @@ const RenderListAluno = ({ item, navigation, data, student }) => {
 function RenderAula({ aula, onDeleteAula, onSelectAula, student, handleViewAula }) {
 
     return (
-        <RenderAulaContainer onPress={() => {
-            if(student) {
-                handleViewAula()
-                return 
-            } 
-            onSelectAula(aula.nome, aula.id)
-            }}>
+        <RenderAulaContainer >
             <Text>{aula.nome}</Text>
+            <View style={{flexDirection: 'row'}}>
+            <CancelarAula
+                onPress={() => {
+                    if(student) {
+                        handleViewAula()
+                        return 
+                    } 
+                    onSelectAula(aula.nome, aula.id)
+                    }}>
+                <TextWhite>Adicionar Material</TextWhite>
+            </CancelarAula>
             <CancelarAula
                 onPress={() => onDeleteAula(aula)}>
-                <TextWhite>Cancelar Aula</TextWhite>
+                <TextWhite>{t("classView.classCancel")}</TextWhite>
             </CancelarAula>
+            </View>
         </RenderAulaContainer>
     )
 }
@@ -205,9 +212,7 @@ export function ClassView({ navigation, route }) {
 
     return (
         <Container>
-
             {pageView[page]}
-            {/*grafico */}
         </Container>
     );
 }

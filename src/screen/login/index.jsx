@@ -20,24 +20,34 @@ import Logo from "../../../assets/adaptive-icon.png";
 
 export function Login({ navigation }) {
   const { validationEmail } = inputValidators()
-  const [loading, setLoading] = useState(false);
+  const [load, setLoad] = useState(false);
   const [mail, setMail] = useState('');
   const [password, setPassword] = useState('');
   const [typeTeacher, setTypeTeacher] = useState(true);
+  const [forgotPass, setforgotPass] = useState(false);
+
   //validations
   const [invalidEmailMessage, setInvalidEmailMessage] = useState('');
-  const { singIn } = useUser();
+  const { singIn, forgotPassword } = useUser();
 
   const { t } = useTranslation();
   async function onHandleLogin() {
     //TODO:achar uma solução que não dê erro: 
-    if (mail === '' || password === '') {
+    if (mail === '' || (password === '' && !forgotPass) ) {
       toastMessage(false, "Preencha os campos!");
       return
     }
-    // setLoading(true);
-    await singIn({ mail: mail, pass: password }, typeTeacher);
-    // setLoading(false);
+    if (forgotPass) {
+      setLoad(true);
+      await forgotPassword(mail, typeTeacher);
+       setLoad(false);
+       handleForgot();
+
+    } else {
+      setLoad(true);
+      await singIn({ mail: mail, pass: password }, typeTeacher);
+       setLoad(false);
+    }
   }
 
   function onHandleCreateAccount() {
@@ -47,8 +57,12 @@ export function Login({ navigation }) {
   const handleEmail = (value) => {
     setMail(value);
     setInvalidEmailMessage(validationEmail(value));
-
   }
+
+  const handleForgot = () => {
+    setforgotPass((old) => !old);
+  }
+  
   return (
     <View style={stylesGlobal.container}>
       <View style={styles.containerLocale}>
@@ -68,6 +82,11 @@ export function Login({ navigation }) {
             type={!typeTeacher}
           ></SwitchButton>
         </View>
+        {forgotPass ?  
+          <Text>{t("login.recoverMail")}</Text>
+          : 
+          <></>
+        }
         <Input
           onChangeText={(value) => { handleEmail(value) }}
           value={mail}
@@ -75,30 +94,60 @@ export function Login({ navigation }) {
           keyboardType="email-address"
           errorMessage={invalidEmailMessage ? invalidEmailMessage : null}
         />
-        <Input
-          style={styles.inputPassword}
-          secureTextEntry={true}
-          onChangeText={setPassword}
-          value={password}
-          placeholder={t('login.password')}
-        />
+        {
+          !forgotPass ?  
+            <Input
+              style={styles.inputPassword}
+              secureTextEntry={true}
+              onChangeText={setPassword}
+              value={password}
+              placeholder={t('login.password')}
+            />
+            :
+            <></>
+        }
+        
         <TouchableOpacity
           style={styles.button}
           onPress={onHandleLogin}
         >
           {
-            !loading ?
-              <Text> {t('login.connect')}</Text>
+            !load ?
+              <Text> 
+                {
+                  forgotPass? t('validation.submit') : t('login.connect')  
+                }
+              </Text>
               :
-              <Loading loading={loading} size={18} />
+              <Loading loading={load} size={18} />
           }
         </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.textTouchebles}
-          onPress={onHandleCreateAccount}
-        >
-          <Text>{t('login.CreateAccount')}</Text>
-        </TouchableOpacity>
+        {
+          !forgotPass ? 
+          <>
+            <TouchableOpacity
+              style={styles.textTouchebles}
+              onPress={onHandleCreateAccount}
+            >
+            <Text>
+              {
+                 t('login.CreateAccount')
+              }
+            </Text>
+            </TouchableOpacity>
+          </>
+          :
+          <></>
+        }
+          <TouchableOpacity
+            style={styles.textTouchebles}
+            onPress={handleForgot}
+          >
+            <Text>{
+              forgotPass  ? t('login.back') : t("login.forgotPass")
+              }
+            </Text>
+          </TouchableOpacity>  
       </View>
     </View>
 
