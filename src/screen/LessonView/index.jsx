@@ -3,21 +3,20 @@ import { FlatList, Text, TouchableOpacity, View } from "react-native";
 import { getAulaByAulaID } from "../../controler/class";
 import {AulaContainer, Container, Retornar, SubTitle, Title, Value, Equipamentos, MaterialViewButton} from './style'
 
-export function LessonView({navigation, aulaid, onBack}) {
+export function LessonView({navigation, route}) {
     const [aula, setAula] = useState(null)
 
      useEffect(() => {
-        getAulaByAulaID(aulaid, setAula)
+        getAulaByAulaID(route?.params?.aulaid, setAula)
      }, [])
 
      function seeMaterialExtra() {
-      navigation.navigate('AlunoViewMaterial', {title:'Material Extra da aula:' + aula.topicoAula, aulaId: aulaid});
+      navigation.navigate('AlunoViewMaterial', {title:'Material Extra da aula:' + aula.topicoAula, aulaId: route?.params?.aulaid});
      }
 
 
     return (
         <Container>
-            <Retornar onPress={onBack}><Text style={{color: 'white'}}>Retornar</Text></Retornar>
           <AulaContainer>
           <Title>Visualizar aula</Title>
             {!aula && <Text>Aula não encontrada</Text>}

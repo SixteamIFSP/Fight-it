@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useIsFocused } from "@react-navigation/native";
-import { useTranslation } from "react-i18next";
+import { setI18n, useTranslation } from "react-i18next";
 import { useUser } from "../../hooks/user"
 import { CalendarList,  LocaleConfig} from "react-native-calendars";
 import { Container, themeCalendar } from "./styles";
@@ -46,49 +46,61 @@ export function CalendarView({handleChangeView}){
         setSelectedDate(new Date(dateCalendar.timestamp))
     }
 
-    LocaleConfig.locales['pt-BR'] = {
-        monthNames: [
-          'Janeiro',
-          'Fevereiro',
-          'Março',
-          'Abril',
-          'Maio',
-          'Junho',
-          'Julho',
-          'Agosto',
-          'Setembro',
-          'Outubro',
-          'Novembro',
-          'Dezembro'
-        ],
-        monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul.', 'Ago', 'Set', 'Oct', 'Nov', 'Dec'],
-        dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
-        dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
-        today: "Aujourd'hui"
-    }
-
     LocaleConfig.locales['en'] = {
         monthNames: [
-          'Janeiro',
-          'Fevereiro',
-          'Março',
-          'Abril',
-          'Maio',
-          'Junho',
-          'Julho',
-          'Agosto',
-          'Setembro',
-          'Outubro',
-          'Novembro',
-          'Dezembro'
+            (t('calendar.monthNames.jan')),
+            (t('calendar.monthNames.feb')),
+            (t('calendar.monthNames.mar')),
+            (t('calendar.monthNames.apr')),
+            (t('calendar.monthNames.may')),
+            (t('calendar.monthNames.jun')),
+            (t('calendar.monthNames.jul')),
+            (t('calendar.monthNames.aug')),
+            (t('calendar.monthNames.sept')),
+            (t('calendar.monthNames.oct')),
+            (t('calendar.monthNames.nov')),
+            (t('calendar.monthNames.dec'))
         ],
-        monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul.', 'Ago', 'Set', 'Oct', 'Nov', 'Dec'],
-        dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
-        dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
-        today: "Aujourd'hui"
-    }   
 
-    LocaleConfig.defaultLocale = 'pt-BR';
+        monthNamesShort: [
+            (t('calendar.monthNamesShort.january')),
+            (t('calendar.monthNamesShort.february')),
+            (t('calendar.monthNamesShort.march')),
+            (t('calendar.monthNamesShort.april')),
+            (t('calendar.monthNamesShort.may')),
+            (t('calendar.monthNamesShort.june')),
+            (t('calendar.monthNamesShort.july')),
+            (t('calendar.monthNamesShort.august')),
+            (t('calendar.monthNamesShort.september')),
+            (t('calendar.monthNamesShort.october')),
+            (t('calendar.monthNamesShort.november')),
+            (t('calendar.monthNamesShort.december'))
+        ],
+
+        dayNames: [
+            (t('calendar.dayNames.sunday')),
+            (t('calendar.dayNames.monday')),
+            (t('calendar.dayNames.tuesday')),
+            (t('calendar.dayNames.wednesday')),
+            (t('calendar.dayNames.thursday')),
+            (t('calendar.dayNames.friday')),
+            (t('calendar.dayNames.saturday')),
+        ],
+
+        dayNamesShort: [
+            (t('calendar.dayNamesShort.sun')),
+            (t('calendar.dayNamesShort.mon')),
+            (t('calendar.dayNamesShort.tue')),
+            (t('calendar.dayNamesShort.wed')),
+            (t('calendar.dayNamesShort.thu')),
+            (t('calendar.dayNamesShort.fri')),
+            (t('calendar.dayNamesShort.sat'))
+        ],
+        
+        today: (t('calendar.today'))
+    },   
+   
+    LocaleConfig.defaultLocale = 'en';
 
     function addHandle(){
         handleChangeView(2);

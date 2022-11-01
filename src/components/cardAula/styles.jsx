@@ -3,8 +3,10 @@ import styled from "styled-components/native";
 export const Container = styled.View`
     width:100%;
     height:60px;
+    padding:5px;
     flex-direction:row;
     border: 1px solid #000000;
+    margin-bottom:5px;
 `
 
 export const InfoContainer = styled.View`
@@ -14,4 +16,6 @@ export const InfoContainer = styled.View`
 export const ButtonsContainer = styled.View`
     width:50%;
     flex-direction:row;
+    align-items:center;
+    justify-content:space-between;
 `
