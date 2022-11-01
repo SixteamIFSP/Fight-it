@@ -276,6 +276,24 @@
             "deleteClassConfirm" : "CONFIRM",
             "deleteClassClose" : "CLOSE"
             
+        },
+
+        "addAula": {
+
+            "addClass" : "Add Class",
+            "classTopic" : "Class Topic",
+            "classDate" : "Class Date", 
+            "classTime" : "Class Time",
+            "classDescription" : "Class Description",
+            "equipaments" : "Equipaments",
+            "equipamentName" : "Equipament Name",
+            "addButton" : "Add"
+            
         }
+
+
+
+
+
     }
 }

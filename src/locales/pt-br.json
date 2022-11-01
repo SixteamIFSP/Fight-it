@@ -254,9 +254,19 @@
 
         "deleteClassConfirm" : "CONFIRMAR",
         "deleteClassClose" : "FECHAR"
-    }
+    },
 
+    "addAula": {
 
+        "addClass" : "Adicionar aula",
+        "classTopic" : "Tópico da aula",
+        "classDate" : "Data da aula", 
+        "classTime" : "Horário da aula",
+        "classDescription" : "Descrição da aula",
+        "equipaments" : "Equipamentos",
+        "equipamentName" : "Nome do Equipamento",
+        "addButton" : "Adicionar"
+        }
 
     }
 }

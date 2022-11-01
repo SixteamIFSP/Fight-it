@@ -7,6 +7,7 @@ import { AddEquipamentContainer, AdicionarAulaButton, AdicionarAulaContainer, Cl
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { MaterialIcons } from "@expo/vector-icons";
 import { DoubleButtonConfirmation } from "../doubleButtonConfirmation";
+import { useTranslation } from "react-i18next";
 
 export function AdicionarAula({ turmaId, setback }) {
     const [topicoAula, setTopicoAula] = useState('')
@@ -17,6 +18,7 @@ export function AdicionarAula({ turmaId, setback }) {
     const [selectectDateIsOpen, setSelectedDateIsOpen] = useState(false);
     const [selectTimeIsOpen, setSelectTimeIsOpen] = useState(false);
     const [equipamento, setEquipamento] = useState('');
+    const { t } = useTranslation()
 
     function handleBack() {
         setback();
@@ -49,15 +51,15 @@ export function AdicionarAula({ turmaId, setback }) {
 
     return (
         <AdicionarAulaContainer>
-            <TextDescription>Adicionar aula</TextDescription>
+            <TextDescription>{t('addAula.addClass')}</TextDescription>
             <Input
                 style={{ marginBottom: 16 }}
                 value={topicoAula}
-                placeholder={'Tópico da aula'}
+                placeholder={t('addAula.classTopic')}
                 onChangeText={setTopicoAula}
             />
             <ClassDateContainer>
-                <Text style={{ fontSize: 16, marginBottom: 12, fontWeight: '700' }}>Data da aula</Text>
+                <Text style={{ fontSize: 16, marginBottom: 12, fontWeight: '700' }}>{t('addAula.classDate')}</Text>
                 <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => { setSelectedDateIsOpen(true) }}>
                     <Text>{date.toLocaleDateString()}</Text>
                     <MaterialIcons style={{ fontSize: 16, marginLeft: 12 }} name="edit" size={40} color="#000" />
@@ -65,7 +67,7 @@ export function AdicionarAula({ turmaId, setback }) {
             </ClassDateContainer>
 
             <ClassDateContainer>
-                <Text style={{ fontSize: 16, marginBottom: 12, fontWeight: '700' }}>Horário da aula</Text>
+                <Text style={{ fontSize: 16, marginBottom: 12, fontWeight: '700' }}>{t('addAula.classTime')}</Text>
                 <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => { setSelectTimeIsOpen(true) }}>
                     <Text>{time.toLocaleTimeString()}</Text>
                     <MaterialIcons style={{ fontSize: 16, marginLeft: 12 }} name="edit" size={40} color="#000" />
@@ -109,17 +111,17 @@ export function AdicionarAula({ turmaId, setback }) {
             <Input
                 style={{ marginBottom: 16 }}
                 value={descricao}
-                placeholder={'Descrição da aula'}
+                placeholder={(t('addAula.classDescription'))}
                 onChangeText={setDescricao}
             />
 
-            <TextDescription>Equipamentos</TextDescription>
+            <TextDescription>{t('addAula.equipaments')}</TextDescription>
             {/* SportsKabaddi */}
             {/* SportsMma */}
             <AddEquipamentContainer style={{ width: '100%' }}>
                 <Input style={{ width: '70%', alignSelf: 'flex-start' }}
                     value={equipamento}
-                    placeholder={'Nome do equipamento'}
+                    placeholder={t('addAula.equipamentName')}
                     onChangeText={setEquipamento}
                 />
                 <AdicionarAulaButton
@@ -127,7 +129,7 @@ export function AdicionarAula({ turmaId, setback }) {
                     onPress={() => {
                         setEquipamentos(e => [...e, equipamento])
                     }}>
-                    <TextWhite style={{ textAlign: 'center' }}>Adicionar</TextWhite>
+                    <TextWhite style={{ textAlign: 'center' }}>{t('addAula.addButton')}</TextWhite>
                 </AdicionarAulaButton>
             </AddEquipamentContainer>
             {
