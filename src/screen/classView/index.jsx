@@ -64,7 +64,7 @@ function RenderAula({ aula, onDeleteAula, onSelectAula, student, handleViewAula 
             <Text>{aula.nome}</Text>
             <CancelarAula
                 onPress={() => onDeleteAula(aula)}>
-                <TextWhite>Cancelar Aula</TextWhite>
+                <TextWhite>{t('classView.cancelClass')}</TextWhite>
             </CancelarAula>
         </RenderAulaContainer>
     )
@@ -105,7 +105,7 @@ export function ClassView({ navigation, route }) {
         const date = new Date();
 
         if (date > aula.data){
-            toastMessage(false, "não é possivel cancelar esta aula")
+            toastMessage(false, t('classView.toastItisNotPossibleCancelClass'))
             return
         }
         const novaLista = dateAula.filter(({id}) => id !==  aula.id);
@@ -114,7 +114,7 @@ export function ClassView({ navigation, route }) {
     }
 
     function onSelectAula(nometurma, aulaid) { 
-        navigation.navigate('MaterialExtra', {title:'Upload do material extra', nometurma, aulaid});
+        navigation.navigate('MaterialExtra', {title:(t('classView.uploadExtraMaterial')), nometurma, aulaid});
     }
     
     function updateClass(){
@@ -124,7 +124,7 @@ export function ClassView({ navigation, route }) {
     useEffect(() => {
         if (!isFocused) return;
         function effect() {
-            setCallback("Deseja apagar a turma?", () => callBackDeleteTurma());
+            setCallback(t('classView.deleteClass'), () => callBackDeleteTurma());
             getData();
         };
 
@@ -135,7 +135,7 @@ export function ClassView({ navigation, route }) {
         1:
             (<ContainerListColumn>
                 <ContainerHeader>
-                    <ClassText>{Descricao}</ClassText>
+                    <ClassText>{t('classView.description')}</ClassText>
 
                     <TouchableOpacity onPress={() => handleOpenPage(5)}>
                         <FontAwesome name={'pencil'} size={30} color="black" />
@@ -163,7 +163,7 @@ export function ClassView({ navigation, route }) {
                                     keyExtractor={item => `${item.Nome}` + '91'}>
                                 </ContentListagem>
                                 :
-                                <Text>{"Não há alunos nessa turma"}</Text>
+                                <Text>{t('classView.thereAreNoStudents')}</Text>
                         }
                     </ContainerFlat>
 
@@ -176,7 +176,7 @@ export function ClassView({ navigation, route }) {
                     {!student && <AddContainer>
                         <AddButton handle={() => handleOpenPage(3)} />
                     </AddContainer>}
-                    <ClassText>Aulas:</ClassText>
+                    <ClassText>{t('classView.classes')}</ClassText>
                     <ContainerFlat>
                         {
                             dateAula.length >= 1 ?
@@ -191,7 +191,7 @@ export function ClassView({ navigation, route }) {
                                     keyExtractor={item => `${item.id}-${item.nome}-dataAula`}>
                                 </ContentListagem>
                                 :
-                                <Text>{"Não há alunos nessa turma"}</Text>
+                                <Text>{t('classView.thereAreNoStudents2')}</Text>
                         }
                     </ContainerFlat>
                 </ContainerList>

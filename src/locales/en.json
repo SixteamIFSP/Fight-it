@@ -109,9 +109,18 @@
         },
         "classView":{
             "Student":{
-                "Header":"Student listing"  
-            }
+                "Header":"Student listing"
+            },
+            "cancelClass" : "Cancel Class",
+            "toastItisNotPossibleCancelClass": "It is not possible to cancel this class",
+            "uploadExtraMaterial": "Uploading extra material",
+            "deleteClass": "Do you want to delete the class?",
+            "description":"Description",
+            "thereAreNoStudents": "There are no students in this class",
+            "classes": "Classes:",
+            "thereAreNoStudents2": "There are no students in this class"
         },
+
         "addStudentClass":{
             "Header":"Add Student",
             "Placeholder":{
@@ -251,8 +260,22 @@
         "ListCalendarDate": {
             "classes" : "Classes",
             "scheduledclasses": "Scheduled classes",
-            "thereAreNo": "There are no classes for this date",
+            "thereAreNo": "There are no classes for this date"
             
-            }
+        },
+
+        "loadingClass": {
+
+            "choseClass" : "Choose a class to add a class",
+            "teacherHasNoClasses": "This teacher has no classes",
+            "backButton": "To back"
+        },
+
+        "figthtItModal": {
+
+            "deleteClassConfirm" : "CONFIRM",
+            "deleteClassClose" : "CLOSE"
+            
+        }
     }
 }
