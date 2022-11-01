@@ -5,6 +5,8 @@ import Toast, { BaseToast, ErrorToast } from 'react-native-toast-message';
 import { UserProvider } from './src/hooks/user';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ModalProvider } from './src/hooks/modalConfirmation';
+import { useEffect, useRef } from 'react';
+import * as Notifications from 'expo-notifications';
 
 const toastConfig = {
   success: (props) => (
@@ -37,10 +39,35 @@ const toastConfig = {
   ),
 };
 
-export default function App() {
+export default function App() {  
+  const notificationListener = useRef();
+  const responseListener = useRef();
+
+  useEffect(() => {
+    Notifications.setNotificationHandler({
+      handleNotification: async () => ({
+        shouldShowAlert: true,
+        shouldPlaySound: false,
+        shouldSetBadge: false,
+      }),
+    });
+
+    notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
+      console.log(notification);
+    });
+  
+    responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
+      console.log(response);
+    });
+  
+    return () => {
+      Notifications.removeNotificationSubscription(notificationListener.current);
+      Notifications.removeNotificationSubscription(responseListener.current);
+    };
+  }, []);
+ 
   return (
     <UserProvider>
-     
         <ModalProvider>
         <NavigationContainer >
           <SafeAreaView style={styles.container}>

@@ -73,8 +73,7 @@ export async function ChangePassowrd(data, type) {
         } else {
             response = await api.patch('/user/senha/aluno', { ...data });
         }
-
-        if (response.data.status) {
+        if (response?.data.status) {
             toastMessage(true, 'Senha atualizada com sucesso!')
         } else {
             toastMessage(false, 'Insira a senha atual')

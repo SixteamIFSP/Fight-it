@@ -252,8 +252,9 @@ export const ChangePassword = ({ editable, setEditable }) => {
                     senhaAntiga: oldPass,
                     senha: newPassword
                 }
-                ChangePassowrd(data, user.TipoUsuario === 1);
-                setEditable((value) => !value)
+
+                ChangePassowrd(data, user.tipoUsuario == 1)
+
             } else {
                 if (!newPassword) {
                     setNewPasswordEmpty(true);
@@ -395,9 +396,8 @@ const ConfirmDelete = ({ deletable, setDeletable }) => {
                                 onPress={() => setDeletable(false)}>
                                 {t('validation.cancel')}
                             </DeleteAccountButton>
-                            <ConfirmButton onPress={() => handleDelete()}>EXCLUIR</ConfirmButton>
+                            <ConfirmButton onPress={() => handleDelete()}>{t("validation.confirm")}</ConfirmButton>
                         </HorizontalButtonsContainer>
-
                     </RowConfirmation>
                 </ConteinerInfoDelete>
             )
@@ -424,7 +424,8 @@ export function ConfigureAccount() {
 
     useEffect(() => {
         (async () => {
-            const cameraRollStatus = await ImagePicker.requestMediaLibraryPermissionsAsync();
+            const cameraRollStatus =
+                await ImagePicker.requestMediaLibraryPermissionsAsync();
             if (
                 cameraRollStatus.status !== "granted"
             ) {
@@ -434,7 +435,6 @@ export function ConfigureAccount() {
     }, []);
 
     const pickImage = async () => {
-
         try {
             let result = await ImagePicker.launchImageLibraryAsync({
                 mediaTypes: "Images",
@@ -449,7 +449,6 @@ export function ConfigureAccount() {
         } catch (error) {
             console.log(error.message);
         }
-
     }
 
     return (
@@ -482,7 +481,7 @@ export function ConfigureAccount() {
                             }
                         </AreaImage>
                     </ContainerImage>
-                    <DataUser></DataUser>
+                    <DataUser/>
                 </>}
             <ChangePassword editable={editablePass} setEditable={setEditablePass}></ChangePassword>
             <ConfirmDelete deletable={deletable} setDeletable={setDeletable}></ConfirmDelete>

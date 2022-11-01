@@ -7,25 +7,25 @@ import { convertDataUTC, convertDateToBrString, dateSplit } from "../../utils/da
 import { getCalendarList } from "../../controler/calendar";
 import { ContainerHeader, TextHeader } from "../calendarView/styles";
 import { AddButton } from "../addButton";
+import { useTranslation } from 'react-i18next';
 
 export function ListCalendarDates({selectedDate, addHandle}){
     const { user } = useUser();
     const [dates, setDates] = useState([]);
+    const { t } = useTranslation();
 
     useEffect(() => {
         const date = dateSplit(selectedDate);
-        console.log(selectedDate);
-
         getCalendarList(user.userID, date, user.tipoUsuario===1, setDates);
     }, [selectedDate]);
 
     return (
     <ContainerList>
-        <ClassText>{"Aulas"}</ClassText>
+        <ClassText>{t('ListCalendarDate.classes')}</ClassText>
        
         <ContainerHeader>
             <Text>
-                Aulas marcadas: {convertDateToBrString(new Date(selectedDate))}
+            {t('ListCalendarDate.scheduledclasses')} {convertDateToBrString(new Date (selectedDate))}
             </Text>
 
             {
@@ -41,11 +41,12 @@ export function ListCalendarDates({selectedDate, addHandle}){
                 <ContentListagem
                 data={dates}
                 renderItem={
-                    ({ item }) => <CardAula item={item}/>}
+                    ({ item }) => <CardAula item={item}/>
+                }
                 >
                 </ContentListagem>
                 :
-                <Text>Não há aulas para essa data</Text>
+                <Text>{t('ListCalendarDate.thereAreNo')}</Text>
             }
         </ContainerFlat>
     </ContainerList>
