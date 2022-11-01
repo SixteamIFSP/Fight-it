@@ -84,7 +84,7 @@
         },
         "configScreen":{
             "Header":"Minha Conta",
-            "MessageAlert":"Usuário sem permição para utilizar mídias",
+            "MessageAlert":"Usuário sem permissão para utilizar mídias",
             "Active":"Ativo",
             "Deactivated":"Desativado",
             "ChangePass": "MUDAR SENHA",

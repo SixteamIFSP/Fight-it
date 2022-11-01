@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import { Text, TouchableOpacity } from "react-native";
+import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { adicionarAula } from "../../controler/class";
 import { toastMessage } from "../../utils/toastMessage";
 import { Input } from "../input";
-import { AddEquipamentContainer, AdicionarAulaButton, AdicionarAulaContainer, ClassDateContainer, TextDescription, TextWhite } from "./styles";
+import { AddEquipamentContainer, AdicionarAulaButton, AdicionarAulaContainer, ClassDateContainer, DeleteButton, Equipamento, TextDescription, TextWhite } from "./styles";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { MaterialIcons } from "@expo/vector-icons";
 import { DoubleButtonConfirmation } from "../doubleButtonConfirmation";
+import { useTranslation } from "react-i18next";
 
 export function AdicionarAula({ turmaId, setback }) {
+    const { t } = useTranslation();
     const [topicoAula, setTopicoAula] = useState('')
     const [descricao, setDescricao] = useState('')
     const [date, setDate] = useState(new Date());
@@ -42,7 +44,6 @@ export function AdicionarAula({ turmaId, setback }) {
             data: newDate,
             turma: turmaId
         }
-
         adicionarAula(data)
         setback();
     }
@@ -114,8 +115,7 @@ export function AdicionarAula({ turmaId, setback }) {
             />
 
             <TextDescription>{t("addLession.equipment.header")}</TextDescription>
-            {/* SportsKabaddi */}
-            {/* SportsMma */}
+
             <AddEquipamentContainer style={{ width: '100%' }}>
                 <Input style={{ width: '70%', alignSelf: 'flex-start' }}
                     value={equipamento}
@@ -130,7 +130,7 @@ export function AdicionarAula({ turmaId, setback }) {
                     <TextWhite style={{ textAlign: 'center' }}>{t("addLession.equipment.add")}</TextWhite>
                 </AdicionarAulaButton>
             </AddEquipamentContainer>
-            {
+            {/* {
                 equipamentos && equipamentos.length ?
                     <View>
                         <Text style={{ fontSize: 16, marginBottom: 12, fontWeight: '700' }}>{t("addLession.equipment.selected")}</Text>
@@ -147,7 +147,7 @@ export function AdicionarAula({ turmaId, setback }) {
                             </Equipamento>)}
                         </ScrollView>
                     </View> : null
-            }
+            } */}
 
             <DoubleButtonConfirmation style={{ alignSelf: 'flex-end' }}
                 handleBack={handleBack}

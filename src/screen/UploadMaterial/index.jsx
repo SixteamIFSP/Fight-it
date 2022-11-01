@@ -7,11 +7,6 @@ import { toastMessage } from "../../utils/toastMessage";
 import { justUploadImage } from "../../controler/image";
 import { postMaterialExtra } from "../../controler/materialExtra";
 
-
-
-
-
-
 export function UploadMaterial({ navigation, route }) { 
     const [image, setImage] = useState()
     const [descricao, setDescricao] = useState()
@@ -29,7 +24,7 @@ export function UploadMaterial({ navigation, route }) {
         await ImagePicker.requestMediaLibraryPermissionsAsync();
 
     if (cameraRollStatus.status !== "granted") {
-        alert("Usuario sem permição para utilizar mídias");
+        alert("Usuario sem permissão para utilizar mídias");
         return false 
      }
       return true 

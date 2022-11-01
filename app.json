@@ -30,6 +30,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
+      "useNextNotificationsApi": true,
       "package": "com.ifsp.sixteam.fightit",
       "versionCode": 1,
       "permissions": [
