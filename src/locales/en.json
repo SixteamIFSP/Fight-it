@@ -129,7 +129,7 @@
             "Student":{
                 "Header":"Student listing"  
             },
-            "classCancel":"Cancel class",
+            "cancelClass":"Cancel class",
             "toastItisNotPossibleCancelClass": "It is not possible to cancel this class",
             "uploadExtraMaterial": "Uploading extra material",
             "deleteClass": "Do you want to delete the class?",
