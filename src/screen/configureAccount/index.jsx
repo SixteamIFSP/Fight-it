@@ -199,7 +199,7 @@ const DataUser = () => {
                             isChecked={notification}
                             onPress={() => setNotification((value) => !value)}
                         ></CheckBox>
-                        : <TextInfo>{notification ? 'Sim' : 'Não'}</TextInfo>
+                        : <TextInfo>{notification ? t(configScreen.NotificationYes) : t(configScreen.NotificationNo)}</TextInfo>
                 }
             </TextAlingLine>
             <RowConfirmation>
@@ -220,7 +220,7 @@ const DataUser = () => {
                     <SaveButton
                         onPress={() => save()}
                     >
-                        <SaveButtonText>Salvar</SaveButtonText>
+                        <SaveButtonText>{t('configScreen.SaveButton')}</SaveButtonText>
                     </SaveButton>}
             </RowConfirmation>
         </ConteinerInfo>
@@ -265,7 +265,7 @@ export const ChangePassword = ({ editable, setEditable }) => {
                 if (!oldPass) {
                     setOldPassEmpty(true);
                 }
-                toastMessage(false, "Digite os campos corretamente !"); // sem t
+                toastMessage(false, "Digite os campos corretamente!"); // sem t
                 //toastMessage(false,  t("msg.completeFields")); // com t 
             }
         }
@@ -338,7 +338,7 @@ export const ChangePassword = ({ editable, setEditable }) => {
                         editable
                         && <SaveButton
                             onPress={() => save()}
-                        ><SaveButtonText>Salvar</SaveButtonText>
+                        ><SaveButtonText>{t('configScreen.SaveButton')}</SaveButtonText>
                         </SaveButton>}
 
                 </RowConfirmation>
@@ -351,7 +351,7 @@ export const ChangePassword = ({ editable, setEditable }) => {
     )
 };
 
-const ConfirmDelete = ({ deletable, setDeletable }) => {
+const ConfirmDelete = ({ deletable, setDeletable}) => {
     const { user, logOut } = useUser();
     const [password, setPassword] = useState('');
 
@@ -363,10 +363,10 @@ const ConfirmDelete = ({ deletable, setDeletable }) => {
                     senha: password,
                 };
                 DeleteAccount(data, user.tipoUsuario === 1, () => logOut())
-                toastMessage(false, "Conta excluída !")
+                toastMessage(false, "Conta Desativada com Sucesso!")
             } else {
 
-                toastMessage(false, "Preencha os campos corretamente")
+                toastMessage(false, "Preencha os Campos Corretamente")
             }
 
         } catch (error) {
@@ -429,7 +429,7 @@ export function ConfigureAccount() {
             if (
                 cameraRollStatus.status !== "granted"
             ) {
-                alert("Usuario sem permissão para utilizar mídias");
+                alert("Usuário sem permissão para utilizar mídias");
             }
         })();
     }, []);
