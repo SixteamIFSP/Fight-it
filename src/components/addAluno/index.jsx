@@ -19,11 +19,8 @@ export function AdicionarAluno({ turmaId, setback }) {
         Keyboard.dismiss();
         const value = InputQueryRef?.current.text;
         if (!value) return
-
         //setLoading(true);
-
-        const resp = await getAluno(value, setAlunos);
-
+        await getAluno(value, setAlunos);
         //setLoading(false)
     }
 
@@ -67,11 +64,11 @@ export function AdicionarAluno({ turmaId, setback }) {
                     !loading ?
 
                         (alunos.length < 1) ?
-                            <Text>{t("addStudents.empty")}</Text>
+                            <Text style={{fontWeight:'bold', fontSize:16}}>{t("addStudents.empty")}</Text>
                             :
                             <View>
                                 <Text style={{ fontSize: 16, marginBottom: 12, fontWeight: 'bold' }}>
-                                    {'Legal! Encontramos estes alunos. Selecione o aluno que deseja adicionar à turma: '}
+                                    {'Legal! Encontramos este(s) aluno(s). Selecione o aluno que deseja adicionar à turma: '}
                                 </Text>
                                 <FlatList
                                     data={alunos}
