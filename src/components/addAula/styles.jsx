@@ -10,7 +10,7 @@ export const TextDescription = styled.Text`
     width:100%;
     text-align:center;
     font-weight: 700;
-    font-size: 16px;
+    font-size: 17px;
     margin-bottom: 12px;
     `;
 

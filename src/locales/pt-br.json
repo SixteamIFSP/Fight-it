@@ -138,8 +138,8 @@
         },
         "loadingClass": {
             "addlesson": "Escolha uma turma para adicionar uma aula",
-            "noClassTeacher": "Este professor não possui turmas",
-            "noClassStudent": "Este Aluno não possui turmas",
+            "noClassTeacher": "Este professor não possui turmas!",
+            "noClassStudent": "Este aluno não está inserido em nenhuma turma!",
             "choseClass": "Escolha uma turma para adicionar uma aula",
             "teacherHasNoClasses": "Este professor não possui turmas",
             "backButton": "Voltar"
