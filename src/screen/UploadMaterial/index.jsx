@@ -7,11 +7,6 @@ import { toastMessage } from "../../utils/toastMessage";
 import { justUploadImage } from "../../controler/image";
 import { postMaterialExtra } from "../../controler/materialExtra";
 
-
-
-
-
-
 export function UploadMaterial({ navigation, route }) { 
     const [image, setImage] = useState()
     const [descricao, setDescricao] = useState()

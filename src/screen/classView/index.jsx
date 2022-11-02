@@ -58,7 +58,7 @@ function RenderAula({ aula, onDeleteAula, onSelectAula, student, handleViewAula 
         <RenderAulaContainer >
             <Text>{aula.nome}</Text>
             <View style={{flexDirection: 'row'}}>
-            <CancelarAula
+            {/* <CancelarAula
                 onPress={() => {
                     if(student) {
                         handleViewAula()
@@ -67,7 +67,7 @@ function RenderAula({ aula, onDeleteAula, onSelectAula, student, handleViewAula 
                     onSelectAula(aula.nome, aula.id)
                     }}>
                 <TextWhite>Adicionar Material</TextWhite>
-            </CancelarAula>
+            </CancelarAula> */}
             <CancelarAula
                 onPress={() => onDeleteAula(aula)}>
                 <TextWhite>{t("classView.classCancel")}</TextWhite>
