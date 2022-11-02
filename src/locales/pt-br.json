@@ -132,7 +132,7 @@
         "addStudentClass":{
             "Header":"Adicionar Aluno",
             "Placeholder":{
-                "mail":"Digite o e-mail do aluno"
+                "mail":"Digite o e-mail"
             }
         },
         "studentView":{

@@ -6,14 +6,14 @@ export function CardDashboard({ text, value }) {
 
     return (
         <View style={{
-            shadowColor: "#ff6359",
+            shadowColor: "#ee1000",
             shadowOffset: {
-                width: 2,
-                height: 6,
+                width: 0,
+                height: 2,
             },
-            shadowOpacity: 0.48,
-            shadowRadius: 11.95,
-            elevation: 18,
+            shadowOpacity: 0.25,
+            shadowRadius: 3.84,
+            elevation: 6,
             width: '40%',
             borderColor: '#f5f5f5',
             borderStyle: 'solid',
