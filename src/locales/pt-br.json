@@ -2,28 +2,28 @@
     "translation": {
         "appName": "Fight It",
         "translate": "tradução:",
-        "header":{
-            "teacher":"Professor",
-            "student":"Aluno"
+        "header": {
+            "teacher": "Professor",
+            "student": "Aluno"
         },
         "validation": {
             "confirm": "CONFIRMAR",
             "submit": "ENVIAR",
             "cancel": "CANCELAR"
-        }, 
-        "form":{
+        },
+        "form": {
             "mail": "E-mail",
             "password": "Senha",
             "name": "Nome",
             "phone": "Telefone",
-            "notification":"Receber Notificação",
+            "notification": "Receber Notificação",
             "confirmPassword": "Confirmar Senha"
         },
-        "toast":{
-            "error":{
-                "blank":"Preencha os Campos Obrigatórios!",
+        "toast": {
+            "error": {
+                "blank": "Preencha os Campos Obrigatórios!",
                 "invalid": {
-                    "email":"Digite um e-mail valido"
+                    "email": "Digite um e-mail valido"
                 }
             }
         },
@@ -57,16 +57,16 @@
                 "description": "Responda o formulário de triagem para saber seu condicionamento físico:",
                 "form-Heart": "Possui problemas Cardiacos?",
                 "form-other-problems": "Descrição de outros problemas não citados:"
+                },
+                "qualification": {
+                    "title": "Comprovante de aptidão",
+                    "description": "Envie as informações necessarias para comprovar a capacitação:",
+                    "form-fight": "Arte Marcial"
+                }
             },
-            "qualification": {
-                "title": "Comprovante de aptidão",
-                "description": "Envie as informações necessarias para comprovar a capacitação:",
-                "form-fight": "Arte Marcial"
-            }     
-        },
-        "homePage":{
-            "student":{
-                "message":"Olá estudante"
+             "homePage": {
+                 "student": {
+                   "message": "Olá estudante"
             },
             "teacher":{
                 "message":"Olá professor"
@@ -76,67 +76,87 @@
                 "classes":"Quantidade de turmas",
                 "lessons":"Quantidade de aulas"
             }
-        },  
-        "nav":{
+        },
+        "nav": {
             "config": "Configuração",
             "home": "Home",
             "calendar": "Calendário",
             "class": "Turma"
         },
-        "configScreen":{
-            "Header":"Minha Conta",
-            "MessageAlert":"Usuário sem permissão para utilizar mídias",
-            "Active":"Ativo",
-            "Deactivated":"Desativado",
+        "configScreen": {
+            "Header": "Minha Conta",
+            "MessageAlert": "Usuário sem permição para utilizar mídias",
+            "Active": "Ativo",
+            "Deactivated": "Desativado",
             "ChangePass": "MUDAR SENHA",
-            "DesactiveAccount": "DESATIVAR CONTA"       
+            "DesactiveAccount": "DESATIVAR CONTA"
         },
-        "changePass":{
+        "changePass": {
             "Header": "Trocar Senha",
-            "OldPass":"Senha Antiga",
-            "NewPass":"Nova Senha",
-            "ConfirmPass":"Confirmação de Senha"
+            "OldPass": "Senha Antiga",
+            "NewPass": "Nova Senha",
+            "ConfirmPass": "Confirmação de Senha"
         },
         "exclude":{
             "Header":"Desativar Conta",
             "LabelUser":"Validação de usuário",
             "placeholder":"Digite sua senha!"
         },
-        "navigationHeader":{
-            "Class":"Turma",
-            "ClassDescription":"Turma: {{name}}",
-            "StudentDescription":"Aluno: {{name}}",
+        "navigationHeader": {
+            "Class": "Turma",
+            "ClassDescription": "Turma: {{name}}",
+            "StudentDescription": "Aluno: {{name}}",
             "Evaluation": "Avaliação: {{name}}"
         },
-        "createClass":{
-            "Header":"Criar nova turma",
-            "Placeholder":{
-                "Nome":"Nome da turma",
-                "Description":"Descrição da turma"
+        "createClass": {
+            "Header": "Criar nova turma",
+            "Placeholder": {
+                "Nome": "Nome da turma",
+                "Description": "Descrição da turma"
             }
         },
-        "classView":{
-            "Student":{
-                "Header":"Listagem de alunos"  
+
+        "classView": {
+            "Student": {
+                "Header": "Listagem de alunos"
             },
-            "classCancel":"Cancelar Aula"
+            "cancelClass" : "Cancelar Aula",
+            "toastItisNotPossibleCancelClass": "Não é possivel cancelar esta aula",
+            "uploadExtraMaterial": "Upload do material extra",
+            "deleteClass": "Deseja apagar a turma?",
+            "description":"Descrição",
+            "thereAreNoStudents": "Não há alunos nessa turma",
+            "classes": "Aulas:",
+            "thereAreNoStudents2": "Não há alunos nessa turma"
         },
+
         "loadingClass":{
             "addlesson":"Escolha uma turma para adicionar uma aula",
             "noClassTeacher":"Este professor não possui turmas",
-            "noClassStudent":"Este Aluno não possui turmas"
+            "noClassStudent":"Este Aluno não possui turmas",
+            "choseClass": "Escolha uma turma para adicionar uma aula",
+            "teacherHasNoClasses": "Este professor não possui turmas",
+            "backButton": "Voltar"
         },
-        "addStudentClass":{
-            "Header":"Adicionar Aluno",
-            "Placeholder":{
-                "mail":"Digite o e-mail do aluno"
-            }
+
+        "addStudentClass": {
+            "Header": "Adicionar Aluno",
+            "Placeholder": {
+                "mail": "Digite o e-mail do aluno"
+                },
+            "searchButton" : "Buscar",
+            "noStudents" : "Sem Alunos",
+            "backButton" : "Voltar"
         },
+
+
         "studentView":{
             "Header":"Desempenho",
             "ButtonAvaliation":"Avaliar Aluno",
             "ButtonViewTriagem":"Visualizar Triagem"
         },
+    
+
         "addStudents":{
             "empty":"No students"
         },
@@ -160,31 +180,36 @@
         },
         "evaluationStudent":{
             "Header":"AVALIAÇÃO",
-            "Description":"Datas de Desempenho:",
+            "Description":"Datas de Avaliação:",
             "Fields":{
                 "Name":"Nome: {{name}}",
                 "Date":"Data: {{date}}"
             }
         },
+
+
         "createEvaluation":{
-            "Header": "Criação de desempenho",
+            "Header": "Criação de avaliação",
             "Label":{
-                "Name":"Nome do desempenho",
-                "Date":"Nome do desempenho"
-            }
-        }, 
-        "parameterCriation":{
-            "Header": "Criação de parâmetro",
-            "Label":{
-                "Select": "Selecione parâmetro",
-                "insertName":"Enter the name of the new paramâtro",
-                "SelectType":"Select Parameter type"
-            },
-            "Buttons":{
-                "Submit":"Enviar parâmetro",
-                "Create":"Criar novo parâmetro"
+                "Name":"Nome da avaliação",
+                "Date":"Data da avaliação"
             }
         },
+        
+        "parameterCriation": {
+            "Header": "Criação de Critério",
+            "Label": {
+                "Select": "Selecione o critério",
+                "insertName": "Insira o nome do novo critério",
+                "SelectType": "Selecione o tipo de critério"
+            },
+            "Buttons": {
+                "Submit": "Enviar critério",
+                "Create": "Criar novo critério"
+            }
+        },
+
+
         "sorting": {
             "title": "Triagem",
 			"sortingHeader1": "Estamos quase finalizando seu cadastro.",
@@ -222,67 +247,84 @@
         "inputValidators": {
             "validationEmail": "Digite um email válido",
             "validationName": "Digite um nome válido"
-        },
-
-        "calendar":{
-            "monthNames": {
-                "jan": "Janeiro",
-                "feb": "Fevereiro",
-                "mar": "Março",
-                "apr": "Abril",
-                "may": "Maio",
-                "jun": "Junho",
-                "jul": "Julho",
-                "aug": "Agosto",
-                "sept": "Setembro",
-                "oct": "Outubro",
-                "nov": "Novembro",
-                "dec": "Dezembro"
-            },
-
-            "monthNamesShort": {
-                "january": "Jan",
-                "february": "Fev",
-                "march": "Mar",
-                "april": "Abr",
-                "may": "Mai",
-                "june": "Jun",
-                "july": "Jul",
-                "august": "Ago",
-                "september": "Set",
-                "october": "Out",
-                "november": "Nov",
-                "december": "Dez"
-            },            
-             
-            "dayNames": {
-                "sunday": "Domingo",
-                "monday": "Segunda",
-                "tuesday": "Terça",
-                "wednesday": "Quarta",
-                "thursday": "Quinta",
-                "friday": "Sexta",
-                "saturday": "Sábado"
-            },
-             
-            "dayNamesShort": {
-                "sun": "Dom.",
-                "mon": "Seg.",
-                "tue": "Ter.",
-                "wed": "Qua.",
-                "thu": "Qui.",
-                "fri": "Sex.",
-                "sat": "Sab."                  
-            },     
-            
-            "today": "Hoje"
-        },
+        },   
 
         "ListCalendarDate": {
             "classes" : "Aulas",
             "scheduledclasses": "Aulas marcadas",
             "thereAreNo": "Não há aulas para essa data"
-            
+
+        },
+
+  
+    "calendar": {
+        "monthNames": {
+            "jan": "Janeiro",
+            "feb": "Fevereiro",
+            "mar": "Março",
+            "apr": "Abril",
+            "may": "Maio",
+            "jun": "Junho",
+            "jul": "Julho",
+            "aug": "Agosto",
+            "sept": "Setembro",
+            "oct": "Outubro",
+            "nov": "Novembro",
+            "dec": "Dezembro"
+        },
+        "monthNamesShort": {
+            "january": "Jan",
+            "february": "Fev",
+            "march": "Mar",
+            "april": "Abr",
+            "may": "Mai",
+            "june": "Jun",
+            "july": "Jul",
+            "august": "Ago",
+            "september": "Set",
+            "october": "Out",
+            "november": "Nov",
+            "december": "Dez"
+        },
+        "dayNames": {
+            "sunday": "Domingo",
+            "monday": "Segunda",
+            "tuesday": "Terça",
+            "wednesday": "Quarta",
+            "thursday": "Quinta",
+            "friday": "Sexta",
+            "saturday": "Sábado"
+        },
+        "dayNamesShort": {
+            "sun": "Dom.",
+            "mon": "Seg.",
+            "tue": "Ter.",
+            "wed": "Qua.",
+            "thu": "Qui.",
+            "fri": "Sex.",
+            "sat": "Sab."
+        },
+        "today": "Hoje"
+    },
+
+
+    "figthtItModal": {
+
+        "deleteClassConfirm" : "CONFIRMAR",
+        "deleteClassClose" : "FECHAR"
+    },
+
+    "addAula": {
+
+        "addClass" : "Adicionar aula",
+        "classTopic" : "Tópico da aula",
+        "classDate" : "Data da aula", 
+        "classTime" : "Horário da aula",
+        "classDescription" : "Descrição da aula",
+        "equipaments" : "Equipamentos",
+        "equipamentName" : "Nome do Equipamento",
+        "addButton" : "Adicionar"
         }
+
     }
 }
