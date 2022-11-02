@@ -45,7 +45,7 @@ export function AdicionarAluno({ turmaId, setback }) {
             <View style={{ padding: 15, flexDirection: "row" }}>
                 <Input
                     width={"50%"}
-                    ref={InputQueryRef}
+                    innerRef={InputQueryRef}
                     onChangeText={text => InputQueryRef.current.text = text}
                     placeholder={t("addStudentClass.Placeholder.mail")}
                     keyboardType="email-address"

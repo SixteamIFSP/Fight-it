@@ -198,7 +198,8 @@
             "Fields":{
                 "Name":"Name: {{name}}",
                 "Date":"Date: {{date}}"
-            }
+            },
+            "StudanteEvaluationsEmpty": "There are no performances recorded for this student!"
         },
         "createEvaluation":{
             "Header": "Performance creation",

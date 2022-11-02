@@ -185,7 +185,8 @@
             "Fields": {
                 "Name": "Nome: {{name}}",
                 "Date": "Data: {{date}}"
-            }
+            },
+            "StudanteEvaluationsEmpty": "Não há desempenhos registrados para esse aluno!"
         },
         "createEvaluation": {
             "Header": "Criação de avaliação",

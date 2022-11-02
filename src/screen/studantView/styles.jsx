@@ -22,7 +22,7 @@ export const TextButtons = styled.Text`
     width:100%;
     text-align:center;
     padding:10px;
-    border-width:0.5px;
+    border-width:0.2px;
     border-color:black;
     background-color: rgb(221, 221, 221);
 
