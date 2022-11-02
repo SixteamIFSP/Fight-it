@@ -291,9 +291,8 @@ export function EvaluationStudent({ navigation, route }) {
                             <TextHeader>{t("evaluationStudent.Description")}</TextHeader>
                             {
                                 dataEvaluation.length ===0 ? 
-                                <TextHeader>{"Não há avaliações"}</TextHeader>
+                                <TextHeader>{t('evaluationSutdent.NoEvaluation')}</TextHeader>
                                 :
-
                                 <EvaluationList
                                     data={dataEvaluation}
                                     renderItem={({ item }) =>

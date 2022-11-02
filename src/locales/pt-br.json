@@ -38,7 +38,7 @@
         },
         "createAccount": {
             "title": "Criar Conta",
-            "descriptionSwitch": "Escolha o tipo de cadastro:",
+            "descriptionSwitch": "Escolha o perfil desejado:",
             "student": "Aluno",
             "teacher": "Professor",
             "name": "Nome",
@@ -54,32 +54,23 @@
             "invalidPhoneNumber": "Digite um número válido",
             "triage": {
                 "title": "Triagem",
-                "description": "Responda o formulário de triagem para saber seu condicionamento físico:",
-                "form-Heart": "Possui problemas Cardiacos?",
-                "form-other-problems": "Descrição de outros problemas não citados:"
-            },
-            "qualification": {
-                "title": "Comprovante de aptidão",
-                "description": "Envie as informações necessarias para comprovar a capacitação:",
-                "form-fight": "Arte Marcial"
+                "description": "Preencha o formulário de triagem:",
+                "form-Heart": "Possui problemas Cardíacos?",
+                "form-other-problems": "Outros:"
             }
         },
-        "qualification": {
-            "title": "Comprovante de aptidão",
-            "description": "Envie as informações necessarias para comprovar a capacitação:",
-            "form-fight": "Arte Marcial"
-        },
+        
         "homePage": {
             "student": {
-                "message": "Olá, aluno"
+                "message": "Bem-vindo!"
             },
             "teacher": {
-                "message": "Olá,"
+                "message": "Bem-vindo!"
             },
             "dashboard": {
-                "student": "Quantidade de alunos",
-                "classes": "Quantidade de turmas",
-                "lessons": "Quantidade de aulas"
+                "student": "Alunos",
+                "classes": "Turmas",
+                "lessons": "Aulas"
             },
             "login": {
                 "logout": "Sair"
@@ -87,7 +78,7 @@
         },
         "nav": {
             "config": "Configuração",
-            "home": "Home",
+            "home": "Início",
             "calendar": "Calendário",
             "class": "Turma"
         },
@@ -97,7 +88,10 @@
             "Active": "Ativo",
             "Deactivated": "Desativado",
             "ChangePass": "MUDAR SENHA",
-            "DesactiveAccount": "DESATIVAR CONTA"
+            "DesactiveAccount": "DESATIVAR CONTA",
+            "SaveButton": "SALVAR",
+            "NotificationYes": "SIM",
+            "NotificationNo": "NÃO"
         },
         "changePass": {
             "Header": "Trocar Senha",
@@ -134,7 +128,9 @@
             "description": "Descrição",
             "thereAreNoStudents": "Não há alunos nessa turma",
             "classes": "Aulas:",
-            "thereAreNoStudents2": "Não há alunos nessa turma"
+            "thereAreNoStudents2": "Não há alunos nessa turma",
+            "edit": "Edit",
+            "addFile": "Add File"
         },
         "loadingClass": {
             "addlesson": "Escolha uma turma para adicionar uma aula",
@@ -182,6 +178,7 @@
         "evaluationStudent": {
             "Header": "AVALIAÇÃO",
             "Description": "Datas de Avaliação:",
+            "NoEvaluation": "Não há avaliações para este aluno.",
             "Fields": {
                 "Name": "Nome: {{name}}",
                 "Date": "Data: {{date}}"
@@ -208,11 +205,11 @@
         },
         "sorting": {
             "title": "Triagem",
-            "sortingHeader1": "Estamos quase finalizando seu cadastro.",
-            "sortingHeader2": "Precisamos apenas de mais algumas informações!",
+            "sortingHeader1": "Estamos quase lá!",
+            "sortingHeader2": "Precisamos de mais algumas informações!",
             "personalData": "Dados Pessoais:",
-            "height": "Altura em centímetros (cm)",
-            "weight": "Peso(kg)",
+            "height": "Altura (cm)",
+            "weight": "Peso (kg)",
             "birthDate": "Data de nascimento:",
             "anamnesis": "Anamnese:",
             "anamneseDidExercise": "Você já praticou exercício físico antes?",
@@ -227,19 +224,43 @@
             "anamneseInjuries": "Possui alguma lesão?",
             "anamneseInjuriesLabel": "Sim",
             "anamneseInjuriesWhich": "Qual(ais)?",
-            "anamneseComments1": "Gostaria de fazer algum outro comentário que possa ajudar na montagem do seu programa de treinamento?",
+            "anamneseComments1": "Outro:",
             "anamneseComments2": "Digite aqui",
             "errorMessageHeight": "Campo Obrigatório",
             "errorMessageWeight": "Campo Obrigatório",
             "loadingErrorText": "Preencha os campos corretamente!"
         },
+
+        "sortingView": {
+            "title": "Última Triagem",
+            "question": "Este Aluno Não Possui Triagem",
+            "height": "Altura (cm)",
+            "weight": "Peso (kg)",
+            "anamneseDidOrthProb": "Possui algum problema ortopédico?",
+            "anamneseDidOrthProbLabel": "Sim",
+            "anamneseDidOrthProbWhich": "Qual(ais)?",
+            "anamneseChronicIll": "Possui alguma doença crônica?",
+            "anamneseChronicIllLabel": "Sim",
+            "anamneseChronicIllWhich": "Qual(ais)?",
+            "anamneseInjuries": "Possui alguma lesão?",
+            "anamneseInjuriesLabel": "Sim",
+            "anamneseInjuriesWhich": "Qual(ais)?",
+            "anamneseComments1": "Outro:",
+            "anamneseComments2": "Digite aqui",
+            "errorMessageHeight": "Campo Obrigatório",
+            "errorMessageWeight": "Campo Obrigatório",
+            "loadingErrorText": "Preencha os campos corretamente!",
+            "noComments": " - "
+        },
+
+
         "inputValidators": {
             "validationEmail": "Digite um email válido",
             "validationName": "Digite um nome válido"
         },
         "ListCalendarDate": {
             "classes": "Aulas",
-            "scheduledclasses": "Aulas marcadas",
+            "scheduledclasses": "Aulas agendadas",
             "thereAreNo": "Não há aulas para essa data"
         },
         "calendar": {
@@ -304,6 +325,16 @@
             "equipaments": "Equipamentos",
             "equipamentName": "Nome do Equipamento",
             "addButton": "Adicionar"
+        },
+
+        "lessonView": {
+            "title": "Visualizar Aula",
+            "subtitle": "Aula não encontrada",
+            "topic": "Tópico da Aula",
+            "date": "Data",
+            "hour": "Hora",
+            "description": "Descrição",
+            "material": "Visualizar Material Extra da Aula"
         }
     }
 }

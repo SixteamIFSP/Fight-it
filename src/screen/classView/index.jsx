@@ -58,7 +58,7 @@ function RenderAula({ aula, onDeleteAula, onSelectAula, student, handleViewAula 
         <RenderAulaContainer >
             <Text>{aula.nome}</Text>
             <View style={{ flexDirection: 'row' }}>
-                {/* <CancelarAula
+                {<CancelarAula
                 onPress={() => {
                     if(student) {
                         handleViewAula()
@@ -66,8 +66,8 @@ function RenderAula({ aula, onDeleteAula, onSelectAula, student, handleViewAula 
                     } 
                     onSelectAula(aula.nome, aula.id)
                     }}>
-                <TextWhite>Adicionar Material</TextWhite>
-            </CancelarAula> */}
+                <TextWhite>{t('classView.addFile')}</TextWhite>
+            </CancelarAula>}
             <CancelarAula
                 onPress={() => onDeleteAula(aula)}>
                 <TextWhite>{t('classView.cancelClass')}</TextWhite>
@@ -146,7 +146,7 @@ export function ClassView({ navigation, route }) {
 
                     <TouchableOpacity style={{alignItems:"center"}} onPress={() => handleOpenPage(5)}>
                         <FontAwesome name={'pencil'} size={26} color="black" />
-                        <Text>Editar</Text>
+                        <Text>{t('ClassView.edit')}</Text>
                     </TouchableOpacity>
 
                 </ContainerHeader>
@@ -180,7 +180,7 @@ export function ClassView({ navigation, route }) {
                                     keyExtractor={item => `${item.Nome}` + '91'}>
                                 </ContentListagem>
                                 :
-                                <Text>{t('classView.thereAreNoStudents')}</Text>
+                                <Text>{t('classView.thereAreNoStudents2')}</Text>
                         }
                     </ContainerFlat>
 
