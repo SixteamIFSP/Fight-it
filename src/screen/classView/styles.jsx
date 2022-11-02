@@ -68,7 +68,7 @@ export const CancelarAula = styled.TouchableOpacity`
     padding-left: 10px;
     padding-right: 10px;
     background-color: #3d3d3d;
-    border-radius: 10;
+    border-radius: 10px;
     margin-left: 5px;
  `;
 
