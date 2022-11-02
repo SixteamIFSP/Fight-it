@@ -14,7 +14,7 @@ import MaskInput, { Masks } from 'react-native-mask-input';
 
 export function CreateAccount({ navigation }) {
     //desestruturação dos imports
-    const { validationEmail, validationName } = inputValidators()
+    const { validationEmail, validationName } = inputValidators();
     const { t } = useTranslation()
 
     //loading
@@ -221,7 +221,7 @@ export function CreateAccount({ navigation }) {
 
                     />
                     {
-                        password !== passwordConfirm
+                        (password !== passwordConfirm)
                             ?
                             <Text style={styles.passwordsDontMatch}>{t('createAccount.passwordsDontMatch')}</Text>
                             :

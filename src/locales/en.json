@@ -52,6 +52,7 @@
             "errorsText": "Fill in the fields correctly!",
             "requiredField": "Required field",
             "passwordsDontMatch": "Passwords do not match",
+            "invalidPhoneNumber": "Invalid Phone Number",
             "triage": {
                 "title": "Triage",
                 "description": "Answer the screening form to know your fitness:",
