@@ -28,6 +28,7 @@
                 }
             }
         },
+
         "login": {
             "mail": "E-mail",
             "password": "Password",
@@ -65,6 +66,7 @@
                 "form-fight": "Martial arts"
             }
         },
+
         "homePage":{
             "student":{
                 "message":"Hello! student"
@@ -81,12 +83,14 @@
                 "logout":"Logout"
             }
         },  
+
         "nav":{
             "config": "Configuration",
             "home": "Home",
             "calendar": "Calendar",
             "class": "Class"
         },
+
         "configScreen":{
             "Header":"My Account",
             "MessageAlert":"User without permition to use media",
@@ -95,23 +99,27 @@
             "ChangePass": "CHANGE PASSWORD",
             "DesactiveAccount": "DEACTIVATE ACCOUNT"
         },
+
         "changePass":{
             "Header": "Change Password",
             "OldPass":"Old Password",
             "NewPass":"New Password",
             "ConfirmPass":"Password Confirmation"
         },
+
         "exclude":{
             "Header":"Delete Account",
             "LabelUser":"User validation",
             "placeholder":"To delete your account enter your password!"  
         },
+
         "navigationHeader":{
             "Class":"Class",
             "ClassDescription":"Class: {{name}}",
             "StudentDescription":"Student: {{name}}",
             "Evaluation": "Evaluation {{name}}"
         },
+
         "createClass":{
             "Header":"Create new class",
             "Placeholder":{
@@ -119,35 +127,55 @@
                 "Description":"Class description"
             }
         },
+        
         "classView":{
             "Student":{
                 "Header":"Student listing"  
             },
-            "classCancel":"Cancel class"
+            "classCancel":"Cancel class",
+            "toastItisNotPossibleCancelClass": "It is not possible to cancel this class",
+            "uploadExtraMaterial": "Uploading extra material",
+            "deleteClass": "Do you want to delete the class?",
+            "description":"Description",
+            "thereAreNoStudents": "There are no students in this class",
+            "classes": "Classes:",
+            "thereAreNoStudents2": "There are no students in this class"
         },
+        
         "loadingClass":{
             "addlesson":"Choose a class to add lesson",
             "noClassTeacher":"This teacher has no classes",
-            "noClassStudent":"This Student does not have classes"
+            "noClassStudent":"This Student does not have classes",
+            "choseClass" : "Choose a class to add a class",
+            "teacherHasNoClasses": "This teacher has no classes",
+            "backButton": "To back"
         },
+
         "addStudentClass":{
             "Header":"Add Student",
             "Placeholder":{
                 "mail":"Enter student's email"
-            }
+            },
+            "searchButton" : "SEARCH",
+            "noStudents" : "No Students",
+            "backButton" : "BACK"
         },
+
         "studentView":{
             "Header":"RATING",
             "ButtonAvaliation":"Rate Student",
             "ButtonViewTriagem":"View Triagem"
         },
+
         "addStudents":{
             "empty":"No students"
         },
+
         "addLession":{
             "messages":{
                 "addTopic":"Enter a lesson topic"
             },
+
             "header":"Add Lession",
             "placeholder":{
                 "topic":"Topic of the lesson",
@@ -155,6 +183,7 @@
                 "time":"Lesson time",
                 "description":"Lesson description"
             },
+
             "equipment":{
                 "header":"Equipments",
                 "description":"Equipment name",
@@ -162,6 +191,7 @@
                 "selected":"Lesson equipments"
             }
         },
+
         "evaluationStudent":{
             "Header":"CREATE RATING",
             "Description":"Performance Dates",
@@ -178,6 +208,7 @@
 
             }
         },
+
         "parameterCriation":{
             "Header": "Parameter creation",
             "Label":{
@@ -191,6 +222,7 @@
                
             }
         },
+
         "sorting": {
             "title": "Sorting",
 			"sortingHeader1": "We are almost finishing your registration.",
@@ -284,11 +316,32 @@
             },      
             "today": "Today"
         },
+
         "ListCalendarDate": {
             "classes" : "Classes",
             "scheduledclasses": "Scheduled classes",
             "thereAreNo": "There are no classes for this date"
             
-            }
+        },
+
+
+        "figthtItModal": {
+
+            "deleteClassConfirm" : "CONFIRM",
+            "deleteClassClose" : "CLOSE"
+            
+        },
+
+        "addAula": {
+
+            "addClass" : "Add Class",
+            "classTopic" : "Class Topic",
+            "classDate" : "Class Date", 
+            "classTime" : "Class Time",
+            "classDescription" : "Class Description",
+            "equipaments" : "Equipaments",
+            "equipamentName" : "Equipament Name",
+            "addButton" : "Add"
+        }
     }
 }

@@ -5,7 +5,7 @@ import { ClassText, ContainerFlat, ContainerList, ContentListagem } from "./styl
 import { CardAula } from "../cardAula";
 import { convertDataUTC, convertDateToBrString, dateSplit } from "../../utils/dateConvert";
 import { getCalendarList } from "../../controler/calendar";
-import { ContainerHeader, TextHeader } from "../calendarView/styles";
+import { ContainerHeader, TextHeader, TextHeaderDate } from "../calendarView/styles";
 import { AddButton } from "../addButton";
 import { useTranslation } from 'react-i18next';
 
@@ -24,9 +24,9 @@ export function ListCalendarDates({selectedDate, addHandle}){
         <ClassText>{t('ListCalendarDate.classes')}</ClassText>
        
         <ContainerHeader>
-            <Text>
-            {t('ListCalendarDate.scheduledclasses')} {convertDateToBrString(new Date (selectedDate))}
-            </Text>
+            <TextHeaderDate>
+                {t('ListCalendarDate.scheduledclasses')} {convertDateToBrString(new Date (selectedDate))}
+            </TextHeaderDate>
 
             {
                 (user.tipoUsuario === 1) ?

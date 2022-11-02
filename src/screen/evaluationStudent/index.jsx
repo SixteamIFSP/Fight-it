@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { SafeAreaView, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { AddButton } from "../../components/addButton";
 import { DoubleButtonConfirmation } from "../../components/doubleButtonConfirmation";
 import { Input } from "../../components/input";
@@ -86,7 +86,7 @@ function CreatePerformace({ dataParams, setCreatePerformace }) {
     };
 
     return (
-        <View>
+        <View >
             <Divider
                 borderColor="#000"
                 color="#000"
@@ -280,7 +280,7 @@ export function EvaluationStudent({ navigation, route }) {
         <Container>
             {
                 !createPerformance ?
-                    <View>
+                    <View >
                         <Divider
                             borderColor="#000"
                             color="#000"
@@ -325,5 +325,6 @@ export function EvaluationStudent({ navigation, route }) {
                     ></CreatePerformace>
             }
         </Container>
+      
     );
 };

@@ -185,7 +185,7 @@ export async function getAulaByAulaID(aulaID, setAula){
             toastMessage(true, response?.data.mensagem)
             setAula(response?.data)
         } else{
-            toastMessage(false, response?.data.mensagem) 
+            
             setAula(null)
         }
         

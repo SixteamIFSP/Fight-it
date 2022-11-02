@@ -1,5 +1,14 @@
 import styled from "styled-components/native";
 
+export const HeaderContainerDescription = styled.View`
+    margin:20px;
+    margin-bottom: 0;
+`
+
+export const TextHeaderDescription =  styled.Text`
+    font-size:16px;
+`
+
 export const ContainerList = styled.SafeAreaView`
     flex:1;
     padding-top:10%;

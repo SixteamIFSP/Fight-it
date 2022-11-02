@@ -52,12 +52,11 @@ export function AdicionarAluno({ turmaId, setback }) {
                     onChangeText={text => InputQueryRef.current.text = text}
                     placeholder={t("addStudentClass.Placeholder.mail")}
                     keyboardType="email-address"
-
                 />
                 <Button
                     style={{ width: '25%' }}
                     confirm={true}
-                    text={"BUSCAR"}
+                    text={t('addStudentClass.searchButton')}
                     handle={() => handleBusca()}
                 ></Button>
             </View>
@@ -91,8 +90,8 @@ export function AdicionarAluno({ turmaId, setback }) {
 
                 }
             </View>
-            <Button confirm={false} text={"VOLTAR"} handle={() => handleBack()} ></Button>
+            <Button confirm={false} text={t('addStudentClass.backButton')} handle={() => handleBack()} ></Button>
 
-        </AddContainerView>
+        </AddContainerView >
     )
 }
