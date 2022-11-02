@@ -7,8 +7,17 @@ import { Container, ContainerImage } from "./styles";
 
 export function CardAddAluno({ data }) {
     return (
-        <Container>
-            <ContainerImage>
+        <Container style={{
+            shadowColor: "#000",
+            shadowOffset: {
+                width: 0,
+                height: 2,
+            },
+            shadowOpacity: 0.25,
+            shadowRadius: 3.84,
+            elevation: 3
+        }} >
+            <ContainerImage style={{ borderRadius: 40, }}>
                 {
                     data?.pfp ?
                         <Image
@@ -17,7 +26,8 @@ export function CardAddAluno({ data }) {
                             }
                             style={{
                                 width: "100%",
-                                height: "100%"
+                                height: "100%",
+                                borderRadius: 40
                             }}
                         />
                         :

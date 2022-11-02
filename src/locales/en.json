@@ -168,7 +168,7 @@
         },
 
         "addStudents":{
-            "empty":"No students"
+            "empty":"Write a valid Email to search an studant."
         },
 
         "addLession":{

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { SafeAreaView, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Text, View } from "react-native";
 import { AddButton } from "../../components/addButton";
 import { DoubleButtonConfirmation } from "../../components/doubleButtonConfirmation";
 import { Input } from "../../components/input";
@@ -48,7 +48,7 @@ const RenderEvaluation = ({ item, data, selectEvaluation, setSelectEvaluation })
             <Text style={{ color: '#fff' }}>
                 {t("evaluationStudent.Fields.Name", { name: item?.nome })}
             </Text>
-            <Text style={{ color: '#fff', marginTop: 5}} disabled={true}>
+            <Text style={{ color: '#fff', marginTop: 5 }} disabled={true}>
                 {t("evaluationStudent.Fields.Date", { date: convertDateToBrString(item?.criação) })}
             </Text>
         </EvaluationSelect>
@@ -281,31 +281,37 @@ export function EvaluationStudent({ navigation, route }) {
             {
                 !createPerformance ?
                     <View >
-                        <Divider
-                            borderColor="#000"
-                            color="#000"
-                            orientation="center">
-                            {t('evaluationStudent.Header')}
-                        </Divider>
+                        <Text style={{ fontWeight: 'bold', fontSize: 18, textAlign: 'center' }}> {t('evaluationStudent.Header')}</Text>
                         <ContainerEvaluation>
                             <TextHeader>{t("evaluationStudent.Description")}</TextHeader>
                             {
-                                dataEvaluation.length ===0 ? 
-                                <TextHeader>{"Não há avaliações"}</TextHeader>
-                                :
+                                dataEvaluation.length === 0 ?
+                                    <TextHeader>{"Não há avaliações"}</TextHeader>
+                                    :
 
-                                <EvaluationList
-                                    data={dataEvaluation}
-                                    renderItem={({ item }) =>
-                                        <RenderEvaluation
-                                            item={item}
-                                            navigation={navigation}
-                                            selectEvaluation={selectEvaluation}
-                                            setSelectEvaluation={setSelectEvaluation}
-                                        />
-                                    }
-                                    keyExtractor={item => `${item?.id}` + '91'}
-                                />
+                                    <EvaluationList
+                                        style={{
+                                            shadowColor: "#ee1000",
+                                            shadowOffset: {
+                                                width: 0,
+                                                height: 2,
+                                            },
+                                            shadowOpacity: 0.25,
+                                            shadowRadius: 3.84,
+                                            elevation: 6,
+                                            backgroundColor:'#ff0000'
+                                        }}
+                                        data={dataEvaluation}
+                                        renderItem={({ item }) =>
+                                            <RenderEvaluation
+                                                item={item}
+                                                navigation={navigation}
+                                                selectEvaluation={selectEvaluation}
+                                                setSelectEvaluation={setSelectEvaluation}
+                                            />
+                                        }
+                                        keyExtractor={item => `${item?.id}` + '91'}
+                                    />
                             }
                         </ContainerEvaluation>
                         <AddButton
@@ -325,6 +331,6 @@ export function EvaluationStudent({ navigation, route }) {
                     ></CreatePerformace>
             }
         </Container>
-      
+
     );
 };

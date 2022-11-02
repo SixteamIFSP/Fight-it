@@ -159,7 +159,7 @@
             "ButtonViewTriagem": "Visualizar Triagem"
         },
         "addStudents": {
-            "empty": "No students"
+            "empty": "Digite um email válido para buscar o aluno."
         },
         "addLession": {
             "messages": {
@@ -181,7 +181,7 @@
         },
         "evaluationStudent": {
             "Header": "AVALIAÇÃO",
-            "Description": "Datas de Avaliação:",
+            "Description": "Avaliações já realizadas",
             "Fields": {
                 "Name": "Nome: {{name}}",
                 "Date": "Data: {{date}}"

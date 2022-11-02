@@ -60,21 +60,17 @@ export function CreateTriagem({ navigation, route }) {
     }
     else { return true }
   };
-
+  const defaultRespoBD = 'Não possui.'
   async function handleConfirm() {
     if (inputValidations()) {
       const data = {
         dataNascimento: date,
         altura,
         peso,
-        problemaOrtopedico: probOrtopedico,
-        problemaOrtopedicoResposta: probOrtopedicoResp,
-        doencasCronicas: doencaCronica,
-        doencasCronicasResposta: doencaCronicaResp,
-        lesoes,
-        lesoesResposta: lesoesResp,
-        jaFezExercicios: didExercise,
-        jaFezExerciciosResposta: didExerciseResp,
+        problemaOrtopedico: probOrtopedico ? probOrtopedicoResp : defaultRespoBD,
+        doencasCronicas: doencaCronica ? doencaCronicaResp : defaultRespoBD,
+        lesoes: lesoes ? lesoesResp : defaultRespoBD,
+        jaFezExercicios: didExercise ? didExerciseResp : defaultRespoBD,
         comentario
       };
       setLoading(true);
