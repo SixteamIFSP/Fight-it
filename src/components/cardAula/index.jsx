@@ -5,7 +5,7 @@ import { useModal } from "../../hooks/modalConfirmation";
 import { useUser } from "../../hooks/user";
 import { convertDataUTC, convertDateToBrString, convertDateToTimeString } from "../../utils/dateConvert";
 import { Button } from "../button";
-import { ButtonsContainer, Container, InfoContainer } from "./styles";
+import { ButtonsContainer, Container, DateDescription, InfoContainer } from "./styles";
 
 export function CardAula({item}){
     const { user } = useUser();
@@ -23,7 +23,7 @@ export function CardAula({item}){
     return (
         <Container>
             <InfoContainer>
-                <Text>{item.nome}</Text>
+                <DateDescription>{item.nome}</DateDescription>
                 <Text>{convertDateToBrString(convertDataUTC(new Date(item.data)))}</Text>
                 <Text>{convertDateToTimeString(new Date(item.data))}</Text>
 

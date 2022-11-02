@@ -129,7 +129,7 @@ export function StudantView({ navigation, route:{params} }) {
             </ContainerButtons>
         ):
         <>
-                <Divider
+                {/* <Divider
                     borderColor="#000"
                     color="#000"
                     orientation="center"
@@ -138,7 +138,9 @@ export function StudantView({ navigation, route:{params} }) {
                 </Divider>
 
                <View style={{padding: 5}}>
-               {(!aulas || !aulas.length) && <Text>Sem aulas</Text>}
+               {
+                (!aulas || !aulas.length) && <Text>Sem aulas</Text>
+                }
                {aulas.map(aula => {
                 return <TouchableOpacity
                 onPress={() =>{
@@ -146,7 +148,7 @@ export function StudantView({ navigation, route:{params} }) {
                 }}
                 ><Text style={{fontSize: 17, fontWeight: 'bold'}}>Aula: {aula.nome } no dia: {new Date(aula.data).toLocaleString()}</Text></TouchableOpacity>
                })}
-               </View>
+               </View> */}
         </>
         }
 
