@@ -429,7 +429,7 @@ export function ConfigureAccount() {
             if (
                 cameraRollStatus.status !== "granted"
             ) {
-                alert("Usuario sem permição para utilizar mídias");
+                alert("Usuario sem permissão para utilizar mídias");
             }
         })();
     }, []);

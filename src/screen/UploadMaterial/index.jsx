@@ -29,7 +29,7 @@ export function UploadMaterial({ navigation, route }) {
         await ImagePicker.requestMediaLibraryPermissionsAsync();
 
     if (cameraRollStatus.status !== "granted") {
-        alert("Usuario sem permição para utilizar mídias");
+        alert("Usuario sem permissão para utilizar mídias");
         return false 
      }
       return true 
