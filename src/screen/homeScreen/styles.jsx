@@ -10,10 +10,11 @@ export const ContainerExitButton = styled.View`
     z-index:4;
 `
 export const TextApresentation = styled.Text`
-    width:60%;
-    font-size:20px;
+    width:70%;
+    font-size:18px;
     color:#202020;
     font-weight:normal;
+    flex-wrap: nowrap;
 `
 export const ContainerContent = styled.View`
     flex:1;

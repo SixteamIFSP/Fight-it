@@ -76,6 +76,9 @@
                 "student":"Number of students",
                 "classes":"Number of classes",
                 "lessons":"Number of lessons"
+            },
+            "login":{
+                "logout":"Logout"
             }
         },  
         "nav":{

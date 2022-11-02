@@ -66,15 +66,18 @@
         },
         "homePage":{
             "student":{
-                "message":"Olá estudante"
+                "message":"Olá, aluno"
             },
             "teacher":{
-                "message":"Olá professor"
+                "message":"Olá,"
             },
             "dashboard":{
                 "student":"Quantidade de alunos",
                 "classes":"Quantidade de turmas",
                 "lessons":"Quantidade de aulas"
+            },
+            "login":{
+                "logout":"Sair"
             }
         },  
         "nav":{

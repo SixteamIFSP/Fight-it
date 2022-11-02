@@ -2,8 +2,7 @@ import styled from "styled-components/native";
 
 export const Container = styled.View`
     width:40%;
-    height:160px;
-    border: 1px solid #e5e5e5;
+    border: 0.5px solid #ff0000;
     background-color: #e0e0e0;
     align-items:center;
     justify-content:center;
@@ -17,12 +16,12 @@ export const TextDescription = styled.Text`
     text-align:center;
     font-size:24px;
     font-weight:900;
-
 `
 export const TextContent = styled.Text`
     color:#444444;
     font-size:50px;
     font-weight:600;
+    margin-bottom:10px;
 `
 export const InfoContainer = styled.View`
     flex-direction:column;
