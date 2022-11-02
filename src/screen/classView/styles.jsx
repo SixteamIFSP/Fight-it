@@ -24,7 +24,7 @@ export const ContainerListColumn = styled.View`
 export const ContainerList = styled.View`
     width: 100%;
     height: 93%;
-    border: 0.5px;
+    border: 0.1px;
     border-color: black;
     background-color: #fff;
     margin-bottom: 20px;
