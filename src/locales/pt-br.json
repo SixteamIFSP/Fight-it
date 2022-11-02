@@ -125,7 +125,10 @@
         "Header": "Adicionar Aluno",
         "Placeholder": {
             "mail": "Digite o e-mail do aluno"
-        }
+        },
+        "searchButton" : "Buscar",
+        "noStudents" : "Sem Alunos",
+        "backButton" : "Voltar"
     },
     "studentView": {
         "Header": "Desempenho",

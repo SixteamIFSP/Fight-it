@@ -67,7 +67,7 @@ export function AdicionarAluno({ turmaId, setback }){
                         keyboardType="email-address"
 
                     />
-                    <Button confirm={true} text={"BUSCAR"} handle={()=>handleBusca()} ></Button>
+                    <Button confirm={true} text={t('addStudentClass.searchButton')} handle={()=>handleBusca()} ></Button>
                 </View>
                   {/* <Text>Nenhum aluno encontrado</Text> */}
                  
@@ -76,7 +76,7 @@ export function AdicionarAluno({ turmaId, setback }){
                     !loading ?
                         
                             (alunos.length < 1) ?
-                                <Text>Sem Alunos</Text>
+                                <Text>{t('addStudentClass.noStudents')}</Text>
                             :
 
                             <FlatList
@@ -94,7 +94,7 @@ export function AdicionarAluno({ turmaId, setback }){
                         
                 }
                 </View>
-                <Button confirm={false} text={"VOLTAR"} handle={()=>handleBack()} ></Button>
+                <Button confirm={false} text={t('addStudentClass.backButton')} handle={()=>handleBack()} ></Button>
 
              
             </AddContainerView>

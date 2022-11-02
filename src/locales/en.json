@@ -125,7 +125,10 @@
             "Header":"Add Student",
             "Placeholder":{
                 "mail":"Enter student's email"
-            }
+            },
+            "searchButton" : "SEARCH",
+            "noStudents" : "No Students",
+            "backButton" : "BACK"
         },
         "studentView":{
             "Header":"RATING",
