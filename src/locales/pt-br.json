@@ -42,7 +42,7 @@
             "student": "Aluno",
             "teacher": "Professor",
             "name": "Nome",
-            "phone": "Telefone:",
+            "phone": "Telefone",
             "confirmPassword": "Confirmar Senha",
             "invalidNameMessage": "Campo Obrigatório",
             "invalidEmailMessage": "Campo Obrigatório",
