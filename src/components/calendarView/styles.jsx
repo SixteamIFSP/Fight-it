@@ -7,21 +7,33 @@ export const Container = styled.View`
 `;
 
 export const ContainerHeader = styled.View`
+    height:55px;
     flex-direction:row;
     align-items:stretch;
+    justify-content:center;
+    margin-bottom:20px;
+    border: solid #d3d3d3;
+    border-top-width: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+`;
+
+export const TextHeaderDate = styled.Text`
+    padding-top:5px;
+    text-align:center;
 `;
 
 export const themeCalendar = {
-    backgroundColor: '#d1d1d1',
-    calendarBackground: '#d3d3d3',
-    textSectionTitleColor: '#2d4150',
+    backgroundColor: '#ffffff',
+    calendarBackground: '#ffffff',
+    textSectionTitleColor: '#b6c1cd',
     textSectionTitleDisabledColor: '#d9e1e8',
     selectedDayBackgroundColor: '#00adf5',
     selectedDayTextColor: '#ffffff',
-    todayTextColor: '#00adf5',
+    todayTextColor: 'red',
     dayTextColor: '#2d4150',
     textDisabledColor: '#d9e1e8',
-    dotColor: '#00adf5',
+    dotColor: 'red',
     selectedDotColor: '#ffffff',
     arrowColor: 'orange',
     disabledArrowColor: '#d9e1e8',

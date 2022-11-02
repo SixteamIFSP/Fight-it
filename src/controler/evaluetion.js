@@ -25,7 +25,6 @@ export async function createEvaluetion(data) { //data => nome:string, date:(stri
         }
 
     } catch (error) {
-
         toastMessage(false, 'Erro de conexão!');
     }
 }
@@ -37,9 +36,7 @@ export async function getTypesParams(setData) {
 
         if (response?.data.status) {
             setData(response?.data.resultado)
-        } else {
-            toastMessage(false, response?.data.mensagem)
-        }
+        } 
 
     } catch (error) {
 
@@ -52,9 +49,7 @@ export async function getParams(setData) {
 
         if (response.data.status) {
             setData(response?.data.resultado)
-        } else {
-            toastMessage(false, response?.data.mensagem)
-        }
+        } 
 
     } catch (error) {
 

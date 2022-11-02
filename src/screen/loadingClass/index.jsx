@@ -3,7 +3,7 @@ import { useIsFocused } from "@react-navigation/native";
 import { Loading } from "../../components/loading";
 import { FlatList, Text } from "react-native";
 import { AddButton } from "../../components/addButton";
-import { CardTitle, CardView, ContainerList, ViewButton } from "./styles";
+import { CardTitle, CardView, ContainerList, HeaderContainerDescription, TextHeaderDescription, ViewButton } from "./styles";
 import { getClass } from "../../controler/class";
 import { useTranslation } from "react-i18next";
 import { useUser } from "../../hooks/user";
@@ -56,11 +56,12 @@ export function LoadingClass({handleNewScreen, handleBack,  user, setCreateNew, 
 
     return (
         <>
+        <HeaderContainerDescription>
             {
                 setCreateNew === undefined &&
-                    <Text>{t("loadingClass.addlesson")}</Text>
+                    <TextHeaderDescription>{t("loadingClass.addlesson")}</TextHeaderDescription>
             }
-            
+        </HeaderContainerDescription>  
             {
                 (user.tipoUsuario === 1 && setCreateNew!=undefined) &&
                 <AddButton handle={() => setCreateNew((value) => !value)} />

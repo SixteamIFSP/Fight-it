@@ -20,10 +20,7 @@ export async function getDesempenhoPorParametro(data, setValue ){ // data => { "
        
         if (response?.data.status){
             setValue(response?.data.result.Parametros);
-
-        } else{
-            toastMessage(false, response?.data.mensagem);
-        }
+        } 
        
     } catch (error) {
         toastMessage(false, 'Erro de conexão!');
