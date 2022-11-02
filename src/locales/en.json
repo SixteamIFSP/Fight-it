@@ -161,7 +161,12 @@
         "studentView":{
             "Header":"RATING",
             "ButtonAvaliation":"Rate Student",
-            "ButtonViewTriagem":"View Triagem"
+            "ButtonViewTriagem":"View Triagem",
+            "removeStudent" : "Do you want to remove student?",
+            "triageView" : "Sorting of ",
+            "dividerClassDates" : "Class dates",
+            "dividerImplementing" :"Implementing!",
+            "evaluation" :"There are no evaluations"
         },
 
         "addStudents":{
@@ -339,6 +344,22 @@
             "equipaments" : "Equipaments",
             "equipamentName" : "Equipament Name",
             "addButton" : "Add"
+        },
+
+        "triagemView": {
+
+            "lastSorting" : "Last sorting 00-00-0000",
+            "studentNoSorting" : "Student does not have sorting",
+            "lastSorting2" : "Last sorting",
+            "height":"Height:",
+            "weight": "Weight:",
+            "injuries" : "Any injuries?:",
+            "orthopedicProblems" : "Any orthopedic problems?:",
+            "chronicIllness" : "Any chronic illness?:",
+            "comments" : "Comments:",
+            "noComments" : "No Comment:",
+            "sortingYes": "Yes",
+            "sortingNo": "No"
         }
     }
 }

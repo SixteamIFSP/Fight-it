@@ -3,10 +3,12 @@ import { ScrollView } from "react-native";
 import { getTriagem } from "../../controler/triagem";
 import { convertDateToBrString } from "../../utils/dateConvert";
 import { Container, TextAnswer, TextQuestion, TextTitle } from './style'
+import { useTranslation } from "react-i18next";
 
 export function TriagemView({ route, route:{params}}) {
     const { studantId } = params;
     const [dadosTriagem, setDadosTriagem] = useState(null)
+    const { t } = useTranslation();
 
     useEffect(() => {
         //route.params?.studentId. Enquanto não temos triagem criada com o ID do aluno, colocamos id
@@ -21,30 +23,30 @@ export function TriagemView({ route, route:{params}}) {
         <ScrollView style={{ flex: 1, padding: 10 }}>{
             !dadosTriagem ? 
             <Container>
-                <TextTitle>Última triagem: 00-00-0000</TextTitle>
-                <TextQuestion>Aluno não possui triagem. </TextQuestion>
+                <TextTitle>{t('triagemView.lastSorting')}</TextTitle>
+                <TextQuestion>{t('triagemView.studentNoSorting')} </TextQuestion>
             </Container>
             :
             <Container>
-                <TextTitle>Última triagem</TextTitle>
+                <TextTitle>{t('triagemView.lastSorting2')}</TextTitle>
 
-                <TextQuestion>Altura: </TextQuestion>
+                <TextQuestion>{t('triagemView.height')}</TextQuestion>
                 <TextAnswer>{dadosTriagem?.Altura}</TextAnswer>
 
-                <TextQuestion>Peso: </TextQuestion>
+                <TextQuestion>{t('triagemView.weight')}</TextQuestion>
                 <TextAnswer>{dadosTriagem?.Peso}</TextAnswer>
 
-                <TextQuestion>Alguma lesão?: </TextQuestion>
-                <TextAnswer>{dadosTriagem?.Lesoes !== "0" ? 'Sim' : 'Não'}. {dadosTriagem.Lesoes === '0' ? '' : dadosTriagem.Lesoes}</TextAnswer>
+                <TextQuestion>{t('triagemView.injuries')}</TextQuestion>
+                <TextAnswer>{dadosTriagem?.Lesoes !== "0" ? (t('triagemView.sortingYes')) :(t('triagemView.sortingNo'))}. {dadosTriagem.Lesoes === '0' ? '' : dadosTriagem.Lesoes}</TextAnswer>
 
-                <TextQuestion>Algum problema ortopédico?: </TextQuestion>
-                <TextAnswer>{dadosTriagem?.Problema_Ortopedico !== "0" ? 'Sim' : 'Não'}. {dadosTriagem.Problema_Ortopedico === '0' ? '' : dadosTriagem.Problema_Ortopedico}</TextAnswer>
+                <TextQuestion>{t('triagemView.orthopedicProblems')}</TextQuestion>
+                <TextAnswer>{dadosTriagem?.Problema_Ortopedico !== "0" ? (t('triagemView.sortingYes')) : (t('triagemView.sortingNo'))}. {dadosTriagem.Problema_Ortopedico === '0' ? '' : dadosTriagem.Problema_Ortopedico}</TextAnswer>
 
-                <TextQuestion>Alguma doença crónica?: </TextQuestion>
-                <TextAnswer> {dadosTriagem?.Doencas_Cronicas !== "0" ? 'Sim' : 'Não'}. {dadosTriagem.Doencas_Cronicas === '0' ? '' : dadosTriagem.Doencas_Cronicas}</TextAnswer>
+                <TextQuestion>{t('triagemView.chronicIllness')} </TextQuestion>
+                <TextAnswer> {dadosTriagem?.Doencas_Cronicas !== "0" ? (t('triagemView.sortingYes')) : (t('triagemView.sortingNo'))}. {dadosTriagem.Doencas_Cronicas === '0' ? '' : dadosTriagem.Doencas_Cronicas}</TextAnswer>
 
-                <TextQuestion>Comentário: </TextQuestion>
-                <TextAnswer>{dadosTriagem?.comentario || 'Não há comentário'}</TextAnswer>
+                <TextQuestion>{t('triagemView.comments')}</TextQuestion>
+                <TextAnswer>{dadosTriagem?.comentario || (t('triagemView.noComments'))}</TextAnswer>
 
             </Container>
         }

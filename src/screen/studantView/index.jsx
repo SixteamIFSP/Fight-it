@@ -48,7 +48,7 @@ export function StudantView({ navigation, route:{params} }) {
     useEffect(()=>{
         function effect (){
             handleLoadingParams()
-            setCallback("Deseja remover aluno?", ()=>callBackDeleteStudentClass());
+            setCallback(t('studentView.removeStudent'), ()=>callBackDeleteStudentClass());
         };
         isFocused && effect();
     }, [isFocused])
@@ -184,7 +184,7 @@ export function StudantView({ navigation, route:{params} }) {
                 />
                 ):
                 (
-                    <Text>Não há desempenhos</Text>
+                    <Text>{t('studentView.evaluation')}</Text>
                 )
                 }
                

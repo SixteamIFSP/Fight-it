@@ -153,7 +153,12 @@
         "studentView":{
             "Header":"Desempenho",
             "ButtonAvaliation":"Avaliar Aluno",
-            "ButtonViewTriagem":"Visualizar Triagem"
+            "ButtonViewTriagem":"Visualizar Triagem",
+            "removeStudent" : "Deseja remover aluno?",
+            "triageView" : "Triagem do ",
+            "dividerClassDates" : "Datas de aulas",
+            "dividerImplementing" :"implementando!",
+            "evaluation" :"Não há avaliações"
         },
     
 
@@ -324,7 +329,22 @@
         "equipaments" : "Equipamentos",
         "equipamentName" : "Nome do Equipamento",
         "addButton" : "Adicionar"
-        }
+        },
 
+        "triagemView": {
+
+            "lastSorting" : "Última triagem: 00-00-0000",
+            "studentNoSorting" : "Aluno não possui triagem.",
+            "lastSorting2" : "Última triagem",
+            "height":"Altura:",
+            "weight": "Peso:",
+            "injuries" : "Alguma lesão?:",
+            "orthopedicProblems" : "Algum problema ortopédico?:",
+            "chronicIllness" : "Alguma doença crónica?:",
+            "comments" : "Comments:",
+            "noComments" : "Comentário:",
+            "sortingYes": "Sim",
+            "sortingNo": "Não"
+        }
     }
 }
