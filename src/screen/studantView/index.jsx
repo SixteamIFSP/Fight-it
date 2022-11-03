@@ -184,7 +184,7 @@ export function StudantView({ navigation, route:{params} }) {
                 />
                 ):
                 (
-                    <Text>Não há desempenhos</Text>
+                    <Text>{t('studentView.AvailablePerformance')}</Text>
                 )
                 }
                

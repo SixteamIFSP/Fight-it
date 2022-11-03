@@ -168,7 +168,8 @@
         "studentView":{
             "Header":"RATING",
             "ButtonAvaliation":"Rate Student",
-            "ButtonViewTriagem":"View Triagem"
+            "ButtonViewTriagem":"View Triagem",            
+            "AvailablePerformance": "There are no performance review"
         },
 
         "addStudents":{

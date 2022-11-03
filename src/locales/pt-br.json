@@ -150,9 +150,10 @@
             "backButton": "Voltar"
         },
         "studentView": {
-            "Header": "Desempenho",
+            "Header": "Avaliação",
             "ButtonAvaliation": "Avaliar Aluno",
-            "ButtonViewTriagem": "Visualizar Triagem"
+            "ButtonViewTriagem": "Visualizar Triagem",
+            "AvailablePerformance": "Não há avaliações"
         },
         "addStudents": {
             "empty": "No students"
@@ -194,7 +195,7 @@
         "parameterCriation": {
             "Header": "Criação de Critério",
             "Label": {
-                "Select": "Selecione o critério",
+                "Select": "Selecione o critério de avaliação",
                 "insertName": "Insira o nome do novo critério",
                 "SelectType": "Selecione o tipo de critério"
             },
