@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity } from "react-native";
 import { adicionarAula } from "../../controler/class";
 import { toastMessage } from "../../utils/toastMessage";
 import { Input } from "../input";
@@ -8,6 +8,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { MaterialIcons } from "@expo/vector-icons";
 import { DoubleButtonConfirmation } from "../doubleButtonConfirmation";
 import { useTranslation } from "react-i18next";
+import { convertDateToBrString } from "../../utils/dateConvert";
 
 export function AdicionarAula({ turmaId, setback }) {
     const { t } = useTranslation();
@@ -60,7 +61,7 @@ export function AdicionarAula({ turmaId, setback }) {
             <ClassDateContainer>
                 <Text style={{ fontSize: 16, marginBottom: 12, fontWeight: '700' }}>{t("addLession.placeholder.date")}</Text>
                 <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => { setSelectedDateIsOpen(true) }}>
-                    <Text>{date.toLocaleDateString()}</Text>
+                    <Text>{convertDateToBrString(date)}</Text>
                     <MaterialIcons style={{ fontSize: 16, marginLeft: 12 }} name="edit" size={40} color="#000" />
                 </TouchableOpacity>
             </ClassDateContainer>

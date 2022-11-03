@@ -23,13 +23,25 @@ import { convertDateToBrString } from "../../utils/dateConvert";
 function CardParamStudant({ item, handleGraphyc }) {
 
     return (
-        <ContainerCardParam onPress={() => handleGraphyc(item.id)}>
+        <ContainerCardParam
+        style={{
+            borderWidth: 0.1,
+            shadowColor: "#000000",
+            shadowOffset: {
+                width: 0,
+                height: 9,
+            },
+            shadowOpacity: 0.22,
+            shadowRadius: 10.24,
+            elevation: 13
+        }}
+        onPress={() => handleGraphyc(item.id)}>
             <Text>{item.nome}</Text>
         </ContainerCardParam>
     )
 };
-export function StudantView({ navigation, route:{params} }) {
-   
+export function StudantView({ navigation, route: { params } }) {
+
     const { t } = useTranslation();
     const { user } = useUser();
     const { studantId, id, nome, data } = params;
@@ -45,21 +57,21 @@ export function StudantView({ navigation, route:{params} }) {
     getAulas()
    }, [])
 
-    useEffect(()=>{
-        function effect (){
+    useEffect(() => {
+        function effect() {
             handleLoadingParams()
-            setCallback("Deseja remover aluno?", ()=>callBackDeleteStudentClass());
+            setCallback("Deseja remover aluno?", () => callBackDeleteStudentClass());
         };
         isFocused && effect();
     }, [isFocused])
 
-    function callBackDeleteStudentClass(){
-        deleteAluno({ aluno:studantId, turma:id })
+    function callBackDeleteStudentClass() {
+        deleteAluno({ aluno: studantId, turma: id })
         navigation.goBack();
     }
-    
+
     function handleEvaluation() {
-        navigation.navigate('EvaluationStudent', { ...params, title: t("navigationHeader.Evaluation", { name: nome })  })
+        navigation.navigate('EvaluationStudent', { ...params, title: t("navigationHeader.Evaluation", { name: nome }) })
     }
 
     function handleViewTriagem() {
@@ -72,7 +84,7 @@ export function StudantView({ navigation, route:{params} }) {
 
         let dataSubmit;
 
-        if (user.tipoUsuario ===1){
+        if (user.tipoUsuario === 1) {
             dataSubmit = {
                 aluno: studantId,
                 turma: id,
@@ -88,15 +100,15 @@ export function StudantView({ navigation, route:{params} }) {
         setLoading(false);
     }
 
-   function getAulas() {
-    getAulasByTurma(setAulas, id ?? data.id)
-   }
+    function getAulas() {
+        getAulasByTurma(setAulas, id ?? data.id)
+    }
 
     async function handleLoadingGraphyc(idParam) {
-        
+
         setLoadingGraphyc(false)
         let paransLoadingGraphyc
-        if ( user.tipoUsuario ===1) {
+        if (user.tipoUsuario === 1) {
             paransLoadingGraphyc = {
                 aluno: studantId,
                 parametro: idParam,
@@ -109,29 +121,48 @@ export function StudantView({ navigation, route:{params} }) {
                 turma: id
             }
         }
-        await getDesempenhoPorParametro(paransLoadingGraphyc, setDataParams) 
+        await getDesempenhoPorParametro(paransLoadingGraphyc, setDataParams)
         setLoadingGraphyc(true)
     }
 
-   function navigateToAula(aulaid) {
-    navigation.navigate('LessonView', {title:'Visualizar aula', aulaid});
+    function navigateToAula(aulaid) {
+        navigation.navigate('LessonView', { title: 'Visualizar aula', aulaid });
     }
 
     return (
         <Container>
-        {user.tipoUsuario === 1 ? (
+            {user.tipoUsuario === 1 ? (
 
-            <ContainerButtons>
-                <ContentButtons onPress={() => handleEvaluation()}>
-                    <TextButtons>{t("studentView.ButtonAvaliation")}</TextButtons>
-                </ContentButtons>
-                <ContentButtons onPress={() => handleViewTriagem()}>
-                    <TextButtons>{t("studentView.ButtonViewTriagem")}</TextButtons>
-                </ContentButtons>
-            </ContainerButtons>
-        ):
-        <>
-                {/* <Divider
+                <ContainerButtons>
+                    <ContentButtons
+                        onPress={() => handleEvaluation()}>
+                        <TextButtons style={{
+                            shadowColor: "#000000",
+                            shadowOffset: {
+                                width: 0,
+                                height: 3,
+                            },
+                            shadowOpacity: 0.18,
+                            shadowRadius: 4.59,
+                            elevation: 5
+                        }}>{t("studentView.ButtonAvaliation")}</TextButtons>
+                    </ContentButtons>
+                    <ContentButtons onPress={() => handleViewTriagem()}>
+                        <TextButtons style={{
+                            shadowColor: "#000000",
+                            shadowOffset: {
+                                width: 0,
+                                height: 3,
+                            },
+                            shadowOpacity: 0.18,
+                            shadowRadius: 4.59,
+                            elevation: 5
+                        }}>{t("studentView.ButtonViewTriagem")}</TextButtons>
+                    </ContentButtons>
+                </ContainerButtons>
+            ) :
+                <>
+                    {/* <Divider
                     borderColor="#000"
                     color="#000"
                     orientation="center"
@@ -151,45 +182,50 @@ export function StudantView({ navigation, route:{params} }) {
                 ><Text style={{fontSize: 17, fontWeight: 'bold'}}>Aula: {aula.nome } no dia: {new Date(aula.data).toLocaleString()}</Text></TouchableOpacity>
                })}
                </View> */}
-        </>
-        }
+                </>
+            }
 
             <ContainerDesempenho>
-                <Divider
-                    borderColor="#000"
-                    color="#000"
-                    orientation="center"
-                >
-                    {t("studentView.Header")}
-                </Divider>
-                {paramsAluno.length > 0   ? (
-                    <FlatList
-                    horizontal={true}
-                    data={paramsAluno}
-                    renderItem={
-                        ({ item }) => <CardParamStudant
-                            item={item}
-                            handleGraphyc={handleLoadingGraphyc}
-                        ></CardParamStudant>
-                    }
-                    keyExtractor={(item) => item.id}
-                    ItemSeparatorComponent={() => {
-                        return (
-                            <View
-                                style={{
-                                    height: "100%",
-                                    width: 20,
-                                }}
-                            />
-                        );
+                <Text
+                    style={{
+                        fontSize: 18,
+                        fontWeight: 'bold',
+                        textAlign: 'center',
+                        marginBottom: 12
                     }}
-                />
-                ):
-                (
-                    <Text>Não há desempenhos</Text>
-                )
+                >{t("studentView.Header")}</Text>
+
+                {
+                paramsAluno.length > 0 ? (
+                    <FlatList
+                        data={paramsAluno}
+                        renderItem={
+                            ({ item }) => <CardParamStudant
+                                item={item}
+                                handleGraphyc={handleLoadingGraphyc}
+                                
+                            ></CardParamStudant>
+                        }
+                        keyExtractor={(item) => item.id}
+                        ItemSeparatorComponent={() => {
+                            return (
+                                <View
+                                    style={{
+                                        width: '100%',
+                                    }}
+                                />
+                            );
+                        }}
+                    />
+                ) :
+                    (
+                        <Text
+                            style={{
+                                textAlign: 'center',
+                            }}>{t('studentView.AvailablePerformance')}</Text>
+                    )
                 }
-               
+
                 <Loading loading={loading} size={30}></Loading>
                 {loadingGraphyc &&
                     <LineChart

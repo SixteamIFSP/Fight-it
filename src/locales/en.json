@@ -6,11 +6,13 @@
             "teacher":"Teacher",
             "student":"Student"
         },
+
         "validation": {
             "confirm": "CONFIRM",
             "submit": "SUBMIT",
             "cancel": "CANCEL"
         }, 
+
         "form":{
             "mail": "E-mail",
             "password": "Password",
@@ -20,6 +22,7 @@
             "confirmPassword": "Confirm Passoword",
             "date":"Date"
         },
+
         "toast":{
             "error":{
                 "blank":"Fill in all the required fields!",
@@ -28,6 +31,7 @@
                 }
             }
         },
+
         "login": {
             "mail": "E-mail",
             "password": "Password",
@@ -37,9 +41,10 @@
             "back":"Cancel",
             "recoverMail":"Recover account with email:"
         },
+
         "createAccount": {
             "title": "Create Account",
-            "descriptionSwitch": "Choose the type of registration:",
+            "descriptionSwitch": "Choose your profile:",
             "student": "Student",
             "teacher": "Teacher",
             "name": "Name",
@@ -55,60 +60,68 @@
             "invalidPhoneNumber": "Invalid Phone Number",
             "triage": {
                 "title": "Triage",
-                "description": "Answer the screening form to know your fitness:",
-                "form-Heart": "You have heart problems?",
-                "form-other-problems": "Description of other uncited issues:"
-            },
-            "qualification": {
-                "title": "Proof of training",
-                "description": "Send the necessary information to prove the training:",
-                "form-fight": "Martial arts"
+                "description": "Fill in the form:",
+                "form-Heart": "Do you have heart problems?",
+                "form-other-problems": "Other:"
             }
         },
+
         "homePage":{
             "student":{
-                "message":"Hello! student"
+                "message":"Welcome!"
             },
             "teacher":{
-                "message":"Hello! teacher"
+                "message":"Welcome!"
             },
             "dashboard":{
-                "student":"Number of students",
-                "classes":"Number of classes",
-                "lessons":"Number of lessons"
+                "student":"Students",
+                "classes":"Classes",
+                "lessons":"Lessons"
+            },
+            "login":{
+                "logout":"Logout"
             }
         },  
+
         "nav":{
-            "config": "Configuration",
+            "config": "Settings",
             "home": "Home",
             "calendar": "Calendar",
             "class": "Class"
         },
+
         "configScreen":{
             "Header":"My Account",
             "MessageAlert":"User without permition to use media",
             "Active":"Active",
             "Deactivated":"Deactivated",
             "ChangePass": "CHANGE PASSWORD",
-            "DesactiveAccount": "DEACTIVATE ACCOUNT"
+            "DesactiveAccount": "DEACTIVATE ACCOUNT",
+            "SaveButton": "SAVE",
+            "NotificationYes": "Yes",
+            "NotificationNo": "No"
         },
+
         "changePass":{
             "Header": "Change Password",
             "OldPass":"Old Password",
             "NewPass":"New Password",
             "ConfirmPass":"Password Confirmation"
         },
+
         "exclude":{
             "Header":"Delete Account",
             "LabelUser":"User validation",
             "placeholder":"To delete your account enter your password!"  
         },
+
         "navigationHeader":{
             "Class":"Class",
             "ClassDescription":"Class: {{name}}",
             "StudentDescription":"Student: {{name}}",
             "Evaluation": "Evaluation {{name}}"
         },
+
         "createClass":{
             "Header":"Create new class",
             "Placeholder":{
@@ -116,35 +129,58 @@
                 "Description":"Class description"
             }
         },
+        
         "classView":{
             "Student":{
                 "Header":"Student listing"  
             },
-            "classCancel":"Cancel class"
+            "classCancel":"Cancel class",
+            "toastItisNotPossibleCancelClass": "It is not possible to cancel this class",
+            "uploadExtraMaterial": "Uploading extra material",
+            "deleteClass": "Do you want to delete the class?",
+            "description":"Description",
+            "thereAreNoStudents": "There are no students in this class",
+            "classes": "Classes:",
+            "thereAreNoStudents2": "There are no students in this class",
+            "edit": "Edit",
+            "addFile": "Add File"
         },
+        
         "loadingClass":{
             "addlesson":"Choose a class to add lesson",
             "noClassTeacher":"This teacher has no classes",
-            "noClassStudent":"This Student does not have classes"
+            "noClassStudent":"This Student does not have classes",
+            "choseClass" : "Choose a class to add a class",
+            "teacherHasNoClasses": "This teacher has no classes",
+            "backButton": "To back"
         },
+
         "addStudentClass":{
             "Header":"Add Student",
             "Placeholder":{
                 "mail":"Enter student's email"
-            }
+            },
+            "searchButton" : "SEARCH",
+            "noStudents" : "No Students",
+            "backButton" : "BACK"
         },
+
         "studentView":{
             "Header":"RATING",
             "ButtonAvaliation":"Rate Student",
-            "ButtonViewTriagem":"View Triagem"
+            "ButtonViewTriagem":"View Triagem",            
+            "AvailablePerformance": "There are no performance review"
         },
+
         "addStudents":{
-            "empty":"No students"
+            "empty":"Write a valid Email to search an studant."
         },
+
         "addLession":{
             "messages":{
                 "addTopic":"Enter a lesson topic"
             },
+
             "header":"Add Lession",
             "placeholder":{
                 "topic":"Topic of the lesson",
@@ -152,6 +188,7 @@
                 "time":"Lesson time",
                 "description":"Lesson description"
             },
+
             "equipment":{
                 "header":"Equipments",
                 "description":"Equipment name",
@@ -159,70 +196,103 @@
                 "selected":"Lesson equipments"
             }
         },
+
         "evaluationStudent":{
             "Header":"CREATE RATING",
-            "Description":"Performance Dates",
+            "Description":"Performance Dates",            
+            "NoEvaluation": "There are no performance review for this student.",
             "Fields":{
                 "Name":"Name: {{name}}",
                 "Date":"Date: {{date}}"
-            }
+            },
+            "StudanteEvaluationsEmpty": "There are no performances recorded for this student!"
         },
+
         "createEvaluation":{
-            "Header": "Performance creation",
+            "Header": "New Performance Review",
             "Label":{
                 "Name":"Performance name",
                 "Date":"Performance date"
 
             }
         },
+
         "parameterCriation":{
-            "Header": "Parameter creation",
+            "Header": "Criteria creation",
             "Label":{
-                "Select": "Select parameter",
-                "insertName":"Enter the name of the new parameter",
+                "Select": "Select Criteria",
+                "insertName":"Enter the name of the new criteria",
                 "SelectType":"Select parameter type"
             },
             "Buttons":{
-                "Submit":"Submit evaluation",
-                "Create":"Create new parameter"
-               
+                "Submit":"Submit Performance Review",
+                "Create":"Create New Criteria"               
             }
         },
+
         "sorting": {
-            "title": "Sorting",
-			"sortingHeader1": "We are almost finishing your registration.",
+            "title": "Triage",
+			"sortingHeader1": "We are almost there!",
             "sortingHeader2": "We just need some more information",
             "personalData": "Personal Data:",
-			"height": "Height in centimeters (cm)",
-			"weight": "weight (kg)",
+			"height": "Height (cm)",
+			"weight": "Weight (kg)",
             "birthDate": "Birth Date:",
             
 			"anamnesis": "Anamnesis:",
 				
-			"anamneseDidExercise": "Have you practiced physical exercise before?",
+			"anamneseDidExercise": "Have you ever practiced physical exercise before?",
 			"anamneseDidExerciseLabel": "Yes",
-			"anamneseDidExerciseWhich": "Which one(s) and for how long?",
+			"anamneseDidExerciseWhich": "Which one and how long?",
 				
-			"anamneseDidOrthProb": "Do you have an orthopedic problem?",
+			"anamneseDidOrthProb": "Do you have any orthopedic problem?",
 			"anamneseDidOrthProbLabel": "Yes",
-			"anamneseDidOrthProbWhich": "Which one(s)?",
+			"anamneseDidOrthProbWhich": "Which one?",
 
 			"anamneseChronicIll": "Do you have any chronic illness?",
 			"anamneseChronicIllLabel": "Yes",
-			"anamneseChronicIllWhich": "Which one(s)?",
+			"anamneseChronicIllWhich": "Which one?",
 
 			"anamneseInjuries": "Do you have any injuries?",
 			"anamneseInjuriesLabel": "Yes",
-			"anamneseInjuriesWhich": "Which one(s)?",
+			"anamneseInjuriesWhich": "Which one?",
 
 		
-			"anamneseComments1": "Would you like to make any other comments that might help you in setting up your training program?",
+			"anamneseComments1": "Other:",
 			"anamneseComments2":"Type here",
 
 			"errorMessageHeight": "Required field",
 			"errorMessageWeight": "Required field",
 			"loadingErrorText":   "Fill in the fields correctly"
 		},
+
+        "sortingView": {
+            "title": "Last Triage",
+            "question": "This Student has no triage",
+            "height": "Height (cm)",
+			"weight": "Weight (kg)",
+            "anamneseDidOrthProb": "Do you have any orthopedic problem?",
+			"anamneseDidOrthProbLabel": "Yes",
+			"anamneseDidOrthProbWhich": "Which one?",
+
+			"anamneseChronicIll": "Do you have any chronic illness?",
+			"anamneseChronicIllLabel": "Yes",
+			"anamneseChronicIllWhich": "Which one?",
+
+			"anamneseInjuries": "Do you have any injuries?",
+			"anamneseInjuriesLabel": "Yes",
+			"anamneseInjuriesWhich": "Which one?",
+
+		
+			"anamneseComments1": "Other:",
+			"anamneseComments2":"Type here",
+
+			"errorMessageHeight": "Required field",
+			"errorMessageWeight": "Required field",
+			"loadingErrorText":   "Fill in the fields correctly",
+
+            "noComments": " - "
+        },
 
         "inputValidators": {
             "validationEmail": "Enter a valid email address",
@@ -281,11 +351,40 @@
             },      
             "today": "Today"
         },
+
         "ListCalendarDate": {
-            "classes" : "Classes",
-            "scheduledclasses": "Scheduled classes",
-            "thereAreNo": "There are no classes for this date"
-            
-            }
+            "classes" : "Lessons",
+            "scheduledclasses": "Scheduled Lessons",
+            "thereAreNo": "There are no lessons to this date"            
+        },
+
+
+        "figthtItModal": {
+
+            "deleteClassConfirm" : "CONFIRM",
+            "deleteClassClose" : "CLOSE"            
+        },
+
+        "addAula": {
+
+            "addClass" : "Add Class",
+            "classTopic" : "Class Topic",
+            "classDate" : "Class Date", 
+            "classTime" : "Class Time",
+            "classDescription" : "Class Description",
+            "equipaments" : "Equipaments",
+            "equipamentName" : "Equipament Name",
+            "addButton" : "Add"
+        },
+
+        "lessonView": {
+            "title": "View Lesson",
+            "subtitle": "Lesson not Found",
+            "topic": "Lesson Topic",
+            "date": "Date",
+            "hour": "Hour",
+            "description": "Description",
+            "material": "View Extra Material"
+        }
     }
 }

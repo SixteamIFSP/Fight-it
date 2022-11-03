@@ -21,45 +21,44 @@ export function HomeScreen({ navigation }) {
     return token
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     if (!isFocused) return
 
     getDashboard(user.userID, user.tipoUsuario === 1, setDashboardData);
 
-  },[isFocused]);
+  }, [isFocused]);
 
   useEffect(async () => {
-    const newToken =  await getNotification();
+    const newToken = await getNotification();
 
     if (user.expoToken === newToken) return
 
     const dataUpdate = {
-      id:user.userID,
-      expotoken:newToken
+      id: user.userID,
+      expotoken: newToken
     }
-    
-    updateExpoToken(dataUpdate,  user.tipoUsuario === 1);
 
-    modifyUser({...user, expoToken:newToken});
-    
+    updateExpoToken(dataUpdate, user.tipoUsuario === 1);
+
+    modifyUser({ ...user, expoToken: newToken });
+
   }, []);
 
   return (
     <View style={stylesGlobal.container}>
       <ContainerExitButton>
-        <TextApresentation>{
-            user.tipoUsuario === 1 ? t('homePage.teacher.message') : t('homePage.student.message')
-            } {user?.nome}
-          </TextApresentation>
+        <TextApresentation>
+          {t('homePage.teacher.message')} {user?.nome}{' !'}
+        </TextApresentation>
         <ButtonLogout />
       </ContainerExitButton>
       <ContainerContent>
         {
-          user.tipoUsuario === 1 ? 
-          <GridDashboard>
-            <CardDashboard text={t("homePage.dashboard.student")} value={dashboardData?.Alunos} />
-          </GridDashboard>
-          : <></>
+          user.tipoUsuario === 1 ?
+            <GridDashboard>
+              <CardDashboard text={t("homePage.dashboard.student")} value={dashboardData?.Alunos} />
+            </GridDashboard>
+            : <></>
         }
         <GridDashboard>
           <CardDashboard text={t("homePage.dashboard.lessons")} value={dashboardData?.Aula} />

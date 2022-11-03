@@ -18,6 +18,7 @@ export async function createTriagem(data, alunoId) {
 export async function getTriagem(id) {
     try {
         const response = await api.get(`/triagem/acessarTriagem/${id}`);
+        console.log(response.data, 'response da get triagem')
         if (response.data.status) {
             return response?.data?.result
         }
