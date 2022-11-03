@@ -1800,9 +1800,9 @@
     "@types/yargs-parser" "*"
 
 "@xmldom/xmldom@~0.7.0":
-  "integrity" "sha512-V3BIhmY36fXZ1OtVcI9W+FxQqxVLsPKcNjWigIaa81dLC9IolJl5Mt4Cvhmr0flUnjSpTdrbMTSbXqYqV5dT6A=="
-  "resolved" "https://registry.npmjs.org/@xmldom/xmldom/-/xmldom-0.7.5.tgz"
-  "version" "0.7.5"
+  "integrity" "sha512-PrJx38EfpitFhwmILRl37jAdBlsww6AZ6rRVK4QS7T7RHLhX7mSs647sTmgr9GIxe3qjXdesmomEgbgaokrVFg=="
+  "resolved" "https://registry.npmjs.org/@xmldom/xmldom/-/xmldom-0.7.8.tgz"
+  "version" "0.7.8"
 
 "abort-controller@^3.0.0":
   "integrity" "sha512-h8lQ8tacZYnR3vNQTgibj+tODHI5/+l06Au2Pcriv/Gmet0eaj4TwWH41sO9wnHDiQsEj19q0drzdWdeAHtweg=="
@@ -3370,7 +3370,7 @@
     "bser" "2.1.1"
 
 "fbemitter@^2.1.1":
-  "integrity" "sha1-Uj4U/a9SSIBbsC9i78M75wP1GGU="
+  "integrity" "sha512-hd8PgD+Q6RQtlcGrkM9oY3MFIjq6CA6wurCK1TKn2eaA76Ww4VAOihmq98NyjRhjJi/axgznZnh9lF8+TcTsNQ=="
   "resolved" "https://registry.npmjs.org/fbemitter/-/fbemitter-2.1.1.tgz"
   "version" "2.1.1"
   dependencies:
@@ -4241,7 +4241,7 @@
   "version" "3.0.1"
 
 "isomorphic-fetch@^2.1.1":
-  "integrity" "sha1-YRrhrPFPXoH3KVB0coGf6XM1WKk="
+  "integrity" "sha512-9c4TNAKYXM5PRyVcwUZrF3W09nQ+sO7+jydgs4ZGW9dhsLG2VOlISJABombdQqQRXCwuYG3sYV/puGf5rp0qmA=="
   "resolved" "https://registry.npmjs.org/isomorphic-fetch/-/isomorphic-fetch-2.2.1.tgz"
   "version" "2.2.1"
   dependencies:
@@ -4995,15 +4995,7 @@
     "snapdragon" "^0.8.1"
     "to-regex" "^3.0.2"
 
-"micromatch@^4.0.2":
-  "integrity" "sha512-DMy+ERcEW2q8Z2Po+WNXuw3c5YaUSFjAO5GsJqfEl7UjvtIuFKO6ZrKvcItdy98dwFI2N1tg3zNIdKaQT+aNdA=="
-  "resolved" "https://registry.npmjs.org/micromatch/-/micromatch-4.0.5.tgz"
-  "version" "4.0.5"
-  dependencies:
-    "braces" "^3.0.2"
-    "picomatch" "^2.3.1"
-
-"micromatch@^4.0.4":
+"micromatch@^4.0.2", "micromatch@^4.0.4":
   "integrity" "sha512-DMy+ERcEW2q8Z2Po+WNXuw3c5YaUSFjAO5GsJqfEl7UjvtIuFKO6ZrKvcItdy98dwFI2N1tg3zNIdKaQT+aNdA=="
   "resolved" "https://registry.npmjs.org/micromatch/-/micromatch-4.0.5.tgz"
   "version" "4.0.5"
@@ -5677,9 +5669,9 @@
   "version" "17.0.2"
 
 "react-native-calendars@^1.1288.3":
-  "integrity" "sha512-qaqRliQxM+05kCPd04d7xryRxpFC/XHgxyOThSeZRdEXP29AQLrWDHZNhUUXALe2pVWNTJIzt6jnWsgs2gAmYg=="
-  "resolved" "https://registry.npmjs.org/react-native-calendars/-/react-native-calendars-1.1289.0.tgz"
-  "version" "1.1289.0"
+  "integrity" "sha512-WBkcpD0B+Fq/VMD5E3laRFf3/1VEaZGqzXW8D1csJUGnXwKbCvh5GOzEUBJJJ2dBTIjww0o4AOUyt4St9qbC8w=="
+  "resolved" "https://registry.npmjs.org/react-native-calendars/-/react-native-calendars-1.1291.0.tgz"
+  "version" "1.1291.0"
   dependencies:
     "hoist-non-react-statics" "^3.3.1"
     "immutable" "^4.0.0-rc.12"
@@ -6228,7 +6220,7 @@
   "version" "1.0.0"
 
 "shell-quote@^1.6.1", "shell-quote@1.6.1":
-  "integrity" "sha1-9HgZSczkAmlxJ0MOo7PFR29IF2c="
+  "integrity" "sha512-V0iQEZ/uoem3NmD91rD8XiuozJnq9/ZJnbHVXHnWqP1ucAhS3yJ7sLIIzEi57wFFcK3oi3kFUC46uSyWr35mxg=="
   "resolved" "https://registry.npmjs.org/shell-quote/-/shell-quote-1.6.1.tgz"
   "version" "1.6.1"
   dependencies:
