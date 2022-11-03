@@ -177,7 +177,7 @@
         },
         "evaluationStudent": {
             "Header": "AVALIAÇÃO",
-            "Description": "Datas de Avaliação:",
+            "Description": "Avaliações:",
             "NoEvaluation": "Não há avaliações para este aluno.",
             "Fields": {
                 "Name": "Nome: {{name}}",
@@ -193,15 +193,15 @@
             }
         },
         "parameterCriation": {
-            "Header": "Criação de Critério",
+            "Header": "CRIAÇÃO DE CRITÉRIO",
             "Label": {
-                "Select": "Selecione o critério",
+                "Select": "Selecione o critério de avaliação",
                 "insertName": "Insira o nome do novo critério",
                 "SelectType": "Selecione o tipo de critério"
             },
             "Buttons": {
-                "Submit": "Enviar critério",
-                "Create": "Criar novo critério"
+                "Submit": "ENVIAR CRITÉRIO",
+                "Create": "CRIAR NOVO CRITÉRIO"
             }
         },
         "sorting": {

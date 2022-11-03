@@ -87,13 +87,20 @@ function CreatePerformace({ dataParams, setCreatePerformace }) {
 
     return (
         <View >
-            <Divider
-                borderColor="#000"
-                color="#000"
-                orientation="center">
+            <Text style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 18 }}>
                 {t("createEvaluation.Header")}
-            </Divider>
-            <ContainerNewPerformance>
+            </Text>
+            <ContainerNewPerformance style={{
+                shadowColor: "#000000",
+                shadowOffset: {
+                    width: 0,
+                    height: 11,
+                },
+                shadowOpacity: 0.23,
+                shadowRadius: 11.78,
+                elevation: 15,
+                alignSelf: 'center'
+            }}>
                 <Input
                     onChangeText={setNomeDesempenho}
                     value={nomeDesempenho}
@@ -179,7 +186,8 @@ function FormCreateParams({ selectEvaluation, setSelectEvaluation }) {
 
     return (
         <View>
-            <TextHeader>{t("parameterCriation.Header")}</TextHeader>
+            <TextHeader style={{fontSize:16, fontWeight:'bold', color:'#000'}}>{t("parameterCriation.Header")}</TextHeader>
+            <Text style={{fontSize:12, color:'#a9a9a9'}}>{'Exemplo: 1km de corrida, chute rodado, agachamento livre.'}</Text>
             <AlingDropDown>
 
                 {
@@ -282,25 +290,23 @@ export function EvaluationStudent({ navigation, route }) {
                 !createPerformance ?
                     <View >
                         <Text style={{ fontWeight: 'bold', fontSize: 18, textAlign: 'center' }}> {t('evaluationStudent.Header')}</Text>
-                        <ContainerEvaluation>
+                        <ContainerEvaluation style={{
+                            shadowColor: "#111111",
+                            shadowOffset: {
+                                width: 0,
+                                height: 2,
+                            },
+                            shadowOpacity: 0.25,
+                            shadowRadius: 3.84,
+                            elevation: 6,
+                        }}>
                             <TextHeader>{t("evaluationStudent.Description")}</TextHeader>
                             {
                                 dataEvaluation.length === 0 ?
-                                    <TextHeader>{t('evaluationSutdent.NoEvaluation')}</TextHeader>
+                                    <TextHeader style={{ marginTop: 10 }}>{t('evaluationStudent.NoEvaluation')}</TextHeader>
                                     :
 
                                     <EvaluationList
-                                        style={{
-                                            shadowColor: "#ee1000",
-                                            shadowOffset: {
-                                                width: 0,
-                                                height: 2,
-                                            },
-                                            shadowOpacity: 0.25,
-                                            shadowRadius: 3.84,
-                                            elevation: 6,
-                                            backgroundColor:'#ff0000'
-                                        }}
                                         data={dataEvaluation}
                                         renderItem={({ item }) =>
                                             <RenderEvaluation

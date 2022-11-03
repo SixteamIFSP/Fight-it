@@ -14,6 +14,7 @@ export const styles = StyleSheet.create(
          color: '#FFF',
          textAlign: 'center',
          fontWeight: 'bold',
+         fontSize:14
       }
    }
 );

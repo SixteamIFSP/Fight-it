@@ -207,7 +207,7 @@ export function StudantView({ navigation, route: { params } }) {
                         <Text
                             style={{
                                 textAlign: 'center',
-                            }}>{t('StudanteEvaluationsEmpty.evaluationStudent')}</Text>
+                            }}>{t('evaluationStudent.StudanteEvaluationsEmpty')}</Text>
                     )
                 }
 
