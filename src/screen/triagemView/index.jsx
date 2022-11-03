@@ -22,28 +22,28 @@ export function TriagemView({ route, route:{params}}) {
         <ScrollView style={{ flex: 1, padding: 10 }}>{
             !dadosTriagem ? 
             <Container>
-                <TextTitle>{t(sortingView.title)}</TextTitle>
-                <TextQuestion>{t(sortingView.question)}</TextQuestion>
+                <TextTitle>{t('sortingView.title')}</TextTitle>
+                <TextQuestion>{t('sortingView.question')}</TextQuestion>
             </Container>
             :
             <Container>
 
-                <TextQuestion>{t(sortingView.height)}</TextQuestion>
+                <TextQuestion>{t('sortingView.height')}</TextQuestion>
                 <TextAnswer>{dadosTriagem?.Altura}</TextAnswer>
 
-                <TextQuestion>{t(sortingView.weight)}</TextQuestion>
+                <TextQuestion>{t('sortingView.weight')}</TextQuestion>
                 <TextAnswer>{dadosTriagem?.Peso}</TextAnswer>
 
-                <TextQuestion>{t(sortingView.anamneseInjuries)} </TextQuestion>
+                <TextQuestion>{t('sortingView.anamneseInjuries')} </TextQuestion>
                 <TextAnswer>{dadosTriagem.Lesoes === '0' ? '' : dadosTriagem.Lesoes}</TextAnswer>
 
-                <TextQuestion>{t(sortingView.anamneseDidOrthProbLabel)} </TextQuestion>
+                <TextQuestion>{t('sortingView.anamneseDidOrthProbLabel')} </TextQuestion>
                 <TextAnswer>{dadosTriagem.Problema_Ortopedico === '0' ? '' : dadosTriagem.Problema_Ortopedico}</TextAnswer>
 
-                <TextQuestion>{t(sortingView.anamneseInjuries)} </TextQuestion>
+                <TextQuestion>{t('sortingView.anamneseInjuries')} </TextQuestion>
                 <TextAnswer> {dadosTriagem.Doencas_Cronicas === '0' ? '' : dadosTriagem.Doencas_Cronicas}</TextAnswer>
 
-                <TextQuestion>{t(sortingView.anamneseComments1)}</TextQuestion>
+                <TextQuestion>{t('sortingView.anamneseComments1')}</TextQuestion>
                 <TextAnswer>{dadosTriagem?.comentario || t('sortingView.noComments')}</TextAnswer>
 
             </Container>
