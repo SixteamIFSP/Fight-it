@@ -129,8 +129,8 @@
             "thereAreNoStudents": "Não há alunos nessa turma",
             "classes": "Aulas:",
             "thereAreNoStudents2": "Não há alunos nessa turma",
-            "edit": "Edit",
-            "addFile": "Add File"
+            "edit": "Editar",
+            "addFile": "Adicionar arquivo"
         },
         "loadingClass": {
             "addlesson": "Escolha uma turma para adicionar uma aula",
@@ -254,7 +254,6 @@
             "loadingErrorText": "Preencha os campos corretamente!",
             "noComments": " - "
         },
-
 
         "inputValidators": {
             "validationEmail": "Digite um email válido",

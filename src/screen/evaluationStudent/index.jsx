@@ -238,7 +238,6 @@ function FormCreateParams({ selectEvaluation, setSelectEvaluation }) {
                                         setParamSelected(selectedItem)
                                     }}
                                     buttonTextAfterSelection={(selectedItem, index) => {
-
                                         return selectedItem
                                     }}
                                     renderDropdownIcon={isOpened => {

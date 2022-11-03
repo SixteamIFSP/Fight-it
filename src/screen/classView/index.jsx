@@ -138,7 +138,6 @@ export function ClassView({ navigation, route }) {
         setAulaID(idAula);
         handleOpenPage(4);
     }
-        
 
     useEffect(() => {
         if (!isFocused) return;
@@ -158,7 +157,7 @@ export function ClassView({ navigation, route }) {
 
                     <TouchableOpacity style={{alignItems:"center"}} onPress={() => handleOpenPage(5)}>
                         <FontAwesome name={'pencil'} size={26} color="black" />
-                        <Text>{t('ClassView.edit')}</Text>
+                        <Text>{t('classView.edit')}</Text>
                     </TouchableOpacity>
 
                 </ContainerHeader>

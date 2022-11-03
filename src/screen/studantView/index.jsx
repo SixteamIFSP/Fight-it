@@ -44,7 +44,7 @@ export function StudantView({ navigation, route: { params } }) {
 
     const { t } = useTranslation();
     const { user } = useUser();
-    const { studantId, id, nome, data } = params;
+    const { studantId, id, nome, data, turma} = params;
     const { setCallback } = useModal();
     const [loading, setLoading] = useState(false);
     const [paramsAluno, setParamsAluno] = useState([]);
@@ -60,13 +60,21 @@ export function StudantView({ navigation, route: { params } }) {
     useEffect(() => {
         function effect() {
             handleLoadingParams()
-            setCallback("Deseja remover aluno?", () => callBackDeleteStudentClass());
+            let text;
+            if (user.tipoUsuario === 1)
+                text = "Deseja remover aluno?"
+            else
+                text = "Deseja sair da Turma?"
+
+            setCallback(text, () => callBackDeleteStudentClass());
         };
         isFocused && effect();
     }, [isFocused])
 
     function callBackDeleteStudentClass() {
-        deleteAluno({ aluno: studantId, turma: id })
+        const valor = user.tipoUsuario == 1 ? { aluno: studantId, turma: id } : { aluno:user.userID, turma: data.id }
+        console.log(data);
+        deleteAluno(valor);
         navigation.goBack();
     }
 
