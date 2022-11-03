@@ -168,7 +168,6 @@ export async function deleteAluno(data){
     try {
         const response = await api.post(`/turma/excluir/aluno`, {...data});  
             toastMessage(response?.data.status, response?.data.mensagem)
-    
         
     } catch (error) {
         console.log(error)
@@ -177,15 +176,12 @@ export async function deleteAluno(data){
 }
 
 export async function getAulaByAulaID(aulaID, setAula){
-    
-
     try {
         const response = await api.get(`/urlDeBuscarAulaPorIDaindaNãoDesenvolvida` + aulaID);
         if (response?.data.status){
             toastMessage(true, response?.data.mensagem)
             setAula(response?.data)
-        } else{
-            
+        } else{        
             setAula(null)
         }
         
@@ -194,7 +190,6 @@ export async function getAulaByAulaID(aulaID, setAula){
         setAula(null)
     }
 }
-
 
 export async function postAulaFeedback(aulaid, message) { 
     try {

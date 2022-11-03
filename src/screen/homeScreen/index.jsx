@@ -5,11 +5,11 @@ import { ButtonLogout } from "../../components/buttonLogout";
 import { useTranslation } from "react-i18next";
 import { useUser } from "../../hooks/user";
 import { ContainerExitButton, ContainerContent, TextApresentation, GridDashboard } from "./styles";
-import { generatePushNotificationsToken } from "../../services/generetePushNotificationToken";
+import { registerForPushNotificationsAsync } from "../../services/generetePushNotificationToken";
 import { CardDashboard } from "../../components/cardDashboard";
 import { useIsFocused } from "@react-navigation/native";
 import { getDashboard } from "../../controler/dashboard";
-
+ 
 export function HomeScreen({ navigation }) {
   const { t } = useTranslation();
   const { user, modifyUser, updateExpoToken } = useUser();
@@ -17,7 +17,7 @@ export function HomeScreen({ navigation }) {
   const isFocused = useIsFocused();
 
   async function getNotification (){
-    const token = await generatePushNotificationsToken();
+    const token = await registerForPushNotificationsAsync();
     return token
   }
 
@@ -65,7 +65,7 @@ export function HomeScreen({ navigation }) {
           <CardDashboard text={t("homePage.dashboard.lessons")} value={dashboardData?.Aula} />
           <CardDashboard text={t("homePage.dashboard.classes")} value={dashboardData?.Turmas} />
         </GridDashboard>
-      </ContainerContent>     
+      </ContainerContent>
     </View>
   );
 }

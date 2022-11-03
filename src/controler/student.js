@@ -16,7 +16,7 @@ export async function getParamsAluno(data, setValue ){ // data => { "aluno": num
 
 export async function getDesempenhoPorParametro(data, setValue ){ // data => { "aluno": number, "parametro": number}
     try {
-        const response = await api.post(`/desempenho/busca/desempenho/parametro`, {...data});
+        const response = await api.post(`/desempenho/buscaParametroTurma`, {...data});
        
         if (response?.data.status){
             setValue(response?.data.result.Parametros);

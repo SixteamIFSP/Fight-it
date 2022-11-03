@@ -51,27 +51,33 @@ const RenderListAluno = ({ item, navigation, data, student }) => {
     );
 };
 
+function RenderAula({navigation, aula }) {
+    //console.log(item);
 
-function RenderAula({ aula, onDeleteAula, onSelectAula, student, handleViewAula }) {
+    const { user } = useUser(); 
+
+    function handleTouch() {
+        if (user.tipoUsuario === 2) return
+        navigation.navigate(
+            'LessonView',
+            {
+                aula,
+                title: aula.nome
+            });
+    };
 
     return (
         <RenderAulaContainer >
             <Text>{aula.nome}</Text>
             <View style={{flexDirection: 'row'}}>
             {/* <CancelarAula
-                onPress={() => {
-                    if(student) {
-                        handleViewAula()
-                        return 
-                    } 
-                    onSelectAula(aula.nome, aula.id)
-                    }}>
-                <TextWhite>Adicionar Material</TextWhite>
+                onPress={handleTouch}>
+                <TextWhite>Visualizar Aula</TextWhite>
             </CancelarAula> */}
-            <CancelarAula
+            {/* <CancelarAula
                 onPress={() => onDeleteAula(aula)}>
                 <TextWhite>{t("classView.classCancel")}</TextWhite>
-            </CancelarAula>
+            </CancelarAula> */}
             </View>
         </RenderAulaContainer>
     )
@@ -96,7 +102,7 @@ export function ClassView({ navigation, route }) {
     }
 
     function handleOpenPage(pageNumber) {
-        setPage(pageNumber)
+        setPage(pageNumber);
     }
 
     function getData() {
@@ -106,6 +112,10 @@ export function ClassView({ navigation, route }) {
     function callback() {
         getData();
         handleOpenPage(1);
+    }
+
+    function changeFluxo(id) {
+        handleOpenPage(id);
     }
 
     function onDeleteAula(aula) {
@@ -124,9 +134,11 @@ export function ClassView({ navigation, route }) {
         navigation.navigate('MaterialExtra', {title:'Upload do material extra', nometurma, aulaid});
     }
     
-    function updateClass(){
-        navigation.goBack();
+    async function ViewLession(idAula){
+        setAulaID(idAula);
+        handleOpenPage(4);
     }
+        
 
     useEffect(() => {
         if (!isFocused) return;
@@ -155,7 +167,6 @@ export function ClassView({ navigation, route }) {
                     <ContainerFlat>
                         {
                             dataAlunos.length >= 1 ?
-
                                 <ContentListagem
                                     data={dataAlunos}
                                     renderItem={
@@ -190,10 +201,13 @@ export function ClassView({ navigation, route }) {
                                 <ContentListagem
                                     data={dateAula}
                                     renderItem={
-                                        ({ item }) => <RenderAula handleViewAula={(aulaid) => {
-                                            setAulaID(aulaid)
-                                            handleOpenPage(4)
-                                        }} aula={item} onDeleteAula={onDeleteAula} onSelectAula={onSelectAula} student={student} />
+                                        ({ item }) => <RenderAula 
+                                        navigation={navigation}
+                                        handle={() => ViewLession()}
+                                        aula={item}
+                                        //onDeleteAula={onDeleteAula}
+                                        //onSelectAula={onSelectAula}
+                                        student={student} />
                                     }
                                     keyExtractor={item => `${item.id}-${item.nome}-dataAula`}>
                                 </ContentListagem>
@@ -205,7 +219,7 @@ export function ClassView({ navigation, route }) {
             </ContainerListColumn>),
         2: <AdicionarAluno setback={callback} turmaId={id}></AdicionarAluno>,
         3: <AdicionarAula turmaId={id} setback={callback} />,
-        4: <LessonView navigation={navigation} aulaid={aulaid} onBack={() => handleOpenPage(1)} />,
+        //4: <LessonView navigation={navigation} aulaid={aulaid} onBack={() => callback()} />,
         5: <EditTurma navigation={navigation} turmaId={id} setback={()=>callback()}></EditTurma>
         
     }
