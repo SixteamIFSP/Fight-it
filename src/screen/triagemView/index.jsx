@@ -1,16 +1,15 @@
-import { t } from "i18n-js";
+import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import { ScrollView } from "react-native";
 import { getTriagem } from "../../controler/triagem";
-import { convertDateToBrString } from "../../utils/dateConvert";
 import { Container, TextAnswer, TextQuestion, TextTitle } from './style'
 
 export function TriagemView({ route, route:{params}}) {
+    const { t } = useTranslation();
     const { studantId } = params;
     const [dadosTriagem, setDadosTriagem] = useState(null)
 
     useEffect(() => {
-        //route.params?.studentId. Enquanto não temos triagem criada com o ID do aluno, colocamos id
         getTriagem(studantId).then(response => {
             if (response) {
                 setDadosTriagem(response[0]);
