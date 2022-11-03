@@ -101,6 +101,9 @@ export function ClassStackTeacher(){
             <StackClass.Screen options={({route}) => ({title: route.params.title})} navigationKey='TriagemView' name="TriagemView" component={TriagemView}></StackClass.Screen>
 
             <StackClass.Screen options={({route}) => ({title: route.params.title})} navigationKey='MaterialExtra' name="MaterialExtra" component={UploadMaterial}></StackClass.Screen>
+
+            <StackClass.Screen options={({route}) => ({title: route.params.title})} navigationKey='LessonView' name="LessonView" component={LessonView}></StackClass.Screen>
+
         </StackClass.Navigator>
     )
 }

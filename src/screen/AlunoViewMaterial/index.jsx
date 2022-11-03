@@ -6,7 +6,6 @@ import { postAulaFeedback } from '../../controler/class'
 import { getMaterialExtra } from '../../controler/materialExtra'
 import {Container, Descricao, EnviarFeedBack, FeedbackButton, FeedbackContainer, ImagemMaterial, Modal, ModalContainer, Title, Wrapper} from './style'
 
-
 export function AlunoViewMaterial({navigation, route}) { 
 
      const [materiais, setMateriais]  = useState([])
@@ -88,7 +87,6 @@ export function AlunoViewMaterial({navigation, route}) {
                                </TouchableWithoutFeedback>
                             </ModalContainer>
                          </TouchableWithoutFeedback>}
-         </Container>
-     
+         </Container>  
     )
 }

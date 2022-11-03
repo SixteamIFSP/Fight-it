@@ -2,177 +2,177 @@ import { api } from "../services/api";
 import { toastMessage } from "../utils/toastMessage";
 import axios from "axios";
 
-export async function getClass(setClasses, idUsuario, type){
+export async function getClass(setClasses, idUsuario, type) {
     try {
         let response;
-        if (type){
+        if (type) {
             response = await api.get(`/turma/busca/${idUsuario}`);
-       } else {
+        } else {
             response = await api.get(`/turma/busca/aluno/${idUsuario}`);
-       }
-       
-       setClasses(response?.data.resultado || []);
+        }
+
+        setClasses(response?.data.resultado || []);
     } catch (error) {
         console.log(error);
         toastMessage(false, 'Erro de conexão!');
     }
 }
 
-export async function createClass(data){ // data => { nome:string, descricao:string, professorId:number}
+export async function createClass(data) { // data => { nome:string, descricao:string, professorId:number}
     try {
-      const response = await api.post(`/turma/criar`, {...data});
-      
-        if (response?.data.status){
-            toastMessage(true, response?.data.mensagem) 
+        const response = await api.post(`/turma/criar`, { ...data });
 
-        } else{
-            toastMessage(false, response?.data.mensagem) 
+        if (response?.data.status) {
+            toastMessage(true, response?.data.mensagem)
+
+        } else {
+            toastMessage(false, response?.data.mensagem)
         }
-        
+
     } catch (error) {
-        toastMessage(false, 'Erro de conexão!') 
+        toastMessage(false, 'Erro de conexão!')
     }
 }
 
-export async function changeClass(data){
+export async function changeClass(data) {
     try {
-        const response = await api.post(`/turma/alterar`, {...data});
+        const response = await api.post(`/turma/alterar`, { ...data });
 
-        if (response?.data.status){
-            toastMessage(true, response?.data.mensagem) 
+        if (response?.data.status) {
+            toastMessage(true, response?.data.mensagem)
 
-        } else{
-            toastMessage(false, response?.data.mensagem) 
+        } else {
+            toastMessage(false, response?.data.mensagem)
         }
 
-    } catch(error) {
-        toastMessage(false, 'Erro de conexão!') 
+    } catch (error) {
+        toastMessage(false, 'Erro de conexão!')
     }
 }
 
-export async function getAllDataClass(setAlunos, setClass, data){
+export async function getAllDataClass(setAlunos, setClass, data) {
     axios.all(
         [
-            api.get(`/turma/alunos/${data}`), 
+            api.get(`/turma/alunos/${data}`),
             api.get(`/aula/busca_turma/${data}`),
-    ]
-    ).then(axios.spread((responseAlunos, responseAula) => {     
+        ]
+    ).then(axios.spread((responseAlunos, responseAula) => {
         setAlunos(responseAlunos?.data.result || [])
         setClass(responseAula?.data.result || [])
-        
+
     }))
-    .catch((error)=>{
-        console.log(error);
-    })
+        .catch((error) => {
+            console.log(error);
+        })
 }
 
-export async function getAulasByTurma(setAulas,  turmaid){
+export async function getAulasByTurma(setAulas, turmaid) {
 
-        try {
-            const response = await api.get(`/aula/busca_turma/${turmaid}`)
-            if (response?.data.status){
-                setAulas(response?.data.result || []);
-    
-            } else{
-                if (response?.data.result == null)
-                    toastMessage(false, 'Aulas não encontradas');
-                else 
-                    toastMessage(false, 'Erro ao buscar dos dados');
+    try {
+        const response = await api.get(`/aula/busca_turma/${turmaid}`)
+        if (response?.data.status) {
+            setAulas(response?.data.result || []);
+
+        } else {
+            if (response?.data.result == null) {
+                console.log('Aulas não encontradas');
+            } else {
+                toastMessage(false, 'Erro ao buscar dos dados');
             }
-            
-        } catch (error) {
-            console.log(error.message)
-            toastMessage(false, 'Erro de conexão!') 
         }
+
+    } catch (error) {
+        console.log(error.message)
+        toastMessage(false, 'Erro de conexão!')
+    }
 }
 
-export async function getAlunosTurma(setAlunos, data){ // data => number
+export async function getAlunosTurma(setAlunos, data) { // data => number
     try {
         const response = await api.get(`/turma/alunos/${data}`);
 
-        if (response?.data.status){
+        if (response?.data.status) {
             setAlunos(response?.data.result || []);
 
-        } else{
+        } else {
             if (response?.data.result == null)
                 toastMessage(false, 'Turma sem alunos');
-            else 
+            else
                 toastMessage(false, 'Erro ao buscar dos dados');
         }
-        
+
     } catch (error) {
         console.log(error.message)
-        toastMessage(false, 'Erro de conexão!') 
+        toastMessage(false, 'Erro de conexão!')
     }
 }
 
-export async function adicionarAluno(data){ // data => {turmaId:number, email:string}
+export async function adicionarAluno(data) { // data => {turmaId:number, email:string}
 
     try {
-        const response = await api.post(`/turma/adiciona`, {...data});
+        const response = await api.post(`/turma/adiciona`, { ...data });
 
-        if (response?.data.status){
-            toastMessage(true, response?.data.mensagem) 
+        if (response?.data.status) {
+            toastMessage(true, response?.data.mensagem)
 
-        } else{
-            toastMessage(false, response?.data.mensagem) 
+        } else {
+            toastMessage(false, response?.data.mensagem)
         }
-        
+
     } catch (error) {
-        toastMessage(false, 'Erro de conexão!') 
+        toastMessage(false, 'Erro de conexão!')
     }
 }
 
-export async function deleteTurma(turmaId){
+export async function deleteTurma(turmaId) {
     try {
         const response = await api.delete(`/turma/excluir/turma/${turmaId}`);
 
-        if (response?.data.status){
-            toastMessage(true, response?.data.mensagem) 
-        } else{
-            toastMessage(false, response?.data.mensagem) 
-        }  
+        if (response?.data.status) {
+            toastMessage(true, response?.data.mensagem)
+        } else {
+            toastMessage(false, response?.data.mensagem)
+        }
     } catch (error) {
-        toastMessage(false, 'Erro de conexão!') 
+        toastMessage(false, 'Erro de conexão!')
     }
 }
 
-export async function adicionarAula(data){
+export async function adicionarAula(data) {
 
     try {
-        const response = await api.post(`/aula/criarAula`, {...data});
-        if (response?.data.status){
-            toastMessage(true, response?.data.message) 
+        const response = await api.post(`/aula/criarAula`, { ...data });
+        if (response?.data.status) {
+            toastMessage(true, response?.data.message)
 
-        } else{
-            toastMessage(false, response?.data.message) 
+        } else {
+            toastMessage(false, response?.data.message)
         }
-        
+
     } catch (error) {
         console.log(error);
-        toastMessage(false, 'Erro de conexão!') 
+        toastMessage(false, 'Erro de conexão!')
     }
 }
 
-export async function removeAula(id){
+export async function removeAula(id) {
     try {
         const response = await api.delete(`/aula/deletarAula/${id}`);
         toastMessage(response?.data.status, response?.data.message)
 
     } catch (error) {
-        toastMessage(false, 'Erro de conexão!') 
+        toastMessage(false, 'Erro de conexão!')
     }
 }
 
-export async function deleteAluno(data){
+export async function deleteAluno(data) {
     try {
         const response = await api.post(`/turma/excluir/aluno`, {...data});  
             toastMessage(response?.data.status, response?.data.mensagem)
-    
         
     } catch (error) {
         console.log(error)
-        toastMessage(false, 'Erro de conexão!') 
+        toastMessage(false, 'Erro de conexão!')
     }
 }
 
@@ -191,23 +191,22 @@ export async function getAulaByAulaID(aulaID, setAula){
         }
         
     } catch (error) {
-        toastMessage(false, 'Erro de conexão!') 
+        toastMessage(false, 'Erro de conexão!')
         setAula(null)
     }
 }
 
-
 export async function postAulaFeedback(aulaid, message) { 
     try {
-        const response = await api.post(`/urlPostAulaFeedback` + aulaid, {message});
-        if (response?.data.status){
+        const response = await api.post(`/urlPostAulaFeedback` + aulaid, { message });
+        if (response?.data.status) {
             toastMessage(true, response?.data.mensagem)
-        } else{
-            toastMessage(false, response?.data.mensagem) 
+        } else {
+            toastMessage(false, response?.data.mensagem)
         }
-        
+
     } catch (error) {
-        toastMessage(false, 'Erro de conexão!') 
+        toastMessage(false, 'Erro de conexão!')
     }
 }
 

@@ -25,7 +25,6 @@ function CardTurma({ data, handleNewScreen }) {
         data: {...data, nomeTurma:data?.TurmaNome}
     }
 
-    // TODO: COLOCAR AS INFORMAÇÕES DENTRO DE CADA CARD E VALIDAR SE EXISTE OU NÃO INFORMAÇÕES.
     return (
         <CardView onPress={()=>handleNewScreen(condicionalNavigate.tela, {title: condicionalNavigate.title, data:condicionalNavigate.data})}>
             <CardTitle>{data?.TurmaNome}</CardTitle>

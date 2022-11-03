@@ -14,6 +14,7 @@ export const styles = StyleSheet.create(
          color: '#FFF',
          textAlign: 'center',
          fontWeight: 'bold',
+         fontSize:14
       }
    }
 );
@@ -31,7 +32,7 @@ export const TextHeader = styled.Text`
 export const ContainerEvaluation = styled.View`
     width:100%;
     height:55%;
-    border-width:0.5px;
+    border-width:0.1px;
     border-color:black;
     margin-bottom: 20px;
     margin-top: 16px;

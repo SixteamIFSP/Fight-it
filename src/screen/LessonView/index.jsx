@@ -1,25 +1,25 @@
+import { t } from "i18n-js";
 import { useEffect, useState } from "react";
-import { FlatList, Text, TouchableOpacity, View } from "react-native";
+import { Text, View, FlatList,  TouchableOpacity, } from "react-native";
 import { getAulaByAulaID } from "../../controler/class";
 import {AulaContainer, Container, Retornar, SubTitle, Title, Value, Equipamentos, MaterialViewButton} from './style'
 
 export function LessonView({navigation, route}) {
     const [aula, setAula] = useState(null)
 
-     useEffect(() => {
-        getAulaByAulaID(route?.params?.aulaid, setAula)
-     }, [])
+    //  useEffect(() => {
+    //     getAulaByAulaID(route?.params.aulaid, setAula)
+    //  }, [])
 
      function seeMaterialExtra() {
       navigation.navigate('AlunoViewMaterial', {title:'Material Extra da aula:' + aula.NomeAula, aulaId: route?.params?.aulaid});
      }
 
-
     return (
         <Container>
           <AulaContainer>
-          <Title>Visualizar aula</Title>
-            {!aula && <Text>Aula não encontrada</Text>}
+          <Title>{t('lessonView.title')}</Title>
+            {!aula && <Text>{t('lessonView.subtitle')}</Text>}
 
             {aula?.Data && aula?.NomeAula && <View style={{width: '100%'}}>
                  <SubTitle>Tópico da aula:</SubTitle>
@@ -37,7 +37,7 @@ export function LessonView({navigation, route}) {
                  
                  <MaterialViewButton
                  onPress={seeMaterialExtra}
-                 ><Text style={{color: 'white'}}>Visualizar material extra da aula</Text></MaterialViewButton>
+                 ><Text style={{color: 'white'}}>{t('lessonView.material')}</Text></MaterialViewButton>
                 </View>
               }
           </AulaContainer>
