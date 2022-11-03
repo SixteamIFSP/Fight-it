@@ -23,7 +23,19 @@ import { convertDateToBrString } from "../../utils/dateConvert";
 function CardParamStudant({ item, handleGraphyc }) {
 
     return (
-        <ContainerCardParam onPress={() => handleGraphyc(item.id)}>
+        <ContainerCardParam
+        style={{
+            borderWidth: 0.1,
+            shadowColor: "#000000",
+            shadowOffset: {
+                width: 0,
+                height: 9,
+            },
+            shadowOpacity: 0.22,
+            shadowRadius: 10.24,
+            elevation: 13
+        }}
+        onPress={() => handleGraphyc(item.id)}>
             <Text>{item.nome}</Text>
         </ContainerCardParam>
     )
@@ -180,14 +192,16 @@ export function StudantView({ navigation, route: { params } }) {
                         marginBottom: 12
                     }}
                 >{t("studentView.Header")}</Text>
-                {paramsAluno.length > 0 ? (
+
+                {
+                paramsAluno.length > 0 ? (
                     <FlatList
-                        horizontal={true}
                         data={paramsAluno}
                         renderItem={
                             ({ item }) => <CardParamStudant
                                 item={item}
                                 handleGraphyc={handleLoadingGraphyc}
+                                
                             ></CardParamStudant>
                         }
                         keyExtractor={(item) => item.id}
@@ -195,8 +209,7 @@ export function StudantView({ navigation, route: { params } }) {
                             return (
                                 <View
                                     style={{
-                                        height: "100%",
-                                        width: 20,
+                                        width: '100%',
                                     }}
                                 />
                             );

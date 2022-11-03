@@ -150,7 +150,7 @@
             "backButton": "Voltar"
         },
         "studentView": {
-            "Header": "Avaliação",
+            "Header": "Avaliações",
             "ButtonAvaliation": "Avaliar Aluno",
             "ButtonViewTriagem": "Visualizar Triagem",
             "AvailablePerformance": "Não há avaliações"

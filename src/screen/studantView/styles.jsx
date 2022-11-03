@@ -28,7 +28,7 @@ export const TextButtons = styled.Text`
 
 `;
 
-export const ContainerDesempenho = styled.ScrollView`
+export const ContainerDesempenho = styled.View`
     width:100%;
     padding:5%;
 `;
@@ -48,7 +48,7 @@ export const DesempenhoHeader = styled.Text`
 export const ContainerCardParam = styled.TouchableOpacity`
     margin-top: 10px;
     margin-bottom: 20px;
-    min-width: 120px;   
+    width:100%;   
     background-color: #fff;
     padding: 12px;
 `;
