@@ -207,7 +207,7 @@
         },
 
         "createEvaluation":{
-            "Header": "Performance creation",
+            "Header": "New Performance Review",
             "Label":{
                 "Name":"Performance name",
                 "Date":"Performance date"
@@ -216,16 +216,15 @@
         },
 
         "parameterCriation":{
-            "Header": "Parameter creation",
+            "Header": "Criteria creation",
             "Label":{
-                "Select": "Select parameter",
-                "insertName":"Enter the name of the new parameter",
+                "Select": "Select Criteria",
+                "insertName":"Enter the name of the new criteria",
                 "SelectType":"Select parameter type"
             },
             "Buttons":{
-                "Submit":"Submit evaluation",
-                "Create":"Create new parameter"
-               
+                "Submit":"Submit Performance Review",
+                "Create":"Create New Criteria"               
             }
         },
 
