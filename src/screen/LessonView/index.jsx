@@ -11,7 +11,7 @@ export function LessonView({navigation, route}) {
      }, [])
 
      function seeMaterialExtra() {
-      navigation.navigate('AlunoViewMaterial', {title:'Material Extra da aula:' + aula.topicoAula, aulaId: route?.params?.aulaid});
+      navigation.navigate('AlunoViewMaterial', {title:'Material Extra da aula:' + aula.NomeAula, aulaId: route?.params?.aulaid});
      }
 
 
@@ -21,26 +21,19 @@ export function LessonView({navigation, route}) {
           <Title>Visualizar aula</Title>
             {!aula && <Text>Aula não encontrada</Text>}
 
-            {aula?.date && aula?.topicoAula && <View style={{width: '100%'}}>
+            {aula?.Data && aula?.NomeAula && <View style={{width: '100%'}}>
                  <SubTitle>Tópico da aula:</SubTitle>
-                 <Value>{aula?.topicoAula}</Value>
+                 <Value>{aula?.NomeAula}</Value>
 
                  <SubTitle>Data:</SubTitle>
-                 <Value>{aula?.date}</Value>
+                 <Value>{new Date(aula?.Data).toLocaleDateString()}</Value>
 
                  <SubTitle>Hora:</SubTitle>
-                 <Value>{aula?.time}</Value>
+                 <Value>{new Date(aula?.Data).toLocaleTimeString()}</Value>
 
                  <SubTitle>Descrição:</SubTitle>
-                 <Value>{aula?.descricao}</Value>
-                 <SubTitle>Equipamentos:</SubTitle>
-                 <Equipamentos
-                 data={aula?.equipamentos}
-                 renderItem={e => {
-                    return <Text>{e}</Text>
-                 }}
-                 keyExtractor={e=> e}
-                 />
+                 <Value>{aula?.Descricao}</Value>
+                 
                  
                  <MaterialViewButton
                  onPress={seeMaterialExtra}
