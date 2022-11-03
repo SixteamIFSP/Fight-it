@@ -44,7 +44,7 @@ export function TriagemView({ route, route:{params}}) {
                 <TextAnswer> {dadosTriagem.Doencas_Cronicas === '0' ? '' : dadosTriagem.Doencas_Cronicas}</TextAnswer>
 
                 <TextQuestion>{t(sortingView.anamneseComments1)}</TextQuestion>
-                <TextAnswer>{dadosTriagem?.comentario || t(sortingView.noComments)}</TextAnswer>
+                <TextAnswer>{dadosTriagem?.comentario || t('sortingView.noComments')}</TextAnswer>
 
             </Container>
         }
