@@ -150,9 +150,10 @@
             "backButton": "Voltar"
         },
         "studentView": {
-            "Header": "Desempenho",
+            "Header": "Avaliação",
             "ButtonAvaliation": "Avaliar Aluno",
-            "ButtonViewTriagem": "Visualizar Triagem"
+            "ButtonViewTriagem": "Visualizar Triagem",
+            "AvailablePerformance": "Não há avaliações"
         },
         "addStudents": {
             "empty": "Digite um email válido para buscar o aluno."
@@ -186,7 +187,7 @@
             "StudanteEvaluationsEmpty": "Não há desempenhos registrados para esse aluno!"
         },
         "createEvaluation": {
-            "Header": "Criação de avaliação",
+            "Header": "Nova Avaliação",
             "Label": {
                 "Name": "Nome da avaliação",
                 "Date": "Data da avaliação"
@@ -259,11 +260,13 @@
             "validationEmail": "Digite um email válido",
             "validationName": "Digite um nome válido"
         },
+
         "ListCalendarDate": {
             "classes": "Aulas",
             "scheduledclasses": "Aulas agendadas",
             "thereAreNo": "Não há aulas para essa data"
         },
+
         "calendar": {
             "monthNames": {
                 "jan": "Janeiro",
@@ -279,6 +282,7 @@
                 "nov": "Novembro",
                 "dec": "Dezembro"
             },
+
             "monthNamesShort": {
                 "january": "Jan",
                 "february": "Fev",
@@ -293,6 +297,7 @@
                 "november": "Nov",
                 "december": "Dez"
             },
+
             "dayNames": {
                 "sunday": "Domingo",
                 "monday": "Segunda",
@@ -302,6 +307,7 @@
                 "friday": "Sexta",
                 "saturday": "Sábado"
             },
+
             "dayNamesShort": {
                 "sun": "Dom.",
                 "mon": "Seg.",
@@ -311,12 +317,15 @@
                 "fri": "Sex.",
                 "sat": "Sab."
             },
+            
             "today": "Hoje"
         },
+
         "figthtItModal": {
             "deleteClassConfirm": "CONFIRMAR",
             "deleteClassClose": "FECHAR"
         },
+
         "addAula": {
             "addClass": "Adicionar aula",
             "classTopic": "Tópico da aula",
