@@ -5,19 +5,19 @@ import { ButtonLogout } from "../../components/buttonLogout";
 import { useTranslation } from "react-i18next";
 import { useUser } from "../../hooks/user";
 import { ContainerExitButton, ContainerContent, TextApresentation, GridDashboard } from "./styles";
-import { generatePushNotificationsToken } from "../../services/generetePushNotificationToken";
+import { registerForPushNotificationsAsync } from "../../services/generetePushNotificationToken";
 import { CardDashboard } from "../../components/cardDashboard";
 import { useIsFocused } from "@react-navigation/native";
 import { getDashboard } from "../../controler/dashboard";
-
+ 
 export function HomeScreen({ navigation }) {
   const { t } = useTranslation();
   const { user, modifyUser, updateExpoToken } = useUser();
   const [dashboardData, setDashboardData] = useState(null);
   const isFocused = useIsFocused();
 
-  async function getNotification() {
-    const token = await generatePushNotificationsToken();
+  async function getNotification (){
+    const token = await registerForPushNotificationsAsync();
     return token
   }
 

@@ -1,15 +1,15 @@
 import { t } from "i18n-js";
 import { useEffect, useState } from "react";
-import { FlatList, Text, TouchableOpacity, View } from "react-native";
+import { Text, View, FlatList,  TouchableOpacity, } from "react-native";
 import { getAulaByAulaID } from "../../controler/class";
 import {AulaContainer, Container, Retornar, SubTitle, Title, Value, Equipamentos, MaterialViewButton} from './style'
 
 export function LessonView({navigation, route}) {
     const [aula, setAula] = useState(null)
 
-     useEffect(() => {
-        getAulaByAulaID(route?.params?.aulaid, setAula)
-     }, [])
+    //  useEffect(() => {
+    //     getAulaByAulaID(route?.params.aulaid, setAula)
+    //  }, [])
 
      function seeMaterialExtra() {
       navigation.navigate('AlunoViewMaterial', {title:'Material Extra da aula:' + aula.topicoAula, aulaId: route?.params?.aulaid});

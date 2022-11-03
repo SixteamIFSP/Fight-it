@@ -51,11 +51,11 @@ export function StudantView({ navigation, route: { params } }) {
     const [loadingGraphyc, setLoadingGraphyc] = useState(false);
     const [dataParams, setDataParams] = useState([]);
     const isFocused = useIsFocused();
-    const [aulas, setAulas] = useState([])
-
-    useEffect(() => {
-        getAulas()
-    }, [])
+    const [aulas, setAulas] = useState([]);
+     
+   useEffect(() => {
+    getAulas()
+   }, [])
 
     useEffect(() => {
         function effect() {
@@ -112,11 +112,13 @@ export function StudantView({ navigation, route: { params } }) {
             paransLoadingGraphyc = {
                 aluno: studantId,
                 parametro: idParam,
-            }
+                turma: id
+            } 
         } else {
             paransLoadingGraphyc = {
                 aluno: user.userID,
                 parametro: idParam,
+                turma: id
             }
         }
         await getDesempenhoPorParametro(paransLoadingGraphyc, setDataParams)
@@ -230,7 +232,7 @@ export function StudantView({ navigation, route: { params } }) {
                 {loadingGraphyc &&
                     <LineChart
                         data={{
-                            labels: ['', ...dataParams?.map((value) => convertDateToBrString(value?.data))],
+                            labels: ['', ...dataParams?.map((value) => convertDateToBrString(value?.data).slice(0,5))],
                             datasets: [
                                 {
                                     data: [0, ...dataParams?.map((value) => value.valor)]
