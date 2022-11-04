@@ -115,22 +115,22 @@ export function AdicionarAula({ turmaId, setback }) {
                 onChangeText={setDescricao}
             />
 
-            <TextDescription>{t("addLession.equipment.header")}</TextDescription>
+{/* <TextDescription>{t("addLession.equipment.header")}</TextDescription>
 
-            <AddEquipamentContainer style={{ width: '100%' }}>
-                <Input style={{ width: '70%', alignSelf: 'flex-start' }}
-                    value={equipamento}
-                    placeholder={t("addLession.equipment.description")}
-                    onChangeText={setEquipamento}
-                />
-                <AdicionarAulaButton
-                    disabled={!equipamento}
-                    onPress={() => {
-                        setEquipamentos(e => [...e, equipamento])
-                    }}>
-                    <TextWhite style={{ textAlign: 'center' }}>{t("addLession.equipment.add")}</TextWhite>
-                </AdicionarAulaButton>
-            </AddEquipamentContainer>
+<AddEquipamentContainer style={{ width: '100%' }}>
+    <Input style={{ width: '70%', alignSelf: 'flex-start' }}
+        value={equipamento}
+        placeholder={t("addLession.equipment.description")}
+        onChangeText={setEquipamento}
+    />
+    <AdicionarAulaButton
+        disabled={!equipamento}
+        onPress={() => {
+            setEquipamentos(e => [...e, equipamento])
+        }}>
+        <TextWhite style={{ textAlign: 'center' }}>{t("addLession.equipment.add")}</TextWhite>
+    </AdicionarAulaButton>
+</AddEquipamentContainer> */}
             {/* {
                 equipamentos && equipamentos.length ?
                     <View>

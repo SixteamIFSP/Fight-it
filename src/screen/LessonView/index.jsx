@@ -12,7 +12,7 @@ export function LessonView({navigation, route}) {
     //  }, [])
 
      function seeMaterialExtra() {
-      navigation.navigate('AlunoViewMaterial', {title:'Material Extra da aula:' + aula.topicoAula, aulaId: route?.params?.aulaid});
+      navigation.navigate('AlunoViewMaterial', {title:'Material Extra da aula:' + aula.NomeAula, aulaId: route?.params?.aulaid});
      }
 
     return (
@@ -21,27 +21,19 @@ export function LessonView({navigation, route}) {
           <Title>{t('lessonView.title')}</Title>
             {!aula && <Text>{t('lessonView.subtitle')}</Text>}
 
-            {aula?.date && aula?.topicoAula && <View style={{width: '100%'}}>
-                 <SubTitle>{t('lessonView.topic')}</SubTitle>
-                 <Value>{aula?.topicoAula}</Value>
+            {aula?.Data && aula?.NomeAula && <View style={{width: '100%'}}>
+                 <SubTitle>Tópico da aula:</SubTitle>
+                 <Value>{aula?.NomeAula}</Value>
 
-                 <SubTitle>{t('lessonView.date')}</SubTitle>
-                 <Value>{aula?.date}</Value>
+                 <SubTitle>Data:</SubTitle>
+                 <Value>{new Date(aula?.Data).toLocaleDateString()}</Value>
 
-                 <SubTitle>{t('lessonView.hour')}</SubTitle>
-                 <Value>{aula?.time}</Value>
+                 <SubTitle>Hora:</SubTitle>
+                 <Value>{new Date(aula?.Data).toLocaleTimeString()}</Value>
 
-                 <SubTitle>{t('lessonView.description')}</SubTitle>
-                 <Value>{aula?.descricao}</Value>
-
-                {/* <SubTitle>Equipamentos:</SubTitle>
-                 <Equipamentos
-                 data={aula?.equipamentos}
-                 renderItem={e => {
-                    return <Text>{e}</Text>
-                 }}
-                 keyExtractor={e=> e}
-                 /> */}
+                 <SubTitle>Descrição:</SubTitle>
+                 <Value>{aula?.Descricao}</Value>
+                 
                  
                  <MaterialViewButton
                  onPress={seeMaterialExtra}

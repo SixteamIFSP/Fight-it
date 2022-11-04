@@ -34,16 +34,16 @@ export function TriagemView({ route, route:{params}}) {
                 <TextAnswer>{dadosTriagem?.Peso}</TextAnswer>
 
                 <TextQuestion>{t('sortingView.anamneseInjuries')} </TextQuestion>
-                <TextAnswer>{dadosTriagem.Lesoes === '0' ? '' : dadosTriagem.Lesoes}</TextAnswer>
+                <TextAnswer>{dadosTriagem.Lesoes}</TextAnswer>
 
-                <TextQuestion>{t('sortingView.anamneseDidOrthProbLabel')} </TextQuestion>
-                <TextAnswer>{dadosTriagem.Problema_Ortopedico === '0' ? '' : dadosTriagem.Problema_Ortopedico}</TextAnswer>
+                <TextQuestion>{t('sortingView.anamneseDidOrthProb')} </TextQuestion>
+                <TextAnswer>{dadosTriagem.Problema_Ortopedico}</TextAnswer>
 
                 <TextQuestion>{t('sortingView.anamneseInjuries')} </TextQuestion>
-                <TextAnswer> {dadosTriagem.Doencas_Cronicas === '0' ? '' : dadosTriagem.Doencas_Cronicas}</TextAnswer>
+                <TextAnswer> {dadosTriagem.Doencas_Cronicas}</TextAnswer>
 
                 <TextQuestion>{t('sortingView.anamneseComments1')}</TextQuestion>
-                <TextAnswer>{dadosTriagem?.comentario || t('sortingView.noComments')}</TextAnswer>
+                <TextAnswer>{dadosTriagem?.Comentario || t('sortingView.noComments')}</TextAnswer>
 
             </Container>
         }

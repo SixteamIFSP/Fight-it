@@ -29,13 +29,13 @@ export async function postMaterialExtra( nomeMaterial, descricao, aulaId, key){
 }
 
 
-export async function getMaterialExtra(aulaId){
+export async function getMaterialExtra(aulaId, setMateriais){
 
     try {
         const response = await api.get(`/materialExtra/busca_arquivo/` + aulaId);
         if (response?.data.status){
             toastMessage(true, 'Material extra encontrado com sucesso!')
-            return response?.data
+            setMateriais(response?.data?.result)
         } else {
             toastMessage(false, response?.data.mensagem);
         }

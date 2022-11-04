@@ -177,12 +177,16 @@ export async function deleteAluno(data) {
 }
 
 export async function getAulaByAulaID(aulaID, setAula){
+   
+
     try {
-        const response = await api.get(`/urlDeBuscarAulaPorIDaindaNãoDesenvolvida` + aulaID);
-        if (response?.data.status) {
-            toastMessage(true, response?.data.mensagem)
-            setAula(response?.data)
-        } else{        
+        const response = await api.get(`/aula/busca_aula/` + aulaID);
+        
+        if (response?.data.status){
+            toastMessage(true, response?.data.message)
+            setAula(response?.data?.result[0])
+        } else{
+            
             setAula(null)
         }
         
