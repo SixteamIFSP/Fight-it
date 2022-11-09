@@ -3,7 +3,6 @@ import styled from "styled-components/native";
 export const Container = styled.View`
     flex:1;
     width:100%;
-    
 `;
 
 export const ContainerButtons = styled.View`
@@ -46,9 +45,9 @@ export const DesempenhoHeader = styled.Text`
 `;
 
 export const ContainerCardParam = styled.TouchableOpacity`
-    margin-top: 10px;
-    margin-bottom: 20px;
-    width:100%;   
-    background-color: #fff;
-    padding: 12px;
+margin-top: 10px;
+margin-bottom: 20px;
+min-width: 120px;   
+background-color: #fff;
+padding: 12px;
 `;

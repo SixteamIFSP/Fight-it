@@ -71,7 +71,7 @@ export function CreateTriagem({ navigation, route }) {
         doencasCronicas: doencaCronica ? doencaCronicaResp : defaultRespoBD,
         lesoes: lesoes ? lesoesResp : defaultRespoBD,
         jaFezExercicios: didExercise ? didExerciseResp : defaultRespoBD,
-        comentario
+        Comentario:comentario
       };
       setLoading(true);
       const response = await createAccount(route.params.data, false);

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Image, ScrollView, Text, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
+import { FlatList, Image, ScrollView, Text, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
 import { Input } from '../../components/input'
 import { variables } from '../../configuration/constants'
 import { postAulaFeedback } from '../../controler/class'
@@ -16,10 +16,7 @@ export function AlunoViewMaterial({navigation, route}) {
 
     async function getMaterial() { 
         const aulaid = route?.params?.aulaId
-        const material = await getMaterialExtra(aulaid)
-       if(material) {
-        setMateriais(material)
-       }
+         getMaterialExtra(aulaid, setMateriais)
     }
 
     useEffect(() => {
@@ -50,15 +47,14 @@ export function AlunoViewMaterial({navigation, route}) {
          {!materiais || !materiais?.length && (
                 <Text>Nenhum material extra encontrado!</Text>
             )}
-        <ScrollView>  
-         {materiais && materiais?.length > 0 && materiais.map(material => {
-                return ( 
-           
-              <Wrapper  key={material?.aulaId}>
+         <FlatList
+          keyExtractor={material => material?.id}
+          data={materiais}
+          renderItem={({item}) => <Wrapper  key={item?.id}>
                <ImagemMaterial>
                <Image 
                       source={
-                        { uri: variables.IMAGES_URL + material?.key }
+                        { uri: variables.IMAGES_URL + item?.S3Key }
                        }
                       style={{
                         width: "100%",
@@ -66,14 +62,12 @@ export function AlunoViewMaterial({navigation, route}) {
                         }}
                    />
                  </ImagemMaterial>
-                 <Title>{material?.nomeMaterial}</Title>
-                 <Descricao>{material?.descricao}</Descricao>
+                 <Title>{item?.NomeMaterial}</Title>
+                 <Descricao>{item?.Descricao}</Descricao>
                </Wrapper>
-          
-                )
-               })}
-                </ScrollView>
-               {materiais && materiais?.length > 0 && <FeedbackButton onPress={() => setModal(e => !e)}>
+          }
+         ></FlatList>  
+       {materiais && materiais?.length > 0 && <FeedbackButton onPress={() => setModal(e => !e)}>
                    <Text style={{color: 'white', fontWeight: 'bold', fontSize: 16}}>Envie um feedback!</Text>
                </FeedbackButton>}
 

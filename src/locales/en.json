@@ -62,7 +62,7 @@
                 "title": "Triage",
                 "description": "Fill in the form:",
                 "form-Heart": "Do you have heart problems?",
-                "form-other-problems": "Other:"
+                "form-other-problems": "Observations:"
             }
         },
 

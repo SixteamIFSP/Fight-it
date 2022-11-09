@@ -206,6 +206,7 @@ export function StudantView({ navigation, route: { params } }) {
                 {
                 paramsAluno.length > 0 ? (
                     <FlatList
+                        horizontal
                         data={paramsAluno}
                         renderItem={
                             ({ item }) => <CardParamStudant
@@ -219,7 +220,8 @@ export function StudantView({ navigation, route: { params } }) {
                             return (
                                 <View
                                     style={{
-                                        width: '100%',
+                                        height:'100%',
+                                        width: 20,
                                     }}
                                 />
                             );

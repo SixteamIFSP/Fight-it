@@ -199,7 +199,7 @@ const DataUser = () => {
                             isChecked={notification}
                             onPress={() => setNotification((value) => !value)}
                         ></CheckBox>
-                        : <TextInfo>{notification ? t("configScreen.NotificationYes") : t("configScreen.NotificationNo")}</TextInfo>
+                        : <TextInfo>{notification ? t('configScreen.NotificationYes') : t('configScreen.NotificationNo')}</TextInfo>
                 }
             </TextAlingLine>
             <RowConfirmation>
