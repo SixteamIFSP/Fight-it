@@ -9,7 +9,7 @@ import { ContainerHeader, TextHeader, TextHeaderDate } from "../calendarView/sty
 import { AddButton } from "../addButton";
 import { useTranslation } from 'react-i18next';
 
-export function ListCalendarDates({selectedDate, addHandle}){
+export function ListCalendarDates({selectedDate, addHandle, handleChangeScreen}){
     const { user } = useUser();
     const [dates, setDates] = useState([]);
     const { t } = useTranslation();
@@ -41,7 +41,7 @@ export function ListCalendarDates({selectedDate, addHandle}){
                 <ContentListagem
                 data={dates}
                 renderItem={
-                    ({ item }) => <CardAula item={item}/>
+                    ({ item }) => <CardAula item={item} handleChangeScreen={handleChangeScreen}/>
                 }
                 >
                 </ContentListagem>

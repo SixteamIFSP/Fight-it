@@ -41,3 +41,7 @@ export const MaterialViewButton = styled.TouchableOpacity`
   padding: 15px;
   border-radius: 4px;
 `
+
+export const BackButtonContainer = styled.View`
+    margin-top:20px;
+`

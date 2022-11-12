@@ -24,7 +24,6 @@ export function AlunoViewMaterial({navigation, route}) {
       console.log('sdas', !materiais || !materiais?.length)
     }, [])
 
-
    function handleFeedback(value) {
     setFeedback(value)  
     if(!feedback || feedback.length < 5) {

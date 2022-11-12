@@ -7,7 +7,7 @@ import { convertDataUTC, convertDateToBrString, convertDateToTimeString } from "
 import { Button } from "../button";
 import { ButtonsContainer, Container, DateDescription, InfoContainer } from "./styles";
 
-export function CardAula({item}){
+export function CardAula({item, handleChangeScreen}){
     const { user } = useUser();
     const { changeModal, setCallback } = useModal();
     
@@ -20,6 +20,10 @@ export function CardAula({item}){
         setCallback("Apagar aula?", ()=>removeAula(item.id))
     }
 
+    function aulaView() {
+        handleChangeScreen(item.id)
+    }
+
     return (
         <Container>
             <InfoContainer>
@@ -29,13 +33,14 @@ export function CardAula({item}){
 
             </InfoContainer>
             <ButtonsContainer>
-                <View></View>
                 {
                     user.tipoUsuario === 1 ?
                         <Button handle={handle} text="Apagar"></Button>
                     :
                         <></>
                 }
+                <Button handle={aulaView} text="Ver"></Button>
+               
             </ButtonsContainer>
         </Container>
     )
