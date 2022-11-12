@@ -1,6 +1,4 @@
-import { t } from "i18n-js";
 import { useEffect, useState } from "react";
-import { Text, View, FlatList,  TouchableOpacity, } from "react-native";
 import { LessionComponent } from "../../components/lessionComponent";
 import { getAulaByAulaID } from "../../controler/class";
 import { AlunoViewMaterial } from "../AlunoViewMaterial";
@@ -27,7 +25,7 @@ export function LessionViewCalendar({aulaId, seeMaterialExtra, handleBack}){
   const [aula, setAula] = useState(null)
 
   useEffect(() => {
-    getAulaByAulaID(aulaId, setAula) 
+    getAulaByAulaID(aulaId, setAula)
   }, []);
 
   const view = {

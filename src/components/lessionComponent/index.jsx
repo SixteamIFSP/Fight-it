@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Text, View, FlatList,  TouchableOpacity, } from "react-native";
+import { Text, View } from "react-native";
 import { Button } from "../button";
-import {AulaContainer, Container, Retornar, SubTitle, Title, Value, Equipamentos, MaterialViewButton, BackButtonContainer} from './styles';
+import {AulaContainer, Container, SubTitle, Title, Value, MaterialViewButton, BackButtonContainer} from './styles';
 
 export function LessionComponent({aula, seeMaterialExtra, handleBack}) {
     const { t } = useTranslation();
@@ -14,16 +14,16 @@ export function LessionComponent({aula, seeMaterialExtra, handleBack}) {
             {!aula && <Text>{t('lessonView.subtitle')}</Text>}
 
             {aula?.Data && aula?.NomeAula && <View style={{width: '100%'}}>
-                 <SubTitle>Tópico da aula:</SubTitle>
+                 <SubTitle>{t('lessonView.topic')}:</SubTitle>
                  <Value>{aula?.NomeAula}</Value>
 
-                 <SubTitle>Data:</SubTitle>
+                 <SubTitle>{t('lessonView.date')}</SubTitle>
                  <Value>{new Date(aula?.Data).toLocaleDateString()}</Value>
 
-                 <SubTitle>Hora:</SubTitle>
+                 <SubTitle>{t('lessonView.hour')}</SubTitle>
                  <Value>{new Date(aula?.Data).toLocaleTimeString()}</Value>
 
-                 <SubTitle>Descrição:</SubTitle>
+                 <SubTitle>{t('lessonView.description')}</SubTitle>
                  <Value>{aula?.Descricao}</Value>
                  
                  
@@ -35,7 +35,7 @@ export function LessionComponent({aula, seeMaterialExtra, handleBack}) {
               {   
                 (handleBack) ?  
                   <BackButtonContainer>
-                    <Button handle={handleBack} text={'Voltar'}></Button>
+                    <Button handle={handleBack} text={t('loadingClass.backButton')}></Button>
                   </BackButtonContainer>
                   : <></>
               }
