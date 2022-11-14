@@ -1,41 +1,69 @@
+import { useEffect, useState } from "react"
+import { FlatList, Image, Text, TouchableWithoutFeedback } from "react-native"
+import { postAulaFeedback } from "../../controler/class"
+import { getMaterialExtra } from "../../controler/materialExtra"
+import { variables } from '../../configuration/constants'
 
-export function MaterialView({ aulaId }){
+import { Input } from "../input"
+import { 
+  BackButtonContainer,
+  Container,
+  Descricao,
+  EnviarFeedBack,
+  FeedbackButton,
+  ImagemMaterial,
+  Modal,
+  Title,
+  Wrapper
+} from "./styles"
+import { AddButton } from "../addButton"
+import { useUser } from "../../hooks/user"
+import { Button } from "../button"
+import { useTranslation } from "react-i18next"
 
-    const [materiais, setMateriais]  = useState([])
-    const [modal, setModal] = useState(false)
-    const [feedback, setFeedback] = useState('')
-    const [errorFeedback, setErrorFeedBack ] = useState('') 
+export function MaterialView({ aulaId, handle, goBack}){
+    const [materiais, setMateriais]  = useState([]);
+    const [modal, setModal] = useState(false);
+    const [feedback, setFeedback] = useState('');
+    const [errorFeedback, setErrorFeedBack ] = useState('') ;
+
+    const {t} = useTranslation();
+
+    const { user } = useUser();
     
-
-   async function getMaterial() { 
-       const aulaid = route?.params?.aulaId
-        getMaterialExtra(aulaid, setMateriais)
+   async function getMaterial() {  
+        getMaterialExtra(aulaId, setMateriais);
    }
 
    useEffect(() => {
-     getMaterial()
-     console.log('sdas', !materiais || !materiais?.length)
+     getMaterial();
+     console.log('sdas', user);
    }, [])
 
-  function handleFeedback(value) {
-   setFeedback(value)  
-   if(!feedback || feedback.length < 5) {
-           setErrorFeedBack('Campo inválido')
-           return
+    function handleFeedback(value) {
+    setFeedback(value);  
+    if(!feedback || feedback.length < 5) {
+            setErrorFeedBack('Campo inválido');
+            return;
+      }
+        setErrorFeedBack('');
     }
-       setErrorFeedBack('')
-   }
 
    function sendFeedback() {
-     const aulaid = route?.params?.aulaId
-     postAulaFeedback(aulaid, feedback)
-     setFeedback('')
-     setModal(false)
+     const aulaid = aulaId;
+     postAulaFeedback(aulaid, feedback);
+     setFeedback('');
+     setModal(false);
    }
 
    return (
        
         <Container>
+        {
+          user.tipoUsuario === 1 ? 
+            <AddButton handle={handle}></AddButton>
+          : <></>
+        }
         {!materiais || !materiais?.length && (
                <Text>Nenhum material extra encontrado!</Text>
            )}
@@ -79,6 +107,10 @@ export function MaterialView({ aulaId }){
                               </TouchableWithoutFeedback>
                            </ModalContainer>
                         </TouchableWithoutFeedback>}
+
+                        <BackButtonContainer>
+                          <Button handle={goBack} text={t('loadingClass.backButton')}></Button>
+                        </BackButtonContainer>
         </Container>  
    )
 }
