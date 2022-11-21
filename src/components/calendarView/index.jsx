@@ -8,7 +8,7 @@ import { getArrayDates, getCalendar } from "../../controler/calendar";
 import { convertDataUTC, dateSplit, dateToBrDefault } from "../../utils/dateConvert";
 import { ListCalendarDates } from "../../components/listCalendarDates";
 
-export function CalendarView({handleChangeView}){
+export function CalendarView({handleChangeView, handleChangeLessionView}){
     const { t } = useTranslation();
     const { user } = useUser();
     const [selectedDate, setSelectedDate] = useState( new Date().setHours(0));
@@ -105,6 +105,10 @@ export function CalendarView({handleChangeView}){
         handleChangeView(2);
     }
 
+    function handleChangeScreen(idAula) {
+        handleChangeLessionView(idAula, 4)
+    }
+
     return(
         <Container>
             <CalendarList
@@ -137,7 +141,7 @@ export function CalendarView({handleChangeView}){
                 windowSize={300}
             />
 
-            <ListCalendarDates addHandle={addHandle} selectedDate={selectedDate}/>
+            <ListCalendarDates addHandle={addHandle} selectedDate={selectedDate} handleChangeScreen={handleChangeScreen}/>
         </Container>
     )
 } 

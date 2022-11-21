@@ -183,10 +183,8 @@ export async function getAulaByAulaID(aulaID, setAula){
         const response = await api.get(`/aula/busca_aula/` + aulaID);
         
         if (response?.data.status){
-            toastMessage(true, response?.data.message)
             setAula(response?.data?.result[0])
         } else{
-            
             setAula(null)
         }
         

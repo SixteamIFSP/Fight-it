@@ -5,7 +5,6 @@ import { api } from "../services/api";
 
 
 export async function postMaterialExtra( nomeMaterial, descricao, aulaId, key){
-
     try {
       const body = { 
         nomeMaterial, 
@@ -30,7 +29,6 @@ export async function postMaterialExtra( nomeMaterial, descricao, aulaId, key){
 
 
 export async function getMaterialExtra(aulaId, setMateriais){
-
     try {
         const response = await api.get(`/materialExtra/busca_arquivo/` + aulaId);
         if (response?.data.status){

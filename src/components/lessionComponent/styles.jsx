@@ -1,7 +1,5 @@
 import styled from "styled-components/native";
 
-
-
 export const Container = styled.View`
 padding: 10px;
 
@@ -42,4 +40,8 @@ export const MaterialViewButton = styled.TouchableOpacity`
   width: 100%;
   padding: 15px;
   border-radius: 4px;
+`
+
+export const BackButtonContainer = styled.View`
+    margin-top:20px;
 `
