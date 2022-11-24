@@ -100,7 +100,6 @@ export function CreateTriagem({ navigation, route }) {
       || (hasMovementLimitation && !hasMovementLimitationResp)
       || (hasCirurgy && !hasCirurgyResp)
       || (usePrescriptionDrugs && !usePrescriptionDrugsResp)) {
-      console.log((isCompetitionGoal || isHypertrophyGoal || isSlimmingGoal || isConditioningGoal))
       return false;
     }
     else { return true }
@@ -117,12 +116,10 @@ export function CreateTriagem({ navigation, route }) {
         lesoes: lesoes ? lesoesResp : 'Não possui.',
         jaFezExercicios: didExercise ? didExerciseResp : 'Não',
         comentario: comentario,
-        objetivo: {
-          Competicao: isCompetitionGoal ? 'Sim' : 'Não',
-          Emagrecimento: isSlimmingGoal ? 'Sim' : 'Não',
-          Condicionamento: isConditioningGoal ? 'Sim' : 'Não',
-          Hipertrofia: isHypertrophyGoal ? 'Sim' : 'Não',
-        },
+        ObjetivoCompeticao: isCompetitionGoal ? 'Sim' : 'Não',
+        ObjetivoEmagrecimento: isSlimmingGoal ? 'Sim' : 'Não',
+        ObjetivoCondicionamento: isConditioningGoal ? 'Sim' : 'Não',
+        ObjetivoHipertrofia: isHypertrophyGoal ? 'Sim' : 'Não',
         fumante: isSmoker ? isSmokerResp : 'Não',
         colesterol: haveHighCholesterol ? 'Sim' : 'Não',
         senteDoresArticulacoes: feelPain ? fellPainResp : 'Não',
