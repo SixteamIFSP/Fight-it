@@ -40,10 +40,10 @@ export function CreateTriagem({ navigation, route }) {
   const [comentario, setComentario] = useState('');
 
   //TODO:fazer com checkbox
-  const [isCompetitionGoal, setIsCompetitionGoal] = useState(false);
-  const [isHypertrophyGoal, setIsHypertrophyGoal] = useState(false);
-  const [isSlimmingGoal, setIsSlimmingGnGoal] = useState(false);
-  const [isConditioningGoal, setIsConditioningGoal] = useState(false);
+  const [isCompetitionGoal, setIsCompetitionGoal] = useState('Não');
+  const [isHypertrophyGoal, setIsHypertrophyGoal] = useState('Não');
+  const [isSlimmingGoal, setIsSlimmingGnGoal] = useState('Não');
+  const [isConditioningGoal, setIsConditioningGoal] = useState('Não');
 
   const [isSmoker, setIsSmoker] = useState(false);
   const [isSmokerResp, setIsSmokerResp] = useState(false);
@@ -129,9 +129,8 @@ export function CreateTriagem({ navigation, route }) {
         remedioControlado: usePrescriptionDrugs ? usePrescriptionDrugsResp : 'Não',
         suplementos: useSupplements ? useSupplementsResp : 'Não'
       };
-      console.log('data');
-      console.log(data);
       setLoading(true);
+      
       const response = await createAccount(route.params.data, false);
       const idAluno = response.id;
       await createTriagem(data, idAluno)
