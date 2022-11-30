@@ -1,7 +1,7 @@
 export const inProduction = true;
 
 const production = {
-  API_URL: 'https://fight-it.herokuapp.com/',
+  API_URL: 'https://teste-ptql.onrender.com/',
   API_AUTHORIZATION: '',
   IMAGES_URL: 'https://fight-it.herokuapp.com/imagem/document/',
 };
