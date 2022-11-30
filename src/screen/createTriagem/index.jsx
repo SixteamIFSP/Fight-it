@@ -16,22 +16,59 @@ import { convertDateToBrString } from "../../utils/dateConvert";
 export function CreateTriagem({ navigation, route }) {
 
   const [loading, setLoading] = useState(false);
-  const [altura, setAltura] = useState('');
-  const [date, setDate] = useState(new Date());
   const [selectectDateIsOpen, setSelectedDateIsOpen] = useState(false);
+  const [errorMessageAltura, setErrorMessageAltura] = useState('');
+  const [errorMessagePeso, setErrorMessagePeso] = useState('');
+
+  //dados da triagem
+  const [altura, setAltura] = useState('');
+  const [birthDate, setBirthDate] = useState(new Date());
+
   const [peso, setPeso] = useState('');
+  //TODO:REMOVER
   const [probOrtopedico, setProbOrtopedico] = useState(false);
   const [probOrtopedicoResp, setProbOrtopedicoResp] = useState('');
+
   const [doencaCronica, setDoencaCronica] = useState(false);
   const [doencaCronicaResp, setDoencaCronicaResp] = useState('');
+  //TODO: REMOVER
   const [lesoes, setLesoes] = useState(false);
   const [lesoesResp, setLesoesResp] = useState('');
+
   const [didExercise, setDidExercise] = useState(false);
   const [didExerciseResp, setDidExerciseResp] = useState('');
   const [comentario, setComentario] = useState('');
 
-  const [errorMessageAltura, setErrorMessageAltura] = useState('');
-  const [errorMessagePeso, setErrorMessagePeso] = useState('');
+  //TODO:fazer com checkbox
+  const [isCompetitionGoal, setIsCompetitionGoal] = useState('Não');
+  const [isHypertrophyGoal, setIsHypertrophyGoal] = useState('Não');
+  const [isSlimmingGoal, setIsSlimmingGnGoal] = useState('Não');
+  const [isConditioningGoal, setIsConditioningGoal] = useState('Não');
+
+  const [isSmoker, setIsSmoker] = useState(false);
+  const [isSmokerResp, setIsSmokerResp] = useState(false);
+
+  const [haveHighCholesterol, setHaveHighCholesterol] = useState(false);
+
+  const [haveDiabetes, setHaveDiabetes] = useState(false);
+
+  const [feelPain, setFeelPain] = useState(false);
+  const [fellPainResp, setFeelPainResp] = useState('');
+
+  const [haveSpinalDysfunction, setHaveSpinalDysfunction] = useState(false);
+  const [haveSpinalDysfunctionResp, setHaveSpinalDysfunctionResp] = useState('');
+
+  const [hasMovementLimitation, setHasMovementLimitation] = useState(false);
+  const [hasMovementLimitationResp, setHasMovementLimitationResp] = useState('');
+
+  const [hasCirurgy, setHasCirugy] = useState(false);
+  const [hasCirurgyResp, setHasCirugyResp] = useState('');
+
+  const [usePrescriptionDrugs, setUsePrescriptionDrugs] = useState(false);
+  const [usePrescriptionDrugsResp, setUsePrescriptionDrugsResp] = useState('');
+
+  const [useSupplements, setUseSupplements] = useState(false);
+  const [useSupplementsResp, setUseSupplementsResp] = useState('');
 
   const { t } = useTranslation()
 
@@ -55,25 +92,45 @@ export function CreateTriagem({ navigation, route }) {
     } else if ((didExercise && !didExerciseResp)
       || (probOrtopedico && !probOrtopedicoResp)
       || (doencaCronica && !doencaCronicaResp)
-      || (lesoes && !lesoesResp)) {
+      || (lesoes && !lesoesResp)
+      || (!isCompetitionGoal && !isHypertrophyGoal && !isSlimmingGoal && !isConditioningGoal)
+      || (isSmoker && !isSmokerResp)
+      || (feelPain && !fellPainResp)
+      || (haveSpinalDysfunction && !haveSpinalDysfunctionResp)
+      || (hasMovementLimitation && !hasMovementLimitationResp)
+      || (hasCirurgy && !hasCirurgyResp)
+      || (usePrescriptionDrugs && !usePrescriptionDrugsResp)) {
       return false;
     }
     else { return true }
   };
-  const defaultRespoBD = 'Não possui.'
+
   async function handleConfirm() {
     if (inputValidations()) {
       const data = {
-        dataNascimento: date,
+        dataNascimento: birthDate,
         altura,
         peso,
-        problemaOrtopedico: probOrtopedico ? probOrtopedicoResp : defaultRespoBD,
-        doencasCronicas: doencaCronica ? doencaCronicaResp : defaultRespoBD,
-        lesoes: lesoes ? lesoesResp : defaultRespoBD,
-        jaFezExercicios: didExercise ? didExerciseResp : defaultRespoBD,
-        Comentario:comentario
+        problemaOrtopedico: probOrtopedico ? probOrtopedicoResp : 'Não possui.',
+        doencasCronicas: doencaCronica ? doencaCronicaResp : 'Não possui.',
+        lesoes: lesoes ? lesoesResp : 'Não possui.',
+        jaFezExercicios: didExercise ? didExerciseResp : 'Não',
+        comentario: comentario,
+        ObjetivoCompeticao: isCompetitionGoal ? 'Sim' : 'Não',
+        ObjetivoEmagrecimento: isSlimmingGoal ? 'Sim' : 'Não',
+        ObjetivoCondicionamento: isConditioningGoal ? 'Sim' : 'Não',
+        ObjetivoHipertrofia: isHypertrophyGoal ? 'Sim' : 'Não',
+        fumante: isSmoker ? isSmokerResp : 'Não',
+        colesterol: haveHighCholesterol ? 'Sim' : 'Não',
+        senteDoresArticulacoes: feelPain ? fellPainResp : 'Não',
+        disfuncaoColuna: haveSpinalDysfunction ? haveSpinalDysfunctionResp : 'Não',
+        limitacaoMovimento: hasMovementLimitation ? hasMovementLimitationResp : 'Não',
+        possuiCirurgia: hasCirurgy ? hasCirurgyResp : 'Não',
+        remedioControlado: usePrescriptionDrugs ? usePrescriptionDrugsResp : 'Não',
+        suplementos: useSupplements ? useSupplementsResp : 'Não'
       };
       setLoading(true);
+      
       const response = await createAccount(route.params.data, false);
       const idAluno = response.id;
       await createTriagem(data, idAluno)
@@ -83,7 +140,6 @@ export function CreateTriagem({ navigation, route }) {
       const errorText = (t('sorting.loadingErrorText'));
       toastMessage(false, errorText);
     }
-
   };
 
   return (
@@ -133,7 +189,7 @@ export function CreateTriagem({ navigation, route }) {
                 style={{ flexDirection: 'row' }}
                 onPress={() => { setSelectedDateIsOpen(true) }}>
                 <Text>
-                  {convertDateToBrString(date)}
+                  {convertDateToBrString(birthDate)}
                 </Text>
                 <MaterialIcons
                   style={{ fontSize: 16, marginLeft: 12 }}
@@ -147,7 +203,7 @@ export function CreateTriagem({ navigation, route }) {
             selectectDateIsOpen && <DateTimePicker
               themeVariant="dark"
               testID="dateTimePicker"
-              value={date}
+              value={birthDate}
               mode="date"
               format="DD-MM-YYYY"
               maximumDate={new Date(2017, 2, 1)}
@@ -155,17 +211,216 @@ export function CreateTriagem({ navigation, route }) {
               display="default"
               onChange={(_, date) => {
                 if (date) {
-                  setDate(date);
+                  setBirthDate(date);
                 }
                 setSelectedDateIsOpen(false)
               }}
               positiveButtonLabel="OK!"
             />
           }
-        </View>
+          <View style={styles.anamneseDidExerciseContainer}>
+            <View style={styles.trainningGoal}>
+              <Text>Qual o seu objetivo?</Text>
+              <RadioButton
+                isChecked={isHypertrophyGoal}
+                onPress={() => {
+                  setIsHypertrophyGoal(!isHypertrophyGoal)
+                }}
+                size={16}
+                label={'Hipertrofia'}
+                horizontal
+              ></RadioButton>
+              <RadioButton
+                isChecked={isSlimmingGoal}
+                onPress={() => {
+                  setIsSlimmingGnGoal(!isSlimmingGoal)
+                }}
+                size={16}
+                label={'Emagrecimento'}
+                horizontal
+              ></RadioButton>
+              <RadioButton
+                isChecked={isCompetitionGoal}
+                onPress={() => {
+                  setIsCompetitionGoal(!isCompetitionGoal)
+                }}
+                size={16}
+                label={'Competição'}
+                horizontal
+              ></RadioButton>
+              <RadioButton
+                isChecked={isConditioningGoal}
 
-        <View style={styles.anamneseDidExerciseContainer}>
-          <Text style={styles.anamneseTitle}>{t('sorting.anamnesis')}</Text>
+                onPress={() => {
+                  setIsConditioningGoal(!isConditioningGoal)
+                }}
+                size={16}
+                label={'Condicionamento'}
+                horizontal
+              ></RadioButton>
+            </View>
+            <View style={styles.anamneseAlignRadioButtons}>
+              <Text>{'Fumante?'}</Text>
+              <RadioButton
+                isChecked={isSmoker}
+                onPress={() => { setIsSmoker(!isSmoker) }}
+                size={16}
+                label={t('sorting.anamneseDidExerciseLabel')}
+                horizontal
+              ></RadioButton>
+            </View>
+            {
+              isSmoker ?
+                <Input
+                  style={{ borderColor: `${isSmoker && !isSmokerResp ? 'red' : 'black'}`, width: '100%' }}
+                  onChangeText={setIsSmokerResp}
+                  value={isSmokerResp}
+                  placeholder={"Há quanto tempo?"}
+                  errorMessage={isSmoker && !isSmokerResp ? t('createAccount.requiredField') : null}
+                /> : null
+            }
+            <View style={styles.anamneseAlignRadioButtons}>
+              <Text>{'Possui Colesterol alto?'}</Text>
+              <RadioButton
+                isChecked={haveHighCholesterol}
+                onPress={() => { setHaveHighCholesterol(!haveHighCholesterol) }}
+                size={16}
+                label={t('sorting.anamneseDidExerciseLabel')}
+                horizontal
+              ></RadioButton>
+            </View>
+            <View style={styles.anamneseAlignRadioButtons}>
+              <Text>{'Possui Diabetes?'}</Text>
+              <RadioButton
+                isChecked={haveDiabetes}
+                onPress={() => { setHaveDiabetes(!haveDiabetes) }}
+                size={16}
+                label={t('sorting.anamneseDidExerciseLabel')}
+                horizontal
+              ></RadioButton>
+            </View>
+
+            <View style={styles.anamneseAlignRadioButtons}>
+              <Text>{'Sente dores nas costas ou articulações?'}</Text>
+              <RadioButton
+                isChecked={feelPain}
+                onPress={() => { setFeelPain(!feelPain) }}
+                size={16}
+                label={t('sorting.anamneseDidExerciseLabel')}
+                horizontal
+              ></RadioButton>
+            </View>
+            {
+              feelPain ?
+                <Input
+                  style={{ borderColor: `${feelPain && !fellPainResp ? 'red' : 'black'}`, width: '100%' }}
+                  onChangeText={setFeelPainResp}
+                  value={fellPainResp}
+                  placeholder={"Onde?"}
+                  errorMessage={feelPain && !fellPainResp ? t('createAccount.requiredField') : null}
+                /> : null
+            }
+            <View style={styles.anamneseAlignRadioButtons}>
+              <Text>{'Possui alguma disfunção na coluna?'}</Text>
+              <RadioButton
+                isChecked={haveSpinalDysfunction}
+                onPress={() => { setHaveSpinalDysfunction(!haveSpinalDysfunction) }}
+                size={16}
+                label={t('sorting.anamneseDidExerciseLabel')}
+                horizontal
+              ></RadioButton>
+            </View>
+            {
+              haveSpinalDysfunction ?
+                <Input
+                  style={{ borderColor: `${haveSpinalDysfunction && !haveSpinalDysfunctionResp ? 'red' : 'black'}`, width: '100%' }}
+                  onChangeText={setHaveSpinalDysfunctionResp}
+                  value={haveSpinalDysfunctionResp}
+                  placeholder={"Qual?"}
+                  errorMessage={haveSpinalDysfunction && !haveSpinalDysfunctionResp ? t('createAccount.requiredField') : null}
+                /> : null
+            }
+            <View style={styles.anamneseAlignRadioButtons}>
+              <Text>{'Possui alguma limitação de movimento ?'}</Text>
+              <RadioButton
+                isChecked={hasMovementLimitation}
+                onPress={() => { setHasMovementLimitation(!hasMovementLimitation) }}
+                size={16}
+                label={t('sorting.anamneseDidExerciseLabel')}
+                horizontal
+              ></RadioButton>
+            </View>
+            {
+              hasMovementLimitation ?
+                <Input
+                  style={{ borderColor: `${hasMovementLimitation && !hasMovementLimitationResp ? 'red' : 'black'}`, width: '100%' }}
+                  onChangeText={setHasMovementLimitationResp}
+                  value={hasMovementLimitationResp}
+                  placeholder={"Qual?"}
+                  errorMessage={hasMovementLimitation && !hasMovementLimitationResp ? t('createAccount.requiredField') : null}
+                /> : null
+            }
+            <View style={styles.anamneseAlignRadioButtons}>
+              <Text>{'Passou por alguma cirurgia ?'}</Text>
+              <RadioButton
+                isChecked={hasCirurgy}
+                onPress={() => { setHasCirugy(!hasCirurgy) }}
+                size={16}
+                label={t('sorting.anamneseDidExerciseLabel')}
+                horizontal
+              ></RadioButton>
+            </View>
+            {
+              hasCirurgy ?
+                <Input
+                  style={{ borderColor: `${hasCirurgy && !hasCirurgyResp ? 'red' : 'black'}`, width: '100%' }}
+                  onChangeText={setHasCirugyResp}
+                  value={hasCirurgyResp}
+                  placeholder={"Onde?"}
+                  errorMessage={hasCirurgy && !hasCirurgyResp ? t('createAccount.requiredField') : null}
+                /> : null
+            }
+            <View style={styles.anamneseAlignRadioButtons}>
+              <Text>{'Faz uso de remédio controlado?'}</Text>
+              <RadioButton
+                isChecked={usePrescriptionDrugs}
+                onPress={() => { setUsePrescriptionDrugs(!usePrescriptionDrugs) }}
+                size={16}
+                label={t('sorting.anamneseDidExerciseLabel')}
+                horizontal
+              ></RadioButton>
+            </View>
+            {
+              usePrescriptionDrugs ?
+                <Input
+                  style={{ borderColor: `${usePrescriptionDrugs && !usePrescriptionDrugsResp ? 'red' : 'black'}`, width: '100%' }}
+                  onChangeText={setUsePrescriptionDrugsResp}
+                  value={usePrescriptionDrugsResp}
+                  placeholder={"Qual/Quais?"}
+                  errorMessage={usePrescriptionDrugs && !usePrescriptionDrugsResp ? t('createAccount.requiredField') : null}
+                /> : null
+            }
+            <View style={styles.anamneseAlignRadioButtons}>
+              <Text>{'Faz uso de suplementos ou anabolizantes?'}</Text>
+              <RadioButton
+                isChecked={useSupplements}
+                onPress={() => { setUseSupplements(!useSupplements) }}
+                size={16}
+                label={t('sorting.anamneseDidExerciseLabel')}
+                horizontal
+              ></RadioButton>
+            </View>
+            {
+              useSupplements ?
+                <Input
+                  style={{ borderColor: `${useSupplements && !useSupplementsResp ? 'red' : 'black'}`, width: '100%' }}
+                  onChangeText={setUseSupplementsResp}
+                  value={useSupplementsResp}
+                  placeholder={"Qual/Quais?"}
+                  errorMessage={useSupplements && !useSupplementsResp ? t('createAccount.requiredField') : null}
+                /> : null
+            }
+          </View>
 
           <View style={styles.anamneseAlignRadioButtons}>
             <Text>{t('sorting.anamneseDidExercise')}</Text>
@@ -260,7 +515,7 @@ export function CreateTriagem({ navigation, route }) {
         </View>
 
         <View>
-          <Text>{t('sorting.anamneseComments1')}</Text>
+          <Text style={styles.observations}>{'Observações: '}</Text>
           <Input
             style={styles.inputes}
             onChangeText={setComentario}
@@ -278,6 +533,6 @@ export function CreateTriagem({ navigation, route }) {
             <Loading loading={loading} size={18} />
         }
       </View>
-    </ScrollView>
+    </ScrollView >
   )
 }

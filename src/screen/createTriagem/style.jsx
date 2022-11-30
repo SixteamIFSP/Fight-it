@@ -52,16 +52,16 @@ export const styles = StyleSheet.create({
     birthDateCalendar: {
         marginTop: 12
     },
-    anamneseTitle: {
-        fontSize: 16,
-        fontWeight: 'bold'
-    },
     anamneseDidExerciseContainer: {
         marginTop: 12
     },
     anamneseAlignRadioButtons: {
         flexDirection: 'column',
-        marginTop: 8
-    }
+        marginTop: 20
+    },
+    trainningGoal: {
+        marginTop: 12
+    },
+    observations: { marginTop: 20 }
 
 });
