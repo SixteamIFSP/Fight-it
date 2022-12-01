@@ -343,7 +343,7 @@ export const ChangePassword = ({ editable, setEditable }) => {
 
                 </RowConfirmation>
 
-            </ConteinerInfo >
+            </ConteinerInfo>
             :
             <ButtonConfigure onPress={() => setEditable(true)}>
                 <TextButton>{t("configScreen.ChangePass")}</TextButton>
