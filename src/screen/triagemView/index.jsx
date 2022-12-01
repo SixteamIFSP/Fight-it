@@ -12,6 +12,8 @@ export function TriagemView({ route, route: { params } }) {
     useEffect(() => {
         getTriagem(studantId).then(response => {
             if (response) {
+                console.log('response');
+                console.log(response);
                 setDadosTriagem(response[0]);
             }
         })
