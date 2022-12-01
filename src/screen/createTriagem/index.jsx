@@ -46,7 +46,7 @@ export function CreateTriagem({ navigation, route }) {
   const [isConditioningGoal, setIsConditioningGoal] = useState('Não');
 
   const [isSmoker, setIsSmoker] = useState(false);
-  const [isSmokerResp, setIsSmokerResp] = useState(false);
+  const [isSmokerResp, setIsSmokerResp] = useState('');
 
   const [haveHighCholesterol, setHaveHighCholesterol] = useState(false);
 
