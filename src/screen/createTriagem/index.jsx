@@ -116,10 +116,10 @@ export function CreateTriagem({ navigation, route }) {
         lesoes: lesoes ? lesoesResp : 'Não possui.',
         jaFezExercicios: didExercise ? didExerciseResp : 'Não',
         comentario: comentario,
-        ObjetivoCompeticao: isCompetitionGoal ? 'Sim' : 'Não',
-        ObjetivoEmagrecimento: isSlimmingGoal ? 'Sim' : 'Não',
-        ObjetivoCondicionamento: isConditioningGoal ? 'Sim' : 'Não',
-        ObjetivoHipertrofia: isHypertrophyGoal ? 'Sim' : 'Não',
+        objetivoCompeticao: isCompetitionGoal ? 'Sim' : 'Não',
+        objetivoEmagrecimento: isSlimmingGoal ? 'Sim' : 'Não',
+        objetivoCondicionamento: isConditioningGoal ? 'Sim' : 'Não',
+        objetivoHipertrofia: isHypertrophyGoal ? 'Sim' : 'Não',
         fumante: isSmoker ? isSmokerResp : 'Não',
         colesterol: haveHighCholesterol ? 'Sim' : 'Não',
         senteDoresArticulacoes: feelPain ? fellPainResp : 'Não',
@@ -133,6 +133,8 @@ export function CreateTriagem({ navigation, route }) {
       
       const response = await createAccount(route.params.data, false);
       const idAluno = response.id;
+      console.log('data enviado');
+      console.log(data);
       await createTriagem(data, idAluno)
       setLoading(false);
       navigation.navigate('Login');
