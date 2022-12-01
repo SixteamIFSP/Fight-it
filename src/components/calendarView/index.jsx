@@ -118,7 +118,7 @@ export function CalendarView({handleChangeView, handleChangeLessionView}){
                     height: 350
                 }}
 
-                markedDates={selectedDates}
+                // markedDates={selectedDates}
 
                 theme={themeCalendar}
 

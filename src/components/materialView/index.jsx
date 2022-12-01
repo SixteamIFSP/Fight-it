@@ -13,6 +13,7 @@ import {
   FeedbackButton,
   ImagemMaterial,
   Modal,
+  ModalContainer,
   Title,
   Wrapper
 } from "./styles"
@@ -87,9 +88,9 @@ export function MaterialView({ aulaId, handle, goBack}){
               </Wrapper>
          }
         ></FlatList>  
-      {materiais && materiais?.length > 0 && <FeedbackButton onPress={() => setModal(e => !e)}>
+      {/* {materiais && materiais?.length > 0 && user.tipoUsuario !== 1 && <FeedbackButton onPress={() => setModal(e => !e)}>
                   <Text style={{color: 'white', fontWeight: 'bold', fontSize: 16}}>Envie um feedback!</Text>
-              </FeedbackButton>}
+              </FeedbackButton>} */}
 
               {modal && <TouchableWithoutFeedback onPress={() => setModal(false)}>
                             <ModalContainer>
